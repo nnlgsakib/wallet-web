@@ -349,7 +349,7 @@ export default {
     const loading = ref(false);
     const {$tradeConfirm} = useTradeConfirm()
     function callBack(){
-            router.replace({ name: "wallet" });
+            router.replace({ name: "home" });
     }
     const gonext = async () => {
           // @ts-ignore

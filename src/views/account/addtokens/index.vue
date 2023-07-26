@@ -103,7 +103,7 @@ export default {
           });
         handleUpdate()
         Toast(t("currencyList.Importsuccessful"));
-          router.replace({ name: "wallet" });
+          router.replace({ name: "home" });
         } catch (err) {
           Toast(err.toString());
         }

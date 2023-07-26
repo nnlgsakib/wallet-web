@@ -112,7 +112,7 @@ const nowAccount = computed(() => state.account.accountInfo);
 let data1,data2,receipt1:TransactionReceipt,receipt2:TransactionReceipt,rep1, rep2;
 const router = useRouter();
 function clickLeft() {
-  router.replace({ name: "wallet" });
+  router.replace({ name: "home" });
 }
 onMounted(() => {
   dispatch("account/updateAllBalance");

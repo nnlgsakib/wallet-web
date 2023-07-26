@@ -105,10 +105,10 @@ export default {
       : {};
     const { backUrl }: any = query;
     const clickRight = () => {
-      router.replace({ name: "wallet" });
+      router.replace({ name: "home" });
     };
     const clickLeft = () => {
-      router.replace({ name: "wallet" });
+      router.replace({ name: "home" });
     };
     const toAccount: any = reactive({
       data: {

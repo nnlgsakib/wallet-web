@@ -338,7 +338,7 @@ export const useExchanges = () => {
         localStorage.setItem('receipt', JSON.stringify(receipt2))
         $tradeConfirm.update({
           status: "success", callBack() {
-            router.replace({ name: "wallet" })
+            router.replace({ name: "home" })
           },
           hash: transactionHash
         })
@@ -479,7 +479,7 @@ export const useExchanges = () => {
     if (status == 0) {
       $tradeConfirm.update({ status: "fail", hash: transactionHash})
     } else {
-      $tradeConfirm.update({ status: "success", callBack() { router.replace({ name: "wallet" }) },hash: transactionHash })
+      $tradeConfirm.update({ status: "success", callBack() { router.replace({ name: "home" }) },hash: transactionHash })
     }
     return receipt
 

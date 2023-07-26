@@ -312,7 +312,7 @@ const aiCreate = async () => {
       status: "fail",
       hash: txData.hash,
       callBack() {
-        router.replace({ name: "wallet" });
+        router.replace({ name: "home" });
       },
     });
     return Promise.reject('tx fail');
@@ -442,7 +442,7 @@ const handleConfirm = async () => {
           status: "fail",
           hash: txData.hash,
           callBack() {
-            router.replace({ name: "wallet" });
+            router.replace({ name: "home" });
           },
         });
         return;

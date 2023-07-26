@@ -233,7 +233,7 @@ export default {
             address,
           });
           $wtoast.success(t("currencyList.Importsuccessful"));
-          router.replace({ name: "wallet" });
+          router.replace({ name: "home" });
         } catch (err: any) {
           $wtoast.fail(err.toString());
         } finally {
@@ -300,7 +300,7 @@ export default {
     };
 
     const cancel = () => {
-      router.replace({ name: "wallet" });
+      router.replace({ name: "home" });
     };
     return {
       tokenError,

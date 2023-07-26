@@ -10,7 +10,7 @@ import { useRouter } from 'vue-router'
 const {t} = useI18n()
 const router = useRouter()
 const backHome = () => {
-    router.replace({name:"wallet"})
+    router.replace({name:"home"})
 }
 </script>
 <style lang="scss">

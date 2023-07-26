@@ -31,7 +31,7 @@ import {
 import { useGasPrice } from "@/hooks/useGasPrice";
 import { setCookies, getCookies } from "@/utils/jsCookie";
 import router from "@/router";
-import { is_install, issuccessdeal } from "@/http/modules/common";
+import { is_install } from "@/http/modules/common";
 import { getQuery } from "@/utils/utils";
 import { useI18n } from "vue-i18n";
 import i18n from "@/language/index";

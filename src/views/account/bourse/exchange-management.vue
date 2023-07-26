@@ -131,7 +131,7 @@ export default {
     const accountInfo = computed(() => state.account.accountInfo)
     const {getContract} = useExchanges()
     const back = () => {
-      router.replace({ name: "wallet" });
+      router.replace({ name: "home" });
     };
     const exchangeUrl = computed(() => {
       const add = state.account.accountInfo.address;

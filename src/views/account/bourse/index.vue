@@ -758,7 +758,7 @@ export default defineComponent({
       if (isExchangeStatusStatus.value) {
         router.replace({ name: "exchange-management" });
       } else {
-        router.replace({ name: "wallet" });
+        router.replace({ name: "home" });
       }
     };
     const isAffirmDialog = ref(false);

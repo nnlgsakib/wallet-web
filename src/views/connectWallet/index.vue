@@ -309,7 +309,7 @@ export default {
 
 
     const back = () => {
-      router.replace({ name: "wallet" });
+      router.replace({ name: "home" });
     };
     // How to obtain a wallet without affecting the wallet status
     async function getWallet2() {

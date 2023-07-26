@@ -2,8 +2,7 @@ import { httpGet, httpPost } from '../request'
 
 export const isProduct = process.env.VUE_APP_NODE_ENV == 'production' || process.env.VUE_APP_NODE_ENV == 'test' ? true : false
 const api = isProduct ? '' : '/createExchange'
-const serviceApi = '/serviceApi'
-const wormholesApi = isProduct ? '' : '/wormholesApi'
+
 const exchangeApi = isProduct ?'':'/exchangeApi'
 const exchansApi = isProduct ? '' : '/exchans'
 // Test url
@@ -19,17 +18,6 @@ export const is_install = (address: string) => {
 }
 
 
-
-// Obtaining Account Information
-export const getAccountInfo = (address: string) => {
-    return httpPost('/nodeApi', { jsonrpc: "2.0", method: "eth_getAccountInfo", params: [address, "latest"], id: 20211209 })
-}
-
-// Queries whether hosting fees have been sent
-export const issuccessdeal = (address: string) => {
-    return httpGet(`${serviceApi}/issuccessdeal`, { address: address.toLowerCase() })
-
-}
 
 
 
@@ -70,9 +58,7 @@ export const getConfiguration = () => {
 // const contractApi = isProduct ? 'contractApi' : 'contractApi'
 const contractApi = isProduct ? 'contractApi' : 'contractApi'
 
-export const checkAuth = (address: string) => {
-    return httpGet(`${contractApi}/extra/checkAuth`,{address})
-}
+
 // Query the account information of the specified address
 export const getAccountAddr = (address: string) => {
     return httpGet(`${contractApi}/account/${address}`,{})

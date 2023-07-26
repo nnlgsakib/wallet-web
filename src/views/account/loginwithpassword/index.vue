@@ -197,7 +197,7 @@ export default {
               router.replace({ name: backUrl.toString(), query: loginParams || {} });
             }
           } else {
-            router.replace({ name: "wallet" });
+            router.replace({ name: "home" });
           }
         }
       } catch (err) {

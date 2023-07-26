@@ -2,7 +2,7 @@
   <van-sticky>
     <NavHeader
       @clickRight="handleRight"
-      backReplaceName="wallet"
+      backReplaceName="home"
       :title="t('castingnft.createNFT')"
       :hasRight="false"
     >
@@ -41,7 +41,7 @@ export default {
     const appProvide: any = inject("appProvide");
     const handleRight = () => {
       router.push({
-        name: "wallet",
+        name: "home",
       });
     };
     return {

@@ -1,6 +1,6 @@
 <template>
   <van-sticky>
-    <NavHeader title="Close" :hasRight="false" :hasLeft="true" :backReplaceName="replaceBackUrl" cancelRouteName="wallet">
+    <NavHeader title="Close" :hasRight="false" :hasLeft="true" :backReplaceName="replaceBackUrl" cancelRouteName="home">
       <template v-slot:left>
        <span class="back hover f-12" @click="appProvide.back">{{t('createAccountpage.back')}}</span>
       </template>

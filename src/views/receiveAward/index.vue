@@ -1,6 +1,6 @@
 <template>
   <van-sticky>
-    <NavHeader :title="t('receiveRewards.title')" :hasRight="hasRight" :hasLeft="false" :backReplaceName="replaceBackUrl" cancelRouteName="wallet"></NavHeader>
+    <NavHeader :title="t('receiveRewards.title')" :hasRight="hasRight" :hasLeft="false" :backReplaceName="replaceBackUrl" cancelRouteName="home"></NavHeader>
   </van-sticky>
   <div class="">
     <router-view v-slot="{ Component }">

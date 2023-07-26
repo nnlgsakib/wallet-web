@@ -75,7 +75,7 @@ export default {
     };
     commit("system/UPDATE_LASTDELAYTIME", new Date().getTime());
     const remindLater = () => {
-      router.replace({ name: "wallet" });
+      router.replace({ name: "home" });
     };
     return {
       t,

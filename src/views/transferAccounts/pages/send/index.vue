@@ -731,7 +731,7 @@ export default {
     });
 
     const back = () => {
-      router.replace({ name: "wallet" });
+      router.replace({ name: "home" });
     };
     return {
       back,

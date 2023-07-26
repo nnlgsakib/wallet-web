@@ -194,7 +194,7 @@ export default {
           $tradeConfirm.update({
             status: "success",
             callBack() {
-              router.replace({ name: "wallet" });
+              router.replace({ name: "home" });
             },
             hash: transactionHash
           });

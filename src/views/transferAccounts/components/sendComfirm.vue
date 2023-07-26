@@ -205,7 +205,7 @@ export default defineComponent({
       let txData = null
       // !value ? token Transaction: ordinary transaction
       const callBack = () => {
-        router.replace({ name: "wallet" });
+        router.replace({ name: "home" });
       };
       const params = {
         ...props.data,

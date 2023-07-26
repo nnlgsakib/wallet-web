@@ -25,11 +25,11 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     component: Home,
-    redirect: { name: 'wallet' },
+    redirect: { name: 'home' },
     children: [
       {
-        path: 'wallet',
-        name: 'wallet',
+        path: '/home',
+        name: 'home',
         component: () => import('@/views/account/wallet/index.vue'),
         meta: {
           auth: true
@@ -319,7 +319,7 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(process.env.VUE_APP_NODE_ENV == 'test' || process.env.VUE_APP_NODE_ENV == 'production' ? '/wallet' : '/'),
   routes
 })
 

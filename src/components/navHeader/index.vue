@@ -400,7 +400,7 @@ export default defineComponent({
     };
     const showPopover = ref(false);
     const clickRight = () => {
-      router.replace({ name: "wallet" });
+      router.replace({ name: "home" });
     };
     const toOfficiaWebsite = () => {
       window.open("https://www.wormholes.com");

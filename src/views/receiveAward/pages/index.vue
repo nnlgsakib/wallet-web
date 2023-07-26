@@ -291,7 +291,7 @@ const toExchange = () => {
   window.open(`${VUE_APP_EXCHANGES_URL}/c${address.toLowerCase()}/#/`)
 }
 const toWallet = () => {
-  router.replace({name:"wallet"})
+  router.replace({name:"home"})
 }
 onMounted(async () => {
   wallet.value = await getWallet();

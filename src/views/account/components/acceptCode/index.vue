@@ -74,7 +74,7 @@ export default defineComponent({
       router.push({
         name: "receive-choose",
         query: {
-          clickBackUrl:"wallet",
+          clickBackUrl:"home",
           backUrl:"receive-set-amount"
         }
       });

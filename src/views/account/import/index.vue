@@ -114,7 +114,7 @@ export default {
     const gohome = () => {
       const { backUrl }: any = route.query;
       router.replace({
-        name: backUrl || "wallet",
+        name: backUrl || "home",
       });
     };
 
@@ -149,7 +149,7 @@ export default {
           commit('account/UPDATE_KEYSTORE', keyStore)
           $wtoast.success(t('importsuccess.success'))
           handleUpdate()
-          router.push({name:"wallet"})
+          router.push({name:"home"})
         })
         .catch(({ reason, address }) => {
           isError.value = true

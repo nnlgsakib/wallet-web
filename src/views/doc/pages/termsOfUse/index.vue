@@ -112,7 +112,7 @@ const clickLeft = () => {
     if(window.history.length > 1) {
         router.back();
     }else {
-        router.replace({name:"wallet"})
+        router.replace({name:"home"})
     }
 
 };

@@ -1,6 +1,6 @@
 <template>
   <van-sticky>
-    <NavHeader @clickRight="handleRight" backReplaceName="wallet" :title="t('mnemonic.recoveryPhrase')">
+    <NavHeader @clickRight="handleRight" backReplaceName="home" :title="t('mnemonic.recoveryPhrase')">
       <template v-slot:left>
       <span class="back" @click="appProvide.back">{{ t("common.back") }}</span>
     </template>
@@ -39,7 +39,7 @@ export default {
     const appProvide = inject("appProvide");
     const handleRight =()=>{
        router.push({
-            name: "wallet",
+            name: "home",
           });
     }
     return {

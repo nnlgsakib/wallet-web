@@ -22,7 +22,7 @@ const newCdns =  needCdn ? cdn : {css:[],js:[]}
 module.exports = {
   productionSourceMap: !isProduct,
   transpileDependencies: [/node_modules/],
-  publicPath: isProduct ? '/wallet/' : './',
+  publicPath: process.env.VUE_APP_NODE_ENV == 'test' || process.env.VUE_APP_NODE_ENV == 'production' ? '/wallet/' : '/',
   devServer: {
     https: false,
     proxy: {

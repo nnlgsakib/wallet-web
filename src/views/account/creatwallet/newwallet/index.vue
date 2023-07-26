@@ -125,7 +125,7 @@ export default {
           commit('mnemonic/UPDATE_MNEMONIC',mnemonicData)
           // await localforage.setItem("mnemonic", mnemonicData);
           router.replace({
-            name: "wallet",
+            name: "home",
           });
         } catch (err) {
           

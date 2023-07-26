@@ -207,7 +207,7 @@ export default {
             }
             Toast(t("sendNft.transfersucceeded"));
             loading.value = false;
-            router.replace({ name: "wallet" });
+            router.replace({ name: "home" });
           });
         })
         .catch((err: any) => {
@@ -230,7 +230,7 @@ export default {
       }
     };
     const hanndleClose = () => {
-      router.replace({ name: "wallet" });
+      router.replace({ name: "home" });
     };
     const showModal: Ref<boolean> = ref(false);
     const handleShowAccountModal = () => {

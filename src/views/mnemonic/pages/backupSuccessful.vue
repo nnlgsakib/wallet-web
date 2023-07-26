@@ -73,7 +73,7 @@ export default {
     const show: Ref<boolean> = ref(false);
     const { commit } = useStore();
     const toHome = () => {
-      router.push({ name: "wallet" });
+      router.push({ name: "home" });
     };
     const openCode = () => {
       show.value = true;
