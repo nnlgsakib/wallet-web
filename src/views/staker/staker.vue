@@ -164,7 +164,8 @@ const validModal = ref(false)
 const showAccountModal = ref(false)
 const showValidModal = ref(false)
 const showAddDialog = ref(false)
-const { state, dispatch, getters } = useStore()
+const store = useStore()
+const { state, dispatch, getters } = store
 const accountInfo = computed(() => state.account.accountInfo)
 const ethAccountInfo = computed(() => state.account.ethAccountInfo)
 const toAddr = ref('')
@@ -400,7 +401,6 @@ const minusConfirm = async () => {
             $tradeConfirm.update({ status: "success", hash: res.transactionHash })
         }
         dispatch('account/waitTxQueueResponse')
-        // $toast.success('质押成功！')
     } catch (err) {
         $tradeConfirm.update({ status: "fail" })
         $wtoast.fail(err.reason)

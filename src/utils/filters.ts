@@ -202,7 +202,7 @@ export const handleSendStatus = (data: any) => {
 export const txTypeToIcon = (data: any) => {
   const myAddr = store.state.account.accountInfo.address.toUpperCase()
   const { to, from, txType, input, jsonData } = data
-  if (txType === 'wormholes') {
+  if (txType === store.getters['account/chainParsePrefix']) {
     if (jsonData) {
       if (jsonData.type == 6) {
         return 'icon-bottom'
@@ -320,7 +320,7 @@ export const transferAmountText = (data: any) => {
     }
   }
   const val = new BigNumber(value).div(1000000000000000000).toString()
-  if (txType === 'wormholes') {
+  if (txType === store.getters['account/chainParsePrefix']) {
     if (jsonData) {
       if (jsonData.type == 6) {
         return '+' + convertAmount

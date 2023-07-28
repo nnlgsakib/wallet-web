@@ -495,7 +495,7 @@ export default {
         if (tokenAddress) {
           txType = 'contract'
         } else {
-          txType = !newData ? 'normal' : (newData.indexOf('wormholes') > -1 ? 'wormholes' : 'contract')
+          txType = !newData ? 'normal' : (newData.indexOf(store.getters['account/chainParsePrefix']) > -1 ? store.getters['account/chainParsePrefix'] : 'contract')
         }
         // let data = await wallet.sendTransaction(tx);
         // const data = await store.dispatch('account/transaction', {
@@ -605,7 +605,7 @@ export default {
         if (tokenAddress) {
           txType = 'contract'
         } else {
-          txType = !newData ? 'normal' : (newData.indexOf('wormholes') > -1 ? 'wormholes' : 'contract')
+          txType = !newData ? 'normal' : (newData.indexOf(store.getters['account/chainParsePrefix']) > -1 ? store.getters['account/chainParsePrefix'] : 'contract')
         }
         const txInfo = {
           ...sendTx.value,

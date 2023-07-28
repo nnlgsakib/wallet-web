@@ -84,5 +84,5 @@ export const chessIcons = [
 
 
 export const netWorklist: Array<NetWorkData> = [
-    { value: 'Wormholes',color:'rgb(14, 126, 33)',icon: chessIcons[0], label: "Wormholes", select: true ,URL, chainId: 51888, currencySymbol: 'ERB', browser:'https://www.wormholesscan.com/',transactionList:{},tokens:{} ,id: 'wormholes-network-1', isMain: true },
+    { value: 'erbie',color:'rgb(14, 126, 33)',icon: chessIcons[0], label: "Erbie", select: true ,URL, chainId: 51888, currencySymbol: 'ERB', browser:'https://www.wormholesscan.com/',transactionList:{},tokens:{} ,id: 'wormholes-network-1', isMain: true },
 ]

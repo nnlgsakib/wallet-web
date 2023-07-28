@@ -47,7 +47,7 @@ import storeObj from '@/store/index'
 import { chainDataParse } from "@/enum/env";
 
 interface ValidatorInfo {
-  Addr:string
+  Addr: string
   Balance: number
   Proxy: string
   Weight: Array<any>
@@ -258,7 +258,7 @@ export default {
       chainId: 51888
     },
     recentList: [],
-    chainVersion:  {
+    chainVersion: {
       name: '',
       version: ''
     },
@@ -285,25 +285,25 @@ export default {
       return state.currentNetwork.tokens[address] || [];
     },
     chainParsePrefix(state: State) {
-      const {name, version} = state.chainVersion
-      if(name == 'wormholes' && version < 'v0.14.0' ){
+      const { name, version } = state.chainVersion
+      if (name == 'wormholes' && version < 'v0.14.0') {
         return chainDataParse.wormholes
       }
-      if(name == 'erbie' && version >= 'v0.14.0' ){
+      if (name == 'erbie' && version >= 'v0.14.0') {
         return chainDataParse.erbie
       }
-      throw Error('chain version error')
+      return ''
     }
   },
   mutations: {
     UPDATE_CHAINVERSION(state: State, str: string) {
       try {
-          const [name, version] = str.split(' ')
-          if(name && version) {
-            state.chainVersion = {
-              name,
-              version
-            }
+        const [name, version] = str.split(' ')
+        if (name && version) {
+          state.chainVersion = {
+            name,
+            version
+          }
         } else {
           state.chainVersion = {
             name: str,
@@ -311,13 +311,13 @@ export default {
           }
         }
 
-      }catch(err) {
+      } catch (err) {
         state.chainVersion = {
           name: str,
           version: str
         }
       }
-      
+
     },
     UPDATE_CREATORSTATUS(state: State, val: any) {
       state.creatorStatus = val
@@ -814,17 +814,17 @@ export default {
     }
   },
   actions: {
-    async getChainVersion ({state, commit}) {
+    async getChainVersion({ state, commit }) {
       const provider = await getProvider()
       const res = await provider.send('eth_version')
       console.warn('erbie ===========', res.split(' '))
       commit('UPDATE_CHAINVERSION', res)
       return res
     },
-    async getValidator({state,commit}: any) {
+    async getValidator({ state, commit }: any) {
       const provider = await getProvider()
       const res = await provider.send("eth_getValidator", ['latest'])
-      const {Validators} = res || {}
+      const { Validators } = res || {}
       const addInfo = Validators.find((item: Validator) => item.Addr.toUpperCase() == state.accountInfo.address.toUpperCase())
       commit('UPDATE_VALIDATOR', addInfo || null)
     },
@@ -1427,8 +1427,8 @@ export default {
     async getExchangeStatus({ commit, state }: any, call: Function = () => { }) {
       const wallet = await getWallet();
       const { address } = wallet;
-      const res = await wallet.provider.send('eth_getAccountInfo',[address, 'latest'])
-      const data = {...res,...res.Worm,status:0}
+      const res = await wallet.provider.send('eth_getAccountInfo', [address, 'latest'])
+      const data = { ...res, ...res.Worm, status: 0 }
       commit("UPDATE_EXCHANGERSTATUS", data);
       call(data);
       return data
@@ -1494,7 +1494,7 @@ export default {
           state.accountInfo.address,
           "latest",
         ]);
-        const data = {...accountInfo, ...accountInfo.Worm, status: 0}
+        const data = { ...accountInfo, ...accountInfo.Worm, status: 0 }
         commit('UPDATE_CHAINACCOUNTINFO', data)
         return data
       } catch (err) {
@@ -1617,7 +1617,7 @@ export default {
         "eth_getAccountInfo",
         [state.accountInfo.address, "latest"]
       ).then((res: any) => {
-        const data = {...res, ...res.Worm, status: 0}
+        const data = { ...res, ...res.Worm, status: 0 }
         commit('UPDATE_ETHACCOUNTINFO', data)
         return data
       });
@@ -1930,107 +1930,107 @@ export const PUSH_TRANSACTION = async (da: any) => {
 export const UPDATE_TRANSACTION = async (da: any) => {
   try {
     const state = store.state.account
-  const { receipt, sendData, network, txId, value, date } = da
-  const { id, currencySymbol } = network
-  const { convertAmount, nonce, data } = sendData
-  const {
-    blockHash,
-    blockNumber,
-    cumulativeGasUsed,
-    effectiveGasPrice,
-    gasUsed,
-    transactionHash,
-    from,
-    to,
-    contractAddress,
-    transactionIndex,
-    status,
-  } = receipt
-  /**
-   * blockHash: "0x1482d2f2e879c9e02fe79469609d4e1c6ffed21c8b3cc09617df6b9228e81a08"
-   * blockNumber:60454
-   * contractAddress: null
-      convertAmount: 0
-      cumulativeGasUsed: 21000
-      from: "0x612dfa56dca1f581ed34b9c60da86f1268ab6349"
-      gas: 21000
-      gasPrice: 1200000000
-      gasUsed: 21000
-      hash: "0xc3b29fb20ac5ff813a9371e7d6d2913e450d950759a06a1d71fd866a3960978a"
-      input: "0x"
-      nonce: 0
-      status: 1
-      timestamp: 1672376574
-      to: "0x352deea28e6b15620c75acf0debe6aacbda965c9"
-      transactionIndex: 0
-      value: "230000000000000000"
-   */
-  const newReceipt = {
-    blockHash,
-    blockNumber,
-    contractAddress,
-    cumulativeGasUsed: ethers.utils.formatUnits(cumulativeGasUsed, 'wei'),
-    from,
-    gasPrice: ethers.utils.formatUnits(effectiveGasPrice, 'wei'),
-    gasUsed: Number(ethers.utils.formatUnits(gasUsed, 'wei')),
-    hash: transactionHash,
-    nonce,
-    to,
-    input: data,
-    transactionIndex,
-    convertAmount,
-    timestamp: Math.floor(new Date(date).getTime() / 1000),
-    status,
-    value: value ? ethers.utils.formatUnits(value, 'wei') : '0',
-    txId
-  }
-  if (data) {
-    const convertAmount = await getConverAmount(wallet, { input: data, blockNumber })
-    newReceipt['convertAmount'] = convertAmount
-  }
-  const formAdd = from.toUpperCase();
-  // @ts-ignore
-  const chainId = state.ethNetwork.chainId
-  let txListKey = ''
-  if (state.currentNetwork.id == 'wormholes-network-1') {
-    txListKey = `async-${id}-${chainId}-${formAdd}`
-  } else {
-    txListKey = `txlist-${id}-${chainId}-${formAdd}`
-  }
-  let txList: any = await localforage.getItem(txListKey)
-  console.warn('has txID', txList)
-  if (state.currentNetwork.id == 'wormholes-network-1') {
-    if (txList && txList.list.length) {
-      for (let i = 0; i < txList.list.length; i++) {
-        const item = txList.list[i]
-        console.warn('----------', item, txId)
-        if (item.txId.toUpperCase() === txId.toUpperCase()) {
-          txList.list[i] = newReceipt
-        }
-      }
-
+    const { receipt, sendData, network, txId, value, date } = da
+    const { id, currencySymbol } = network
+    const { convertAmount, nonce, data } = sendData
+    const {
+      blockHash,
+      blockNumber,
+      cumulativeGasUsed,
+      effectiveGasPrice,
+      gasUsed,
+      transactionHash,
+      from,
+      to,
+      contractAddress,
+      transactionIndex,
+      status,
+    } = receipt
+    /**
+     * blockHash: "0x1482d2f2e879c9e02fe79469609d4e1c6ffed21c8b3cc09617df6b9228e81a08"
+     * blockNumber:60454
+     * contractAddress: null
+        convertAmount: 0
+        cumulativeGasUsed: 21000
+        from: "0x612dfa56dca1f581ed34b9c60da86f1268ab6349"
+        gas: 21000
+        gasPrice: 1200000000
+        gasUsed: 21000
+        hash: "0xc3b29fb20ac5ff813a9371e7d6d2913e450d950759a06a1d71fd866a3960978a"
+        input: "0x"
+        nonce: 0
+        status: 1
+        timestamp: 1672376574
+        to: "0x352deea28e6b15620c75acf0debe6aacbda965c9"
+        transactionIndex: 0
+        value: "230000000000000000"
+     */
+    const newReceipt = {
+      blockHash,
+      blockNumber,
+      contractAddress,
+      cumulativeGasUsed: ethers.utils.formatUnits(cumulativeGasUsed, 'wei'),
+      from,
+      gasPrice: ethers.utils.formatUnits(effectiveGasPrice, 'wei'),
+      gasUsed: Number(ethers.utils.formatUnits(gasUsed, 'wei')),
+      hash: transactionHash,
+      nonce,
+      to,
+      input: data,
+      transactionIndex,
+      convertAmount,
+      timestamp: Math.floor(new Date(date).getTime() / 1000),
+      status,
+      value: value ? ethers.utils.formatUnits(value, 'wei') : '0',
+      txId
     }
-  } else {
-    if (txList && txList.length) {
-      if (txList && txList.length) {
-        for (let i = 0; i < txList.length; i++) {
-          const item = txList[i]
+    if (data) {
+      const convertAmount = await getConverAmount(wallet, { input: data, blockNumber })
+      newReceipt['convertAmount'] = convertAmount
+    }
+    const formAdd = from.toUpperCase();
+    // @ts-ignore
+    const chainId = state.ethNetwork.chainId
+    let txListKey = ''
+    if (state.currentNetwork.id == 'wormholes-network-1') {
+      txListKey = `async-${id}-${chainId}-${formAdd}`
+    } else {
+      txListKey = `txlist-${id}-${chainId}-${formAdd}`
+    }
+    let txList: any = await localforage.getItem(txListKey)
+    console.warn('has txID', txList)
+    if (state.currentNetwork.id == 'wormholes-network-1') {
+      if (txList && txList.list.length) {
+        for (let i = 0; i < txList.list.length; i++) {
+          const item = txList.list[i]
           console.warn('----------', item, txId)
           if (item.txId.toUpperCase() === txId.toUpperCase()) {
-            txList[i] = newReceipt
+            txList.list[i] = newReceipt
           }
         }
 
       }
+    } else {
+      if (txList && txList.length) {
+        if (txList && txList.length) {
+          for (let i = 0; i < txList.length; i++) {
+            const item = txList[i]
+            console.warn('----------', item, txId)
+            if (item.txId.toUpperCase() === txId.toUpperCase()) {
+              txList[i] = newReceipt
+            }
+          }
+
+        }
+      }
     }
-  }
-  await localforage.setItem(txListKey, txList)
-  if (newReceipt.status) {
-    await DEL_TXQUEUE(da)
-  }
-  eventBus.emit('txUpdate', newReceipt)
-  return newReceipt
-  }catch(err){
+    await localforage.setItem(txListKey, txList)
+    if (newReceipt.status) {
+      await DEL_TXQUEUE(da)
+    }
+    eventBus.emit('txUpdate', newReceipt)
+    return newReceipt
+  } catch (err) {
     console.error(err)
   }
 }

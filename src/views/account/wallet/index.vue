@@ -30,11 +30,6 @@
             </div>
           </template>
         </van-popover>
-
-        <!-- 
-        <div class="account-icon" v-show="!validator">
-          <AccountIcon :data="accountInfo.icon" />
-        </div> -->
       </div>
       <AccountModal v-model:show="showModal" @close="closeModal" />
 
@@ -463,7 +458,7 @@ export default {
         let time = setTimeout(() => {
           showExpresion.value = true
           clearTimeout(time)
-        }, 300)
+        }, 500)
       } else {
         showExpresion.value = false
       }

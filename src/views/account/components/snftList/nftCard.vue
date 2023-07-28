@@ -14,7 +14,7 @@
     </div>
     <div class="snft-card-r" v-show="!select">
       <div class="flex right center-v link-icons">
-        <van-popover
+        <!-- <van-popover
         v-model:show="showPopover2"
         placement="top"
         class="nft-tag-popover"
@@ -23,7 +23,7 @@
         <template #reference>
           <i class="iconfont icon-fangwujianzhuwugoujianbeifen" @click.stop="toNftExchange"  @mouseover="showPopover2 = true" @mouseout="showPopover2 = false"></i>
         </template>
-      </van-popover>
+      </van-popover> -->
       <van-popover
         v-model:show="showPopover"
         placement="top"
@@ -48,6 +48,7 @@ import { addressMask, decimal } from "@/utils/filters";
 import { useStore } from "vuex";
 import { computed } from "vue";
 import { Popover } from "vant";
+import { toScan } from '@/utils/utils'
 import {
   tokenIdByNftaddr
 } from "@/http/modules/nft";
@@ -114,11 +115,8 @@ export default defineComponent({
 
     const toBrowser = () => {
       const { tag, nft_address,source_url, metaData } = props.data
-      const domain = `${VUE_APP_SCAN_URL}/SNFTDetails`
-      
-      const str = `?addr=${nft_address}`
-      const newUrl = `${domain}${str}`
-      window.open(newUrl)
+      toScan(nft_address, '/SNFTDetails')
+
     }
     
     const showPopover2 = ref(false)

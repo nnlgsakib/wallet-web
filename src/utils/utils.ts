@@ -100,15 +100,16 @@ export const randArr = (arr: Array<any>) => {
 type ScanPaths = '/AccountDetail' | '/TradeDetail' | '/NFTDetails' | '/SNFTDetails' | '/BlockDetails'
 
 export const toScan = (addr: string, path: ScanPaths = '/AccountDetail') => {
+  const fullPath = `${VUE_APP_SCAN_URL}${path}?addr=${addr}`
   if(addr) {
     if(store.state.account.currentNetwork.id === 'wormholes-network-1') {
-      window.open(`${VUE_APP_SCAN_URL}${path}?addr=${addr}`);
+      window.open(fullPath);
     } else {
       const defaultUrl = store.state.account.currentNetwork.browser
       if(defaultUrl) {
         window.open(`${defaultUrl}`);
       } else {
-        window.open(`${VUE_APP_SCAN_URL}${path}?addr=${addr}`);
+        window.open(fullPath);
       }
     }
   } else {

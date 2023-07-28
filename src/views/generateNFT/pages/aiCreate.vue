@@ -104,7 +104,8 @@ import { decode } from "js-base64";
 const { $wtoast } = useToast();
 const { $tradeConfirm } = useTradeConfirm();
 const router = useRouter();
-const { dispatch, state } = useStore();
+const store = useStore();
+const { dispatch, state } = store
 const { t } = useI18n();
 const showWord = ref(false);
 const emailErr = ref(false);
