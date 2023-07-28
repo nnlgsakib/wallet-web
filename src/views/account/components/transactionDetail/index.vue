@@ -189,7 +189,7 @@ export default defineComponent({
     })
 
     const view = () => {
-      window.open(`${VUE_APP_SCAN_URL}TradeDetail/${props.data.hash}`);
+      window.open(`${VUE_APP_SCAN_URL}/TradeDetail?addr=${props.data.hash}`);
     };
     const cancel = () => {
       emit("handleClose");

@@ -138,7 +138,7 @@ import {
   Popover as VanPopover,
   Switch as VanSwitch,
 } from "vant";
-import { onMounted, ref, Ref,watch } from "vue";
+import { onMounted, ref, Ref,watch, computed } from "vue";
 import BigNumber from "bignumber.js";
 import { useI18n } from "vue-i18n";
 import {
@@ -159,11 +159,13 @@ import { TradeStatus } from "@/plugins/tradeConfirmationsModal/tradeConfirm";
 import { useToast } from "@/plugins/toast";
 import { useRouter, useRoute } from "vue-router";
 import { getGasFee } from "@/store/modules/account";
+import { computeAddress } from "ethers/lib/utils";
 
 const { $wtoast } = useToast();
 const { $tradeConfirm } = useTradeConfirm();
 const router = useRouter();
-const { dispatch, state } = useStore();
+const store = useStore();
+const { dispatch, state } = store
 const { t } = useI18n();
 const showWord = ref(false);
 const emailErr = ref(false);
@@ -171,6 +173,8 @@ const wordErr = ref(false);
 const royaltyErr = ref(false);
 const showPopover3 = ref(false);
 const route = useRoute();
+
+const chainPrefix = computed(() => store.getters['account/chainParsePrefix'])
 const onSubmit = async () => {
   if (checked.value && RegUrl.test(promptWord.value)) {
     $wtoast.warn(t("generateNFT.normalNftTip"));
@@ -200,6 +204,7 @@ const onSubmit = async () => {
     gasFee.value = gas1;
   }
   }catch(err) {
+    console.error('err', err)
     $wtoast.fail(t('common.noMoney'))
   }
 };
@@ -223,7 +228,8 @@ const handleGetGas = async () => {
     exchanger: "",
     meta_url: web3.utils.fromUtf8(JSON.stringify(nft_data)),
   };
-  const parstr = `wormholes:${JSON.stringify(par)}`;
+  const parstr = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(par)}`;
+  debugger
   const newdata = web3.utils.fromUtf8(parstr);
   const tx = {
     to: myAddr,
@@ -333,7 +339,7 @@ const handleSendCreate = async (nft_data = {}, call = (v: any) => {}) => {
     exchanger: "",
     meta_url: web3.utils.fromUtf8(JSON.stringify(nft_data)),
   };
-  const parstr = `wormholes:${JSON.stringify(par)}`;
+  const parstr = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(par)}`;
   const newdata = web3.utils.fromUtf8(parstr);
   const tx = {
     to: myAddr,
@@ -352,6 +358,7 @@ const handleSendCreate = async (nft_data = {}, call = (v: any) => {}) => {
   if (!status) {
     return Promise.reject("failure of transaction");
   }
+  debugger
   const { topics } = log;
   const [addr1, fullnftaddr] = topics;
   const nft_address = "0x" + fullnftaddr.substr(fullnftaddr.length - 40);

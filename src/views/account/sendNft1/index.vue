@@ -172,7 +172,7 @@ export default {
     const route = useRoute();
     const { query } = route;
     const store = useStore();
-    const { dispatch } = store;
+    const { dispatch, state } = store;
     const { nft_address }: any = query;
     const accountInfo = computed(() => store.state.account.accountInfo);
     const toAddress = ref("");
@@ -187,7 +187,7 @@ export default {
       loading.value = true;
       const { address } = query;
       const wallet = await getWallet();
-      const str = `wormholes:{"version": "v0.0.1","type": 1,"nft_address":"${address}"}`;
+      const str = `${store.getters['account/chainParsePrefix']}:{"version": "v0.0.1","type": 1,"nft_address":"${address}"}`;
       const data = toHex(str);
       const tx1 = {
         from: wallet.address,

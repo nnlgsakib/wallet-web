@@ -13,7 +13,7 @@
           <div class="text-center sign-bg-icon">
             <van-icon name="records" />
           </div>
-          <div class="text-center sign-bg-tit">{{t('bourse.sendProxyExchange')}}</div>
+          <div class="text-center sign-bg-tit">{{ t('bourse.sendProxyExchange') }}</div>
           <div class="text-center sign-bg-tit1">
             {{ t("sign.confirmsignaturedata") }}
           </div>
@@ -27,14 +27,9 @@
           {{ txs }}
         </div>
       </div>
-      <h2 class="text-center">{{t('bootstrapwindow.balance')}}：{{ nowAccount.amount }}</h2>
+      <h2 class="text-center">{{ t('bootstrapwindow.balance') }}：{{ nowAccount.amount }}</h2>
       <div class="flex between btn-box">
-        <van-button
-          type="default"
-          @click="router.replace({ name: 'wallet' })"
-          plain
-          >{{ t("sign.cancel") }}</van-button
-        >
+        <van-button type="default" @click="router.replace({ name: 'home' })" plain>{{ t("sign.cancel") }}</van-button>
         <van-button type="primary" @click="toSend" :loading="sendLoading">{{
           t("sign.confirm")
         }}</van-button>
@@ -93,8 +88,7 @@ import { TransactionReceipt } from "@ethersproject/abstract-provider";
 const { $tradeConfirm } = useTradeConfirm();
 const newErbAbi = require("@/assets/json/packagePay.json");
 
-const { abi,} = newErbAbi;
-debugger
+const { abi, } = newErbAbi;
 const { t } = useI18n();
 const { sendTo } = useExchanges();
 const { query } = useRoute();
@@ -109,7 +103,7 @@ const accountList = computed(() => state.account.accountList);
 const currentNetwork = computed(() => state.account.currentNetwork);
 const sendLoading = ref(false);
 const nowAccount = computed(() => state.account.accountInfo);
-let data1,data2,receipt1:TransactionReceipt,receipt2:TransactionReceipt,rep1, rep2;
+let data1, data2, receipt1: TransactionReceipt, receipt2: TransactionReceipt, rep1, rep2;
 const router = useRouter();
 function clickLeft() {
   router.replace({ name: "home" });
@@ -127,29 +121,29 @@ async function getContract(wallet: any, contractAddress: string) {
   return contractWithSigner;
 }
 
-async function getAuthExchange(){
+async function getAuthExchange() {
   const wallet = await getWallet();
-    const number = await wallet.provider.getBlockNumber();
-    const block_number = utils.hexlify((number) + 6307200);
-    const { address } = wallet;
-    const exchangeraddr = '0x7fbc8ad616177c6519228fca4a7d9ec7d1804900'
-    const newParams = {
-      exchanger_owner: address,
-      to: exchangeraddr,
-      block_number,
-    };
-    const str = `${address}${exchangeraddr}${block_number}`;
-    const newstr = hashMessage(str);
-    return new Promise((resolve, reject) => {
-      toSign({
-        sig: newstr,
-        address: wallet.address,
-        call: async (sigstr: string) => {
-          const params = { ...newParams, sig: sigstr }
-          resolve(params)
-        }
-      })
+  const number = await wallet.provider.getBlockNumber();
+  const block_number = utils.hexlify((number) + 6307200);
+  const { address } = wallet;
+  const exchangeraddr = '0x7fbc8ad616177c6519228fca4a7d9ec7d1804900'
+  const newParams = {
+    exchanger_owner: address,
+    to: exchangeraddr,
+    block_number,
+  };
+  const str = `${address}${exchangeraddr}${block_number}`;
+  const newstr = hashMessage(str);
+  return new Promise((resolve, reject) => {
+    toSign({
+      sig: newstr,
+      address: wallet.address,
+      call: async (sigstr: string) => {
+        const params = { ...newParams, sig: sigstr }
+        resolve(params)
+      }
     })
+  })
 
 }
 
@@ -160,7 +154,7 @@ const callBack = async () => {
     action: Actions.sendOpenExchangeTransaction,
     data: {
       auth: data,
-      status1: receipt1 ? receipt1.status: '',
+      status1: receipt1 ? receipt1.status : '',
       status2: receipt2 ? receipt2.status : '',
       exchangeAuth
     },
@@ -187,33 +181,33 @@ async function toSend() {
   try {
     // sendLoading.value = true
     const wallet = await getWallet();
-    if(tx1){
+    if (tx1) {
       const { pledge, fee_rate, name } = tx1;
       data1 = await send1(name, fee_rate, pledge);
       receipt1 = await wallet.provider.waitForTransaction(data1.hash);
-    await dispatch('account/waitTxQueueResponse')
-    const { status: status1 } = receipt1;
-    if(!status1) {
-      $tradeConfirm.update({ status: "fail", hash: data1.hash })
-      return
+      await dispatch('account/waitTxQueueResponse')
+      const { status: status1 } = receipt1;
+      if (!status1) {
+        $tradeConfirm.update({ status: "fail", hash: data1.hash })
+        return
+      }
     }
-    }
-    if(tx2){
+    if (tx2) {
       const { package_id, amount } = tx2;
       data2 = await send2(package_id, amount);
       receipt2 = await data2.wait();
-    await dispatch('account/waitTxQueueResponse')
-    const { status: status2 } = receipt2;
-    if(!status2) {
-      $tradeConfirm.update({ status: "fail", hash: data2.hash }) 
-      return
-    }
+      await dispatch('account/waitTxQueueResponse')
+      const { status: status2 } = receipt2;
+      if (!status2) {
+        $tradeConfirm.update({ status: "fail", hash: data2.hash })
+        return
+      }
     }
     $tradeConfirm.update({ status: "approve" });
     let name = ''
-    if(!tx1){
-      const res = await wallet.provider.send("eth_getAccountInfo", [address,"latest"]);
-      const {ExchangerName} = res.Worm
+    if (!tx1) {
+      const res = await wallet.provider.send("eth_getAccountInfo", [address, "latest"]);
+      const { ExchangerName } = res.Worm
       name = ExchangerName
     } else {
       name = tx1.name
@@ -226,16 +220,16 @@ async function toSend() {
 
   } catch (err: any) {
     if (err.toString().indexOf("timeout") > -1) {
-          $tradeConfirm.update({
-            status: "warn",
-            failMessage: t("error.timeout"),
-          });
-        } else {
-          $tradeConfirm.update({
-            status: "fail",
-            failMessage: err.reason,
-          });
-        }
+      $tradeConfirm.update({
+        status: "warn",
+        failMessage: t("error.timeout"),
+      });
+    } else {
+      $tradeConfirm.update({
+        status: "fail",
+        failMessage: err.reason,
+      });
+    }
     console.error(err);
   }
 }
@@ -281,7 +275,7 @@ async function send1(
   amount: string = ""
 ) {
   if (!name || !fee_rate || !amount) {
-    $tradeConfirm.update({ status: "fail", failBack: () => {} });
+    $tradeConfirm.update({ status: "fail", failBack: () => { } });
     throw new Error(
       "Parameter is invalid name or fee_rate or amount is undefined"
     );
@@ -289,7 +283,7 @@ async function send1(
   const wallet = await getWallet();
   const { address } = wallet;
   const baseName = web3.utils.fromUtf8(name)
-  const str = `wormholes:{"version": "0","type": 11,"fee_rate": ${fee_rate},"name":"${name}","url":""}`;
+  const str = `${store.getters['account/chainParsePrefix']}:{"version": "0","type": 11,"fee_rate": ${fee_rate},"name":"${name}","url":""}`;
   const data3 = web3.utils.fromUtf8(str);
   const tx1 = {
     from: address,
@@ -310,7 +304,7 @@ async function send1(
 
 async function send2(package_id: string = "", amount: string = "0") {
   if (!package_id || !Number(amount)) {
-    $tradeConfirm.update({ status: "fail", failBack: () => {} });
+    $tradeConfirm.update({ status: "fail", failBack: () => { } });
 
     throw new Error("Parameter is invalid package_id is undefined");
   }
@@ -320,7 +314,7 @@ async function send2(package_id: string = "", amount: string = "0") {
     const wallet = await getWallet();
     const contractWithSigner = await getContract(wallet, tx2.contractAddr);
     const value = ethers.utils.parseEther(amount + '')
-    const data = await contractWithSigner.functions.payForPackage(package_id +'',{
+    const data = await contractWithSigner.functions.payForPackage(package_id + '', {
       value
     });
 

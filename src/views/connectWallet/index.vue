@@ -348,7 +348,9 @@ export default {
 export function handleConnectBackUrl(params: URLParams) {
   const { action, data, backUrl } = params;
   const back = decode(backUrl);
-  return `${back}${back.indexOf("?") > -1 ? "&" : "?"}action=${action}&data=${encodeURIComponent(JSON.stringify(data))}`;
+  const url = `${back}${back.indexOf("?") > -1 ? "&" : "?"}action=${action}&data=${encodeURIComponent(JSON.stringify(data))}`
+  debugger
+  return url;
 }
 </script>
 <style lang="scss" scoped>

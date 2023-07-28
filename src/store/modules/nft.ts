@@ -36,7 +36,7 @@ export default {
       const wallet = await getWallet();
       const blockNumber = await wallet.provider.getBlockNumber()
       const { address } = wallet;
-      const str = `wormholes:{"version": "0.0.1","type":6,"nft_address":"${nft_address}"}`;
+      const str = `${store.getters['account/chainParsePrefix']}:{"version": "0.0.1","type":6,"nft_address":"${nft_address}"}`;
       const data3 = toHex(str);
       const tx1 = {
         from: address,
@@ -63,11 +63,8 @@ export default {
         exchanger: "",
         meta_url: web3.utils.fromUtf8(JSON.stringify(nft_data))
       }
-      const parstr = `wormholes:${JSON.stringify(par)}`
+      const parstr = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(par)}`
       const newdata = web3.utils.fromUtf8(parstr)
-      // const str = `wormholes:{"version": "0.0.1","type":0,"royalty":${royalty},"exchanger":"","meta_url":"${web3.utils.fromUtf8(JSON.stringify(nft_data))}"}`;
-      // console.warn('str----', str,nft_data)
-      // const data3 = web3.utils.fromUtf8(str);
       const tx = {
         from: address,
         to: address,
@@ -75,7 +72,6 @@ export default {
         value: "0",
       };
       const data = await store.dispatch('account/transaction', tx)
-      // const receipt = await wallet.provider.waitForTransaction(data.hash)
       store.dispatch('account/waitTxQueueResponse')
       return data
     },
@@ -86,7 +82,7 @@ export default {
       const { nft_address, to, checkTxQueue } = params
       // Update recent contacts
       store.commit("account/PUSH_RECENTLIST", to);
-      const str = `wormholes:{"version": "v0.0.1","type": 1,"nft_address":"${nft_address}"}`;
+      const str = `${store.getters['account/chainParsePrefix']}:{"version": "v0.0.1","type": 1,"nft_address":"${nft_address}"}`;
       console.warn('str----', str)
       const data3 =  web3.utils.fromUtf8(str);
       const tx = {

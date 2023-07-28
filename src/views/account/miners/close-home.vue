@@ -53,7 +53,7 @@ export default {
         const router = useRouter()
         const emitWarningSuccess = () => {
             router.push({
-              name: 'wallet'
+              name: 'home'
             })
         }
         const text = props.text

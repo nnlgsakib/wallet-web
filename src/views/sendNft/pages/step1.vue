@@ -91,6 +91,7 @@ import NavHeader from "@/components/navHeader/index.vue";
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { addressMask, decimal } from "@/utils/filters";
+import {toScan} from '@/utils/utils'
 import { web3 } from "@/utils/web3";
 
 export default {
@@ -123,7 +124,7 @@ export default {
       });
     };
     const tomore = () => {
-      Toast(t("sendNFT.tomore"));
+      toScan(pageData.data.address, '/NFTDetails')
     };
     const showImg = () => {
       ImagePreview({ images: [nftInfo.value.meta_url], closeable: true });

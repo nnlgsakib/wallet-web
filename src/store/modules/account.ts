@@ -44,6 +44,7 @@ import { web3 } from "@/utils/web3";
 import { Console } from "console";
 import { getConverAmount, getInput } from "./txList";
 import storeObj from '@/store/index'
+import { chainDataParse } from "@/enum/env";
 
 interface ValidatorInfo {
   Addr:string
@@ -53,6 +54,10 @@ interface ValidatorInfo {
 }
 type Validator = null | ValidatorInfo
 
+type ChainVersion = {
+  name: string
+  version: string
+}
 export interface State {
   mnemonic: Mnemonic;
   path: string;
@@ -77,7 +82,8 @@ export interface State {
   exchangeTotalProfit: number
   ethAccountInfo: Object,
   creatorStatus: Object | null
-  validator: Validator
+  validator: Validator,
+  chainVersion: ChainVersion
 }
 
 export enum NetStatus {
@@ -240,6 +246,7 @@ export default {
       name: "",
       transactionRecord: [],
       token: [],
+
     },
     //Open exchange status 2 Second successful ExchangerFlag true First successful
     exchangeStatus: {
@@ -251,6 +258,10 @@ export default {
       chainId: 51888
     },
     recentList: [],
+    chainVersion:  {
+      name: '',
+      version: ''
+    },
     // network switcher
     networkType: 1,
     // Smart Contract Address
@@ -273,8 +284,41 @@ export default {
       const address = account.address.toUpperCase();
       return state.currentNetwork.tokens[address] || [];
     },
+    chainParsePrefix(state: State) {
+      const {name, version} = state.chainVersion
+      if(name == 'wormholes' && version < 'v0.14.0' ){
+        return chainDataParse.wormholes
+      }
+      if(name == 'erbie' && version >= 'v0.14.0' ){
+        return chainDataParse.erbie
+      }
+      throw Error('chain version error')
+    }
   },
   mutations: {
+    UPDATE_CHAINVERSION(state: State, str: string) {
+      try {
+          const [name, version] = str.split(' ')
+          if(name && version) {
+            state.chainVersion = {
+              name,
+              version
+            }
+        } else {
+          state.chainVersion = {
+            name: str,
+            version: str
+          }
+        }
+
+      }catch(err) {
+        state.chainVersion = {
+          name: str,
+          version: str
+        }
+      }
+      
+    },
     UPDATE_CREATORSTATUS(state: State, val: any) {
       state.creatorStatus = val
     },
@@ -770,6 +814,13 @@ export default {
     }
   },
   actions: {
+    async getChainVersion ({state, commit}) {
+      const provider = await getProvider()
+      const res = await provider.send('eth_version')
+      console.warn('erbie ===========', res.split(' '))
+      commit('UPDATE_CHAINVERSION', res)
+      return res
+    },
     async getValidator({state,commit}: any) {
       const provider = await getProvider()
       const res = await provider.send("eth_getValidator", ['latest'])
@@ -1040,6 +1091,7 @@ export default {
           const wall = await dispatch("createWalletByJson", { password, json });
           const newWallet = wall.connect(newprovider)
           const res = await newWallet.provider.getNetwork()
+          dispatch('getChainVersion')
           commit('UPDATE_ETHNETWORK', res)
           commit('UPDATE_NETSTATUS', NetStatus.success)
           commit("UPDATE_WALLET", newWallet);
@@ -1054,6 +1106,8 @@ export default {
             commit('UPDATE_NETSTATUS', NetStatus.success)
             commit("UPDATE_WALLET", newWallet);
             commit('UPDATE_ETHNETWORK', res)
+            dispatch('getChainVersion')
+
             return newWallet
           } else {
             commit('UPDATE_NETSTATUS', NetStatus.success)

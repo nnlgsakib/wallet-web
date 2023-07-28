@@ -64,7 +64,7 @@ export default {
     const{t}=useI18n()
     const router = useRouter();
     const back = () => {
-      router.replace({name:'wallet'})
+      router.replace({name:'home'})
     };
     const { toSign, loading, password, sign, address, backUrl }: any = useSign();
     const signSelect: Ref<boolean> = ref(false);
@@ -100,11 +100,11 @@ export default {
         if(url) {
           location.href = decode(url)
         } else {
-          router.replace({name:'wallet'})
+          router.replace({name:'home'})
         }
 
       } catch(err){
-        router.replace({name:'wallet'})
+        router.replace({name:'home'})
       }
     }
     onMounted(() => {

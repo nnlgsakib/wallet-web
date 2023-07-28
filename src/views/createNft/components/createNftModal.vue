@@ -1,13 +1,6 @@
 <template>
   <div class="createNftModal">
-    <van-dialog
-      v-model:show="showModal"
-      teleport="#page-box"
-      :showConfirmButton="false"
-      :showCancelButton="false"
-      closeOnClickOverlay
-      :title="''"
-    >
+    <van-dialog v-model:show="showModal" teleport="#page-box" :showConfirmButton="false" :showCancelButton="false" closeOnClickOverlay :title="''">
       <div class="title text-center text-bold van-hairline--bottom">
         {{ t("castingnft.createNFT") }}
       </div>
@@ -42,23 +35,12 @@
         <div class="flex between">
           <div class="label">
             {{ t("transactiondetails.gasfee") }}
-            <van-popover
-              v-model:show="showPopover"
-              theme="dark"
-              placement="top"
-            >
-              <div
-                class="f-12 pl-10 pr-10 pt-10 pb-10"
-                @click="showPopover = false"
-              >
+            <van-popover v-model:show="showPopover" theme="dark" placement="top">
+              <div class="f-12 pl-10 pr-10 pt-10 pb-10" @click="showPopover = false">
                 {{ t("common.gasFee") }}
               </div>
               <template #reference>
-                <van-icon
-                  name="question hover"
-                  @mouseover="showPopover = true"
-                  @mouseout="showPopover = false"
-                />
+                <van-icon name="question hover" @mouseover="showPopover = true" @mouseout="showPopover = false" />
               </template>
             </van-popover>
           </div>
@@ -66,7 +48,7 @@
             ≈ {{ gasFee }} {{ currentNetwork.currencySymbol }}
           </div>
         </div>
-       <!--  <div class="flex between">
+        <!--  <div class="flex between">
           <div class="label">{{ t("transactiondetails.totalAmount") }}</div>
           <div class="value">
             ≈ {{ totalAmount }} {{ currentNetwork.currencySymbol }}
@@ -75,17 +57,11 @@
       </div>
       <div class="flex between pb-30 pl-16 pr-16 mt-20 btn-box">
         <van-button @click="cencel">{{ t("sendto.cancel") }}</van-button>
-        <van-button
-          type="primary"
-          :loading="nextLoading"
-          :disabled="!finishCount ? true : false"
-          @click="handleComfirm"
-          >{{ t("sendto.send") }}
-          {{ !finishCount ? `(${current.seconds}S)` : "" }}</van-button
-        >
+        <van-button type="primary" :loading="nextLoading" :disabled="!finishCount ? true : false" @click="handleComfirm">{{ t("sendto.send") }}
+          {{ !finishCount ? `(${current.seconds}S)` : "" }}</van-button>
       </div>
-      </van-dialog>
-      </div>
+    </van-dialog>
+  </div>
 </template>
 <script lang="ts">
 import {
@@ -124,9 +100,9 @@ export default defineComponent({
   components: {
     [Dialog.Component.name]: Dialog.Component,
     [Button.name]: Button,
-    [Popover.name]:Popover,
+    [Popover.name]: Popover,
     [Icon.name]: Icon
-  },  emits: ["handleComfirm","update:modelValue"],
+  }, emits: ["handleComfirm", "update:modelValue"],
   props: {
     modelValue: {
       type: Boolean,
@@ -139,19 +115,20 @@ export default defineComponent({
       }
     }
   },
-  setup(props: any, context: SetupContext){
+  setup(props: any, context: SetupContext) {
     const { t } = useI18n();
-    const {emit} = context
+    const { emit } = context
     const showModal: Ref<boolean> = ref(false);
-      const store = useStore();
-      const currentNetwork = computed(() => store.state.account.currentNetwork);
-      const accountInfo = computed(() => store.state.account.accountInfo);
-      const gasFee = ref("0");
+    const store = useStore();
+    const { state } = store
+    const currentNetwork = computed(() => store.state.account.currentNetwork);
+    const accountInfo = computed(() => store.state.account.accountInfo);
+    const gasFee = ref("0");
 
-      const calcFee = async() => {
-        console.warn('props.tx', props.tx)
-        const newTx = {...props.tx,category: props.tx.category.value}
-        const str = `wormholes:{"version": "0.0.1","type":0,"royalty":${props.tx.royalty},"exchanger":"","meta_url":"${encode(JSON.stringify(newTx))}"}`;
+    const calcFee = async () => {
+      console.warn('props.tx', props.tx)
+      const newTx = { ...props.tx, category: props.tx.category.value }
+      const str = `${store.getters['account/chainParsePrefix']}:{"version": "0.0.1","type":0,"royalty":${props.tx.royalty},"exchanger":"","meta_url":"${encode(JSON.stringify(newTx))}"}`;
       console.warn('str----', str)
       const data3 = web3.utils.fromUtf8(str);
       const myAddr = accountInfo.value.address
@@ -161,17 +138,17 @@ export default defineComponent({
         data: data3,
         value: "0",
       };
-        gasFee.value = await getGasFee(tx)
-      }
-      watch(
+      gasFee.value = await getGasFee(tx)
+    }
+    watch(
       () => props.modelValue,
-      async(n) => {
-        
+      async (n) => {
+
         showModal.value = n;
-  
-        if(n){
+
+        if (n) {
           calcFee()
-        countDown.start();
+          countDown.start();
         }
       },
       {
@@ -188,7 +165,7 @@ export default defineComponent({
       }
     );
     const showPopover = ref(false)
-    const cencel= () => {
+    const cencel = () => {
       emit("update:modelValue", false);
     }
     const nextLoading = ref(false)
@@ -223,29 +200,31 @@ export default defineComponent({
 
 </script>
 <style lang="scss" scoped>
-  .title {
+.title {
   line-height: 62px;
   font-weight: bold;
   font-size: 14px;
   background: #F8F3F9;
 }
-.createNftModal {
 
+.createNftModal {}
 
-    
-}
 .btn-box {
   padding: 0 52px 20px;
+
   button {
-    min-width:100px;
+    min-width: 100px;
   }
 }
+
 .content {
   border: 1px solid #e4e7e8;
   border-radius: 5px;
+
   .label {
     color: #8f8f8f;
   }
+
   .label,
   .value {
     line-height: 16px;
@@ -253,8 +232,9 @@ export default defineComponent({
     width: 60%;
     display: block;
   }
+
   .value {
-    text-align:right;
+    text-align: right;
   }
 }
 </style>

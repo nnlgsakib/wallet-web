@@ -170,9 +170,10 @@ emits: ['error'],
 setup(props: any, context: SetupContext) {
   const { t } = useI18n();
   const store = useStore();
+  const { state } = store
   const currentNetwork = computed(() => store.state.account.currentNetwork);
   const { emit }: any = context;
-  const str = `wormholes:{"type":10,"version":"v0.0.1"}`;
+  const str = `${store.getters['account/chainParsePrefix']}:{"type":10,"version":"v0.0.1"}`;
   let dislogShow = computed({
     get: () => props.show,
     set: (v) => emit("update:show", v),

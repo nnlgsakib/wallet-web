@@ -224,7 +224,8 @@ export default defineComponent({
     const show = ref(false);
     const { t } = useI18n();
     const { addExchangeBalance, miunsExchangeBalance } = useExchanges();
-    const { state } = useStore();
+    const store = useStore();
+    const {state} = store
     const gasFee = ref();
     watch(
       () => props.modelValue,
@@ -232,7 +233,7 @@ export default defineComponent({
         show.value = n;
         if (n) {
           const { address } = state.account.accountInfo;
-          const str = `wormholes:{"version": "0.0.1","type": 21}`;
+          const str = `${store.getters['account/chainParsePrefix']}:{"version": "0.0.1","type": 21}`;
           const data3 = toHex(str);
           const tx1 = {
             from: address,

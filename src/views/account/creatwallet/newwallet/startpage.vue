@@ -17,7 +17,7 @@ const {t} = useI18n()
 
 onMounted(() => {
   let time = setTimeout(() => {
-    router.replace({name:'wallet'})
+    router.replace({name:'home'})
     clearTimeout(time)
   },3000)
 })

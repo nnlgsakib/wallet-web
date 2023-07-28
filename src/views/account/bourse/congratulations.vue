@@ -149,11 +149,11 @@ export default defineComponent({
     console.warn('VUE_APP_EXCHANGESMANAGEMENT_URL', VUE_APP_EXCHANGESMANAGEMENT_URL)
     const goHome = () => {
       router.push({
-        path: '/wallet'
+        path: '/home'
       });
     }
     const back = () => {
-      router.replace({name:'wallet'})
+      router.replace({name:'home'})
     }
     const { t } = useI18n();
     const { toClipboard } = useClipboard()

@@ -72,7 +72,7 @@ export default defineComponent({
           downTime.value = 3
           let time = setInterval(() => {
             if (downTime.value == 0) {
-              router.replace({ name: 'wallet' })
+              router.replace({ name: 'home' })
               clearInterval(time)
               return
             }

@@ -150,7 +150,7 @@ export default {
                                     item.txType = 'normal'
                                 }else {
                                     const {txType} = json
-                                    item.txType = 'wormholes'
+                                    item.txType = store.getters['account/chainParsePrefix']
                                     item.jsonData = json
                                 }
                             } else {
@@ -240,7 +240,7 @@ export default {
                         } else {
                             const json = getInput(item.input)
                             if (json) {
-                                item.txType = 'wormholes'
+                                item.txType = store.getters['account/chainParsePrefix']
                                 item.jsonData = json
                             } else {
                                 item.txType = 'contract'
@@ -324,14 +324,15 @@ export default {
 
 export function getInput(input) {
     console.log('input', input)
+    const prefix = store.getters['account/chainParsePrefix']
     if (input && input != '0x') {
         try {
             debugger
             const wormStr = web3.utils.toAscii(input)
             console.log('wormStr',wormStr)
-            const [nullstr, jsonstr] = wormStr.split('wormholes:')
+            const [nullstr, jsonstr] = wormStr.split(`${prefix}:`)
             let jsonData = null
-            const txType = wormStr.startsWith('wormholes:')
+            const txType = wormStr.startsWith(`${prefix}:`)
             if (jsonstr && txType) {
                 jsonData = JSON.parse(jsonstr)
             } else {
@@ -340,7 +341,7 @@ export function getInput(input) {
   
             console.warn('jsonData', jsonData)
             if(txType) {
-                jsonData.txType = 'wormholes'
+                jsonData.txType = prefix
             } else {
                 if(jsonData) {
                     if(jsonData.nft_address && jsonData.owner) {
@@ -354,7 +355,7 @@ export function getInput(input) {
             }
             return jsonData
         } catch (err) {
-            console.log('err', err)
+            console.warn('err', err)
             return null
         }
     }

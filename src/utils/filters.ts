@@ -227,7 +227,7 @@ export const handleTxType = (item: any) => {
     // }
     return i18n.global.t('transationHistory.send')
   }
-  if (txType === 'wormholes') {
+  if (txType === store.getters['account/chainParsePrefix']) {
     const data = getInput(input)
     if (data) {
         console.warn('data', data)

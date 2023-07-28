@@ -627,7 +627,6 @@ export default defineComponent({
     const payErb = computed(() => {
       return (70 - Coefficient.value)/10
     })
-    //  const { state } = store;
     onMounted(async () => {
       debugger
       try {
@@ -712,11 +711,7 @@ export default defineComponent({
       modifExchangeBalance,
     } = useExchanges();
     const name = ref("");
-    const handleNameBlur = () => {};
-    console.log("===========");
-    console.log("===========");
-
-    const { dispatch } = store;
+    const { dispatch, state } = store;
     const amount = ref(200);
 
     // Open exchange status
@@ -1203,7 +1198,7 @@ export default defineComponent({
         const tx = {
           to: accountInfo.value.address,
           value: ethers.utils.parseEther(sendAmount.toString()),
-          data: web3.utils.fromUtf8(`wormholes:{"type":26,"version":"v0.0.1"}`),
+          data: web3.utils.fromUtf8(`${store.getters['account/chainParsePrefix']}:{"type":26,"version":"v0.0.1"}`),
         };
         const gasFee = await getGasFee(tx);
         reconveryDetail.value = {
@@ -1229,7 +1224,7 @@ export default defineComponent({
     const handleReConfirm = async() => {
       console.warn(reconveryDetail.value)
       const {amount}: any = reconveryDetail.value
-      const str = `wormholes:{"type":26,"version":"v0.0.1"}`;
+      const str = `${store.getters['account/chainParsePrefix']}:{"type":26,"version":"v0.0.1"}`;
       const tx = {
         value: amount,
         data: web3.utils.fromUtf8(str),
@@ -1237,7 +1232,7 @@ export default defineComponent({
         transitionType:'26'
       }
       const callBack = () => {
-        router.replace({name:'wallet'})
+        router.replace({name:'home'})
       }
       
       $tradeConfirm.open({

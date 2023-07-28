@@ -83,7 +83,7 @@ export default {
         }
         console.log('newdata', newdata)
         window.parent.postMessage({type:'wallet-authLogin-callback', data: newdata }, '*')
-        router.replace({name: 'wallet'})
+        router.replace({name: 'home'})
 
       } finally {
         accountLoading.value = false

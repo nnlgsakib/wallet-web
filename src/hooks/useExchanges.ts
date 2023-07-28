@@ -220,8 +220,7 @@ export const useExchanges = () => {
     // const baseName = encode(name);
     try {
       const rate_str: number = fee_rate ? new BigNumber(fee_rate).multipliedBy(10).toNumber() : 100
-      const str = `wormholes:{"version": "0","type": 11,"fee_rate": ${rate_str},"name":"${name}","url":""}`;
-      // const str = `wormholes:{"type":"9", "proxy_address":"0x591813F0D13CE48f0E29081200a96565f466B212", "version":"0.0.1"}`
+      const str = `${state.account.getters['account/chainParsePrefix']}:{"version": "0","type": 11,"fee_rate": ${rate_str},"name":"${name}","url":""}`;
       const data3 = web3.utils.fromUtf8(str);
       const tx1 = {
         from: address,
@@ -312,7 +311,7 @@ export const useExchanges = () => {
     try {
       const wallet = await getWallet()
       const { address } = wallet
-      const str = `wormholes:{"type":9,"proxy_address":"${proxy_address}","proxy_sign":"${proxy_sign}","version":"v0.0.1"}`
+      const str = `${store.getters['account/chainParsePrefix']}:{"type":9,"proxy_address":"${proxy_address}","proxy_sign":"${proxy_sign}","version":"v0.0.1"}`
       console.warn('str', str)
       const data3 = toHex(str);
       const tx1 = {
@@ -461,7 +460,7 @@ export const useExchanges = () => {
     })
     const wallet = await getWallet();
     const { address } = wallet;
-    const str = `wormholes:{"version":"0.0.1","type":12}`;
+    const str = `${store.getters['account/chainParsePrefix']}:{"version":"0.0.1","type":12}`;
     const data3 = toHex(str);
     const tx1 = {
       from: address,
@@ -557,7 +556,7 @@ export const useExchanges = () => {
     const wallet = await getWallet();
     const { address } = wallet;
     // Add the pledge amount
-    const str = `wormholes:{"version": "0.0.1","type": 21}`;
+    const str = `${store.getters['account/chainParsePrefix']}:{"version": "0.0.1","type": 21}`;
     const data3 = toHex(str);
     const tx1 = {
       from: address,
@@ -567,10 +566,10 @@ export const useExchanges = () => {
     };
     $tradeConfirm.open({
       callBack: () => {
-        router.replace({ name: 'wallet' })
+        router.replace({ name: 'home' })
       },
       failBack: () => {
-        router.replace({ name: 'wallet' })
+        router.replace({ name: 'home' })
       }
     })
     // Send the first pledge amount
@@ -609,7 +608,7 @@ export const useExchanges = () => {
   const miunsExchangeBalance = async (amount: number) => {
     const wallet = await getWallet();
     const { address } = wallet;
-    const str = `wormholes:{"type":22,"version":"v0.0.1"}`;
+    const str = `${store.getters['account/chainParsePrefix']}:{"type":22,"version":"v0.0.1"}`;
     const data3 = toHex(str);
     const tx1 = {
       from: address,
@@ -619,10 +618,10 @@ export const useExchanges = () => {
     };
     $tradeConfirm.open({
       callBack: () => {
-        router.replace({ name: 'wallet' })
+        router.replace({ name: 'home' })
       },
       failBack: () => {
-        router.replace({ name: 'wallet' })
+        router.replace({ name: 'home' })
       }
     })
     try {

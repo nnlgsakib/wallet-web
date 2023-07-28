@@ -84,7 +84,6 @@
 // import NftCard from "./nftCard.vue";
 import AiNftCard from "./aiNftCard.vue";
 import {
-  getNftOwner,
   getDrawInfoByUser,
   GetDrawInfoParams,
   getDrawInfoByNftaddrs,

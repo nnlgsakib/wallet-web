@@ -188,7 +188,7 @@ export default {
           const gasFee = ref();
           const { address } = state.account.accountInfo;
           const baseName = encode(props.name);
-          const str = `wormholes:{"version": "0","type": 11,"fee_rate": 100,"name":"${baseName}","url":""}`;
+          const str = `${store.getters['account/chainParsePrefix']}:{"version": "0","type": 11,"fee_rate": 100,"name":"${baseName}","url":""}`;
           const data3 = toHex(str);
           const tx1 = {
             from: address,

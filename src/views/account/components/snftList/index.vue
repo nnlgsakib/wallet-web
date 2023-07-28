@@ -121,7 +121,7 @@ import { computed, ref, onBeforeMount, onMounted, watch } from "vue";
 import { useStore } from "vuex";
 import {
   queryArraySnft,
-  snft_com_page,
+  getOwnerSnftList,
   tokenIdByNftaddr
 } from "@/http/modules/nft";
 import dialogWarning from "@/components/dialogWarning/message.vue";
@@ -199,6 +199,7 @@ export default defineComponent({
     const loading = ref(false);
     const finished = ref(false);
     const store = useStore();
+    const { state } = store
     const { t } = useI18n();
     const nftErr = ref(false);
     const network = ref({
@@ -316,7 +317,7 @@ export default defineComponent({
         //   blockNumber = await wallet.provider.getBlockNumber();
         //   network = await wallet.provider.getNetwork()
         // }        
-        let { nfts } = await snft_com_page(params2);
+        let { nfts } = await getOwnerSnftList(params2);
         nfts = nfts && nfts.length ? nfts : [];
         const nftsAddr = nfts && nfts.length ? nfts.map((item: any) => item.address.toUpperCase()) : ''
         let copyList = JSON.parse(JSON.stringify(list.value))
@@ -622,15 +623,15 @@ export default defineComponent({
             switch (tabIndex.value) {
               case "2":
                 transitionType = '6'
-                str = `wormholes:{"type":6,"nft_address":"${nft_address}","version":"v0.0.1"}`;
+                str = `${store.getters['account/chainParsePrefix']}:{"type":6,"nft_address":"${nft_address}","version":"v0.0.1"}`;
                 break;
               case "3":
                 transitionType = '7'
-                str = `wormholes:{"type":7,"nft_address":"${nft_address}","version":"0.0.1"}`;
+                str = `${store.getters['account/chainParsePrefix']}:{"type":7,"nft_address":"${nft_address}","version":"0.0.1"}`;
                 break;
               case "1":
                 transitionType = '8'
-                str = `wormholes:{"type":8,"nft_address":"${nft_address}","version":"0.0.1"}`;
+                str = `${store.getters['account/chainParsePrefix']}:{"type":8,"nft_address":"${nft_address}","version":"0.0.1"}`;
                 break;
             }
 
@@ -726,13 +727,13 @@ export default defineComponent({
       const { nft_address }: any = list.value.length ? list.value[0] : {}
       switch (tabIndex.value) {
         case "2":
-          str = `wormholes:{"type":6,"nft_address":"${nft_address}","version":"v0.0.1"}`;
+          str = `${store.getters['account/chainParsePrefix']}:{"type":6,"nft_address":"${nft_address}","version":"v0.0.1"}`;
           break;
         case "3":
-          str = `wormholes:{"type":7,"nft_address":"${nft_address}","version":"0.0.1"}`;
+          str = `${store.getters['account/chainParsePrefix']}:{"type":7,"nft_address":"${nft_address}","version":"0.0.1"}`;
           break;
         case "1":
-          str = `wormholes:{"type":8,"nft_address":"${nft_address}","version":"0.0.1"}`;
+          str = `${store.getters['account/chainParsePrefix']}:{"type":8,"nft_address":"${nft_address}","version":"0.0.1"}`;
           break;
       }
       const data3 = toHex(str);

@@ -183,6 +183,7 @@ const stakerExtensions = ref([])
 const myExtensions = ref([])
 const blockNumber = ref(0)
 onMounted(() => {
+    console.warn('prefix', store.getters['account/chainParsePrefix'])
     const toast = Toast.loading({
         duration: 0,
         forbidClick: true,
@@ -319,7 +320,7 @@ const handleShowReconveryModal = async () => {
         const tx = {
             to: accountInfo.value.address,
             value: ethers.utils.parseEther(sendAmount.toString()),
-            data: web3.utils.fromUtf8(`wormholes:{"type":26,"version":"v0.0.1"}`),
+            data: web3.utils.fromUtf8(`${store.getters['account/chainParsePrefix']}:{"type":26,"version":"v0.0.1"}`),
         };
         const gasFee = await getGasFee(tx);
         reconveryDetail.value = {
@@ -382,7 +383,7 @@ const minusConfirm = async () => {
         callBack
     })
     try {
-        const str = `wormholes:${JSON.stringify({ type: 10, version: "0.0.1" })}`;
+        const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify({ type: 10, version: "0.0.1" })}`;
         const data3 = web3.utils.fromUtf8(str)
         const tx1 = {
             to: toAddr.value,
@@ -413,7 +414,7 @@ const handleMinusError = (err: any) => {
 const reconveryConfirm = async () => {
     showReconveryModal.value = false;
     const { amount }: any = reconveryDetail.value
-    const str = `wormholes:{"type":26,"version":"v0.0.1"}`;
+    const str = `${store.getters['account/chainParsePrefix']}:{"type":26,"version":"v0.0.1"}`;
     const tx = {
         value: amount,
         data: web3.utils.fromUtf8(str),
@@ -486,7 +487,7 @@ const addStakeConfirm = async () => {
         callBack
     })
     try {
-        const str = `wormholes:${JSON.stringify({ type: 9, proxy_address: accountInfo.value.address, fee_rate: 1000, name: "Staker", url: "", version: "v0.0.1" })}`;
+        const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify({ type: 9, proxy_address: accountInfo.value.address, fee_rate: 1000, name: "Staker", url: "", version: "v0.0.1" })}`;
         const data3 = web3.utils.fromUtf8(str)
         const tx1 = {
             to: toAddr.value,

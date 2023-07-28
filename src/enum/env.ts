@@ -19,3 +19,14 @@ export const VUE_APP_SCAN_URL = decode(process.env.VUE_APP_SCAN_URL || '')
 
 
 export const VUE_APP_OFFICIAL_EXCHANGE = decode(process.env.VUE_APP_OFFICIAL_EXCHANGE || '')
+
+
+export const isDev = process.env.VUE_APP_NODE_ENV == 'development'
+
+
+
+
+export enum chainDataParse {
+    wormholes = 'wormholes',
+    erbie = 'erbie'
+}

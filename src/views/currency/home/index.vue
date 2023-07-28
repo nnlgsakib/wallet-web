@@ -2,18 +2,11 @@
   <div class="currency">
     <div class="flex center">
       <div class="flex center currency-icon">
-        <img
-          class="currency-symbol"
-          :src="require(`@/assets/token/icon_black.svg`)"
-          alt="'"
-        />
+        <img class="currency-symbol" :src="require(`@/assets/token/icon_black.svg`)" alt="'" />
       </div>
     </div>
-    <div
-      :class="`amount text-center ${
-        decimal(pageData.data.balance).length > 30 ? 'small' : 'big'
-      }`"
-    >
+    <div :class="`amount text-center ${decimal(pageData.data.balance).length > 30 ? 'small' : 'big'
+      }`">
       {{ decimal(pageData.data.balance) }} {{ pageData.data.symbol }}
     </div>
 
@@ -21,10 +14,7 @@
       <div class="actions-list flex evenly">
         <div class="actions-list-card">
           <div class="flex center">
-            <div
-              class="actions-list-card-icon flex center"
-              @click.stop="toogleAcceptCode"
-            >
+            <div class="actions-list-card-icon flex center" @click.stop="toogleAcceptCode">
               <i class="iconfont icon-bottom"></i>
             </div>
           </div>
@@ -49,58 +39,19 @@
     </div>
     <div class="tx-tit lh-30 pl-14 pr-14 mt-20">{{ t("common.hsitory") }}</div>
     <div class="swap-list" v-show="!loading">
-      <DynamicScroller
-    class="scroller"
-    :items="txList"
-    minItemSize="30"
-    keyField="txId"
-    pageMode
-  >
-  <template v-slot="{ item, active, index}">
-    <DynamicScrollerItem
-        :item="item"
-        :active="active"
-        :data-index="index"
-      >
-    <CollectionCard
-        @handleClick="handleView(item)"
-        @handleSend="handleSend"
-        @handleCancel="handleCancel"
-        :data="item"
-      />
-      </DynamicScrollerItem>
-  </template>
+      <DynamicScroller class="scroller" :items="txList" minItemSize="30" keyField="txId" pageMode>
+        <template v-slot="{ item, active, index }">
+          <DynamicScrollerItem :item="item" :active="active" :data-index="index">
+            <CollectionCard @handleClick="handleView(item)" @handleSend="handleSend" @handleCancel="handleCancel" :data="item" />
+          </DynamicScrollerItem>
+        </template>
 
-</DynamicScroller>
+      </DynamicScroller>
 
       <NoData v-if="!txList.length" :message="$t('wallet.no')" />
-      <!-- <i18n-t
-        tag="div"
-        keypath="wallet.toBrowser"
-        class="flex center scan-link pb-30"
-      >
-        <template v-slot:link>
-          <span
-            @click="viewAccountByAddress(accountInfo.address)"
-            rel="noopener noreferrer"
-            >{{ t("wallet.scanLink") }}</span
-          >
-        </template>
-      </i18n-t> -->
-      <van-dialog
-        v-model:show="showTransactionModal"
-        title
-        :showCancelButton="false"
-        :showConfirmButton="false"
-        closeOnClickOverlay
-        class="transfer-detail-modal"
-      >
-        <TransactionDetail
-          @handleClose="handleClose"
-          @handleSpeed="handleSend"
-          @handleCancel="handleCancel"
-          :data="transactionData.data"
-        />
+
+      <van-dialog v-model:show="showTransactionModal" title :showCancelButton="false" :showConfirmButton="false" closeOnClickOverlay class="transfer-detail-modal">
+        <TransactionDetail @handleClose="handleClose" @handleSpeed="handleSend" @handleCancel="handleCancel" :data="transactionData.data" />
       </van-dialog>
     </div>
     <div class="loading-list-con" v-show="loading">
@@ -109,33 +60,20 @@
       </div>
     </div>
   </div>
-  <SliderBottom >
-    <i18n-t
-        tag="div"
-        keypath="wallet.toBrowser"
-        class="flex center scan-link"
-      >
-        <template v-slot:link>
-          <span
-            @click="viewAccountByAddress(accountInfo.address)"
-            class="f-12 view-history hover"
-            rel="noopener noreferrer"
-            >{{ t("wallet.scanLink") }}</span>
-        </template>
-      </i18n-t>
+  <SliderBottom>
+    <i18n-t tag="div" keypath="wallet.toBrowser" class="flex center scan-link">
+      <template v-slot:link>
+        <span @click="toScan(accountInfo.address, '/AccountDetail')" class="f-12 view-history hover" rel="noopener noreferrer">{{ t("wallet.scanLink") }}</span>
+      </template>
+    </i18n-t>
   </SliderBottom>
   <!-- <Transition name="slider">
 
   </Transition> -->
-  <CommonModal
-    v-model="showSpeedModal"
-    :title="
-      sendTxType == 1
-        ? t('common.gasSpeedUp')
-        : t('transationHistory.cancelDealTit')
-    "
-    className="transactionDetailsModal"
-  >
+  <CommonModal v-model="showSpeedModal" :title="sendTxType == 1
+      ? t('common.gasSpeedUp')
+      : t('transationHistory.cancelDealTit')
+    " className="transactionDetailsModal">
     <div class="m-14 pl-14 pr-14 border-round detail-modal">
       <div class="flex between lh-16 pt-12 pb-8">
         <span>{{ t("transactionDetails.nonce") }}</span>
@@ -151,39 +89,30 @@
         <span>{{ t("converSnft.amount") }}</span>
         <span>{{
           !sendTx.tokenAddress
-            ? ethers.utils.formatEther(sendTx.sendData.value)
-            : sendTx.amount
+          ? ethers.utils.formatEther(sendTx.sendData.value)
+          : sendTx.amount
         }}</span>
       </div>
       <div class="flex between lh-16 pt-8 pb-8">
         <span>{{ t("transactionDetails.gasfee") }}</span>
         <span>{{
           sendTx.sendData.gasPrice
-            ? ethers.utils.formatEther(sendTx.sendData.gasPrice)
-            : 0
+          ? ethers.utils.formatEther(sendTx.sendData.gasPrice)
+          : 0
         }}</span>
       </div>
       <div class="flex between lh-16 pt-8 pb-12">
         <span>{{ t("transactionDetails.totalAmount") }}</span>
-        <span
-          >≈
+        <span>≈
           {{
             !sendTx.tokenAddress
-              ? ethers.utils.formatEther(sendTx.sendData.value)
-              : sendTx.amount
+            ? ethers.utils.formatEther(sendTx.sendData.value)
+            : sendTx.amount
           }}
-          {{ currentNetwork.currencySymbol }}</span
-        >
+          {{ currentNetwork.currencySymbol }}</span>
       </div>
     </div>
-    <ModifGasFee
-      :show="showSpeedModal"
-      :to="sendTx.to"
-      :gasPrice="sendTx.gasPrice"
-      :gasLimit="sendTx.gasLimit"
-      :amount="ethers.utils.formatEther(sendTx.sendData.value)"
-      @change="handleGasChange"
-    />
+    <ModifGasFee :show="showSpeedModal" :to="sendTx.to" :gasPrice="sendTx.gasPrice" :gasLimit="sendTx.gasLimit" :amount="ethers.utils.formatEther(sendTx.sendData.value)" @change="handleGasChange" />
     <div class="sendBtnBox pb-20 mt-20">
       <van-button @click="showSpeedModal = false" class="mr-26">{{
         t("common.cancel")
@@ -222,7 +151,7 @@ import { VUE_APP_SCAN_URL } from "@/enum/env";
 import localforage from "localforage";
 import { ethers } from "ethers";
 import BigNumber from "bignumber.js";
-import { debounce, guid, viewAccountByAddress } from "@/utils/utils";
+import { debounce, guid, toScan } from "@/utils/utils";
 import {
   clone,
   getWallet,
@@ -235,7 +164,7 @@ import { web3 } from "@/utils/web3";
 import { useDialog } from "@/plugins/dialog";
 import eventBus from "@/utils/bus";
 import { stopLoop } from '@/store/modules/txList';
-import { RecycleScroller,DynamicScroller,DynamicScrollerItem } from 'vue-virtual-scroller'
+import { RecycleScroller, DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller'
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 import SliderBottom from '@/components/sliderBottom/index.vue'
 
@@ -298,65 +227,65 @@ export default {
     const getPageList = async () => {
       // showSpeedModal.value = false;
       try {
-          const chainId = currentNetwork.value.chainId;
-          const id = currentNetwork.value.id;
-          const targetAddress = accountInfo.value.address.toUpperCase();
-          let searchKey = "";
-          if (id === "wormholes-network-1") {
-            searchKey = `async-${id}-${chainId}-${targetAddress}`;
-          } else {
-            searchKey = `txlist-${id}-${chainId}-${targetAddress}`;
-          }
-          const txInfo: any = await localforage.getItem(searchKey);
-          const queuekey = `txQueue-${id}-${chainId}-${targetAddress.toUpperCase()}`;
-          const txQueue = await localforage.getItem(queuekey);
-          let tx = [];
-          if (id === "wormholes-network-1") {
-            tx = txInfo ? txInfo.list : [];
-          } else {
-            tx = txInfo;
-          }
-
-          if (tx && tx.length) {
-            const list = tx || [];
-            if (tokenContractAddress) {
-              txList.value = list.filter((item: any) => {
-                if(item.to){
-                  return item.to.toUpperCase() == tokenContractAddress.toString().toUpperCase()
-                }
-              });
-              
-            } else {
-              const tokens = currentNetwork.value.tokens[accountInfo.value.address.toUpperCase()]
-              const tokenAddrs = tokens && tokens.length ? tokens.map((item: any) => item.tokenContractAddress.toUpperCase()) : []
-              console.warn('tokenAddrs', tokenAddrs,list)
-              txList.value = list
-            }
-          }
-          if(!tokenContractAddress) {
-            if(Array.isArray(txQueue)) {
-            txQueue.forEach(item => {
-              if(!item.tokenAddress){
-                // @ts-ignore
-                txList.value.unshift(item)
-              }
-            })
-          }
-          } else {
-            if(Array.isArray(txQueue)) {
-            txQueue.forEach(item => {
-              if(item.tokenAddress.toUpperCase() == tokenContractAddress.toString().toUpperCase()){
-                // @ts-ignore
-                txList.value.unshift(item)
-              }
-            })
-          }
-          }
-
-        } catch (err) {
-        } finally {
-          loading.value = false;
+        const chainId = currentNetwork.value.chainId;
+        const id = currentNetwork.value.id;
+        const targetAddress = accountInfo.value.address.toUpperCase();
+        let searchKey = "";
+        if (id === "wormholes-network-1") {
+          searchKey = `async-${id}-${chainId}-${targetAddress}`;
+        } else {
+          searchKey = `txlist-${id}-${chainId}-${targetAddress}`;
         }
+        const txInfo: any = await localforage.getItem(searchKey);
+        const queuekey = `txQueue-${id}-${chainId}-${targetAddress.toUpperCase()}`;
+        const txQueue = await localforage.getItem(queuekey);
+        let tx = [];
+        if (id === "wormholes-network-1") {
+          tx = txInfo ? txInfo.list : [];
+        } else {
+          tx = txInfo;
+        }
+
+        if (tx && tx.length) {
+          const list = tx || [];
+          if (tokenContractAddress) {
+            txList.value = list.filter((item: any) => {
+              if (item.to) {
+                return item.to.toUpperCase() == tokenContractAddress.toString().toUpperCase()
+              }
+            });
+
+          } else {
+            const tokens = currentNetwork.value.tokens[accountInfo.value.address.toUpperCase()]
+            const tokenAddrs = tokens && tokens.length ? tokens.map((item: any) => item.tokenContractAddress.toUpperCase()) : []
+            console.warn('tokenAddrs', tokenAddrs, list)
+            txList.value = list
+          }
+        }
+        if (!tokenContractAddress) {
+          if (Array.isArray(txQueue)) {
+            txQueue.forEach(item => {
+              if (!item.tokenAddress) {
+                // @ts-ignore
+                txList.value.unshift(item)
+              }
+            })
+          }
+        } else {
+          if (Array.isArray(txQueue)) {
+            txQueue.forEach(item => {
+              if (item.tokenAddress.toUpperCase() == tokenContractAddress.toString().toUpperCase()) {
+                // @ts-ignore
+                txList.value.unshift(item)
+              }
+            })
+          }
+        }
+
+      } catch (err) {
+      } finally {
+        loading.value = false;
+      }
     };
 
     const handleAsyncTxList = () => {
@@ -370,9 +299,9 @@ export default {
       store.dispatch('account/clearWaitTime')
 
       try {
-       const { total, asyncRecordKey} = await handleAsyncTxList();
-        await store.dispatch('txList/asyncUpdateList',{total})
-      }finally {
+        const { total, asyncRecordKey } = await handleAsyncTxList();
+        await store.dispatch('txList/asyncUpdateList', { total })
+      } finally {
         getPageList();
         loading.value = false
       }
@@ -384,7 +313,7 @@ export default {
     const toSend = () => {
       router.push({ name: "send", query });
     };
-    const toSwap = () => {};
+    const toSwap = () => { };
     let transactionData: any = reactive({ data: {} });
     const showTransactionModal: Ref<boolean> = ref(false);
     const handleView = (e: any) => {
@@ -396,7 +325,7 @@ export default {
       showTransactionModal.value = false;
     };
     const showSpeedModal = ref(false);
-    const sendTx:Ref<SendTx> = ref({});
+    const sendTx: Ref<SendTx> = ref({});
     // 1 speed up  2 cancel
     const sendTxType = ref(1);
     const handleSend = (data: any) => {
@@ -435,14 +364,14 @@ export default {
         cancelSend();
       }
     };
-    eventBus.on('changeNetwork', async(address) => {
+    eventBus.on('changeNetwork', async (address) => {
       loading.value = true
       txList.value = [];
       try {
-        const { total, asyncRecordKey} = await handleAsyncTxList();
-        await store.dispatch('txList/asyncUpdateList',{total})
+        const { total, asyncRecordKey } = await handleAsyncTxList();
+        await store.dispatch('txList/asyncUpdateList', { total })
         await getPageList();
-      }finally {
+      } finally {
         loading.value = false
       }
       store.dispatch("account/waitTxQueueResponse", {
@@ -465,7 +394,7 @@ export default {
       // @ts-ignore
       // txList.value = txList.value.filter(item => item.txId.toUpperCase() == data.txId.toUpperCase())
     });
-    
+
     eventBus.on("txQueuePush", (data: any) => {
       getPageList()
       // let time = setTimeout(async() => {
@@ -477,8 +406,8 @@ export default {
       // clearTimeout(time)
       // },300)
     });
-    eventBus.on('waitTxEnd', async() => {
-      store.dispatch('txList/asyncUpdateList',{total: 0})
+    eventBus.on('waitTxEnd', async () => {
+      store.dispatch('txList/asyncUpdateList', { total: 0 })
 
     })
     eventBus.on("txUpdate", (data: any) => {
@@ -563,7 +492,7 @@ export default {
           })
         }
         let txType = 'normal'
-        if(tokenAddress) {
+        if (tokenAddress) {
           txType = 'contract'
         } else {
           txType = !newData ? 'normal' : (newData.indexOf('wormholes') > -1 ? 'wormholes' : 'contract')
@@ -574,7 +503,7 @@ export default {
         //     checkTxQueue: false
         //   })
         const { hash, from, type, value: newVal, contractAddress } = data;
-        const txInfo =  {
+        const txInfo = {
           ...sendTx.value,
           receipt: {
             blockHash: null,
@@ -582,7 +511,7 @@ export default {
             cumulativeGasUsed: { type: "BigNumber", hex: "0x0" },
             effectiveGasPrice: { type: "BigNumber", hex: "0x0" },
             gasUsed: { type: "BigNumber", hex: "0x0" },
-                 // @ts-ignore
+            // @ts-ignore
             transactionHash: sendTx.value.hash,
             from,
             to,
@@ -673,12 +602,12 @@ export default {
         // step1  Set the original transaction status to false and unshift to the transaction record
         const { hash, from, type, value: newVal, contractAddress } = data;
         let txType = 'normal'
-        if(tokenAddress) {
+        if (tokenAddress) {
           txType = 'contract'
         } else {
           txType = !newData ? 'normal' : (newData.indexOf('wormholes') > -1 ? 'wormholes' : 'contract')
         }
-        const txInfo =  {
+        const txInfo = {
           ...sendTx.value,
           receipt: {
             blockHash: null,
@@ -746,7 +675,7 @@ export default {
       loading,
       pageData,
       VUE_APP_SCAN_URL,
-      viewAccountByAddress,
+      toScan,
       txList,
     };
   },
@@ -757,16 +686,19 @@ export default {
   overflow-y: scroll;
   flex: auto 1 1;
 }
+
 :deep() {
   .van-skeleton__avatar--round {
     margin-top: 12px;
   }
 }
+
 .tx-tit {
   height: 30px;
   color: #848484;
   background: #F1F3F4;
 }
+
 .fixed-bottom {
   height: 20px;
   width: 220px;
@@ -774,6 +706,7 @@ export default {
   bottom: 10px;
   left: 50%;
   margin-left: -110px;
+
   &.fixed {
     padding: 3px 5px;
     box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
@@ -781,59 +714,73 @@ export default {
     background: #fff;
   }
 }
+
 .view-history {
   color: #9F54BA;
+
   &:hover {
     text-decoration: underline;
   }
 }
+
 .loading-list-con {
   height: calc(100vh - 48px - 70px - 42px - 36px - 55px);
   overflow: hidden;
 }
+
 .loading-list-card {
   padding: 6px 0;
 }
+
 .sendBtnBox {
   button {
     min-width: 80px;
   }
 }
+
 .detail-modal {
-  & > div {
+  &>div {
     span:nth-of-type(1) {
       color: #8f8f8f;
     }
   }
 }
+
 :deep() {
   .van-dialog__footer {
     display: none;
   }
 }
+
 .detail-modal {
   border-radius: 5px;
 }
+
 .currency {
   .scan-link {
     color: #848484;
+
     span {
       margin-left: 3px;
       color: #9F54BA;
       cursor: pointer;
+
       &:hover {
         text-decoration: underline;
       }
     }
   }
+
   .currency-icon {
     width: 40px;
     height: 40px;
+
     .currency-symbol {
       width: 37.5px;
       // border-radius: 50%;
     }
   }
+
   &-icon {
     margin-top: 25px;
     width: 34px;
@@ -841,37 +788,47 @@ export default {
     border-radius: 50%;
     margin-bottom: 5px;
   }
+
   .amount {
     line-height: 42px;
     font-size: 24px;
     font-weight: 600;
+
     &.small {
       font-size: 16px;
     }
+
     &.big {
       font-size: 22px;
     }
   }
+
   .amount2 {
     color: #848484;
   }
+
   .actions-list {
     width: 50%;
+
     &-card {
       width: 60px;
+
       &-icon {
         height: 32px;
         width: 32px;
         background: #9F54BA;
         border-radius: 32px;
         transition: ease 0.3s;
+
         i {
           font-size: 18px;
         }
+
         &:hover {
           background: #9643b4;
         }
       }
+
       &-label {
         line-height: 16px;
         color: #9F54BA;
@@ -886,6 +843,7 @@ export default {
     border-top: 1px solid #e4e7e8;
   }
 }
+
 .iconfont {
   color: #fff;
 }

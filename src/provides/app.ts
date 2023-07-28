@@ -12,7 +12,7 @@ export const provide = () => {
             return store.getters['account/wallet']
         },
         backHome(){
-            router.replace({name:'wallet'})
+            router.replace({name:'home'})
         }
     }
 }

@@ -234,8 +234,8 @@ export default defineComponent({
           const bigAmount = new Bignumber(props.amount);
           const { address } = state.account.accountInfo;
           const str = bigAmount.gte(props.fee)
-            ? `wormholes:{"version":"0.0.1","type":12}`
-            : `wormholes:{"type":22,"version":"v0.0.1"}`;
+            ? `${store.getters['account/chainParsePrefix']}:{"version":"0.0.1","type":12}`
+            : `${store.getters['account/chainParsePrefix']}:{"type":22,"version":"v0.0.1"}`;
           const realAm = bigAmount.gte(props.fee) ? 0 : props.amount;
           const data3 = toHex(str);
           const tx1 = {

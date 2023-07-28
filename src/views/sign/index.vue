@@ -35,7 +35,7 @@
       </div>
 
       <div class="flex between btn-box">
-        <van-button type="default" @click="router.replace({name:'wallet'})" plain>{{t('sign.cancel')}}</van-button>
+        <van-button type="default" @click="router.replace({name:'home'})" plain>{{t('sign.cancel')}}</van-button>
         <van-button type="primary" @click="goOn">{{t('sign.confirm')}}</van-button>
       </div>
     </div>
@@ -65,7 +65,7 @@ export default {
     const router = useRouter();
     const { backUrl: backUrl1 }: any = useRoute()
     const back = () => {
-      router.replace({name:'wallet'})
+      router.replace({name:'home'})
     };
     const { toSign, loading, password, sign, address, backUrl }: any = useSign();
     const signSelect: Ref<boolean> = ref(false);

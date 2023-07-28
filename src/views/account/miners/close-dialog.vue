@@ -1,32 +1,20 @@
 <template>
   <div v-if="show" class="dialog-warning-dark">
     <div v-if="show" class="dialog-warning">
-      <div class="dialog-warning-header">{{t('minerspledge.stacking')}}</div>
-      <div
-        style="
+      <div class="dialog-warning-header">{{ t('minerspledge.stacking') }}</div>
+      <div style="
           color: #8f8f8f;
           padding-left: 15px;
           margin-top: 20px;
           margin-bottom: 20px;
-        "
-      >
-        {{t('minerspledge.select')}}
+        ">
+        {{ t('minerspledge.select') }}
       </div>
       <van-cell-group :border="false">
         <van-cell title="SNFT" @click="select = 0" class="hover">
           <template #icon>
-            <img
-              src="@/assets/token/yuan-active.png"
-              v-if="select === 0"
-              alt=""
-              class="no_checkbox"
-            />
-            <img
-              src="@/assets/token/yuan.png"
-              v-else
-              alt=""
-              class="no_checkbox"
-            />
+            <img src="@/assets/token/yuan-active.png" v-if="select === 0" alt="" class="no_checkbox" />
+            <img src="@/assets/token/yuan.png" v-else alt="" class="no_checkbox" />
           </template>
           <template #right-icon>
             <van-icon name="success" color="#28A745" v-if="select === 0" />
@@ -34,18 +22,8 @@
         </van-cell>
         <van-cell title="ERB" @click="select = 1" class="hover">
           <template #icon>
-            <img
-              src="@/assets/token/yuan-active.png"
-              v-if="select === 1"
-              alt=""
-              class="no_checkbox"
-            />
-            <img
-              src="@/assets/token/yuan.png"
-              v-else
-              alt=""
-              class="no_checkbox"
-            />
+            <img src="@/assets/token/yuan-active.png" v-if="select === 1" alt="" class="no_checkbox" />
+            <img src="@/assets/token/yuan.png" v-else alt="" class="no_checkbox" />
           </template>
           <template #right-icon>
             <van-icon name="success" color="#28A745" v-if="select === 1" />
@@ -53,34 +31,15 @@
         </van-cell>
       </van-cell-group>
       <div class="warning-text" v-if="select === 1">
-        <span
-          >{{t('minerspledge.selectErb')}}</span
-        >
+        <span>{{ t('minerspledge.selectErb') }}</span>
       </div>
 
       <div class="warning-text" v-if="select === 0">
-        <span
-          >{{t('minerspledge.selectSnft')}}</span
-        >
+        <span>{{ t('minerspledge.selectSnft') }}</span>
       </div>
       <div class="footer-btns">
-        <van-button
-          @click="show = false"
-          style="width: 100px"
-          class="btn"
-          round
-          plain
-          >{{t('common.cancel')}}</van-button
-        >
-        <van-button
-          :loading="isLoading"
-          style="width: 100px"
-          type="primary"
-          class="btn"
-          round
-          @click="http"
-          >{{t('common.confirm')}}</van-button
-        >
+        <van-button @click="show = false" style="width: 100px" class="btn" round plain>{{ t('common.cancel') }}</van-button>
+        <van-button :loading="isLoading" style="width: 100px" type="primary" class="btn" round @click="http">{{ t('common.confirm') }}</van-button>
       </div>
     </div>
   </div>
@@ -99,7 +58,7 @@ import {
   onMounted,
   watch,
 } from "vue";
-import { getWallet,clone ,TransactionTypes} from "@/store/modules/account";
+import { getWallet, clone, TransactionTypes } from "@/store/modules/account";
 import { useStore } from "vuex";
 import { useI18n } from 'vue-i18n';
 import { useTradeConfirm } from '@/plugins/tradeConfirmationsModal';
@@ -118,8 +77,9 @@ export default {
     },
   },
   setup(props: any, context: SetupContext) {
-    const {t} = useI18n()
+    const { t } = useI18n()
     let Time = ref(3);
+    const { state } = useStore()
     nextTick(() => {
       let setIntervalValue = setInterval(() => {
         Time.value -= 1;
@@ -145,7 +105,7 @@ export default {
       show.value = false;
       emit("warningSuccess");
     };
-    const {$tradeConfirm} = useTradeConfirm()
+    const { $tradeConfirm } = useTradeConfirm()
     const toHex = (str: string) => {
       if (str === "") return "";
       var hexCharCode = [];
@@ -158,7 +118,7 @@ export default {
     const http = async () => {
       try {
         isLoading.value = true;
-        const str = `wormholes:{"version": "0.0.1", "type": 25, "reward_flag": ${select.value}}`;
+        const str = `${store.getters['account/chainParsePrefix']}:{"version": "0.0.1", "type": 25, "reward_flag": ${select.value}}`;
         const data3 = toHex(str);
         console.log(data3);
         console.log(str);
@@ -192,23 +152,23 @@ export default {
     };
     const text = props.text;
 
-    watch(()=>show.value, async(n) => {
-      if(n) {
-        Toast.loading({duration:0})
-           try {
-             const wallet = await getWallet();
-      const { address } = wallet;
-      const ethAccountInfo = await wallet.provider.send("eth_getAccountInfo", [
-        address,
-        "latest",
-      ]);
-      debugger
-      select.value = ethAccountInfo.Worm.RewardFlag;
-           }finally{
-            Toast.clear()
+    watch(() => show.value, async (n) => {
+      if (n) {
+        Toast.loading({ duration: 0 })
+        try {
+          const wallet = await getWallet();
+          const { address } = wallet;
+          const ethAccountInfo = await wallet.provider.send("eth_getAccountInfo", [
+            address,
+            "latest",
+          ]);
+          debugger
+          select.value = ethAccountInfo.Worm.RewardFlag;
+        } finally {
+          Toast.clear()
+        }
       }
-      }
-    },{
+    }, {
       immediate: true,
       deep: true
     })
@@ -237,6 +197,7 @@ export default {
   background: rgba(0, 0, 0, 0.7);
 
 }
+
 .dialog-warning {
   z-index: 9999;
   width: 340px;
@@ -252,6 +213,7 @@ export default {
   border-radius: 8px;
   overflow: hidden;
 }
+
 .dialog-warning-header {
   height: 62px;
   line-height: 62px;
@@ -261,11 +223,13 @@ export default {
   color: #000;
   font-weight: bold;
 }
+
 .warning-icon {
   padding: 25px;
   padding-top: 25px;
   text-align: center;
 }
+
 .warning-text {
   text-align: center;
   padding: 0 15px;
@@ -273,14 +237,17 @@ export default {
   font-size: 12px;
   color: #9F54BA;
 }
+
 .footer-btns {
   display: flex;
   justify-content: space-between;
   padding: 0 50px;
   margin-top: 30px;
+
   div {
     padding: 25px;
     text-align: center;
+
     span {
       display: inline-block;
       width: 100px;
@@ -290,17 +257,20 @@ export default {
       text-align: center;
       line-height: 45px;
       box-sizing: border-box;
+
       &:first-child {
         color: #000;
         margin-right: 40px;
         border: 1px solid #000;
       }
+
       &:last-child {
         background-color: #d73a49;
       }
     }
   }
 }
+
 .no_checkbox {
   margin-top: 2px;
   margin-right: 15px;

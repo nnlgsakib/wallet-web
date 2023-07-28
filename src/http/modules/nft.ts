@@ -24,20 +24,12 @@ export function getSnftOwner(params = {}){
 }
 
 
-// Get NFT according to owner
-export function getNftOwner(params = {}){
-  return httpGet(`${contractApi}/nft_meta/page`, params)
-}
-
-
-export const snft_com_page = (params = {}) => {
-  return httpGet(`${contractApi}/snft_com/page`,params)
- 
-}
 export const getOwnerSnftList = (params = {}) => {
   return httpGet(`${contractApi}/snft/page`,params)
 }
 
+
+// Get NFT according to owner
 export const getOwnerNftList = (params = {}) => {
   return httpGet(`${contractApi}/nft/page`,params)
 }

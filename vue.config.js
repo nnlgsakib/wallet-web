@@ -216,6 +216,7 @@ module.exports = {
     config.plugin("html").tap(args => {
       console.log(JSON.stringify(newCdns))
       args[0].jsCDN = newCdns
+      args[0].env = process.env
       return args
     })
   }

@@ -25,7 +25,7 @@ export default {
     const { t } = useI18n()
     const router = useRouter()
     const back = () => {
-      router.replace({name:'wallet'})
+      router.replace({name:'home'})
     }
     return {
       t,

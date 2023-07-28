@@ -49,13 +49,12 @@ import { useStore } from "vuex";
 import { computed } from "vue";
 import { Popover } from "vant";
 import {
-  queryArraySnft,
-  snft_com_page,
   tokenIdByNftaddr
 } from "@/http/modules/nft";
 import { useRoute, useRouter } from "vue-router";
 import NftTag from './nftTag.vue'
 import { useI18n } from "vue-i18n";
+import { VUE_APP_SCAN_URL } from "@/enum/env";
 export default defineComponent({
   name: "nft-card",
   components: {
@@ -111,11 +110,13 @@ export default defineComponent({
       const newUrl = `${domain}${str}`
       window.open(newUrl)
     }
+    
 
     const toBrowser = () => {
       const { tag, nft_address,source_url, metaData } = props.data
-      const domain = 'https://www.wormholesscan.com/#/SNFT/SNFTDetails'
-      const str = `?snftid=${nft_address}`
+      const domain = `${VUE_APP_SCAN_URL}/SNFTDetails`
+      
+      const str = `?addr=${nft_address}`
       const newUrl = `${domain}${str}`
       window.open(newUrl)
     }

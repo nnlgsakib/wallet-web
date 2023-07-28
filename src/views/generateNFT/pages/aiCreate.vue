@@ -185,7 +185,7 @@ const handleGetGas = async () => {
     exchanger: "",
     meta_url: web3.utils.fromUtf8(JSON.stringify(nft_data)),
   };
-  const parstr = `wormholes:${JSON.stringify(par)}`;
+  const parstr = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(par)}`;
   const newdata = web3.utils.fromUtf8(parstr);
   debugger
   const tx = {
@@ -283,7 +283,7 @@ const handleSendCreate = async (nft_data = {}, call = (v: any) => { }) => {
     exchanger: "",
     meta_url: web3.utils.fromUtf8(JSON.stringify(nft_data)),
   };
-  const parstr = `wormholes:${JSON.stringify(par)}`;
+  const parstr = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(par)}`;
   const newdata = web3.utils.fromUtf8(parstr);
   const tx = {
     to: myAddr,

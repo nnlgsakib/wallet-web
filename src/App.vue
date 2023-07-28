@@ -70,7 +70,8 @@ export default {
       let time2 = setTimeout(function () {
         commit("account/UPDATE_WORMHOLES_URL", {
           URL: "https://api.wormholes.com",
-          browser: "https://www.wormholesscan.com/#/",
+          // browser: "https://www.wormholesscan.com/#/",
+          browser: "http://192.168.1.232:9007/",
           label: "Erbie"
         });
         clearTimeout(time2);

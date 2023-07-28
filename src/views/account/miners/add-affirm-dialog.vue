@@ -131,7 +131,7 @@ export default {
       () => props.show,
       async (n) => {
         if (n) {
-          const str = `wormholes:${JSON.stringify({ type: 9, proxy_address: accountInfo.value.address, "fee_rate": 1000, "name": "", "url": "", "version": "0.0.1" })}`;
+          const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify({ type: 9, proxy_address: accountInfo.value.address, "fee_rate": 1000, "name": "", "url": "", "version": "0.0.1" })}`;
           const data3 = web3.utils.fromUtf8(str)
           const tx1 = {
             to: props.to,

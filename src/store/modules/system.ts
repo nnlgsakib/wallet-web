@@ -203,6 +203,7 @@ export default {
         `txlist-${id}-${chainId}`
       ]
       const oldVersion = state.chainVersion
+      console.warn('version--------', version)
       if(oldVersion && version != oldVersion) {
         localforage.iterate((value, key, iterationNumber) => {
           console.log('clear cancel', key)

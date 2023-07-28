@@ -139,7 +139,7 @@ import { computed, Ref, ref } from "vue";
 import { Button, Icon, Loading } from "vant";
 import i18n from "@/language";
 import { TradeConfirmOpt, TradeStatus } from "./tradeConfirm";
-import { viewTransactionByHash } from "@/utils/utils";
+import { toScan } from "@/utils/utils";
 import router from "@/router";
 console.warn("i18n-------", i18n);
 

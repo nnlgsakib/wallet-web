@@ -96,33 +96,19 @@ export const randArr = (arr: Array<any>) => {
 }
 
 
-export const viewTransactionByHash = (hash:string | null) => {
-  if(hash) {
-    if(store.state.account.currentNetwork.id === 'wormholes-network-1') {
-      window.open(`${VUE_APP_SCAN_URL}TradeDetail/${hash}`);
-    } else {
-      const defaultUrl = store.state.account.currentNetwork.browser
-      if(defaultUrl) {
-        window.open(`${defaultUrl}`);
-      } else {
-        window.open(`${VUE_APP_SCAN_URL}TradeDetail/${hash}`);
-      }
-    }
-  } else {
-    throw Error('The hash cannot be empty')
-  }
-}
 
-export const viewAccountByAddress = (address:string ) => {
-  if(address) {
+type ScanPaths = '/AccountDetail' | '/TradeDetail' | '/NFTDetails' | '/SNFTDetails' | '/BlockDetails'
+
+export const toScan = (addr: string, path: ScanPaths = '/AccountDetail') => {
+  if(addr) {
     if(store.state.account.currentNetwork.id === 'wormholes-network-1') {
-      window.open(`${VUE_APP_SCAN_URL}AccountDetail/${address}`);
+      window.open(`${VUE_APP_SCAN_URL}${path}?addr=${addr}`);
     } else {
       const defaultUrl = store.state.account.currentNetwork.browser
       if(defaultUrl) {
         window.open(`${defaultUrl}`);
       } else {
-        window.open(`${VUE_APP_SCAN_URL}AccountDetail/${address}`);
+        window.open(`${VUE_APP_SCAN_URL}${path}?addr=${addr}`);
       }
     }
   } else {

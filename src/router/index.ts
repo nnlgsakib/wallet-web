@@ -382,8 +382,8 @@ router.beforeEach(async (to, form, next) => {
       const arr = ['withpassword', 'guidance']
       // There's a login password. There's an account
       // @ts-ignore
-      if (hasAccountFlag && authFlag && arr.includes(name?.toString()) && name != 'wallet') {
-        next({ name: 'wallet' })
+      if (hasAccountFlag && authFlag && arr.includes(name?.toString()) && name != 'home') {
+        next({ name: 'home' })
         return
       } else {
         next()

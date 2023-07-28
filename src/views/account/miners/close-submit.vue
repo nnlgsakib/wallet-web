@@ -138,6 +138,7 @@ export default {
   setup(props: any, context: SetupContext) {
     const { t } = useI18n();
     const store = useStore();
+    const { state } = store
     const { emit }: any = context;
     let amount = ref(props.minersMoney);
     let moneyMin = ref(100000);
@@ -173,7 +174,7 @@ export default {
           failMessage: t("minerspledge.close_wrong"),
         });
 
-        const str = `wormholes:{"version": "0.0.1", "type": 10}`;
+        const str = `${store.getters['account/chainParsePrefix']}:{"version": "0.0.1", "type": 10}`;
         const data3 = toHex(str);
         console.log("data3", data3);
         console.log("str", str);

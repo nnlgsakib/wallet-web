@@ -66,7 +66,7 @@
       >
         <template v-slot:link>
           <span
-            @click="viewAccountByAddress(accountInfo.address)"
+            @click="toScan(accountInfo.address, '/AccountDetail')"
             class="f-12 view-history hover"
             rel="noopener noreferrer"
             >{{ t("wallet.scanLink") }}</span
@@ -202,7 +202,7 @@ import NavHeader from "@/components/navHeader/index.vue";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
-import { debounce, guid, viewAccountByAddress } from "@/utils/utils";
+import { debounce, guid, toScan } from "@/utils/utils";
 import { ElTableV2 } from "element-plus";
 import CollectionCard from "@/views/account/components/collectionCard/index.vue";
 
@@ -788,7 +788,7 @@ export default {
       currentNetwork,
       changeTab,
       t,
-      viewAccountByAddress,
+      toScan,
       chooseTabdata,
       back,
       transactionList,

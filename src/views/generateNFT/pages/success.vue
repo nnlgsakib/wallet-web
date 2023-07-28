@@ -59,7 +59,7 @@
       const router = useRouter()
       const tohome = () => {
         router.push({
-          name: 'wallet'
+          name: 'home'
         })
       }
       onMounted(() => {
@@ -74,7 +74,7 @@
             clearInterval(timer)
             timer = null
             router.push({
-              name: 'wallet',
+              name: 'home',
             })
           }
         }, 1000)
