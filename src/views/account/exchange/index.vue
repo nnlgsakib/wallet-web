@@ -163,15 +163,7 @@ export default {
       } catch (err) {
         Toast(JSON.stringify(err))
       }
-      // emit('minersConfirm')
     }
-    // const sliderChange = (value: any) => {
-    //   if (value === 200) {
-    //     serverIndex.value = 1
-    //   } else {
-    //     serverIndex.value = 0
-    //   }
-    // }
     const changeServerIndex = (value: number) => {
       serverIndex.value = value
     }
@@ -180,11 +172,6 @@ export default {
       n => {
         console.log(n)
         showCreateExchange.value = n
-        // if (!n) {
-        //   name.value = "wormholes exchanger"
-        //   firstamount.value = 100
-        //   emit("close");
-        // }
       }
     )
     watch(

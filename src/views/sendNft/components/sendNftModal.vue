@@ -128,7 +128,8 @@ export default defineComponent({
     const calcFee = async () => {
       console.warn('props.tx', props.tx)
       const { nft_address, to } = props.tx
-      const str = `${store.getters['account/chainParsePrefix']}:{"version": "v0.0.1","type": 1,"nft_address":"${nft_address}"}`;
+      const d2 = {type:1,nft_address, version:"v0.0.1"}
+      const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d2)}`;
       console.warn('str----', str)
       const data3 = web3.utils.fromUtf8(str);
       const myAddr = accountInfo.value.address

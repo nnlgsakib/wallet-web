@@ -236,7 +236,7 @@ export default {
     "guide-fore": GuideModal4,
     "guide-five": GuideModal5,
     "guide-six": GuideModal6,
-    'guide-seven': GuideModal7,
+    // 'guide-seven': GuideModal7,
     'guide-eight': GuideModal8,
     "dialog-warning": dialogWarning,
   },
@@ -367,14 +367,14 @@ export default {
 
     let time: any = null;
     const getWalletBalance = () => {
-      dispatch("account/updateAllBalance");
+      dispatch("account/updateBalance");
       dispatch("account/updateTokensBalances");
     }
     const handleLoopBalance = () => {
       if (!time) {
         time = setInterval(() => {
           getWalletBalance()
-        }, 10000);
+        }, 6000);
       }
     };
     onMounted(async () => {
@@ -443,7 +443,7 @@ export default {
       nftLen.value = len;
     };
     const toHelp = () => {
-      window.open("https://www.wormholes.com/docs/wallet/");
+      window.open("https://www.erbie.io/docs/wallet/");
     };
 
     const handleShowSwitch = (v: any) => {

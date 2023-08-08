@@ -14,9 +14,9 @@
       </div>
     </div>
     <div class="flex valid-balance">
-      <div class="flex column between" :style="{color: percentColor}">
+      <div class="flex column between" :style="{ color: percentColor }">
         <div class="lh-18 text-right">{{ props.data.Balance }} ERB</div>
-        <div class="lh-18 text-right">{{props.data.percent}}%</div>
+        <div class="lh-18 text-right">{{ props.data.percent }}%</div>
       </div>
     </div>
   </div>
@@ -34,21 +34,21 @@ const props = defineProps({
 
 const emits = defineEmits(['handleClick'])
 const getIconClass = computed(() => {
-      const num = Number(props.data.Coefficient)
-      if (num < 40) return "sad";
-      if (num >= 40 && num <= 50) return "neutral";
-      if (num > 50) return "smile";
+  const num = Number(props.data.Coefficient)
+  if (num < 40) return "sad";
+  if (num >= 40 && num <= 50) return "neutral";
+  if (num > 50) return "smile";
 })
 
 const percentColor = computed(() => {
   const per = Number(props.data.percent)
-  if(per < 33) {
+  if (per < 33) {
     return '#3aae55'
   }
-  if(per >= 33 && per < 66) {
+  if (per >= 33 && per < 66) {
     return 'black'
   }
-  if(per > 66) {
+  if (per > 66) {
     return '#9F54BA'
   }
 })
@@ -71,19 +71,21 @@ $fontColor: #848484;
   transition: ease .3s;
   height: 54px;
   cursor: pointer;
+
   .iconBox {
     width: 34px;
     height: 34px;
     border-radius: 50%;
     overflow: hidden;
-    border: 1px solid #fff;
+    border: 2px solid #fff;
   }
+
   &.selected {
     border: 1px solid #9F54BA;
   }
-  .valid-info {
 
-  }
+  .valid-info {}
+
   .expresion {
     width: 16px;
     display: block;
@@ -115,7 +117,7 @@ $fontColor: #848484;
   }
 }
 
-@media screen and (max-width: 750px){
+@media screen and (max-width: 750px) {
   .valid-addr {
     max-width: 200px;
     overflow: hidden;

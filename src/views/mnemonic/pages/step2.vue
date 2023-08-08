@@ -169,9 +169,9 @@ export default {
     }
   }
   .tip-card {
-    border: 1px solid #9F54BA;
+    border: 1PX solid #9F54BA;
     .icon {
-      border: 1px solid #9F54BA;
+      border: 1PX solid #9F54BA;
       border-radius: 50%;
     }
   }
@@ -225,7 +225,7 @@ export default {
       height: 22px;
       // line-height: 23px;
       position: absolute;
-      left: -1px;
+      left: -1PX;
       top: 0px;
 
     }

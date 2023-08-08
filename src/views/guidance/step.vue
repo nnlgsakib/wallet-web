@@ -28,18 +28,15 @@
       </div>
     </div>
   </div>
-  <!-- Terms of service -->
-  <TermsService  v-model:show="showService" @select="handleSelect" />
+
   <dialog-warning :text="t('createAccountpage.isServiceandPrivacyNotice')"   v-model:isWarning="isWarning"></dialog-warning>
   <!-- Privacy policy -->
-  <PrivacyPolicy  v-model:show="showPrivacy" @select="handleSelect2" />
+
 </template>
 <script lang="ts">
 import { Icon, Checkbox, Button, Toast } from 'vant'
 import { useRoute, useRouter } from 'vue-router'
 import { ref, Ref, computed, toRaw, SetupContext, onMounted, watch } from 'vue'
-import TermsService from '@/components/termsservice/index.vue'
-import PrivacyPolicy from '@/components/privacypolicy/index.vue'
 import dialogWarning from '@/components/dialogWarning/index.vue'
 import { useI18n } from 'vue-i18n'
 export default {
@@ -48,8 +45,6 @@ export default {
     [Icon.name]: Icon,
     [Checkbox.name]: Checkbox,
     [Button.name]: Button,
-    TermsService,
-    PrivacyPolicy,
     'dialog-warning': dialogWarning,
   },
   setup() {

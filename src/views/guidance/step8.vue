@@ -4,7 +4,7 @@
     <div class="custom-popover-header">
             <div class="footer-btns">
         <div class="container pl-20 pr-20 evenly flex">   
-          <span @click="handleClick(8)">{{ t("returnreceipt.done") }} 8/8</span>
+          <span @click="handleClick(7)">{{ t("returnreceipt.done") }} 7/7</span>
         </div>
       </div>
     </div>
@@ -48,10 +48,10 @@ export default defineComponent({
   setup(props: any, context: SetupContext) {
     const { t } = useI18n();
     const { state, dispatch } = useStore();
-    const show8 = computed(() => state.system.show8);
+    const show7 = computed(() => state.system.show7);
     const showModal = ref(false);
     watch(
-      () => show8,
+      () => show7,
       (n) => (showModal.value = n.value),
       { immediate: true, deep: true }
     );

@@ -46,6 +46,8 @@
 </template>
 
 <script lang="ts">
+import { web3 } from "@/utils/web3";
+
 import { emit } from "process";
 import { Icon, Checkbox, Button, Toast, CellGroup, Cell } from "vant";
 import {
@@ -118,14 +120,15 @@ export default {
     const http = async () => {
       try {
         isLoading.value = true;
-        const str = `${store.getters['account/chainParsePrefix']}:{"version": "0.0.1", "type": 25, "reward_flag": ${select.value}}`;
-        const data3 = toHex(str);
+        const d2 = {type:25,reward_flag:select.value,version:"v0.0.1"}
+        const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d2)}`;
+        const data3 = web3.utils.fromUtf8(str);
         console.log(data3);
         console.log(str);
         const tx1 = {
           from: accountInfo.value.address,
           to: accountInfo.value.address,
-          data: `0x${data3}`,
+          data: data3,
         };
         console.log(tx1);
 

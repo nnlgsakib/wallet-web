@@ -276,7 +276,7 @@ import dialogWarnings from "@/components/dialogWarning/message.vue";
 import { useToast } from "@/plugins/toast";
 import { useDialog } from "@/plugins/dialog";
 import { isCommunityResourcable } from "@ethersproject/providers";
-import { VUE_APP_EXCHANGESMANAGEMENT_URL } from "@/enum/env";
+import { VUE_APP_EXCHANGESMANAGEMENT_URL,VUE_APP_SCAN_URL } from "@/enum/env";
 import BigNumber from "bignumber.js";
 export default defineComponent({
   name: "NavHeader",
@@ -403,7 +403,7 @@ export default defineComponent({
       router.replace({ name: "home" });
     };
     const toOfficiaWebsite = () => {
-      window.open("https://www.wormholes.com");
+      window.open("https://www.erbie.io");
     };
 
     const routerTo = (name: string) => {
@@ -456,7 +456,7 @@ export default defineComponent({
     };
     const network = computed(() => store.state.account.currentNetwork);
     const tobrowser = () => {
-      window.open(`${network.value.browser || 'https://www.wormholesscan.com'}`)
+      window.open(`${network.value.browser || VUE_APP_SCAN_URL}`)
     };
 
     const toSend = () => {

@@ -36,12 +36,13 @@ export default {
       const wallet = await getWallet();
       const blockNumber = await wallet.provider.getBlockNumber()
       const { address } = wallet;
-      const str = `${store.getters['account/chainParsePrefix']}:{"version": "0.0.1","type":6,"nft_address":"${nft_address}"}`;
-      const data3 = toHex(str);
+      const d = {type:6,version:"v0.0.1",nft_address}
+      const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d)}`;
+      const data3 = web3.utils.fromUtf8(str);
       const tx1 = {
         from: address,
         to: address,
-        data: `0x${data3}`,
+        data: data3,
         value: '0',
       };
       sessionStorage.setItem('nft_address', nft_address)
@@ -82,7 +83,8 @@ export default {
       const { nft_address, to, checkTxQueue } = params
       // Update recent contacts
       store.commit("account/PUSH_RECENTLIST", to);
-      const str = `${store.getters['account/chainParsePrefix']}:{"version": "v0.0.1","type": 1,"nft_address":"${nft_address}"}`;
+      const d = {type:1,version:"v0.0.1",nft_address}
+      const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d)}`;
       console.warn('str----', str)
       const data3 =  web3.utils.fromUtf8(str);
       const tx = {

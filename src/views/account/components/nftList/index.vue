@@ -2,7 +2,7 @@
   <van-sticky offset-top="91">
       <div class="flex between center-v create-box">
         <span class="f-12 text-bold label">
-          <van-popover
+          <!-- <van-popover
             v-model:show="showPopover"
             :actions="actions"
             @select="onSelect"
@@ -13,7 +13,10 @@
                 >{{ sortVal.text }}
               </span>
             </template>
-          </van-popover>
+          </van-popover> -->
+          <span class="flex center"
+                >{{ sortVal.text }}
+              </span>
         </span>
 
       </div>

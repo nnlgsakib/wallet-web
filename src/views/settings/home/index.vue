@@ -13,7 +13,7 @@
         <div class="flex between title center-v">
           <div class="label">{{ t("setting.networks") }}</div>
         </div>
-        <div class="desc">{{ t("setting.networkstltle") }}</div>
+        <!-- <div class="desc">{{ t("setting.networkstltle") }}</div> -->
       </div>
       <div class="icon flex center"><van-icon name="arrow" /></div>
     </div>
@@ -25,9 +25,9 @@
         <div class="flex between title center-v">
           <div class="label">{{ t("setting.safety") }}</div>
         </div>
-        <div class="desc">
+        <!-- <div class="desc">
           {{ t("setting.safetytltle") }}
-        </div>
+        </div> -->
       </div>
 
       <div class="icon flex center"><van-icon name="arrow" /></div>
@@ -41,9 +41,9 @@
         <div class="flex between title center-v">
           <div class="label">{{ t("importByMnemonic.mnemonicExport") }}</div>
         </div>
-        <div class="desc">
+        <!-- <div class="desc">
           {{ t("importByMnemonic.backUpDesc") }}
-        </div>
+        </div> -->
       </div>
 
       <div class="icon flex center"><van-icon name="arrow" /></div>
@@ -56,9 +56,9 @@
         <div class="flex between title center-v">
           <div class="label">{{ t("setting.langTit") }}</div>
         </div>
-        <div class="desc">
+        <!-- <div class="desc">
           {{ t("setting.languageSelection") }}
-        </div>
+        </div> -->
       </div>
       <div class="icon flex center"><van-icon name="arrow" /></div>
     </div>
@@ -136,7 +136,7 @@ export default {
 <style lang="scss" scoped>
 .settings-index {
   .settings-card {
-    padding: 13px 12px 16px 14px;
+    padding: 20px 12px 20px 14px;
     transition: ease 0.3s;
     border-bottom: 1px solid #e6e6e6;
     &:hover {

@@ -233,16 +233,18 @@ export default defineComponent({
         if (n) {
           const bigAmount = new Bignumber(props.amount);
           const { address } = state.account.accountInfo;
+          const d1 = {version:"0.0.1",type:12}
+          const d2 = {type:22,version:"v0.0.1"}
           const str = bigAmount.gte(props.fee)
-            ? `${store.getters['account/chainParsePrefix']}:{"version":"0.0.1","type":12}`
-            : `${store.getters['account/chainParsePrefix']}:{"type":22,"version":"v0.0.1"}`;
+            ? `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d1)}`
+            : `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d2)}`;
           const realAm = bigAmount.gte(props.fee) ? 0 : props.amount;
-          const data3 = toHex(str);
+          const data3 = web3.utils.fromUtf8(str);
           const tx1 = {
             from: address,
             to: address,
             value: ethers.utils.parseEther(realAm + ""),
-            data: `0x${data3}`,
+            data: data3,
           };
 
           gasFee.value = await getGasFee(tx1);

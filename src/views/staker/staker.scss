@@ -7,13 +7,18 @@ $fontColor: #848484;
         height: 32px;
         border-radius: 50%;
         overflow: hidden;
-        border: 1px solid #fff;
+        border: 2px solid #fff;
     }
     .staker-card {
         .stakerAddr {
             background: #F3F3F3;
             border-radius: 5px;
             cursor: pointer;
+            .iconBox {
+                border-radius: 50%;
+                overflow: hidden;
+                border: 2px solid #fff;
+            }
 
             .addr {
                 color: $fontColor;

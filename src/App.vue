@@ -33,6 +33,7 @@ import { provide as appProvide } from "@/provides/app";
 import localforage, { clear } from "localforage";
 import eventBus from "./utils/bus";
 import { useWallet } from './hooks/useWallet';
+import { VUE_APP_NODE_URL, VUE_APP_NODE_NAME, VUE_APP_SCAN_URL } from "./enum/env";
 
 export default {
   components: {
@@ -69,13 +70,12 @@ export default {
     window.onload = async () => {
       let time2 = setTimeout(function () {
         commit("account/UPDATE_WORMHOLES_URL", {
-          URL: "https://api.wormholes.com",
-          // browser: "https://www.wormholesscan.com/#/",
-          browser: "http://192.168.1.232:9007/",
-          label: "Erbie"
+          URL: VUE_APP_NODE_URL,
+          browser: VUE_APP_SCAN_URL,
+          label: VUE_APP_NODE_NAME
         });
         clearTimeout(time2);
-      },0);
+      },2000);
       let time = setTimeout(() => {
         // @ts-ignore
         document.getElementById("loading-page-box").style.display = "none";

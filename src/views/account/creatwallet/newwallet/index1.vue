@@ -95,11 +95,6 @@
       </div>
     </div>
   </div>
-    <!-- Terms of service -->
-  <!-- <TermsService  v-model:show="modal1" :hasSelect="false" /> -->
-  <!-- Privacy policy -->
-  <!-- <PrivacyPolicy  v-model:show="modal2" :hasSelect="false" /> -->
-
 
 </template>
 <script lang="ts">
@@ -126,8 +121,7 @@ import { web3 } from "@/utils/web3";
 import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { regPassword1 } from "@/enum/regexp";
-import TermsService from '@/components/termsservice/index.vue'
-import PrivacyPolicy from '@/components/privacypolicy/index.vue'
+
 import WormholesTransition from '@/components/wromTransition/index.vue'
 import localforage from 'localforage';
 
@@ -142,8 +136,6 @@ export default {
     [Switch.name]: Switch,
     [Checkbox.name]: Checkbox,
     [CheckboxGroup.name]: CheckboxGroup,
-    PrivacyPolicy,
-    TermsService,
     WormholesTransition,
     NavHeader
   },

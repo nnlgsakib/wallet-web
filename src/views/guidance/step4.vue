@@ -5,7 +5,7 @@
         <div class="footer-btns">
           <div class="container pl-20 pr-20 evenly flex">
             <span @click="dispatchClose">{{t('common.cancel')}}</span>
-            <span @click="handleClick(4)">{{t('common.next')}} 4/8</span>
+            <span @click="handleClick(4)">{{t('common.next')}} 4/7</span>
           </div>
         </div>
         <div class="footer-text">

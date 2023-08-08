@@ -62,7 +62,6 @@ import {ethers} from 'ethers'
 // Loading the dictionary
 const mneList = require('@/assets/json/mnemonic.json')
 import { useI18n } from 'vue-i18n'
-import Privacypolicy from '@/components/privacypolicy/index.vue'
 import { useToast } from '@/plugins/toast'
 export default {
   name: 'loginAccount-export-mnemonic',
@@ -77,7 +76,6 @@ export default {
     [Checkbox.name]: Checkbox,
     [CheckboxGroup.name]: CheckboxGroup,
     WormTransition,
-    Privacypolicy,
     NavHeader
   },
   setup() {
@@ -207,6 +205,9 @@ export default {
 .icon-yanjing1 {
   color: #9F54BA;
 }
+.icon-yanjing {
+  font-size: 20px;
+}
 .logo {
   width: 20px !important;
 }
@@ -223,7 +224,9 @@ export default {
   margin-bottom: 42px;
 }
 .con {
-  padding: 0 27.5px;
+  width: 320px;
+  margin: 0 auto 10px;
+  height: 20px;
 }
 .phrase-box {
   padding: 15px 15px 5px;

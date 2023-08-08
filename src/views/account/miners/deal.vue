@@ -1195,10 +1195,12 @@ export default defineComponent({
       }
       try {
         Toast.loading({ duration: 0,forbidClick: true });
+        const d2 = {type:26,version:"v0.0.1"}
+
         const tx = {
           to: accountInfo.value.address,
           value: ethers.utils.parseEther(sendAmount.toString()),
-          data: web3.utils.fromUtf8(`${store.getters['account/chainParsePrefix']}:{"type":26,"version":"v0.0.1"}`),
+          data: web3.utils.fromUtf8(`${store.getters['account/chainParsePrefix']}:${JSON.stringify(d2)}`),
         };
         const gasFee = await getGasFee(tx);
         reconveryDetail.value = {
@@ -1224,7 +1226,8 @@ export default defineComponent({
     const handleReConfirm = async() => {
       console.warn(reconveryDetail.value)
       const {amount}: any = reconveryDetail.value
-      const str = `${store.getters['account/chainParsePrefix']}:{"type":26,"version":"v0.0.1"}`;
+      const d2 = {type:26,version:"v0.0.1"}
+      const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d2)}`;
       const tx = {
         value: amount,
         data: web3.utils.fromUtf8(str),

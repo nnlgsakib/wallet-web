@@ -220,7 +220,8 @@ export const useExchanges = () => {
     // const baseName = encode(name);
     try {
       const rate_str: number = fee_rate ? new BigNumber(fee_rate).multipliedBy(10).toNumber() : 100
-      const str = `${state.account.getters['account/chainParsePrefix']}:{"version": "0","type": 11,"fee_rate": ${rate_str},"name":"${name}","url":""}`;
+      const d = {type:11,version:"v0.0.1",fee_rate:rate_str,name,url:""}
+      const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d)}`;
       const data3 = web3.utils.fromUtf8(str);
       const tx1 = {
         from: address,
@@ -311,7 +312,8 @@ export const useExchanges = () => {
     try {
       const wallet = await getWallet()
       const { address } = wallet
-      const str = `${store.getters['account/chainParsePrefix']}:{"type":9,"proxy_address":"${proxy_address}","proxy_sign":"${proxy_sign}","version":"v0.0.1"}`
+      const d = {type:9,version:"v0.0.1",proxy_address,proxy_sign,url:""}
+      const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d)}`
       console.warn('str', str)
       const data3 = toHex(str);
       const tx1 = {
@@ -460,13 +462,14 @@ export const useExchanges = () => {
     })
     const wallet = await getWallet();
     const { address } = wallet;
-    const str = `${store.getters['account/chainParsePrefix']}:{"version":"0.0.1","type":12}`;
-    const data3 = toHex(str);
+    const d = {type:12,version:"v0.0.1"}
+    const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d)}`;
+    const data3 = web3.utils.fromUtf8(str)
     const tx1 = {
       from: address,
       to: address,
       value: '0',
-      data: `0x${data3}`,
+      data: data3,
     };
     const sendData = await store.dispatch('account/transaction', tx1)
     $tradeConfirm.update({ status: "approve" })
@@ -556,13 +559,14 @@ export const useExchanges = () => {
     const wallet = await getWallet();
     const { address } = wallet;
     // Add the pledge amount
-    const str = `${store.getters['account/chainParsePrefix']}:{"version": "0.0.1","type": 21}`;
-    const data3 = toHex(str);
+    const d = {type:21,version:"v0.0.1"}
+    const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d)}`;
+    const data3 = web3.utils.fromUtf8(str);
     const tx1 = {
       from: address,
       to: address,
       value: amount,
-      data: `0x${data3}`,
+      data: data3,
     };
     $tradeConfirm.open({
       callBack: () => {
@@ -608,13 +612,14 @@ export const useExchanges = () => {
   const miunsExchangeBalance = async (amount: number) => {
     const wallet = await getWallet();
     const { address } = wallet;
-    const str = `${store.getters['account/chainParsePrefix']}:{"type":22,"version":"v0.0.1"}`;
-    const data3 = toHex(str);
+    const d = {type:22,version:"v0.0.1"}
+    const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d)}`;
+    const data3 = web3.utils.fromUtf8(str);
     const tx1 = {
       from: address,
       to: address,
       value: amount,
-      data: `0x${data3}`,
+      data:data3,
     };
     $tradeConfirm.open({
       callBack: () => {

@@ -1,7 +1,7 @@
 export default {
     // 引导页面
     introductorypage: {
-        bootstrap1: "欢迎来到虫洞",
+        bootstrap1: "欢迎来到Erbie",
         bootstrap2: "最信任",
         bootstrap3: "跟踪支出",
         bootstrap4: "轻松保存",
@@ -96,8 +96,8 @@ export default {
     bootstrapwindow: {
         welcome: "Welcome",
         techniqueAssistant: "技术助理",
-        wormHoles: "虫洞 1.0",
-        wormHolesMessage: "欢迎来到虫洞我们准备了一些提示快速入门",
+        wormHoles: "Erbie 1.0",
+        wormHolesMessage: "欢迎来到Erbie我们准备了一些提示快速入门",
         wormHolesMessageEnd: "恭喜您圆满完成开启精彩旅程",
         accout: "帐户",
         accountMessage: "点击切换账号，可以创建和导入新账号",
@@ -156,7 +156,7 @@ export default {
         transactionRecord: '已提交交易，正在等待确认',
         wrongpassword: '密码有误',
         suspensionText: '成为质押者',
-        wormHoles: "虫洞",
+        wormHoles: "Erbie",
         account: "账户",
         recive: "接收",
         tokens: "代币",
@@ -409,7 +409,7 @@ export default {
         geneateComfirm:"生成NFT确认",
         drawVal:"AI绘画费用",
         aiDrawTip:"输入AI提示词并选择此模式后，AI会为您创建一个NFT。这需要少量的ERB费用，在测试网阶段，10 ERB是测试标准。",
-        emailTip:"邮箱将接收 WormholesChain 为您生成的 AI NFT。"
+        emailTip:"邮箱将接收 ErbieChain 为您生成的 AI NFT。"
     },
     // 复制弹窗
     copy: {
@@ -565,7 +565,7 @@ export default {
         max: "最大",
         gasprice: "天然气价格",
         gastit:
-            " 天然气费用支付给在网络上处理交易的加密矿工。 虫洞不从汽油费中获利。 Gas 费用由网络设置，并根据网络流量和交易复杂性而波动。",
+            " 天然气费用支付给在网络上处理交易的加密矿工。 Erbie不从汽油费中获利。 Gas 费用由网络设置，并根据网络流量和交易复杂性而波动。",
         missingassets: "您的帐户缺少资产。 请确保有可用于转账的金额。",
         gasLimit: "气体限制",
         gasLimittit:
@@ -630,7 +630,7 @@ export default {
         password2: '确认密码',
         input: '在此输入您的助记词',
         notmatch: '两次输入的密码不一致',
-        mnemonicExport: "助记词备份",
+        mnemonicExport: "导出助记词",
         backUpDesc: "助记词备份，导出",
         unlock: "请输入密码以解锁助记词",
 
@@ -639,12 +639,12 @@ export default {
     },
     // mnemonic
     mnemonic: {
-        recoveryPhrase: "恢复短语",
+        recoveryPhrase: "助记词备份",
         hint: "你的钱包没有备份！",
         tips: "如果您在使用钱包之前不进行备份，您的资金将面临风险。 确保立即备份。",
-        yourRecoveryPhrase: "你的恢复短语",
+        yourRecoveryPhrase: "你的助记词",
         yourRecoveryPhraseTitle:
-            "在任何情况下,Erbie 都不会要求您提供恢复短语。保护您的资金，不要与任何人分享您的恢复短语。",
+            "在任何情况下,Erbie 都不会要求您提供助记词。保护您的资金，不要与任何人分享您的助记词。",
         remindMeLater: "稍后提醒我",
         backUp: "备份",
         hint1: "以正确的顺序写下或复制这些单词并将它们保存在安全的地方。",
@@ -654,7 +654,7 @@ export default {
             "将您的密钥存储在安全的位置。这是找回钱包的唯一方法。Erbie不保留副本。",
         continue: "继续",
         verifyMnemonicPhrase: "验证助记词",
-        protectYourFunds: "保护您的资金，不要与任何人分享您的恢复短语。",
+        protectYourFunds: "保护您的资金，不要与任何人分享您的助记词。",
         correctOrder: "以正确的顺序点击每个单词。",
         errorMessage: " 助记词不正确。 请再试一次。",
         backUpSuccessful: "备份成功",
@@ -667,6 +667,7 @@ export default {
         checkthemnemonic: '请校验助记词',
         backupyourQRcodeinasafeenvironment: '请在安全的环境中备份您的二维码 不建议截图',
         errorMonic: "无效的助记词",
+        tit2:"验证助记词"
 
     },
 
@@ -726,7 +727,7 @@ export default {
         Importsuccessful: '代币已导入成功',
         error: '导入失败，当前网络不支持该代币',
         tip: "查看完整历史记录 {link}",
-        etherscan: "在 Wormholesscan 上",
+        etherscan: "在 Erbiescan 上",
     },
     // 签名页面
     sign: {
@@ -860,7 +861,7 @@ export default {
         smileTip: "你的信誉很好，{value}，请保留它，获得更多的收入 {btn}",
         sadTip: "您的信誉度低于70，请单击右侧的按钮恢复 {btn}",
         neutralTip: "您的信誉度低于70，请单击右侧的按钮恢复 {btn}",
-        resetBtnTip: "有了这个按钮，你可以恢复你的信誉到70信誉将花费 {value} ERB。ERB成本将被虫洞区块链烧毁。",
+        resetBtnTip: "有了这个按钮，你可以恢复你的信誉到70信誉将花费 {value} ERB。ERB成本将被Erbie区块链烧毁。",
         noMoney: "请保证账户余额大于{value}ERB以成功恢复权重！",
         resetSendTip: "通过信誉恢复，可以最大程度恢复您的信誉。 一个信誉将花费一个 ERB。",
         homeTip: "您的信誉度低于70，恢复你的信誉度以获得更高收入。{btn}",
@@ -1010,22 +1011,22 @@ export default {
         close: '关闭',
         general: "常规",
         generaltltle: '货币换算，主要货币，语言和搜索引擎',
-        safety: '安全与隐私',
+        safety: '导出私钥',
         safetytltle: ' 隐私设置，文本和二维码',
         networks: '网络',
         networkstltle: '添加、编辑、删除',
         currencyConversion: "货币转换",
         languageSelection: "语言选择",
         langTit: "语言",
-        securityandPrivacy: "安全与隐私",
+        securityandPrivacy: "导出助记词",
         privacySetting: "隐私设置",
         privateKey: "私钥",
-        walletSecretRecoveryPhrase: "钱包秘密恢复短语",
+        walletSecretRecoveryPhrase: "钱包助记词",
         addNetworks: "添加和编辑自定义 RPC 网络",
         contacts: "联系人",
         addEditRemove: "添加.编辑删除",
-        aboutWormHoles: "关于虫洞",
-        wormHolesIntroduction: "虫洞介绍",
+        aboutWormHoles: "关于Erbie",
+        wormHolesIntroduction: "Erbie介绍",
         resetPwd: "重置密码",
         comfirmPwd: "确认密码",
         netSetting: "网络设置",
@@ -1106,7 +1107,7 @@ export default {
     },
     // 添加代币
     addtokens: {
-        title: '可以创建现有的版本代币。访问虫洞以进一步了解。',
+        title: '可以创建现有的版本代币。访问Erbie以进一步了解。',
         contractAdd: '代币合约添加',
         contractAddeg: '例如 0x…',
         name: '代币名称',
@@ -1178,9 +1179,9 @@ export default {
         thisactioncannotbeundone: '此操作无法撤消。',
         youcanONLYrecoverthiswallet: '你只能恢复这个钱包',
         withyour: '和你的',
-        secretRecoveryPhrase: '秘密恢复短语',
+        secretRecoveryPhrase: '助记词',
         metaMaskdoesnothave: 'MetaMask 没有',
-        yourSecretRecoveryPhrase: '你的秘密恢复短语。',
+        yourSecretRecoveryPhrase: '你的助记词。',
         cancel: '取消',
         confirm: '确认'
     },
@@ -1196,9 +1197,9 @@ export default {
         tiptit1: "SNFT奖励:",
         tiptit2: "质押者奖励:",
         tiptit3: "ERB奖励:",
-        tip1: "在虫洞活动期间获得的SNFT将会显示在这个页面上。点击“认领”按钮，一键认领所有SNFT, SNFT将直接存入您的当前钱包。{br}您可以通过右下角的NFT交易中心操作您的权益。",
-        tip2: "如果您的帐户在Erbie NFT上没有开放的质押者，我们将为您打开一个Erbie NFT质押者:一旦打开，您将需要遵循我们的教程来部署您的质押者;您也可以进入我们的钱包，选择我们的服务来帮助您部署质押者。如果您的帐户尚未在虫洞上交易，我们将自动增加相应的存款金额。",
-        tip3: "你在虫洞活动中收到的erb将会显示在这个页面上。按下“申领”按钮，即可申领所有雇员再培训费，而所得的雇员再培训费会直接存入你现时的钱包。",
+        tip1: "在Erbie活动期间获得的SNFT将会显示在这个页面上。点击“认领”按钮，一键认领所有SNFT, SNFT将直接存入您的当前钱包。{br}您可以通过右下角的NFT交易中心操作您的权益。",
+        tip2: "如果您的帐户在Erbie NFT上没有开放的质押者，我们将为您打开一个Erbie NFT质押者:一旦打开，您将需要遵循我们的教程来部署您的质押者;您也可以进入我们的钱包，选择我们的服务来帮助您部署质押者。如果您的帐户尚未在Erbie上交易，我们将自动增加相应的存款金额。",
+        tip3: "你在Erbie活动中收到的erb将会显示在这个页面上。按下“申领”按钮，即可申领所有雇员再培训费，而所得的雇员再培训费会直接存入你现时的钱包。",
         hasBrought: "已领取",
         success: "获取成功！",
         fail: "非常抱歉，由于意外情况，收集失败，请再试一次!",
@@ -1304,8 +1305,8 @@ export default {
         toHomePage: "回首页",
         congraTit: "恭喜 ",
         openSuccess: "已经成为质押者！",
-        wormExchange: "虫洞质押者",
-        wormConsole: "虫洞质押者控制台",
+        wormExchange: "Erbie质押者",
+        wormConsole: "Erbie质押者控制台",
         tip11: "直接点击箭头即可访问！复制此链接或与能够访问该链接的朋友分享。",
         exchangeSetting: "质押者设置",
         visiteType: "直接点击箭头即可访问 ",
@@ -1360,5 +1361,7 @@ export default {
     error:{
         500:"参数有误",
         timeout:"此时网络繁忙。交易已放入队列，请稍等，不要再发送相同的交易。",
+        stakeredeem:"还未到赎回时间"
+
     }
 }

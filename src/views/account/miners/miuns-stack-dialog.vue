@@ -173,7 +173,9 @@ setup(props: any, context: SetupContext) {
   const { state } = store
   const currentNetwork = computed(() => store.state.account.currentNetwork);
   const { emit }: any = context;
-  const str = `${store.getters['account/chainParsePrefix']}:{"type":10,"version":"v0.0.1"}`;
+  const d2 = {type:10,version:"v0.0.1"}
+
+
   let dislogShow = computed({
     get: () => props.show,
     set: (v) => emit("update:show", v),
@@ -199,13 +201,16 @@ setup(props: any, context: SetupContext) {
     () => props.show,
     async (n) => {
       if (n) {
-        const data3 = toHex(str);
+        const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d2)}`;
+        debugger
+        const data3 = web3.utils.fromUtf8(str);
         const tx1 = {
           to: props.to,
           value: ethers.utils.parseEther(props.minusNumber + ""),
-          data: `0x${data3}`,
+          data: data3,
         };
         try {
+          
           gasFee.value = await getGasFee(tx1)
         } catch (err: any) {
           console.error(err);

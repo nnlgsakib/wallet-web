@@ -19,18 +19,18 @@
             <SnftCard :data="item" :select="isSelectComputed" />
           </div>
           <div v-if="finished && !list.length">
-            <NoData :hasText="false" />
+            <NoData />
           </div>
         </div>
       </van-list>
     </div>
   </div>
-
+<!-- 
   <SliderBottom>
     <i18n-t keypath="wallet.buySnft" tag="div" class="text-center f-12">
       <template v-slot:link><a :href="VUE_APP_OFFICIAL_EXCHANGE" target="__blank">{{ t('wallet.findMore') }}</a></template>
     </i18n-t>
-  </SliderBottom>
+  </SliderBottom> -->
   <Transition name="slider">
     <div class="load-tip flex center" v-if="isSelectComputed && loading">
       <div class="load-tip-con flex-1 flex center"><van-loading color="#9F54BA" size="13" /> <span class="ml-4">{{ t('common.loading') }}</span></div>
@@ -99,11 +99,11 @@
           </div>
         </div>
         <Tip :message="t('common.converTip')" type="warn" />
-        <i18n-t keypath="converSnft.tip" v-if="Number(tabIndex) == 2" tag="div" class="dialog-warning-text">
+        <!-- <i18n-t keypath="converSnft.tip" v-if="Number(tabIndex) == 2" tag="div" class="dialog-warning-text">
           <template v-slot:link>
             <a :href="VUE_APP_OFFICIAL_EXCHANGE" target="_blank" rel="noopener noreferrer">{{ t("converSnft.buy") }}</a>
           </template>
-        </i18n-t>
+        </i18n-t> -->
 
         <div class="footer-btns-c">
           <van-button @click="show = false" style="width: 100px" class="btn" round plain>{{ t("common.cancel") }}</van-button>
@@ -623,23 +623,16 @@ export default defineComponent({
             switch (tabIndex.value) {
               case "2":
                 transitionType = '6'
-                str = `${store.getters['account/chainParsePrefix']}:{"type":6,"nft_address":"${nft_address}","version":"v0.0.1"}`;
-                break;
-              case "3":
-                transitionType = '7'
-                str = `${store.getters['account/chainParsePrefix']}:{"type":7,"nft_address":"${nft_address}","version":"0.0.1"}`;
-                break;
-              case "1":
-                transitionType = '8'
-                str = `${store.getters['account/chainParsePrefix']}:{"type":8,"nft_address":"${nft_address}","version":"0.0.1"}`;
+                const d = {type:6,nft_address,version:"v0.0.1"}
+                str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d)}`;
                 break;
             }
-
-            const data3 = toHex(str);
+            debugger
+            const data3 = web3.utils.fromUtf8(str)
             const tx1 = {
               from: accountInfo.value.address,
               to: accountInfo.value.address,
-              data: `0x${data3}`,
+              data: data3,
               transitionType,
               nft_address,
               checkTxQueue: false
@@ -724,23 +717,19 @@ export default defineComponent({
     const gasFee = ref('')
     const calcGasFee = async () => {
       let str = "";
-      const { nft_address }: any = list.value.length ? list.value[0] : {}
+      const nft: any = list.value.length ? list.value[0] : {}
+      const { nft_address } = nft
       switch (tabIndex.value) {
         case "2":
-          str = `${store.getters['account/chainParsePrefix']}:{"type":6,"nft_address":"${nft_address}","version":"v0.0.1"}`;
-          break;
-        case "3":
-          str = `${store.getters['account/chainParsePrefix']}:{"type":7,"nft_address":"${nft_address}","version":"0.0.1"}`;
-          break;
-        case "1":
-          str = `${store.getters['account/chainParsePrefix']}:{"type":8,"nft_address":"${nft_address}","version":"0.0.1"}`;
+        const d = {type:6,nft_address: nft_address,version:"v0.0.1"}
+        str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d)}`;
           break;
       }
-      const data3 = toHex(str);
+      const data3 = web3.utils.fromUtf8(str);
       const tx1 = {
         to: accountInfo.value.address,
         value: ethers.utils.parseEther(0 + ""),
-        data: `0x${data3}`,
+        data: data3,
       };
       const gas: any = await getGasFee(tx1)
       try {

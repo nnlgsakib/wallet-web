@@ -362,6 +362,7 @@ export function getInput(input) {
     return null
 }
 
+window.getInput = getInput
 
 function unRepet(list, list2) {
     if (list && list.length) {

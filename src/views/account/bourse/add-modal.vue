@@ -233,13 +233,14 @@ export default defineComponent({
         show.value = n;
         if (n) {
           const { address } = state.account.accountInfo;
-          const str = `${store.getters['account/chainParsePrefix']}:{"version": "0.0.1","type": 21}`;
-          const data3 = toHex(str);
+          const d = {type:21,version:"v0.0.1"}
+          const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d)}`;
+          const data3 = web3.utils.fromUtf8(str);
           const tx1 = {
             from: address,
             to: address,
             value: ethers.utils.parseEther(props.amount + ""),
-            data: `0x${data3}`,
+            data: data3,
           };
           gasFee.value = await getGasFee(tx1);
           calcProfit();

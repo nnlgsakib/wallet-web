@@ -76,10 +76,6 @@
         </i18n-t>
       </div>
     </div>
-        <!-- Terms of service -->
-  <TermsService  v-model:show="modal1" :hasSelect="false" />
-  <!-- Privacy policy -->
-  <PrivacyPolicy  v-model:show="modal2" :hasSelect="false" />
   </div>
   
 
@@ -100,9 +96,7 @@ import { getPath } from '@/utils/ether'
 import { useBroadCast } from '@/utils/broadCast'
 import NavHeader from '@/components/navHeader/index.vue'
 import WormTransition from '@/components/wromTransition/index.vue'
-import TermsService from '@/components/termsservice/index.vue'
-import PrivacyPolicy from '@/components/privacypolicy/index.vue'
-import localforage from 'localforage'
+
 export default {
   name: 'loginAccount-create-step1',
   components: {
@@ -114,8 +108,6 @@ export default {
     [Switch.name]: Switch,
     [Checkbox.name]: Checkbox,
     [CheckboxGroup.name]: CheckboxGroup,
-    PrivacyPolicy,
-    TermsService,
     NavHeader,
     WormTransition
   },
