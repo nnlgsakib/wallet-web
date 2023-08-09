@@ -474,7 +474,7 @@ export default defineComponent({
       })
       show.value = false;
       const exchangeStatus = await dispatch('account/getExchangeStatus')
-      debugger
+      
       Toast.clear()
       if (exchangeStatus.ExchangerFlag) {
         router.push({
@@ -531,7 +531,6 @@ export default defineComponent({
         "latest",
       ]);
       show.value = false;
-      console.log(accountInfo);
       if (blockNumber - accountInfo.Worm.BlockNumber >= (currentNetwork.value.chainId == 51888 ? 72 : 6307200)) {
         isAffirmDialogB.value = true;
       } else {

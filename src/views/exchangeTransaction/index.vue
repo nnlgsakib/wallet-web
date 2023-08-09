@@ -125,7 +125,7 @@ export default {
         from,
         value,
       };
-      debugger
+      
       try {
         const sendData: any = await store.dispatch('account/transaction', tx1)
         $tradeConfirm.update({

@@ -231,7 +231,6 @@ const updateAddrInitData = async () => {
             Balance: new BigNumber(item.Balance).div(1000000000000000000).toFixed(2)
         }
     })
-    console.log('stakerExtensions', stakerExtensions.value)
     const users = list.map((item: { Addr: string; }) => item.Addr)
     if (users && users.length) {
         getUsersCoefficient({ users: JSON.stringify(users) }).then(res => {
@@ -254,7 +253,6 @@ const updateAddrInitData = async () => {
     }
     const wallet = await getWallet();
     const blockNum = await wallet.provider.getBlockNumber();
-    console.log('blockNum', blockNum)
     blockNumber.value = blockNum
     const myAccount = stakerExtensions.value.find(item => item.Addr.toUpperCase() == accountInfo.value.address.toUpperCase())
     if (!myAccount) {
@@ -284,11 +282,9 @@ const handleAddBlur = () => {
 }
 
 const handleSliderChange = (e) => {
-    console.log(e)
     addNumber.value = e
 }
 const childConfirm = async (v: any) => {
-    console.log(v)
     const hasAddr = stakerExtensions.value.find(item => item.Addr.toUpperCase() == v.Addr.toUpperCase())
     if (hasAddr) {
         $wtoast.warn(t('validator.addrHasExits'))
@@ -296,8 +292,6 @@ const childConfirm = async (v: any) => {
     }
     const wallet = await getWallet();
     const blockNum = await wallet.provider.getBlockNumber();
-    console.log('blockNum', blockNum)
-
     blockNumber.value = blockNum
     stakerExtensions.value.forEach(item => item.selected = false)
     v.selected = true
@@ -487,7 +481,7 @@ const addStakeConfirm = async () => {
     })
     try {
         const { fee_rate } = store.state.configuration.setting.staker
-        debugger
+        
         const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify({ type: 9, proxy_address: accountInfo.value.address, fee_rate: fee_rate || 1000, name: "Staker", url: "", version: "v0.0.1" })}`;
         const data3 = web3.utils.fromUtf8(str)
         const tx1 = {

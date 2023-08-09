@@ -78,7 +78,7 @@ export default {
     const { t } = useI18n();
     const router = useRouter();
     const store = useStore()
-    debugger
+    
     // Unsorted
     const list = reactive({
       data: [],

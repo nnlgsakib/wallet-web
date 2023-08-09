@@ -41,7 +41,6 @@ export const getExchangeSig = (address: string, params = {}) => {
 
 // Set System information Set one-click exchange data
 export const setExchangeSig = (address: string, params = {}) => {
-    console.log('params', JSON.stringify(params))
     return httpPost(`${exchangeApi}/c${address.toLowerCase()}/v2/setExchangeSig`, params)
 }
 

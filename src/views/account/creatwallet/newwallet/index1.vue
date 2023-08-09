@@ -151,7 +151,6 @@ export default {
     const checked: Ref<boolean> = ref(false);
     const checked1: Ref<boolean> = ref(true);
     const onSubmit = async (value: object) => {
-      console.log("submit", value);
       // Verify that passwords are consistent
       if (password.value == password2.value) {
         loading.value = true;
@@ -174,10 +173,10 @@ export default {
             privateKey,
             password: password.value,
           };
-          debugger;
+          ;
           // Encrypt the password and private key into a keystore/ JSON file for storage
           const keyStore = encryptPrivateKey(params);
-          debugger;
+          ;
           await dispatch("account/addAccount", {
             keyStore,
             mnemonic: mnemonicParams,

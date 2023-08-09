@@ -44,16 +44,11 @@ export default {
                 emit('update:isWarning', v)
             }
         })
-        console.log(props);
-        
         let time:any = null
         watch(() => props.isWarning,
         (now) => {
             if (now) {
                 clearTimeout(time)
-                console.log(now);
-                console.log("nownownownownownownow");
-                
                 time = setTimeout(() => {
                     show.value = false
                     emit('update:isWarning', false)

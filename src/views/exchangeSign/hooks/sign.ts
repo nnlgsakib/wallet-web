@@ -51,10 +51,8 @@ export const useSign = () => {
         
         
         return dispatch('account/connectWalletByPwdAddress', params).then(async (wallet) => {
-            console.log('wallet', wallet)
             try {
                 const sstr = sig
-                
                 if(sstr?.toString().startsWith('[') && sstr?.toString().endsWith(']')) {
                     const arr = sstr?.toString().replace('[','').replace(']','').split(',')
                     if(isAdmin){

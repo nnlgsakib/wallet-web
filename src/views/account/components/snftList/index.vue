@@ -235,7 +235,6 @@ export default defineComponent({
         }
         a[i] = code;
       }
-      console.log('a', a)
       return a.reduce(function (acc, c) {
         acc = 16 * acc + c;
         return acc;
@@ -244,7 +243,6 @@ export default defineComponent({
 
     const snftPosition = (nft_address: string) => {
       const str = nft_address.substr(41)
-      console.log('last str', str)
       return Number(`0x${str || 0}`) + 1
     }
     const sumP = computed(() => {
@@ -357,7 +355,6 @@ export default defineComponent({
           const hexc = `0x${str.substr(39, 1)}`
           const hexn = `0x${str.substr(40, 1)}`
           const hexf = `0x${str.substr(41, 1)}`
-          console.log('hexp', hexp)
           switch (reallen) {
             case 39:
               item.tag = "P";
@@ -532,7 +529,6 @@ export default defineComponent({
     };
 
     const handleChangeSwitch = () => {
-      console.log(value.value);
       emit("showSwitch", value.value);
     };
 
@@ -627,7 +623,7 @@ export default defineComponent({
                 str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d)}`;
                 break;
             }
-            debugger
+            
             const data3 = web3.utils.fromUtf8(str)
             const tx1 = {
               from: accountInfo.value.address,
@@ -639,7 +635,6 @@ export default defineComponent({
             };
             const receipt: any = await store.dispatch('account/transaction', tx1)
             txQueue.push(receipt);
-            console.log('receipt', receipt)
           }
           $tradeConfirm.update({
             status: "approve",

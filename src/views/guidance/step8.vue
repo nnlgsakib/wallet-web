@@ -2,16 +2,16 @@
 <template>
   <div v-if="showModal" class="custom-popover">
     <div class="custom-popover-header">
-            <div class="footer-btns">
-        <div class="container pl-20 pr-20 evenly flex">   
+      <div class="footer-btns">
+        <div class="container pl-20 pr-20 evenly flex">
           <span @click="handleClick(7)">{{ t("returnreceipt.done") }} 7/7</span>
         </div>
       </div>
     </div>
     <div class="custom-popover-container">
       <div class="container-left"></div>
-            <span class="tip-txt">
-        <span>{{t('common.helpCenter')}}</span>
+      <span class="tip-txt">
+        <span>{{ t('common.helpCenter') }}</span>
       </span>
       <span class="line"></span>
       <span class="line-circle"></span>
@@ -20,12 +20,7 @@
       <div class="footer-left"></div>
     </div>
 
-    <dialog-warning
-      @warningSuccess="warningSuccess"
-      :text="t('common.confirmExit')"
-      v-model:isWarning="isWarning"
-      theme="light" 
-    ></dialog-warning>
+    <dialog-warning @warningSuccess="warningSuccess" :text="t('common.confirmExit')" v-model:isWarning="isWarning" theme="light"></dialog-warning>
   </div>
 </template>
 
@@ -66,7 +61,6 @@ export default defineComponent({
       })
         .then(() => true)
         .catch(() => false);
-      console.log("flag", flag);
       if (flag) {
         dispatch("system/closeGuide");
         showModal.value = false;
@@ -99,16 +93,17 @@ export default defineComponent({
   top: 0;
   left: 0;
   right: 0;
-  bottom:0;
+  bottom: 0;
   width: 100%;
   height: 100%;
   z-index: 100000;
 }
+
 .custom-popover-header {
   height: calc(100vh - 165px);
   width: 100%;
   display: flex;
-        background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   // .header-left {
   //   width: 50px;
   //   height: 100%;
@@ -141,29 +136,34 @@ export default defineComponent({
   //   background-color: rgba(0, 0, 0, 0.7);
   // }
 }
+
 .custom-popover-container {
-    height: 100px;
-    position: relative;
-    .container-left {
-    width:75%;
-  background-color: rgba(0, 0, 0, 0.7);
-  height: 100%;
-    }
-    .tip-txt {
+  height: 100px;
+  position: relative;
+
+  .container-left {
+    width: 75%;
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 100%;
+  }
+
+  .tip-txt {
     position: absolute;
     top: -98px;
     right: 14px;
     color: #fff;
 
   }
+
   .line {
-      width: 0;
-      border-right: 1px solid #9F54BA;
-      height: 75px;
-      position: absolute;
-      right: 48px;
-      top: -75px;
+    width: 0;
+    border-right: 1px solid #9F54BA;
+    height: 75px;
+    position: absolute;
+    right: 48px;
+    top: -75px;
   }
+
   .line-circle {
     width: 6px;
     height: 6px;
@@ -175,6 +175,7 @@ export default defineComponent({
   }
 
 }
+
 .custom-popover-footer {
   position: relative;
   height: 65px;
@@ -184,12 +185,13 @@ export default defineComponent({
   // bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
 }
+
 .footer-btns {
-    position: fixed;
-    top: 235px;
-    left: 0;
-    right: 0;
-    width: 100%;
+  position: fixed;
+  top: 235px;
+  left: 0;
+  right: 0;
+  width: 100%;
 
   div {
     span {
@@ -210,6 +212,7 @@ export default defineComponent({
     }
   }
 }
+
 .footer-text {
   position: absolute;
   font-size: 12px;
@@ -219,10 +222,12 @@ export default defineComponent({
   z-index: 100;
   width: 100px;
   text-align: center;
+
   div {
     position: relative;
     // display: inline-block;
   }
+
   .dot {
     width: 4px;
     height: 4px;
@@ -230,9 +235,11 @@ export default defineComponent({
     border-radius: 50%;
   }
 }
+
 .dialog-box {
   // width: 340px;
   padding-bottom: 25px;
+
   .serial-number {
     display: flex;
     justify-content: flex-end;
@@ -241,10 +248,12 @@ export default defineComponent({
     padding-right: 14px;
     font-size: 12px;
     font-size: 12px;
+
     .left {
       color: #9F54BA;
     }
   }
+
   .title {
     text-align: center;
     font-size: 24px;
@@ -252,27 +261,29 @@ export default defineComponent({
     line-height: 30px;
     margin-top: 44px;
   }
+
   .small-tit {
     text-align: center;
     margin-bottom: 50px;
     font-size: 12px;
     color: #848484;
   }
+
   :deep {
     button {
       min-width: 100px;
     }
   }
+
   :deep(.van-popover__wrapper) {
     height: 0;
   }
 }
 
 @media screen and (min-width:750px) {
-  .custom-popover-container{
-  .container-left {
-    width: 86%;
+  .custom-popover-container {
+    .container-left {
+      width: 86%;
+    }
   }
-  }
-}
-</style>
+}</style>

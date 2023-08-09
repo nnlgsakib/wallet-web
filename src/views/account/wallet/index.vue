@@ -279,11 +279,9 @@ export default {
     const canbtn = ref(false);
     const canbtns = ref(true);
     const loading: Ref<boolean> = ref(false);
-    console.log("getters", store);
     const accountTokens = computed(
       () => store.getters["account/accountTokens"]
     );
-    console.log("accountTokens", accountTokens);
     let sonShow = ref(false);
     const toogleAcceptCode = () => {
       // showAcceptCode.value = true;

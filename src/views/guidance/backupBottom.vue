@@ -77,7 +77,7 @@ export default defineComponent({
     );
 
       // watch(() =>[show0.value,show1.value,show2.value,show3.value,show4.value,show5.value,show6.value, show13.value, hasBackUpMnemonic.value],(newVal, oldVal) => {
-      //   debugger
+      //   
       //   const len = [...newVal].splice(0,8).filter(item => !item).length
         
       //   if(len === 8 && !newVal[newVal.length - 1]){

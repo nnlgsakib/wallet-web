@@ -64,7 +64,6 @@ export default defineComponent({
       })
         .then(() => true)
         .catch(() => false)
-      console.log('flag', flag)
       if (flag) {
         dispatch('system/closeGuide')
         showModal.value = false

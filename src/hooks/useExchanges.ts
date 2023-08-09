@@ -51,7 +51,7 @@ export const useExchanges = () => {
 
       callBack ? callBack() : "";
       localStorage.setItem('tx2', JSON.stringify(data))
-      // debugger
+      // 
       $tradeConfirm.update({ status: "approve" })
       const receipt = await wallet.provider.waitForTransaction(data.hash, null, 60000)
       localStorage.setItem('receipt2', JSON.stringify(receipt))
@@ -78,8 +78,6 @@ export const useExchanges = () => {
           failMessage: err.reason,
         });
       }
-      console.log(err)
-      console.log("==========err2=============")
       Toast(err.toString());
       resetData();
       return Promise.reject()
@@ -115,7 +113,6 @@ export const useExchanges = () => {
         address,
         params: `'${JSON.stringify(params)}'`,
       };
-      console.log(sendData)
       const val: any = await createExchange(sendData);
       if (val.code == "true") {
         let time = setTimeout(async () => {
@@ -292,7 +289,7 @@ export const useExchanges = () => {
           sig: sigstr,
           isAdmin: false,
           call: (sign: string) => {
-            debugger
+            
             sendPledge(amount, proxy_address, sign)
           }
         })
@@ -426,8 +423,6 @@ export const useExchanges = () => {
       status,
       ExchangerFlag
     } = exchangeStatus
-    console.log(status)
-    console.log(ExchangerFlag)
     if ((status != 2 && ExchangerFlag == false) || (!ExchangerFlag && status == 2)) {
       $tradeConfirm.open({
         approveMessage: i18n.global.t('createExchange.create_approve'),

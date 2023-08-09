@@ -541,17 +541,14 @@ export default defineComponent({
         account.value = await getAccount(address);
         blockNumber.value = await wallet.provider.getBlockNumber();
         const accountInfo = await dispatch('account/getExchangeStatus')
-        console.log(blockNumber.value - accountInfoBlockNumber.value);
-        console.log("blockNumber.value - accountInfoBlockNumber.value");
         await dispatch("account/getExchangeStatus");
         ethAccountInfo.value = accountInfo;
         accountInfoBlockNumber.value = accountInfo.BlockNumber;
-        console.log(blockNumber.value - accountInfoBlockNumber.value);
         dispatch("account/getExchangeStatus");
         if (exchangeStatus.value.ExchangerFlag) {
           const { ExchangerBalance, ExchangerName, ExchangerURL, FeeRate } =
             accountInfo;
-            debugger
+            
           let formatValue;
           money.value = new BigNumber(FeeRate).div(10).toNumber();
           if (ExchangerBalance.toString().indexOf("e") !== -1) {
@@ -807,7 +804,7 @@ export default defineComponent({
       const diffAm = new Bignumber(maxBalance.value).minus(
         exchangerBalance.value
       );
-      debugger;
+      ;
       if (am.lt(diffAm)) {
         $wtoast.warn(t("createExchange.ispoor"));
         return;

@@ -216,8 +216,6 @@ export default {
     const tokenError = ref(false);
     // Click add connectconstraint
     const onSubmit = async (data: any) => {
-      console.log("submit", data);
-
       Dialog.confirm({
         message: t("currencyList.sure"),
       }).then(async () => {
@@ -294,11 +292,6 @@ export default {
         Toast.clear();
       }
     };
-    // Import function
-    const handleImport = () => {
-      console.log("import...");
-    };
-
     const cancel = () => {
       router.replace({ name: "home" });
     };
@@ -319,7 +312,6 @@ export default {
       indexList,
       search,
       alist,
-      handleImport,
     };
   },
 };

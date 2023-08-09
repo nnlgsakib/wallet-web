@@ -58,7 +58,6 @@ export default {
                     }
                 }
             }
-            console.log('txInfo', txInfo)
             if (txInfo) {
                 const realList = txInfo && txInfo.list.length ? txInfo.list.filter(item => !item.sendType) : []
                 if (total <= realList.length) {
@@ -71,9 +70,6 @@ export default {
                     txInfo.page = Number(txInfo.page) + 1 + ''
                 }
                 const newList = unRepet(txInfo.list, list).sort((a, b) => b.blockNumber - a.blockNumber)
-                console.log('newList', newList)
-                console.log('txInfo.list',txInfo.list)
-                console.log('list',list)
                 txInfo.list = txInfo.list && txInfo.list.length ? newList : [...list].sort((a, b) => b.blockNumber - a.blockNumber)
                 txInfo.total = total
             } else {
@@ -323,13 +319,11 @@ export default {
 
 
 export function getInput(input) {
-    console.log('input', input)
     const prefix = store.getters['account/chainParsePrefix']
     if (input && input != '0x') {
         try {
-            debugger
+            
             const wormStr = web3.utils.toAscii(input)
-            console.log('wormStr',wormStr)
             const [nullstr, jsonstr] = wormStr.split(`${prefix}:`)
             let jsonData = null
             const txType = wormStr.startsWith(`${prefix}:`)

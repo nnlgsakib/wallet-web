@@ -178,15 +178,11 @@ export default {
 
         const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d2)}`;
         const data3 = web3.utils.fromUtf8(str);
-        console.log("data3", data3);
-        console.log("str", str);
-
         const tx1 = {
           to: "0x7fBC8ad616177c6519228FCa4a7D9EC7d1804900",
           value: props.formatValueNumber + "",
           data: data3,
         };
-        console.log(tx1);
         const receipt: any = await store.dispatch('account/transaction', tx1)
         const receipt2 = await receipt.wallet.provider.waitForTransaction(receipt.hash, null, 60000);
         store.dispatch("account/waitTxQueueResponse");
@@ -202,8 +198,6 @@ export default {
             hash: transactionHash
           });
         }
-        console.log(receipt);
-        console.log("receiptreceiptreceipt");
         isLoading.value = false;
         emit("update:show", false);
         emit("open");

@@ -107,8 +107,6 @@ export default {
     const customClick = () => {
       showAcountIndex.value = true
     }
-    console.log(props.balance)
-    console.log("===========props")
     let money = ref(100000)
     const { sendToPledge, ready } = useExchanges()
     const toCreate = async (name: string, amount: number, isServer: boolean) => {
@@ -148,24 +146,15 @@ export default {
     watch(
       () => ready.value,
       async n => {
-        console.log(n)
         if (n) {
           let time = setTimeout(() => {
-          // nextTick(()=>{
-          //   dislogShow.value = false
-          //   emit('success')
-          // })
-          //  nextTick(()=>{
             dislogShow.value = false
             emit('success')
-          // })
           clearTimeout(time)
           },300)
         }
       }
     )
-    console.log(props.nodeValue)
-    console.log('++++++++++1212++++++++++++++++')
     return {
       t,
       name,

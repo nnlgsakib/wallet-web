@@ -253,7 +253,6 @@ export default {
     const appProvide = inject("appProvide");
     const { t } = useI18n();
     const store = useStore();
-    console.log("-=============================");
     const currentNetwork = computed(() => store.state.account.currentNetwork);
     const accountInfo = computed(() => store.state.account.accountInfo);
     const { $wdialog } = useDialog();
@@ -305,7 +304,7 @@ export default {
       console.warn('txPush', data)
       // const tx = tlist.value.find((item: any) => item.txId.toUpperCase() == data.txId.toUpperCase())
       // if(!tx) {
-      //   debugger
+      //   
       // // @ts-ignore
       // tlist.value.unshift(data)
       // }

@@ -1,14 +1,6 @@
 <template>
   <div>
-    <van-dialog
-      v-model:show="showModal"
-      teleport="#page-box"
-      :showConfirmButton="false"
-      :showCancelButton="false"
-      closeOnClickOverlay
-      :title="''"
-      class="send-confirm-modal"
-    >
+    <van-dialog v-model:show="showModal" teleport="#page-box" :showConfirmButton="false" :showCancelButton="false" closeOnClickOverlay :title="''" class="send-confirm-modal">
       <div class="title text-center f-16 bold van-hairline--bottom">
         {{ $t("send.sendConfirm") }}
       </div>
@@ -32,23 +24,12 @@
         <div class="flex between">
           <div class="label">
             {{ t("transactiondetails.gasfee") }}
-            <van-popover
-              v-model:show="showPopover"
-              theme="dark"
-              placement="top"
-            >
-              <div
-                class="f-12 pl-10 pr-10 pt-10 pb-10"
-                @click="showPopover = false"
-              >
+            <van-popover v-model:show="showPopover" theme="dark" placement="top">
+              <div class="f-12 pl-10 pr-10 pt-10 pb-10" @click="showPopover = false">
                 {{ t("common.gasFee") }}
               </div>
               <template #reference>
-                <van-icon
-                  name="question hover"
-                  @mouseover="showPopover = true"
-                  @mouseout="showPopover = false"
-                />
+                <van-icon name="question hover" @mouseover="showPopover = true" @mouseout="showPopover = false" />
               </template>
             </van-popover>
           </div>
@@ -65,14 +46,8 @@
       </div>
       <div class="flex between pb-30 pl-16 pr-16 mt-20 btn-box">
         <van-button @click="cencel">{{ t("sendto.cancel") }}</van-button>
-        <van-button
-          type="primary"
-          :loading="nextLoading"
-          :disabled="!finishCount ? true : false"
-          @click="handleComfirm"
-          >{{ t("sendto.send") }}
-          {{ !finishCount ? `(${current.seconds}S)` : "" }}</van-button
-        >
+        <van-button type="primary" :loading="nextLoading" :disabled="!finishCount ? true : false" @click="handleComfirm">{{ t("sendto.send") }}
+          {{ !finishCount ? `(${current.seconds}S)` : "" }}</van-button>
       </div>
     </van-dialog>
   </div>
@@ -149,7 +124,6 @@ export default defineComponent({
       () => props.modelValue,
       (n) => {
         showModal.value = n;
-        console.log("props.data", props.data);
       },
       {
         immediate: true,
@@ -219,27 +193,24 @@ export default defineComponent({
           value ? "account/transaction" : "account/tokenTransaction",
           params
         );
-        debugger
+
         $tradeConfirm.update({ status: "approve" });
         eventBus.emit('sendComfirm')
         const receipt = await txData.wait()
-        debugger
+
         // await store.dispatch("account/waitTxQueueResponse", {
         //   callback(e: any) {
         //     waitTime.value = e;
         //   },
         // });
-        if(receipt.status) {
-          $tradeConfirm.update({ status: "success", hash:txData.hash });
+        if (receipt.status) {
+          $tradeConfirm.update({ status: "success", hash: txData.hash });
         } else {
-          $tradeConfirm.update({ status: "fail", hash:txData.hash });
+          $tradeConfirm.update({ status: "fail", hash: txData.hash });
         }
       } catch (err: any) {
-        console.warn('idx', err.toString().indexOf("timeout"))
-        console.error('err:===', err)
-        console.log('t("error.timeout")', t("error.timeout"))
         if (err.toString().indexOf("timeout") > -1) {
-          if(await store.dispatch('account/checkIsTxHash', txData.hash)) {
+          if (await store.dispatch('account/checkIsTxHash', txData.hash)) {
             $tradeConfirm.update({
               status: "warn",
               failMessage: t("error.timeout"),
@@ -296,13 +267,16 @@ export default defineComponent({
 .btn-box {
   padding: 0 52px 20px;
 }
+
 .green {
   color: #3aae55;
 }
+
 .border-top {
   border-top: 1px solid #e4e7e8;
   padding-top: 9px;
 }
+
 .title {
   color: #000;
   font-size: 15px;
@@ -314,23 +288,28 @@ export default defineComponent({
 :deep(.van-button) {
   width: 100px !important;
 }
-.send-confirm-modal {
-}
+
+.send-confirm-modal {}
+
 .icon-box {
   width: 35px;
   height: 35px;
   border-radius: 50%;
   border: 1px solid #000;
+
   i {
     font-size: 20px;
   }
 }
+
 .content {
   border: 1px solid #e4e7e8;
   border-radius: 5px;
+
   .label {
     color: #8f8f8f;
   }
+
   .label,
   .value {
     line-height: 16px;

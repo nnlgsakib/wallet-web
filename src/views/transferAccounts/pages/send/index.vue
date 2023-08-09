@@ -13,17 +13,12 @@
     <div class="mt-14 mr-14 pl-14 userinfo-box">
       <div :class="`userinfo ${checkAddressError ? 'error' : ''}`">
         <div class="from flex column between">
-          <div
-            class="information p-14 flex between"
-            @click="handleShowAccountModal"
-          >
+          <div class="information p-14 flex between" @click="handleShowAccountModal">
             <div class="flex center-v">
               <div class="avatar flex center">
                 <AccountIcon :data="accountInfo.icon" />
               </div>
-              <div
-                class="flex column between userinformation center-h pt-4 pb-4"
-              >
+              <div class="flex column between userinformation center-h pt-4 pb-4">
                 <div class="username mb-4">{{ accountInfo.name }}</div>
                 <div class="userbalance">
                   {{ chooseToken.balance }} {{ chooseToken.name }}
@@ -42,27 +37,13 @@
           <div class="line"></div>
         </div>
         <div class="to from flex between center-v toInfo">
-          <div
-            class="add-ipt flex center-v between pl-14 pr-14"
-            v-show="!hasChooseAddress"
-          >
-            <van-field
-              :placeholder="$t('sendNFT.addAddress')"
-              v-model="toAddress"
-              @blur="checkAddress"
-            ></van-field>
-            <div
-              class="flex right center-v right to-btns"
-              v-show="!hasChooseAddress"
-            >
+          <div class="add-ipt flex center-v between pl-14 pr-14" v-show="!hasChooseAddress">
+            <van-field :placeholder="$t('sendNFT.addAddress')" v-model="toAddress" @blur="checkAddress"></van-field>
+            <div class="flex right center-v right to-btns" v-show="!hasChooseAddress">
               <i class="iconfont icon-tongxunlu hover" @click="toContacts"></i>
             </div>
             <div class="flex right center-v" v-show="hasChooseAddress">
-              <van-icon
-                name="cross"
-                class="clearAddress"
-                @click="clearAddress"
-              />
+              <van-icon name="cross" class="clearAddress" @click="clearAddress" />
             </div>
           </div>
           <div class="information p-14 flex between" v-show="hasChooseAddress">
@@ -70,11 +51,8 @@
               <div class="avatar flex center">
                 <AccountIcon :data="account.data.icon" />
               </div>
-              <div
-                :class="`flex column ${
-                  account.data.name ? 'between' : ''
-                }  userinformation center-h pt-4 pb-4`"
-              >
+              <div :class="`flex column ${account.data.name ? 'between' : ''
+                }  userinformation center-h pt-4 pb-4`">
                 <div class="username mb-4">{{ account.data.name }}</div>
                 <div class="userbalance userbalanceBox">
                   {{ account.data.address }}
@@ -82,28 +60,18 @@
                 </div>
               </div>
             </div>
-            <div
-              class="flex right center-v between to-btns"
-              v-show="!hasChooseAddress"
-            >
+            <div class="flex right center-v between to-btns" v-show="!hasChooseAddress">
               <i class="iconfont icon-tongxunlu hover" @click="toContacts"></i>
             </div>
             <div class="flex right center-v" v-show="hasChooseAddress">
-              <van-icon
-                name="cross"
-                class="clearAddress"
-                @click="clearAddress"
-              />
+              <van-icon name="cross" class="clearAddress" @click="clearAddress" />
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div
-      v-show="checkAddressError"
-      class="color-error f-12 ml-14 mr-14 mb-14 mt-8"
-    >
+    <div v-show="checkAddressError" class="color-error f-12 ml-14 mr-14 mb-14 mt-8">
       {{ addressMsg }}
     </div>
     <!-- Transfer amount / balance area -->
@@ -114,27 +82,14 @@
           <div class="pl-14 pr-14 pt-20 pb-20 flex between amount">
             <div class="amount-info van-ellipsis">
               <div class="label">{{ t("sendNFT.amount") }}</div>
-              <van-field
-                placeholder="0.00"
-                v-model="amount"
-                maxlength="40"
-                @blur="handleAmountBlur"
-                @update:model-value="changeAmount"
-                type="number"
-              />
+              <van-field placeholder="0.00" v-model="amount" maxlength="40" @blur="handleAmountBlur" @update:model-value="changeAmount" type="number" />
             </div>
             <div class="flex center-v right up-down-box">
               <span class="max f-12 hover" @click="handleMax">
                 {{ t("sendto.max") }}
               </span>
-              <div
-                class="van-hairline--right h-12 mr-14 ml-14 line-box"
-                style="width: 1px"
-              ></div>
-              <div
-                class="token-info flex center-v between pr-6 pl-6 hover"
-                @click="handleTokenModal"
-              >
+              <div class="van-hairline--right h-12 mr-14 ml-14 line-box" style="width: 1px"></div>
+              <div class="token-info flex center-v between pr-6 pl-6 hover" @click="handleTokenModal">
                 <div class="xuanwo flex center">
                   <img src="@/assets/token/logowallet.png" alt />
                 </div>
@@ -160,28 +115,16 @@
             <!-- gas price -->
             <div class="label">
               {{ t("sendto.gasprice") }}
-              <van-popover
-                v-model:show="gasPriceModal"
-                theme="dark"
-                placement="right"
-              >
+              <van-popover v-model:show="gasPriceModal" theme="dark" placement="right">
                 <p class="pl-10 pr-10">{{ t("sendto.gastit") }}</p>
                 <template #reference>
-                  <van-icon
-                    name="question hover"
-                    @mouseover="gasPriceModal = true"
-                    @mouseleave="gasPriceModal = false"
-                  />
+                  <van-icon name="question hover" @mouseover="gasPriceModal = true" @mouseleave="gasPriceModal = false" />
                 </template>
               </van-popover>
             </div>
             <div class="value">
-              <span class="text-bold"
-                >≈ {{ gasPriceNum }} Gwei,</span
-              >
-              <span class="second pl-6"
-                >≈ {{ second }} {{ t("sendto.second") }}</span
-              >
+              <span class="text-bold">≈ {{ gasPriceNum }} Gwei,</span>
+              <span class="second pl-6">≈ {{ second }} {{ t("sendto.second") }}</span>
             </div>
           </div>
           <div class="gasfee-icon flex center-v hover">
@@ -192,13 +135,7 @@
     </div>
     <div class="btn-group">
       <div class="container pr-26 pl-26">
-        <van-button
-          type="primary"
-          :disabled="btnDisabled"
-          @click="gonext"
-          block
-          >{{ t("sendto.confirm") }}</van-button
-        >
+        <van-button type="primary" :disabled="btnDisabled" @click="gonext" block>{{ t("sendto.confirm") }}</van-button>
       </div>
     </div>
     <!-- Confirm sending Popup -->
@@ -338,7 +275,7 @@ export default {
       // Whether the balance is greater than the sent amount
       if (new BigNumber(chooseToken.value.balance).lte(amount.value)) {
         //  $wtoast.warn(t("sendto.nomoney",{symbol:chooseToken.value.name}));
-                     amountErrMsg.value = t("sendto.nomoney", {
+        amountErrMsg.value = t("sendto.nomoney", {
           symbol: chooseToken.value.name,
           amount: chooseToken.value.balance
         });
@@ -420,7 +357,7 @@ export default {
           utils.getAddress(toAddress.value);
           checkAddressError.value = false;
           account.data = createCache();
-      
+
         } catch (err) {
           Toast(t("sendto.wrongaddressformat"));
           toAddress.value = "";
@@ -433,7 +370,7 @@ export default {
     watch(
       chooseToken.value,
       async (n) => {
-        nextTick(async() => {
+        nextTick(async () => {
           calcGasLimit();
         });
       },
@@ -496,7 +433,6 @@ export default {
     const handleMax = () => {
       // const v = new BigNumber(chooseToken.value.balance).toString()
       const v = chooseToken.value.balance;
-      console.log("usemax", v);
       amount.value = v;
     };
 
@@ -508,7 +444,6 @@ export default {
     // Send confirmation pop-up
     const showSendConfirm = ref(false);
     const handleShowSendConfirm = () => {
-      console.log('sendTx', sendTx.value)
       showSendConfirm.value = true;
     };
 
@@ -520,7 +455,6 @@ export default {
       try {
         const wallet = await getWallet();
         const gasPrice = await wallet.provider.getGasPrice();
-        console.log("gasPrice", utils.formatUnits(gasPrice, "wei"));
         const bigGas = new BigNumber(utils.formatUnits(gasPrice, "wei"));
         const bigGasDiv = bigGas.multipliedBy(0.2);
         const bigGasDiv2 = bigGas.multipliedBy(0.1);
@@ -530,10 +464,6 @@ export default {
           .plus(bigGasDiv2)
           .dividedBy(1000000000)
           .toString();
-        console.log("bigGas", bigGas.toString());
-        console.log("max", max);
-        console.log("min", min);
-        console.log("average", average);
         gasData.value = [min, average, max];
         gasPriceNum.value = max;
         reCalc(route.query);
@@ -605,10 +535,7 @@ export default {
           tokenContractAddress
         );
         const am = (amount.value || 1) + ''
-        console.log('am---1', am)
         const amountWei = amount.value ? amount.value.toString() : '1'
-        console.log('amountWei---1', amountWei)
-
         contractWithSigner.estimateGas
           .transfer(
             toAddress.value || accountInfo.value.address,
@@ -620,8 +547,7 @@ export default {
               utils.formatUnits(gas, "wei")
             );
             const limitWei = utils.formatUnits(gas, "wei")
-          gasLimit.value = parseFloat(new BigNumber(limitWei).plus(new BigNumber(limitWei).multipliedBy(0.2)).toFixed(0));
-          console.log('gasLimit.value', gasLimit.value,limitWei)
+            gasLimit.value = parseFloat(new BigNumber(limitWei).plus(new BigNumber(limitWei).multipliedBy(0.2)).toFixed(0));
           })
       } else {
         gasLimit.value = 21000;
@@ -696,7 +622,7 @@ export default {
             item.tokenContractAddress &&
             item.tokenContractAddress == tokenContractAddress
         );
-        debugger;
+        ;
         console.warn("token-----------", token);
         if (tokenContractAddress && tokenContractAddress != "null" && !token) {
           Dialog.confirm({
@@ -714,7 +640,6 @@ export default {
                 tokenContractAddress,
                 address,
               });
-              console.log("impot-----token----", newToken);
               commit("transfer/UPDATE_CHOOSETOKEN", newToken);
               Toast(t("currencyList.Importsuccessful"));
             } catch (err: any) {
@@ -788,88 +713,110 @@ export default {
 .wd-100 {
   width: 100%;
 }
+
 .back {
   color: #9F54BA;
   font-size: 12px;
 }
+
 .title {
   font-size: 16px;
   color: #000;
   font-weight: bold;
 }
+
 .userbalanceBox {
   letter-spacing: -0.8px;
 }
+
 .toInfo {
   display: block !important;
 }
+
 .icon {
   height: auto;
   margin-bottom: 0;
 }
+
 .gasfee-icon i {
   color: #9F54BA;
   font-size: 24px;
 }
+
 .page-container {
   padding-bottom: 80px;
   width: 100%;
+
   .common-modal-txt {
     color: #848484;
   }
+
   .slider-container {
     position: relative;
     z-index: 20;
   }
+
   .tip-box {
     position: fixed;
     left: 15px;
     right: 15px;
     bottom: 95px;
+
     .box {
       background: #fbf2f3;
       border-radius: 7.5px;
       font-size: 12px;
     }
+
     i {
       font-size: 14px;
       color: #ff4258;
     }
   }
+
   .balance-box {
     color: #a4a4a4;
     margin: 11.5px 0;
+
     .value {
       max-width: 375px;
     }
+
     div {
       line-height: 16px;
       font-size: 12px;
     }
   }
+
   .limit-box {
     height: 44px;
     background: #f1f3f4;
     border-radius: 22px;
+
     .ipt-box {
       width: 60px;
+
       :deep(.van-field input) {
         text-align: center;
       }
     }
+
     .action {
       width: 17.5px;
       height: 17.5px;
       border-radius: 50%;
       border: 1px solid #9F54BA;
       cursor: pointer;
+
       &.disabled {
         border: 1px solid #ccc;
         cursor: no-drop;
+
         i {
           color: #ccc;
         }
       }
+
       i {
         font-size: 12px;
         color: #9F54BA;
@@ -877,18 +824,21 @@ export default {
       }
     }
   }
+
   .token-info {
     height: 35px;
     min-width: 90px;
     max-width: 140px;
     background: #f1f3f4;
     border-radius: 17.5px;
+
     .xuanwo {
       width: 24px;
       height: 24px;
       border-radius: 10px;
       // background: #0b80d7;
       padding: 2px;
+
       img {
         display: block;
         width: 100%;
@@ -896,34 +846,42 @@ export default {
         // border-radius: 50%;
       }
     }
+
     .token-name {
       color: #000;
     }
   }
+
   :deep() {
     .van-field__body {
       border: none;
       padding: 0;
       height: auto;
     }
+
     .van-cell {
       padding: 0;
     }
   }
+
   :deep(.van-slider .van-slider__button) {
     z-index: 100;
     width: 20px;
     height: 20px;
   }
+
   :deep(.van-slider .van-slider__bar) {
     z-index: 1000;
   }
+
   :deep(.van-slider) {
     z-index: 1000;
   }
+
   .slider-dian {
     height: 30px;
     position: relative;
+
     .slider-icon {
       width: 7.5px;
       position: absolute;
@@ -932,6 +890,7 @@ export default {
       border-radius: 50%;
       background: #f1f3f4;
       z-index: 1;
+
       &.active {
         background: #9F54BA;
       }
@@ -941,77 +900,95 @@ export default {
       left: 8px;
       top: -17px;
     }
+
     .slider-c {
       left: 50%;
       margin-left: -3.75px;
       top: -17px;
     }
+
     .slider-r {
       right: 8px;
       top: -17px;
     }
+
     .speed-label {
       font-size: 12px;
       color: #9a9a9a;
       line-height: 18px;
       position: absolute;
       top: 2px;
+
       &.speed-l {
         left: 0;
       }
+
       &.speed-c {
         left: 50%;
         width: 48px;
         margin-left: -24px;
         text-align: center;
       }
+
       &.speed-r {
         right: 0;
       }
     }
   }
+
   .account-box {
     margin-bottom: 50px;
   }
+
   .userinfo-box {
     background: #fff;
   }
+
   .clearAddress {
     font-size: 16px;
     color: #9F54BA;
   }
+
   .slider-box.amount-info {
     .value {
       color: #000;
       font-size: 12px;
     }
   }
+
   .cancel {
     font-size: 11px;
     color: #9F54BA;
   }
+
   .up-down-box {
     i {
       font-size: 15px;
     }
+
     span {
       word-break: keep-all;
 
       color: #9F54BA;
     }
+
     .line-box::after {
       border-color: #6e7276 !important;
     }
+
     font-size: 12px;
     color: #9F54BA;
   }
+
   :deep(input) {
     font-size: 12px;
     line-height: 16px;
     font-weight: bold;
   }
+
   .amount-info {
     width: 100%;
+
     .van-cell {
       background: none;
       padding: 0;
@@ -1022,21 +999,26 @@ export default {
       font-size: 12px;
       color: #9a9a9a;
       line-height: 18px;
+
       &.equal {
         color: #000;
       }
     }
+
     .second {
       color: #3aae55;
     }
   }
+
   .to-btns {
+
     // width: 66px;
     i {
       color: #9F54BA;
       font-size: 20px;
     }
   }
+
   .line-box {
     .line {
       height: 0;
@@ -1044,6 +1026,7 @@ export default {
       border-bottom: 1px solid #bbc0c5;
     }
   }
+
   .userinfo {
     display: flex;
     flex-direction: column;
@@ -1051,43 +1034,53 @@ export default {
     background: #fff;
     border: 1px solid #bbc0c5;
     border-radius: 5px;
+
     &.error {
       border-color: #d73a49;
       background: #fbf2f3;
+
       .van-cell {
         background: #fbf2f3;
       }
     }
+
     &::after {
       border-radius: 5px;
       border-color: #bbc0c5;
     }
   }
+
   .btn-group {
     position: fixed;
     left: 0px;
     right: 0px;
     bottom: 25px;
   }
+
   .from {
     display: flex;
     justify-content: space-around;
+
     .userfrom {
       font-size: 12px;
       margin-top: 18px;
       width: 76px;
       text-align: center;
     }
+
     .information {
       border-collapse: collapse;
       position: relative;
+
       &.amount {
         padding: 20px 14px 20px;
       }
+
       &:hover {
         transition: ease 0.3s;
         background-color: #F8F3F9;
       }
+
       .closeIcon {
         position: absolute;
         right: 10px;
@@ -1095,38 +1088,47 @@ export default {
         font-size: 18px;
         color: #6a737d;
       }
+
       .jticon {
         position: absolute;
         right: 10px;
         top: 14px;
+
         &::before {
           color: #6a737d;
         }
       }
+
       &::after {
         border-radius: 10px;
       }
+
       .avatar {
         overflow: hidden;
         border-radius: 50%;
         height: 42px;
+
         :deep(.account-icon-component) {
           overflow: hidden;
           border-radius: 50%;
         }
       }
+
       .userinformation {
         margin-left: 5px;
         max-width: 88%;
+
         .username {
           font-size: 12px;
           line-height: 14px;
         }
+
         .userbalance {
           line-height: 14px;
           font-size: 12px;
           color: #9a9a9a;
           word-break: break-all;
+
           i {
             color: #0dd70d;
             font-size: 14px;
@@ -1136,29 +1138,36 @@ export default {
       }
     }
   }
+
   .to {
     display: flex;
     justify-content: space-between;
+
     .sendto {
       font-size: 12px;
       margin-top: 18px;
       width: 76px;
       text-align: center;
     }
+
     .add-ipt {
       height: 100%;
       padding-top: 20px;
       padding-bottom: 20px;
+
       &::after {
         border-radius: 10px;
       }
+
       & .van-cell {
         padding-left: 0;
       }
+
       & .van-cell:after {
         display: none;
       }
     }
+
     .receiver {
       font-size: 12px;
       text-align: center;
@@ -1169,6 +1178,7 @@ export default {
       border: 1px solid rgba(209, 212, 215, 1);
     }
   }
+
   .transfer {
     height: 40px;
     line-height: 40px;
@@ -1176,11 +1186,13 @@ export default {
     font-size: 12px;
     color: rgba(7, 118, 211, 1);
   }
+
   .useravatar {
     width: 30px;
     height: 30px;
     background-color: green;
   }
+
   .recent {
     .text {
       width: 100%;

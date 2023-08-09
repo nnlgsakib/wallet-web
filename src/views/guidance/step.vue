@@ -91,7 +91,6 @@ export default {
     let isShowServiceTrueIcon = ref(0)
     let isShowPrivacyTrueIcon = ref(0)
     const toservice = () => {
-      console.log('11')
       showService.value =  true
     }
     const isWarning = ref(false)
@@ -99,7 +98,6 @@ export default {
     //  Laws and regulations
     const showPrivacy = ref(false)
     const toprivacy = () => {
-      console.log('12')
       showPrivacy.value = true
     }
     const handleSelect = (v: any) => {
@@ -113,7 +111,6 @@ export default {
       isShowPrivacyTrueIcon.value = v ? 2 : 1
     }
     const handleChange = (v: any) => {
-      console.log('change', v)
       if (v) {
         checked.value = true
         checked1.value = true

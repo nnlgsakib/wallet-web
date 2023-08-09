@@ -95,7 +95,6 @@ const getIconClass = (v: any) => {
       if (num > 50) return "smile";
 }
 const getList = async () => {
-    console.log('get list',loading.value, finished.value)
     if(loading.value || finished.value){
         return
     }

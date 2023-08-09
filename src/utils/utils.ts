@@ -33,8 +33,6 @@ export const getQuery = () => {
   const hash = location.hash
   const strarr = hash.split('?')
   const str = strarr.length ? strarr[1] : null
-  console.log('hash-----------', hash.split('?'))
-  console.log('search---', location.search)
   if (!str) {
     return {}
   }
@@ -43,7 +41,6 @@ export const getQuery = () => {
   for (let i of arr) {
     obj[i.split("=")[0]] = i.split("=")[1];
   }
-  console.log('query-------', obj)
   return obj
 }
 

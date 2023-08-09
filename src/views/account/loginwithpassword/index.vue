@@ -143,7 +143,6 @@ export default {
     const { dispatch, commit, state } = store;
     const onClickLeft = () => {
       router.go(-1);
-      console.log("return");
     };
     const pw1Error = ref(false);
     const password: Ref<string> = ref("");

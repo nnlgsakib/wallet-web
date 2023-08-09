@@ -49,8 +49,6 @@ export default {
         (now) => {
             if (now) {
                 clearTimeout(time)
-                console.log(now);
-                
                 time = setTimeout(() => {
                     show.value = false
                 }, 2500)

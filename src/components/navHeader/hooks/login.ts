@@ -12,7 +12,6 @@ export const useLogin = () => {
         clearWallet()
         loginOut()
         const query = getQuery()
-        console.log('tologin', '0', query)
         router.replace({ name: 'withpassword',query: query || {} })
     }
     const authentication = () => {

@@ -50,7 +50,7 @@ export default {
       if (percentage.value === 100) {
         clearInterval(setValue)
         setTimeout(() => {
-          debugger
+          
           router.push({
             name: 'startpage'
           })

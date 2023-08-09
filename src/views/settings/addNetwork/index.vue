@@ -17,92 +17,42 @@
         <div class="label text-bold">
           <span>*</span>{{ t("addNetwork.networkname") }}
         </div>
-        <van-field
-          v-model="label"
-          maxlength="12"
-          :disabled="isMain ? true : false"
-          :class="nameError ? 'error' : ''"
-          :placeholder="$t('addNetwork.networknameoptional')"
-          :rules="[
-            {
-              // required: true,
-              // message: t('addNetwork.inputnetworknameoptional'),
-              validator: asyncName,
-            },
-          ]"
-        />
+        <van-field v-model="label" maxlength="12" :disabled="isMain ? true : false" :class="nameError ? 'error' : ''" :placeholder="$t('addNetwork.networknameoptional')" :rules="[
+          {
+            // required: true,
+            // message: t('addNetwork.inputnetworknameoptional'),
+            validator: asyncName,
+          },
+        ]" />
         <div class="label text-bold">
           <span>*</span>{{ t("addNetwork.rpcurl") }}
         </div>
-        <van-field
-          :class="urlError ? 'error' : ''"
-          v-model="URL"
-          :placeholder="$t('addNetwork.newRpcPlaceholder')"
-          maxlength="200"
-          :disabled="isMain ? true : false"
-          validate-trigger="onChange"
-          @blur="getChainId"
-          :rules="[
-            // { required: true, message: t('addNetwork.inputrpcurl') },
-            { validator: asyncurl },
-          ]"
-        />
+        <van-field :class="urlError ? 'error' : ''" v-model="URL" :placeholder="$t('addNetwork.newRpcPlaceholder')" maxlength="200" :disabled="isMain ? true : false" validate-trigger="onChange" @blur="getChainId" :rules="[
+          // { required: true, message: t('addNetwork.inputrpcurl') },
+          { validator: asyncurl },
+        ]" />
         <div class="label text-bold">
           <span>*</span>{{ t("addNetwork.chain") }}
         </div>
-        <van-field
-          v-model="chainId"
-          type="number"
-          maxlength="30"
-          validate-trigger="onChange"
-          :disabled="isMain ? true : false"
-          :class="chainError ? 'error' : ''"
-          :placeholder="$t('addNetwork.chain')"
-          :rules="[
-            // {
-            //   required: true,
-            //   message: t('addNetwork.Invalidchain'),
-            //   //  message: t('addNetwork.inputchain')
-            // },
-            { validator: asyncid },
-          ]"
-        />
+        <van-field v-model="chainId" type="number" maxlength="30" validate-trigger="onChange" :disabled="isMain ? true : false" :class="chainError ? 'error' : ''" :placeholder="$t('addNetwork.chain')" :rules="[
+          // {
+          //   required: true,
+          //   message: t('addNetwork.Invalidchain'),
+          //   //  message: t('addNetwork.inputchain')
+          // },
+          { validator: asyncid },
+        ]" />
         <div class="error err-msg" v-if="hasChainId">
           {{ t("addNetwork.existedchain") }}
         </div>
         <div class="label text-bold">{{ t("addNetwork.symbol") }}</div>
-        <van-field
-          v-model="currencySymbol"
-          :disabled="isMain ? true : false"
-          :placeholder="$t('addNetwork.symboloptional')"
-          maxlength="20"
-          :rules="[{ required: false, message: t('addNetwork.inputsymbol') }]"
-        />
+        <van-field v-model="currencySymbol" :disabled="isMain ? true : false" :placeholder="$t('addNetwork.symboloptional')" maxlength="20" :rules="[{ required: false, message: t('addNetwork.inputsymbol') }]" />
         <div class="label text-bold">{{ t("addNetwork.blockexplorer") }}</div>
-        <van-field
-          v-model="browser"
-          maxlength="50"
-          :disabled="isMain ? true : false"
-          :placeholder="$t('addNetwork.blockexploreroptional')"
-          :rules="[{ required: false }]"
-        />
+        <van-field v-model="browser" maxlength="50" :disabled="isMain ? true : false" :placeholder="$t('addNetwork.blockexploreroptional')" :rules="[{ required: false }]" />
         <div class="btn-groups isModif" v-if="!isMain">
           <div class="container pl-20 pr-20 flex between">
-            <van-button
-              v-if="isModif"
-              block
-              class="mr-10"
-              type="danger"
-              plain
-              @click="handleDelNet"
-              >{{ t("addNetwork.delete") }}</van-button
-            >
-            <van-button
-              block
-              type="primary"
-              :loading="loading"
-              @click="onSubmit"
-            >
+            <van-button v-if="isModif" block class="mr-10" type="danger" plain @click="handleDelNet">{{ t("addNetwork.delete") }}</van-button>
+            <van-button block type="primary" :loading="loading" @click="onSubmit">
               {{ isModif ? t("addNetwork.submit") : t("addNetwork.add") }}
             </van-button>
           </div>
@@ -179,7 +129,6 @@ export default {
           try {
             let provider = ethers.getDefaultProvider(URL.value);
             const { chainId } = await provider.getNetwork();
-            console.log(chainId);
             // @ts-ignore
             ID.value = chainId;
             return true;
@@ -288,7 +237,6 @@ export default {
         id: id || guid(),
         icon: qicon && qicon != undefined ? qicon : icon,
       };
-      console.log("netWork", netWork, qicon);
       !isModif.value ? (netWork.isMain = false) : "";
       store.commit(
         isModif.value ? "account/MODIF_NETWORK" : "account/PUSH_NETWORK",
@@ -310,7 +258,7 @@ export default {
       Dialog.confirm({
         title: t("addNetwork.hint"),
         message: t("addNetwork.confirmdeletion", { qlabel: qlabel }),
-        className:'del-net-modal'
+        className: 'del-net-modal'
       }).then(() => {
         // on confirm
         store.commit("account/DETETE_NETWORK", id);
@@ -328,7 +276,7 @@ export default {
         const url = URL.value;
         const provider = ethers.getDefaultProvider(url);
         const network = await provider.getNetwork();
-        debugger;
+        ;
         urlError.value = false;
         chainId.value = network.chainId;
       } catch (err: any) {
@@ -381,12 +329,14 @@ export default {
 <style lang="scss" scoped>
 .addNetwork {
   padding: 0 13px 25px;
+
   .error {
     :deep(.van-field__body) {
       border-color: #d73a49;
       background: #fbf2f3;
     }
   }
+
   .tip-tit {
     font-size: 15px;
     font-weight: bold;
@@ -395,20 +345,24 @@ export default {
   .w-tips {
     margin-bottom: 14px;
   }
+
   .err-msg {
     color: #adb8c5;
     transform: translateY(-10px);
     font-size: 12px;
   }
+
   .w-tips {
     // background: #F8F3F9;
     border-radius: 7px;
+
     // margin: 15px 0;
     .icon {
       width: 28px;
       color: #9F54BA;
       font-size: 18px;
     }
+
     .text {
       line-height: 16px;
       color: #848484;
@@ -419,6 +373,7 @@ export default {
     font-size: 12px;
     line-height: 16px;
     margin-bottom: 6px;
+
     span {
       color: #e0707d;
     }
@@ -429,25 +384,31 @@ export default {
     left: 0;
     right: 0;
     bottom: 25px;
-    &.isModif {
-    }
+
+    &.isModif {}
   }
+
   :deep(.van-field__label) {
     display: none;
   }
+
   :deep(.van-field__error-message) {
     margin-bottom: 12px;
     line-height: 12px;
     margin-top: -10px;
   }
+
   :deep(.van-cell:after) {
     display: none;
   }
+
   :deep(.van-cell) {
     padding: 0;
   }
+
   :deep(.van-field__body) {
     margin-bottom: 20px;
+
     &:hover {
       border: 1px solid #9F54BA;
     }

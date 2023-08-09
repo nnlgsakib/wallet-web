@@ -75,7 +75,6 @@ export default defineComponent({
       })
         .then(() => true)
         .catch(() => false);
-      console.log("flag", flag);
       if (flag) {
         dispatch("system/closeGuide");
         showModal.value = false;
@@ -283,4 +282,5 @@ export default defineComponent({
   :deep(.van-popover__wrapper) {
     height: 0;
   }
-}</style>
+}
+</style>

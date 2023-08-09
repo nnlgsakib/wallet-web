@@ -64,7 +64,6 @@ export default defineComponent({
     };
     async function getdata() {
       let info = datab.data;
-      console.log(info);
     }
 
     // Balance display type
@@ -75,7 +74,6 @@ export default defineComponent({
       router.push({ name: "generateNFT-ai", query: props.data });
     };
     const toDetail = () => {
-      console.log('------')
       sessionStorage.setItem("nftInfo", JSON.stringify(props.data));
       router.push({ name: "sendNft-step1" });
     };

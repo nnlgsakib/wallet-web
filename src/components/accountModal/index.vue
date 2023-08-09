@@ -161,7 +161,6 @@ export default defineComponent({
         forbidClick: true,
         loadingType: "spinner",
       });
-      console.log("loading");
       createAccount();
     };
     watch(

@@ -329,12 +329,10 @@ export default {
     // 1 speed up  2 cancel
     const sendTxType = ref(1);
     const handleSend = (data: any) => {
-      console.log("handleSend...");
       handleClose();
       sendTxType.value = 1;
       sendTx.value = data;
       showSpeedModal.value = true;
-      console.log("sendTx---", sendTx.value);
     };
 
     const handleCancel = (data: any) => {

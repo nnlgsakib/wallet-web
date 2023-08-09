@@ -120,7 +120,7 @@ const info = drawInfo && drawInfo.info ? JSON.parse(drawInfo.info) : drawInfo
 
 const promptWord = ref(info ? info.prompt : "");
 const checked = ref(info.aiModel || drawInfo.modif || false);
-debugger
+
 const showAddr = ref(false);
 const showSwitch = ref(false);
 const readonlySwitch = ref(drawInfo.address ? true : false);
@@ -188,7 +188,7 @@ const handleGetGas = async () => {
   };
   const parstr = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(par)}`;
   const newdata = web3.utils.fromUtf8(parstr);
-  debugger
+  
   const tx = {
     to: myAddr,
     from: myAddr,
@@ -324,7 +324,7 @@ const handleConfirm = async () => {
   });
   try {
     const myAddr = state.account.accountInfo.address;
-    debugger;
+    ;
     if (!readonlySwitch.value) {
       if (isNormalCreate) {
         await normalCreate();
@@ -355,7 +355,7 @@ const handleConfirm = async () => {
         }
       }
     } else {
-      debugger;
+      ;
       const nft_address = drawInfo.address ? drawInfo.address.toString() : ""
       const sendData = {
         owner: myAddr,

@@ -338,14 +338,12 @@ router.beforeEach(async (to, form, next) => {
       localStorage.removeItem(pwdKey)
     }
   }
-  console.log(to)
   const { name, meta } = to
   const { auth } = meta
   const { authentication, hasAccount } = useLogin()
   const hasAccountFlag = await hasAccount()
   const authFlag = authentication()
   const query = getQuery()
-  console.log('---------------------', auth, name, query)
   if (!auth && (name == 'termsOfUse' || name == 'privacyNotice' || name == 'inputpage')) {
     next()
     return

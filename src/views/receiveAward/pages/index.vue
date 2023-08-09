@@ -212,6 +212,7 @@ const receiveAward = async (award_type: string) => {
   try {
  
   } catch (err: any) {
+    // @ts-ignore
     if (!window.ethereum) {
       Toast(t('common.installMetaMask'));
     } else {
@@ -223,7 +224,6 @@ const receiveAward = async (award_type: string) => {
     await receiveuseraward({ ...params });
     successModal.value = true;
   } catch (err: any) {
-    console.log(err.msg);
     failModal.value = true;
   } finally {
     Toast.clear();
@@ -235,7 +235,6 @@ const getAwardInfo = async () => {
     const { data } = await queryuseraward(address.toString());
     const [d] = data;
     userInfo.value = d || {};
-    console.warn("d", d);
   } catch (err: any) {
     console.log(err.msg);
   }
@@ -255,21 +254,18 @@ const disabled3 = computed(() => {
 });
 
 const send1 = async () => {
-  console.log("Receive SNFT");
   if (disabled1.value) {
     return;
   }
   await receiveAward("snft");
 };
 const send2 = async () => {
-  console.log("Gift Exchange");
   if (disabled2.value) {
     return;
   }
   await receiveAward("exchange");
 };
 const send3 = async () => {
-  console.log("Get The ERB");
   if (disabled3.value) {
     return;
   }

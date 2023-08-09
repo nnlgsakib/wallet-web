@@ -74,14 +74,12 @@ export default {
       try {
         await dispatch('account/createWalletByJson', data)
         const wallet = await getWallet()
-        console.log('wallet.provider', wallet.provider)
         const { address } = wallet
         const blockNumber = await wallet.provider.getBlockNumber()
         const newdata = {
             address,
             blockNumber
         }
-        console.log('newdata', newdata)
         window.parent.postMessage({type:'wallet-authLogin-callback', data: newdata }, '*')
         router.replace({name: 'home'})
 

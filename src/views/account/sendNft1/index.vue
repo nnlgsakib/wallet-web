@@ -196,7 +196,6 @@ export default {
         to: toAddress.value,
         data: data,
       };
-      console.log("tx1", tx1);
       wallet
         .sendTransaction(tx1)
         .then(({ hash }: any) => {
@@ -242,7 +241,7 @@ export default {
       showModal.value = false;
     };
     const failed = (e: any) => {
-      // debugger;
+      // ;
     };
     return {
       t,

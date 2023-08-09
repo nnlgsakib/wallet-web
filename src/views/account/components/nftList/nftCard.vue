@@ -60,7 +60,6 @@ export default defineComponent({
     }
     async function getdata() {
       let info = datab.data
-      console.log(info)
     }
     const toDetail = () => {
       sessionStorage.setItem('nftInfo',JSON.stringify(props.data))

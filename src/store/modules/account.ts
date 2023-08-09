@@ -506,8 +506,6 @@ export default {
         txListKey = `txlist-${state.currentNetwork.id}-${chainId}-${formAdd}`
       }
       let txList: any = await localforage.getItem(txListKey)
-      console.log('txList', txList)
-
       if (state.currentNetwork.id == 'wormholes-network-1') {
         if (txList && txList.list.length) {
           txList.list.unshift(clone(newReceipt))
@@ -523,7 +521,6 @@ export default {
       }
 
       // store.commit('account/DEL_TXQUEUE', value)
-      console.log('set txList', txList)
       // save txlist
       await localforage.setItem(txListKey, clone(txList))
       let time = setTimeout(() => {
@@ -1200,7 +1197,6 @@ export default {
           nft_address: nft_address || ''
         })
 
-        console.log("i18n", i18n);
         sendData.wallet = newwallet
         return sendData
       } catch (err) {
@@ -1230,7 +1226,6 @@ export default {
         );
         const { precision } = currentNetwork.tokens[accountInfo.address.toUpperCase()].find((item: any) => item.tokenContractAddress.toUpperCase() == tokenAddress.toUpperCase())
         const amountWei = utils.parseUnits(amount?.toString() || '0', precision).toString()
-        console.log(" contract.estimate", contract, contractWithSigner);
         const gasp = Number(gasPrice) ? new BigNumber(gasPrice).dividedBy(1000000000).toFixed(12) : '0.0000000012';
         const transferParams: any = {
           gasLimit: gasLimit,
@@ -1239,7 +1234,6 @@ export default {
         if (typeof sendNonce != undefined) {
           transferParams['nonce'] = sendNonce
         }
-        console.log("transferParams", transferParams);
         const data = await contractWithSigner.transfer(to, amountWei, transferParams)
         const { from, gasLimit: newLimit, gasPrice: newPrice, hash, nonce, type, value: newVal, to: toAddr } = data;
         await PUSH_TXQUEUE({
@@ -1267,45 +1261,6 @@ export default {
         return Promise.reject(err)
       }
     },
-    // send data
-    // async sendTransaction({ commit, dispatch, state }: any, tx: any) {
-    //   const { to, from, data, callBack, value: sendVal } = tx
-    //   commit("PUSH_RECENTLIST", to);
-    //   sessionStorage.setItem('tx-----2', JSON.stringify(tx))
-    //   try {
-    //   // @ts-ignore
-    //   const network = clone(store.state.account.currentNetwork)
-    //     const wallet = await getWallet();
-    //     const res: any = await wallet.sendTransaction({
-    //       to,
-    //       data,
-    //       value: sendVal
-    //     })
-    //     const { from, gasLimit: newLimit, gasPrice: newPrice, hash, nonce, to: toAddr, type, value: newVal } = res;
-    //     commit("PUSH_TXQUEUE", {
-    //       hash,
-    //       from,
-    //       gasLimit: null,
-    //       gasPrice: null,
-    //       nonce,
-    //       to: toAddr,
-    //       type,
-    //       value: newVal,
-    //       transitionType:  null,
-    //       txType: TransactionTypes.other,
-    //       network: clone(network),
-    //       data: data,
-    //       sendStatus: TransactionSendStatus.pendding,
-    //       sendData: clone(res),
-    //       nft_address:''
-    //     });
-    //     console.log("i18n", i18n);
-    //     res.wallet = wallet
-    //     return res
-    //   } catch (err) {
-    //     return Promise.reject(err)
-    //   }
-    // },
     //Load the wallet by address and password
     async connectWalletByPwdAddress(
       { state, commit, dispatch }: any,
@@ -1329,7 +1284,6 @@ export default {
         const { URL } = state.currentNetwork;
         // debugger
         let provider = ethers.getDefaultProvider(URL);
-        console.log(provider);
         // @ts-ignore
         const newwallet2 = newWallet.connect(provider);
         return newWallet;
@@ -1381,10 +1335,8 @@ export default {
         // Toast(i18n.global.t("account.importerror"));
         return Promise.reject(i18n.global.t("common.importerror"));
       }
-      console.log("connectConstract", contactObj.contractWithSigner, contactObj.contract);
       // Link to the contract
       if (hasAddress) {
-        console.log("balance.toString()", balance);
         // If it does not exist, add it
       } else {
         // Current Network The current address has no token
@@ -1896,7 +1848,6 @@ export const PUSH_TRANSACTION = async (da: any) => {
     txListKey = `txlist-${state.currentNetwork.id}-${chainId}-${formAdd}`
   }
   let txList: any = await localforage.getItem(txListKey)
-  console.log('txList', txList)
 
   if (state.currentNetwork.id == 'wormholes-network-1') {
     if (txList && txList.list.length) {
@@ -1918,8 +1869,6 @@ export const PUSH_TRANSACTION = async (da: any) => {
     }
   }
 
-  // store.commit('account/DEL_TXQUEUE', value)
-  console.log('set txList', txList)
   // save txlist
   await localforage.setItem(txListKey, clone(txList))
   eventBus.emit('txPush', clone(newReceipt))

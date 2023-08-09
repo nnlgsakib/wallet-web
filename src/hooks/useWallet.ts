@@ -14,7 +14,6 @@ import localforage from 'localforage';
 export const useWallet = () => {
     const query = getQuery()
     const initWallet = async () => {
-        console.log('initWallet------------',store)
         const { dispatch } = store
         const { hasAccount } = useLogin()
         const hasAcc = await hasAccount()

@@ -112,7 +112,6 @@ export default {
     const accountInfo: any = computed(() => store.state.account.accountInfo)
     // server
     let serverIndex = ref(1)
-    console.log(props)
     let checked = computed({
       get: () => props.check,
       set: v => emit('update:check', v)
@@ -137,7 +136,6 @@ export default {
         await createExchanges(name, Math.floor(amount))
         dislogShow.value = false
         emit('update:showExchange', true)
-        console.log('11111111111111')
       } catch (err) {
         console.error(err)
       }
@@ -170,14 +168,12 @@ export default {
     watch(
       () => props.show,
       n => {
-        console.log(n)
         showCreateExchange.value = n
       }
     )
     watch(
       () => props.minersMoney,
       value => {
-        console.log(value)
         if (value == 200) {
           serverIndex.value = 1
         } else {

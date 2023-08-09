@@ -59,7 +59,6 @@ export default {
     const setLanguage = (item: Language) => {
       const { value } = item;
       locale.value = value
-      console.log("value", value);
       // @ts-ignore
       Locale.use(vantLangs[value].value, vantLangs[value]["package"]);
       dispatch("system/setLanguage", value);

@@ -380,29 +380,6 @@ export default defineComponent({
         immediate: true
       }
     )
-
-    // watch(
-    //   () => showService.value,
-    //   n => {
-    //     if (!n) {
-    //       emit('update:modelValue', false)
-    //     }
-    //     if (n) {
-    //       nextTick(() => {
-    //         // Lazy loading animation encapsulation
-    //         const intersectionObserver = new IntersectionObserver(entries => {
-    //           if (entries[0].intersectionRatio <= 0) return
-    //           console.log('Loaded new items')
-    //           let time = setTimeout(() => {
-    //             showBtn.value = true
-    //             clearTimeout(time)
-    //           })
-    //         })
-    //         intersectionObserver.observe(nullEle.value)
-    //       })
-    //     }
-    //   }
-    // )
     const nullEle = ref(null)
     const showBtn = ref(true)
     onMounted(() => {
@@ -417,7 +394,6 @@ export default defineComponent({
         if (count.value <= 0) {
           clearInterval(timer)
           timer = null
-          //  btnDisabled.value=true
         }
       }, 1000)
     }

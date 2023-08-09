@@ -79,7 +79,6 @@ export default {
       isLoading.value = true
       const data = await closeExchanges()
       isLoading.value = false
-      console.log("1",data)
       dislogShow.value = false
       dislogShowC.value = true
     }

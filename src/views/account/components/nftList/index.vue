@@ -232,7 +232,6 @@ export default defineComponent({
         }
         loadNft.value = true;
       }
-      console.log("load nft...");
       try {
         if (sortVal.value == 0) {
           params.page = Number(params.page) + 1 + "";

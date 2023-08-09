@@ -202,7 +202,7 @@ setup(props: any, context: SetupContext) {
     async (n) => {
       if (n) {
         const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d2)}`;
-        debugger
+        
         const data3 = web3.utils.fromUtf8(str);
         const tx1 = {
           to: props.to,

@@ -111,7 +111,7 @@ export default {
 
     const amount = value ? value.toString() : '0' 
     const newVal = ethers.utils.parseEther(amount)
-    debugger
+    
     const { backUrl }: any = query;
 
    async function getContract(wallet: any) {
@@ -142,7 +142,7 @@ export default {
         const wallet = await getWallet()
         const contractWithSigner = await getContract(wallet)
         let tx = null
-        debugger
+        
         package_id = package_id + '';
         let newPrice = ''
         // @ts-ignore
@@ -170,14 +170,14 @@ export default {
               break;
 
         }
-        debugger
+        
         $tradeConfirm.update({
             status: "approve",
           });
         const receipt = await wallet.provider.waitForTransaction(tx.hash)
         await dispatch('account/waitTxQueueResponse')
         const network = clone(store.state.account.currentNetwork);
-        debugger
+        
         const rep = handleGetTranactionReceipt(
             TransactionTypes.contract,
             receipt,

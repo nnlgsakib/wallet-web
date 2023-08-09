@@ -123,8 +123,6 @@ export default {
       errAddress.value = ''
       isError.value = false
       importAction.value = true
-      console.log('submit', values)
-      console.log('privatekey.value', privatekey.value, privatekey.value.length)
       // Verify that the private key is valid
       dispatch('account/importPrivateKey', privatekey.value.trim())
         .then(async(wallet) => {
@@ -156,7 +154,6 @@ export default {
           // Login failed status
           importAction.value = false
           privatekey.value = ''
-          console.log('$wdialog',$wdialog)
           errorMsg.value = reason || t('importerror.cannotenter')
           errAddress.value = address || ''
           // $toast.warn(t(errorMsg.value))

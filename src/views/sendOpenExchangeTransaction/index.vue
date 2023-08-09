@@ -310,7 +310,7 @@ async function send2(package_id: string = "", amount: string = "0") {
     throw new Error("Parameter is invalid package_id is undefined");
   }
   try {
-    debugger
+    
     const network = clone(state.account.currentNetwork);
     const wallet = await getWallet();
     const contractWithSigner = await getContract(wallet, tx2.contractAddr);

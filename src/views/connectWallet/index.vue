@@ -178,7 +178,7 @@ export default {
     }
 
     async function createNft() {
-      debugger
+      
       const wallet = await getWallet2();
       router.replace({
         name: "ai-create",
@@ -349,7 +349,7 @@ export function handleConnectBackUrl(params: URLParams) {
   const { action, data, backUrl } = params;
   const back = decode(backUrl);
   const url = `${back}${back.indexOf("?") > -1 ? "&" : "?"}action=${action}&data=${encodeURIComponent(JSON.stringify(data))}`
-  debugger
+  
   return url;
 }
 </script>

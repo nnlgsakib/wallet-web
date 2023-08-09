@@ -87,9 +87,7 @@ export default {
         Toast(t('sign.ready'));
         return;
       }
-      console.log('backUrl', backUrl.value)
       if(backUrl.value){
-        debugger
         location.href = backUrl.value
       }
     }

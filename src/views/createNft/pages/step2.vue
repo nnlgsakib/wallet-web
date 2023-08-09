@@ -280,29 +280,14 @@ export default {
 
     const loading = ref(false);
     const txPorp = ref({})
-    // const validMetaUrl = async() => {
-    //   try {
-    //    const data= await axios.get(meta_url.value)
-    //     console.warn('get data', data)
-    //     if(data.data){
-    //       return true
-    //     } else {
-    //       return t('common.urlErr')
-    //     }
-    //   }catch(err){
-    //     return t('common.urlErr')
-    //   }
-    // }
     const onSubmit = async (values: any) => {
       const name1 = name.value.toString()
       const desc1 = desc.value.toString()
-      console.log("111", name1);
       if (new BigNumber(royalty.value).lte(0)) {
         Toast(t("castingnft.royaltyTip"));
         return;
       }
       loading.value = true;
-      console.log("submit", values);
       try {
 
         txPorp.value ={

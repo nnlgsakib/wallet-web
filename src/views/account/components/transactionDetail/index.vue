@@ -159,9 +159,7 @@ export default defineComponent({
         Toast.success(t("copy.titlehash"));
       });
     };
-    const tolink = () => {
-      console.log(currentNetwork.value.browser);
-    };
+
     const showPopover = ref(false);
     // aggregate amount
     const totalAmount = computed(() => {
@@ -219,7 +217,6 @@ export default defineComponent({
       utils,
       showPopover,
       currentNetwork,
-      tolink,
       totalAmount,
       transactionStatus,
       formatTxDate,

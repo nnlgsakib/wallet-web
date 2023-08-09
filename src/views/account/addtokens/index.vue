@@ -86,7 +86,6 @@ export default {
       router.go(-1);
     };
     const onSubmit = (data: any) => {
-      console.log("submit", data);
       Dialog.confirm({
         message: t("currencyList.sure"),
       }).then(async () => {

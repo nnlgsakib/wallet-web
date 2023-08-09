@@ -6,19 +6,18 @@
     <div class="custom-popover-footer">
       <div class="footer-text">
         <div>
-          {{t('guidePopup.tip2')}}
+          {{ t('guidePopup.tip2') }}
         </div>
       </div>
       <div class="footer-btns">
         <div class="container pl-20 pr-20 evenly flex">
-          <span @click="dispatchClose">{{t('common.cancel')}}</span>
-          <span @click="handleClick(2)">{{t('common.next')}} 2/7</span>
+          <span @click="dispatchClose">{{ t('common.cancel') }}</span>
+          <span @click="handleClick(2)">{{ t('common.next') }} 2/7</span>
         </div>
       </div>
     </div>
   </div>
-  <dialog-warning @warningSuccess="warningSuccess" theme="light"  @close="handleClose"  :text="t('common.confirmExit')"  v-model:isWarning="isWarning"></dialog-warning>
-
+  <dialog-warning @warningSuccess="warningSuccess" theme="light" @close="handleClose" :text="t('common.confirmExit')" v-model:isWarning="isWarning"></dialog-warning>
 </template>
 
 <script lang="ts">
@@ -31,7 +30,7 @@ import dialogWarning from '@/components/dialogWarning/indexAffirm.vue'
 import eventBus from "@/utils/bus";
 export default defineComponent({
   name: 'guide-modal2',
-    components: {
+  components: {
     [Popover.name]: Popover,
     [Dialog.Component.name]: Dialog.Component,
     [Button.name]: Button,
@@ -45,20 +44,20 @@ export default defineComponent({
     },
   },
   setup(props: any, context: SetupContext) {
-    const {t}=useI18n()
+    const { t } = useI18n()
     const { state, dispatch } = useStore();
     const showModal = ref(false);
     const show2 = computed(() => state.system.show2);
     watch(
       () => show2,
       (n) => {
-        if(n.value) {
+        if (n.value) {
           let time = setTimeout(() => {
-            eventBus.emit('guideSnftModal',0)
+            eventBus.emit('guideSnftModal', 0)
             clearTimeout(time)
-          },500)
+          }, 500)
         }
-          showModal.value = n.value
+        showModal.value = n.value
       },
       { immediate: true, deep: true }
     );
@@ -74,16 +73,15 @@ export default defineComponent({
     const beforeClose = async () => {
       const flag = await Dialog.confirm({
         message: t('bootstrapwindow.unboot'),
-                  className:"closeGuideModal",
+        className: "closeGuideModal",
 
       })
         .then(() => true)
         .catch(() => false);
-        console.log('flag', flag)
-        if(flag) {
-          dispatch('system/closeGuide')
-          showModal.value = false
-        }
+      if (flag) {
+        dispatch('system/closeGuide')
+        showModal.value = false
+      }
     };
     const isWarning = ref(false)
     const dispatchClose = () => {
@@ -116,48 +114,56 @@ export default defineComponent({
   height: 100%;
   z-index: 100000;
 }
+
 .custom-popover-header {
   height: 290px;
   background-color: rgba(0, 0, 0, .7);
 }
+
 .custom-popover-container {
   height: 180px;
 }
+
 .custom-popover-footer {
   position: relative;
   height: calc(100% - 290px - 165px);
   background-color: rgba(0, 0, 0, .7);
 }
+
 .footer-btns {
-    position: fixed;
-    bottom: 30px;
-    left: 0;
-    right: 0;
-    width: 100%;
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  width: 100%;
+
   div {
     span {
       cursor: pointer;
-    display: inline-block;
-    width: 100px;
-    height: 45px;
-    font-size: 12px;
-          cursor: pointer;
+      display: inline-block;
+      width: 100px;
+      height: 45px;
+      font-size: 12px;
+      cursor: pointer;
 
-    border-radius: 50px;
-    text-align: center;
-    line-height: 45px;
-    color: #fff;
-    box-sizing: border-box;
-    &:first-child {
-      border: 1px solid #fff;
-      margin-right: 40px;
+      border-radius: 50px;
+      text-align: center;
+      line-height: 45px;
+      color: #fff;
+      box-sizing: border-box;
+
+      &:first-child {
+        border: 1px solid #fff;
+        margin-right: 40px;
+      }
+
+      &:last-child {
+        background-color: #9F54BA;
+      }
     }
-    &:last-child {
-      background-color: #9F54BA;
-    }
-  }
   }
 }
+
 .footer-text {
   position: absolute;
   font-size: 12px;
@@ -165,20 +171,23 @@ export default defineComponent({
   top: 63px;
   left: 50%;
   width: 50%;
+
   div {
     display: inline-block;
     transform: translateX(-50%);
+
     &:before {
-        content: "";
-        position: absolute;
-        top: -35px;
-        left: 17.5px;
-        width: 55px;
-        display: inline-block;
-        z-index: 999999;
-        transform: rotate(90deg);
-        border-top: 1px dotted #9F54BA;
-      }
+      content: "";
+      position: absolute;
+      top: -35px;
+      left: 17.5px;
+      width: 55px;
+      display: inline-block;
+      z-index: 999999;
+      transform: rotate(90deg);
+      border-top: 1px dotted #9F54BA;
+    }
+
     &:after {
       content: "";
       position: absolute;
@@ -193,21 +202,25 @@ export default defineComponent({
     }
   }
 }
+
 .dialog-box {
   // width: 340px;
   padding-bottom: 25px;
-    .serial-number{
-     display: flex;
-     justify-content: flex-end;
-     text-indent: 10px;
-     padding-bottom: 14px;
-     padding-right: 14px;
-     font-size: 12px;
-     font-size: 12px;
-     .left{
-       color: #9F54BA;
-      }
-   }
+
+  .serial-number {
+    display: flex;
+    justify-content: flex-end;
+    text-indent: 10px;
+    padding-bottom: 14px;
+    padding-right: 14px;
+    font-size: 12px;
+    font-size: 12px;
+
+    .left {
+      color: #9F54BA;
+    }
+  }
+
   .title {
     text-align: center;
     font-size: 24px;
@@ -215,19 +228,21 @@ export default defineComponent({
     line-height: 30px;
     margin-top: 44px;
   }
+
   .small-tit {
     text-align: center;
     margin-bottom: 50px;
     font-size: 12px;
     color: #848484;
   }
+
   :deep {
     button {
       min-width: 100px;
     }
   }
+
   :deep(.van-popover__wrapper) {
     height: 0;
   }
-}
-</style>
+}</style>

@@ -229,7 +229,7 @@ const handleGetGas = async () => {
     meta_url: web3.utils.fromUtf8(JSON.stringify(nft_data)),
   };
   const parstr = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(par)}`;
-  debugger
+  
   const newdata = web3.utils.fromUtf8(parstr);
   const tx = {
     to: myAddr,
@@ -358,7 +358,7 @@ const handleSendCreate = async (nft_data = {}, call = (v: any) => {}) => {
   if (!status) {
     return Promise.reject("failure of transaction");
   }
-  debugger
+  
   const { topics } = log;
   const [addr1, fullnftaddr] = topics;
   const nft_address = "0x" + fullnftaddr.substr(fullnftaddr.length - 40);
@@ -385,7 +385,7 @@ const handleConfirm = async () => {
   });
   try {
     const myAddr = state.account.accountInfo.address;
-    debugger;
+    ;
     if (!readonlySwitch.value) {
       if (isNormalCreate) {
         await normalCreate();
@@ -420,7 +420,7 @@ const handleConfirm = async () => {
         }
       }
     } else {
-      debugger;
+      ;
       const nft_address = query.address ? query.address.toString() : ""
       const sendData = {
         owner: myAddr,

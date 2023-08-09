@@ -206,21 +206,16 @@ export default defineComponent({
     // Get the three highest, lowest and average gas fees
     const gasData: any = ref([]);
     const initGas = async () => {
-      console.log("000", props);
-      console.log("111111111111", props.gasLimit);
-      console.log("222222", props.gasPrice);
       try {
         gasLimit.value = props.gasLimit || 21000;
         console.warn("gasLimit.value", gasLimit.value);
         let gas = props.gasPrice || "0";
         if (!Number(gas)) {
-          // debugger
+          // 
           const wallet = await getWallet();
           let newgas = await wallet.provider.getGasPrice();
           gas = utils.formatUnits(newgas, "gwei");
         }
-        console.log("gasPrice", gas, gasLimit.value);
-        // console.log('utils.formatUnits(gas, "wei")', utils.formatUnits(utils.parseEther(gas), "wei"))
         const bigGas = new BigNumber(
           utils.formatUnits(utils.parseEther(gas), "wei")
         );
@@ -240,7 +235,6 @@ export default defineComponent({
           .dividedBy(1000000000000000000)
           .toString();
         gasData.value = [min, average, max];
-        console.log("gasData.value", gasData.value);
         context.emit("change", {
           gasLimit: gasLimit.value,
           gasPrice: gasData.value[gasFee.value],
@@ -260,7 +254,6 @@ export default defineComponent({
       [() => gasFee.value, () => gasLimit.value],
       (newVal, oldVal) => {
         const [idx, limit] = newVal;
-        console.log("change", gasData.value, idx, limit);
         context.emit("change", {
           gasLimit: limit,
           gasPrice: gasData.value[idx],

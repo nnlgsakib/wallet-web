@@ -190,7 +190,6 @@ export default {
   })();
     })
     const handleImport = () => {
-      console.log('handleImport')
       router.push({name:"export-mnemonic"})
     }
     const showTip1 = ref(true)

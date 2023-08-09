@@ -128,9 +128,7 @@ export default defineComponent({
       () => props.modelValue,
       (n) => {
         showModal.value = n;
-        console.log("props", props.defaultAmount);
         const am = Number(props.defaultAmount);
-
         amount.value = am ? am.toString() : null;
       },
       {
@@ -160,7 +158,6 @@ export default defineComponent({
         // $wtoast.warn(t("amountreminder.pleaseenter"));
         return;
       }
-      console.log("props---------", props);
       const num = new BigNumber(props.maxBalance);
       if (num.lt(parseFloat(amount.value))) {
         Toast(t("customExchangeModal.exceededmaximumamount"));
