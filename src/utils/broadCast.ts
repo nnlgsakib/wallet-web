@@ -7,9 +7,7 @@ export const useBroadCast = () => {
         onmessage: (e: any) => { },
         postMessage: (params: any) => { },
     };
-    console.warn('system', judgeClient())
     if (judgeClient() != 'IOS' && BroadcastChannel) {
-        console.warn('BroadcastChannel', BroadcastChannel)
         broad = new BroadcastChannel('WormHoles-Wallet')
     }
     // broadcast

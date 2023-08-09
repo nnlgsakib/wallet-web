@@ -182,7 +182,6 @@ const stakerExtensions = ref([])
 const myExtensions = ref([])
 const blockNumber = ref(0)
 onMounted(() => {
-    console.warn('prefix', store.getters['account/chainParsePrefix'])
     const toast = Toast.loading({
         duration: 0,
         forbidClick: true,
@@ -314,7 +313,7 @@ const handleShowReconveryModal = async () => {
         const tx = {
             to: accountInfo.value.address,
             value: ethers.utils.parseEther(sendAmount.toString()),
-            data: web3.utils.fromUtf8(`${store.getters['account/chainParsePrefix']}:${JSON.stringify({type:26,version:"v0.0.1"})}`),
+            data: web3.utils.fromUtf8(`${store.getters['account/chainParsePrefix']}:${JSON.stringify({ type: 26, version: "v0.0.1" })}`),
         };
         const gasFee = await getGasFee(tx);
         reconveryDetail.value = {
@@ -384,7 +383,6 @@ const minusConfirm = async () => {
             value: addNumber.value,
             data: data3,
         };
-        console.warn('tx1', tx1, addNumber.value)
         const data = await dispatch('account/transaction', tx1)
         $tradeConfirm.update({ status: "approve" })
         const res = await data.wait()
@@ -407,7 +405,7 @@ const handleMinusError = (err: any) => {
 const reconveryConfirm = async () => {
     showReconveryModal.value = false;
     const { amount }: any = reconveryDetail.value
-    const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify({"type":26,"version":"v0.0.1"})}`;
+    const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify({ "type": 26, "version": "v0.0.1" })}`;
     const tx = {
         value: amount,
         data: web3.utils.fromUtf8(str),
@@ -481,7 +479,7 @@ const addStakeConfirm = async () => {
     })
     try {
         const { fee_rate } = store.state.configuration.setting.staker
-        
+
         const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify({ type: 9, proxy_address: accountInfo.value.address, fee_rate: fee_rate || 1000, name: "Staker", url: "", version: "v0.0.1" })}`;
         const data3 = web3.utils.fromUtf8(str)
         const tx1 = {
@@ -489,7 +487,6 @@ const addStakeConfirm = async () => {
             value: addNumber.value,
             data: data3,
         };
-        console.warn('tx1', tx1, addNumber.value)
         const data = await dispatch('account/transaction', tx1)
         $tradeConfirm.update({ status: "approve" })
         const res = await data.wait()
@@ -512,7 +509,6 @@ const handleAddError = (err: any) => {
 }
 
 const handleClick = (item: any) => {
-    console.warn('click item', item)
     const { Addr } = item
     stakerExtensions.value.forEach(item => {
         if (Addr.toUpperCase() == item.Addr.toUpperCase()) {

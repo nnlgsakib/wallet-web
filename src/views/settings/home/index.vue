@@ -108,9 +108,7 @@ export default {
       loading.value = true;
       try {
         localforage.iterate((value, key, iterationNumber) => {
-          console.log('clear cancel', key)
           if (key !== "vuex") {
-            console.log('clear cancel', key)
             localforage.removeItem(key);
           } else {
             [key, value]

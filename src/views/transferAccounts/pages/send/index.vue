@@ -284,7 +284,6 @@ export default {
       }
       // Whether the balance is equal to 0
       if (chooseToken.value.balance == 0 || amount.value == 0) {
-        //  $wtoast.warn(t("sendto.no"));
         amountErrMsg.value = t("sendto.no");
         amountErr.value = true;
         return false;
@@ -292,7 +291,6 @@ export default {
 
       const { tokenContractAddress } = chooseToken.value;
       const gasPrice = gasPriceNum.value;
-      console.warn("gasPrice", gasPrice);
       if (tokenContractAddress) {
         return {
           address: tokenContractAddress,
@@ -319,7 +317,6 @@ export default {
 
       checkAddressError.value = false;
       amountErr.value = false;
-      console.warn("amount.value", amount.value);
       const params = checkTx();
       if (!params) {
         return false;
@@ -542,10 +539,6 @@ export default {
             amountWei
           )
           .then((gas: any) => {
-            console.warn(
-              "gas----------------==",
-              utils.formatUnits(gas, "wei")
-            );
             const limitWei = utils.formatUnits(gas, "wei")
             gasLimit.value = parseFloat(new BigNumber(limitWei).plus(new BigNumber(limitWei).multipliedBy(0.2)).toFixed(0));
           })
@@ -623,7 +616,6 @@ export default {
             item.tokenContractAddress == tokenContractAddress
         );
         ;
-        console.warn("token-----------", token);
         if (tokenContractAddress && tokenContractAddress != "null" && !token) {
           Dialog.confirm({
             title: tokenContractAddress,

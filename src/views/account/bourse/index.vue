@@ -616,8 +616,6 @@ export default defineComponent({
         if (exchangeStatus.value.ExchangerFlag) {
           await modifExchangeBalance(name);
         } else {
-          console.warn("name", name);
-          console.warn("fee_rate", fee_rate);
           await createExchanges(name, 200, fee_rate);
         }
       } catch (err) {
@@ -912,7 +910,6 @@ export default defineComponent({
     };
     const showClose = ref(true);
     const feilvstr = computed(() => {
-      console.warn('moneyStr.value', t('createExchange.commission',{value: moneyStr.value}))
       return t('createExchange.commission',{value: moneyStr.value})
     })
 

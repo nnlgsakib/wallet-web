@@ -222,15 +222,11 @@ export const handleTxType = (item: any) => {
   const { to, from, contractAddress, sendStatus, txType, input } = item
   const myAddr = store.state.account.accountInfo.address.toUpperCase()
   if (sendStatus && sendStatus === 'pendding') {
-    // if (txType === 'contract') {
-    //   return i18n.global.t('transationHistory.contract')
-    // }
     return i18n.global.t('transationHistory.send')
   }
   if (txType === store.getters['account/chainParsePrefix']) {
     const data = getInput(input)
     if (data) {
-        console.warn('data', data)
         if (data.type == 6) {
           const { nft_address } = data
           const level = getSNFTLevel(nft_address)

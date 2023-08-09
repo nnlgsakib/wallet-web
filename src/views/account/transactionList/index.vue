@@ -301,50 +301,18 @@ export default {
     });
     eventBus.on("txPush", (data: any) => {
       getPageList();
-      console.warn('txPush', data)
-      // const tx = tlist.value.find((item: any) => item.txId.toUpperCase() == data.txId.toUpperCase())
-      // if(!tx) {
-      //   
-      // // @ts-ignore
-      // tlist.value.unshift(data)
-      // }
     });
 
     eventBus.on("delTxQueue", (data: any) => {
       getPageList();
-      // @ts-ignore
-      // tlist.value = tlist.value.filter(item => item.txId.toUpperCase() == data.txId.toUpperCase())
     });
     
     eventBus.on("txQueuePush", (data: any) => {
       getPageList();
-      // let time = setTimeout(async() => {
-      //   const tx = tlist.value.find((item: any) => item.txId.toUpperCase() == data.txId.toUpperCase())
-      // if(!tx) {
-      //   tlist.value.unshift(data)
-      // }
-      //   clearTimeout(time)
-      // },300)
     });
     
     eventBus.on("txUpdate", (data: any) => {
-      console.warn("txUpdate----", data);
       getPageList();
-      // for (let i = 0; i < tlist.value.length; i++) {
-      //   let item = tlist.value[i];
-      //   const { txId } = item;
-      //   if(data.txId) {
-      //     // @ts-ignore
-      //     if (txId && txId.toString().toUpperCase() == data.txId.toUpperCase()) {
-      //     // @ts-ignore
-      //     tlist.value[i] = data;
-      //     }
-      //   }
-      // }
-      // const tx = tlist.value.find((item: any) => item.txId.toUpperCase() == data.txId.toUpperCase())
-      // if(!tx) {
-      //   tlist.value.unshift(data)
-      // }
     });
     eventBus.on('changeNetwork', async(address) => {
       loading.value = true
@@ -381,7 +349,6 @@ export default {
     });
     const loading = ref(true);
     const getPageList = async () => {
-      // showSpeedModal.value = false;
         const chainId = currentNetwork.value.chainId;
         try {
           const id = currentNetwork.value.id;
@@ -407,11 +374,8 @@ export default {
           loading.value = false;
         }
         const hash = route.query.hash
-        console.warn('hash', hash)
-        console.warn('tlist.value', tlist.value)
         if(hash) {
           const tx = tlist.value.find((item: any) => item.hash.toUpperCase() == hash?.toString().toUpperCase())
-          console.warn('tx', tx)
           if(tx) {
             transactionData.data = tx
             showTransactionModal.value = true;
@@ -646,7 +610,6 @@ export default {
           gasLimit: gasLimit.value,
           data: sendData.data
         };
-        console.warn("tx", tx);
         let data = null;
         if (tokenAddress) {
           const transferParams = {
@@ -730,7 +693,6 @@ export default {
     const handleCancel = (data: any) => {
       handleClose();
       sendTxType.value = 2;
-      console.warn("cancel...");
       transactionData.data = data;
       showSpeedModal.value = true;
     };

@@ -71,8 +71,8 @@
 
   </Transition> -->
   <CommonModal v-model="showSpeedModal" :title="sendTxType == 1
-      ? t('common.gasSpeedUp')
-      : t('transationHistory.cancelDealTit')
+    ? t('common.gasSpeedUp')
+    : t('transationHistory.cancelDealTit')
     " className="transactionDetailsModal">
     <div class="m-14 pl-14 pr-14 border-round detail-modal">
       <div class="flex between lh-16 pt-12 pb-8">
@@ -258,7 +258,6 @@ export default {
           } else {
             const tokens = currentNetwork.value.tokens[accountInfo.value.address.toUpperCase()]
             const tokenAddrs = tokens && tokens.length ? tokens.map((item: any) => item.tokenContractAddress.toUpperCase()) : []
-            console.warn('tokenAddrs', tokenAddrs, list)
             txList.value = list
           }
         }
@@ -317,7 +316,6 @@ export default {
     let transactionData: any = reactive({ data: {} });
     const showTransactionModal: Ref<boolean> = ref(false);
     const handleView = (e: any) => {
-      console.warn("e--", e);
       transactionData.data = e;
       showTransactionModal.value = true;
     };
@@ -338,7 +336,6 @@ export default {
     const handleCancel = (data: any) => {
       handleClose();
       sendTxType.value = 2;
-      console.warn("cancel...", data);
       sendTx.value = data;
       showSpeedModal.value = true;
     };
@@ -347,8 +344,6 @@ export default {
     const gasPrice = ref("0");
     const handleGasChange = (gasData: any) => {
       const { gasLimit: limit, gasPrice: gprice } = gasData;
-      console.warn("limit", limit);
-      console.warn("gprice", gprice);
       gasLimit.value = limit;
       gasPrice.value = gprice;
     };
@@ -381,56 +376,23 @@ export default {
     });
     eventBus.on("txPush", (data: any) => {
       getPageList()
-      // const tx = txList.value.find((item: any) => item.txId.toUpperCase() == data.txId.toUpperCase())
-      // if(!tx) {
-      // // @ts-ignore
-      // txList.value.unshift(data)
-      // }
     });
     eventBus.on("delTxQueue", (data: any) => {
       getPageList()
-      // @ts-ignore
-      // txList.value = txList.value.filter(item => item.txId.toUpperCase() == data.txId.toUpperCase())
     });
 
     eventBus.on("txQueuePush", (data: any) => {
       getPageList()
-      // let time = setTimeout(async() => {
-      //   const tx = txList.value.find((item: any) => item.txId.toUpperCase() == data.txId.toUpperCase())
-      // if(!tx) {
-      // // @ts-ignore
-      // txList.value.unshift(data)
-      // }
-      // clearTimeout(time)
-      // },300)
+
     });
     eventBus.on('waitTxEnd', async () => {
       store.dispatch('txList/asyncUpdateList', { total: 0 })
 
     })
     eventBus.on("txUpdate", (data: any) => {
-      console.warn("txUpdate----", data);
       getPageList()
-      // for (let i = 0; i < txList.value.length; i++) {
-      //   let item = txList.value[i];
-      //   const { txId } = item;
-      //   if(data.txId) {
-      //     // @ts-ignore
-      //     if (txId && txId.toString().toUpperCase() == data.txId.toUpperCase()) {
-      //     // @ts-ignore
-      //     txList.value[i] = data;
-      //     }
-      //   }
-      // }
-      // const tx = txList.value.find((item: any) => item.txId.toUpperCase() == data.txId.toUpperCase())
-      // if(!tx) {
-      //    // @ts-ignore
-      //   txList.value.unshift(data)
-      //   return
-      // }
     });
     onUnmounted(() => {
-      // console.warn('waitTime.value', waitTime.value)
       if (waitTime.value) {
         clearInterval(waitTime.value);
       }
@@ -495,11 +457,6 @@ export default {
         } else {
           txType = !newData ? 'normal' : (newData.indexOf(store.getters['account/chainParsePrefix']) > -1 ? store.getters['account/chainParsePrefix'] : 'contract')
         }
-        // let data = await wallet.sendTransaction(tx);
-        // const data = await store.dispatch('account/transaction', {
-        //     ...tx,
-        //     checkTxQueue: false
-        //   })
         const { hash, from, type, value: newVal, contractAddress } = data;
         const txInfo = {
           ...sendTx.value,
@@ -539,7 +496,6 @@ export default {
         await store.dispatch("account/waitTxQueueResponse");
         handleAsyncTxList()
       } catch (err) {
-        console.error(err);
         Toast(err.reason);
       } finally {
         showSpeedModal.value = false;
@@ -577,7 +533,6 @@ export default {
           gasLimit: gasLimit.value,
           data: sendData.data
         };
-        console.warn("tx", tx);
         let data = null;
         if (tokenAddress) {
           const transferParams = {
@@ -639,7 +594,6 @@ export default {
         await store.dispatch("account/waitTxQueueResponse");
         handleAsyncTxList()
       } catch (err) {
-        console.error(err);
         Toast(err.reason);
       } finally {
         showSpeedModal.value = false;

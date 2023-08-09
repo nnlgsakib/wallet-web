@@ -126,11 +126,9 @@ export default defineComponent({
     const gasFee = ref("0");
 
     const calcFee = async () => {
-      console.warn('props.tx', props.tx)
       const newTx = { ...props.tx, category: props.tx.category.value }
 
       const str = `${store.getters['account/chainParsePrefix']}:{"version": "0.0.1","type":0,"royalty":${props.tx.royalty},"exchanger":"","meta_url":"${encode(JSON.stringify(newTx))}"}`;
-      console.warn('str----', str)
       const data3 = web3.utils.fromUtf8(str);
       const myAddr = accountInfo.value.address
       const tx = {

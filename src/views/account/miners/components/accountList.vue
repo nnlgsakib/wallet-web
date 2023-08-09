@@ -53,7 +53,6 @@ const accountList = computed(() => state.account.accountList);
 const props = defineProps({
   modelValue: Boolean,
 });
-console.warn("props", props.modelValue);
 const emits = defineEmits(["update:modelValue", "onChange"]);
 const showModal: Ref<boolean> = ref(false);
 const selectAccount: Ref<AccountInfo | any> = ref({});
@@ -67,7 +66,6 @@ watch(
 watch(
   () => showModal.value,
   (v) => {
-    console.warn("emit", v);
     emits("update:modelValue", v);
   }
 );

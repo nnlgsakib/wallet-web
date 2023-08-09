@@ -199,8 +199,6 @@ export default defineComponent({
       const newList = Array.from(listDoms.children)
       const ele: any = newList.find((item: any) => item.dataset.selected == 'true')
       const hei = ele.offsetTop - ele.offsetHeight
-
-      console.warn('hei', hei)
       dispatch('common/scrollTop', {
         id:'listDom',
         top: hei

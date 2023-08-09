@@ -19,7 +19,6 @@ import { ref, onMounted, watch, unref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 const router = useRouter();
 const route = useRoute();
-console.warn("route---", route);
 enum ToastType {
   success = "success",
   warn = "warn",

@@ -7,7 +7,6 @@ import { ConnectWalletByPwdAddress } from '@/store/modules/account'
 import { getCookies } from '@/utils/jsCookie';
 import i18n from '@/language/index'
 import { decode } from 'js-base64';
-import { debug } from 'console';
 
 export const useSign = () => {
     const { global: { t } } = i18n

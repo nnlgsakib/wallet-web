@@ -203,13 +203,10 @@ export default {
         `txlist-${id}-${chainId}`
       ]
       const oldVersion = state.chainVersion
-      console.warn('version--------', version)
       if(oldVersion && version != oldVersion) {
         localforage.iterate((value, key, iterationNumber) => {
-          console.log('clear cancel', key)
           if (key !== "vuex") {
             const flag = queryList.some(str => key.indexOf(str) > -1)
-            console.log('clear cancel', key)
             if(flag){
               localforage.removeItem(key);
             }

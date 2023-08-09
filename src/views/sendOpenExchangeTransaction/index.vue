@@ -297,7 +297,6 @@ async function send1(
     const data: any = await dispatch('account/transaction', tx1)
     return Promise.resolve(data);
   } catch (err: any) {
-    console.error('err: 1', err)
     $tradeConfirm.update({ status: "fail" });
     return Promise.reject(err);
   }
@@ -345,7 +344,6 @@ async function send2(package_id: string = "", amount: string = "0") {
     localStorage.setItem("contact 1", JSON.stringify(data));
     return Promise.resolve(data);
   } catch (err) {
-    console.error('err: 2', err)
     $tradeConfirm.update({ status: "fail" });
     return Promise.reject();
   }

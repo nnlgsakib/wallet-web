@@ -141,8 +141,6 @@ import i18n from "@/language";
 import { TradeConfirmOpt, TradeStatus } from "./tradeConfirm";
 import { toScan } from "@/utils/utils";
 import router from "@/router";
-console.warn("i18n-------", i18n);
-
 
 enum messageType {
   string = 'string',

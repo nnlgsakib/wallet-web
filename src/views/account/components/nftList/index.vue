@@ -214,7 +214,6 @@ export default defineComponent({
               item.info = {};
             }
           });
-          console.warn("nfts", nfts);
           // @ts-ignore
           pageData.nftList.push(...nfts);
         }

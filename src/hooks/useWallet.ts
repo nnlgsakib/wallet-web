@@ -10,7 +10,6 @@ import store from '@/store/index'
 import { getCookies } from '@/utils/jsCookie'
 import localforage from 'localforage';
 
-// init wallet
 export const useWallet = () => {
     const query = getQuery()
     const initWallet = async () => {

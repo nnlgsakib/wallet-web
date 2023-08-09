@@ -281,7 +281,6 @@ export default {
         chainId.value = network.chainId;
       } catch (err: any) {
         urlError.value = true;
-        console.warn(err.toString());
       }
     };
 

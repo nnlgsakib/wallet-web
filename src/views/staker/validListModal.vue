@@ -15,15 +15,15 @@
                         <div class="flex between">
                             <div class="flex center">
                                 <img class="expresion" v-if="item.iconClass == 'smile'" src="@/assets/smile.png" alt="" />
-                                <img class="expresion" v-if="item.iconClass == 'sad'" src="@/assets/sad.png"  alt="" />
-                                <img class="expresion"  v-if="item.iconClass == 'neutral'" src="@/assets/neutral.png" alt="" />
+                                <img class="expresion" v-if="item.iconClass == 'sad'" src="@/assets/sad.png" alt="" />
+                                <img class="expresion" v-if="item.iconClass == 'neutral'" src="@/assets/neutral.png" alt="" />
                             </div>
                             <div>{{ item.Pledged }} ERB</div>
                         </div>
                         <div class="addr text-left van-ellipsis">{{ item.useraddr }}</div>
                     </div>
                 </div>
-                <div class="pt-10  flex center" v-show="loading" >
+                <div class="pt-10  flex center" v-show="loading">
                     <van-loading color="#9F54BA" size="22">{{ t('wallet.loading') }}</van-loading>
                 </div>
                 <NoData v-if="!list.length && !loading" class="pb-20" />
@@ -64,7 +64,6 @@ const props = defineProps({
 })
 const emits = defineEmits(['update:modelValue', 'confirm'])
 watch(() => props.modelValue, n => {
-    console.warn('watch modelvalue', n)
     showModal.value = n
     if (n) {
         getList()
@@ -79,7 +78,7 @@ watch(() => showModal.value, n => {
         nextTick(() => {
             cancelClick()
         })
-    } 
+    }
 })
 
 const list = ref([])
@@ -89,25 +88,23 @@ const params: ValidParams = {
     index: "0"
 }
 const getIconClass = (v: any) => {
-      const num = Number(v)
-      if (num < 40) return "sad";
-      if (num >= 40 && num <= 50) return "neutral";
-      if (num > 50) return "smile";
+    const num = Number(v)
+    if (num < 40) return "sad";
+    if (num >= 40 && num <= 50) return "neutral";
+    if (num > 50) return "smile";
 }
 const getList = async () => {
-    if(loading.value || finished.value){
+    if (loading.value || finished.value) {
         return
     }
     loading.value = true
     try {
         const { data } = await getValidatorInfo(params)
         params.index = Number(params.index) + 10 + ''
-        console.warn('d', data)
         list.value.push(...(data && data.length ? data : []).map((item: any) => {
             //The field of Pledged's unit is GWEI
-            return { ...item, icon: getRandomIcon(), iconClass:getIconClass(item.coefficient),Pledged: new BigNumber(item.Pledged).div(1000000000).toNumber() }
+            return { ...item, icon: getRandomIcon(), iconClass: getIconClass(item.coefficient), Pledged: new BigNumber(item.Pledged).div(1000000000).toNumber() }
         }))
-        console.warn('list.value', list.value)
         if (!data || data.length < 10) {
             finished.value = true
         }
@@ -124,7 +121,7 @@ const scrollList = (e: any) => {
     const cHeight = e.target.clientHeight
     const sTop = e.target.scrollTop
     const sHeight = e.target.scrollHeight
-    if(((cHeight + sTop + 20) > sHeight) && !loading.value && !finished.value) {
+    if (((cHeight + sTop + 20) > sHeight) && !loading.value && !finished.value) {
         getList()
     }
 }
@@ -140,7 +137,7 @@ const handleSelect = (e: any) => {
 }
 const { $wtoast } = useToast()
 const btnLoading = ref(false)
-const handleConfirm = async() => {
+const handleConfirm = async () => {
     if (!value1.value) {
         $wtoast.fail(t('validator.addressErr'))
         return
@@ -149,10 +146,9 @@ const handleConfirm = async() => {
     try {
         ethers.utils.getAddress(value1.value)
         const wallet = await getWallet()
-        const acc = await wallet.provider.send('eth_getAccountInfo',  [value1.value, "latest"])
-        console.warn('acc', acc)
+        const acc = await wallet.provider.send('eth_getAccountInfo', [value1.value, "latest"])
         const PledgedBalance = acc.Worm?.PledgedBalance ? new BigNumber(acc.Worm?.PledgedBalance).div(1000000000000000000).toNumber() : 0
-        if(PledgedBalance < 700 && accountInfo.value.address.toUpperCase() != value1.value.toUpperCase()) {
+        if (PledgedBalance < 700 && accountInfo.value.address.toUpperCase() != value1.value.toUpperCase()) {
             $wtoast.warn(t('validator.fromPledgeErr'))
             return
         }
@@ -166,7 +162,6 @@ const handleConfirm = async() => {
         })
         showModal.value = false
     } catch (err) {
-        console.error(err)
         $wtoast.fail(t('transaction.malformedaddress'))
     } finally {
         btnLoading.value = false
@@ -199,6 +194,7 @@ const cancelClick = () => {
         cursor: pointer;
         color: #838383;
         transition: ease .26s;
+
         .iconBox {
             width: 32px;
             height: 32px;
@@ -206,6 +202,7 @@ const cancelClick = () => {
             overflow: hidden;
             border: 1px solid #fff;
         }
+
         &:hover {
             background-color: #F8F3F9;
         }

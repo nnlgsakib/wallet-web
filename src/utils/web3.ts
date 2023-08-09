@@ -58,7 +58,6 @@ export const parseMnemonic = async (password: string, json: any): Promise<string
       const str = web3.utils.toUtf8(s.privateKey);
       return str;
     } catch (err) {
-      console.error(err);
       Toast(i18n.global.t("wallet.wrongpassword"));
       return Promise.reject(err);
     }

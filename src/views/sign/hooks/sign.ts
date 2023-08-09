@@ -20,53 +20,51 @@ export const useSign = () => {
      * backUrl 
      */
     let { address, sig, backUrl: back } = query
-    let isAdmin:Boolean = true
-    const loading:Ref<boolean> = ref(false)
+    let isAdmin: Boolean = true
+    const loading: Ref<boolean> = ref(false)
     const password = getCookies('password')
     const backUrl: Ref<string> = ref('')
     const toSign = (opt: SignParams) => {
-        let call: Function = () => {}
-        if(opt){
-            address =  opt.address
+        let call: Function = () => { }
+        if (opt) {
+            address = opt.address
             sig = opt.sig
-            call = opt.call ? opt.call : () =>{}
+            call = opt.call ? opt.call : () => { }
             isAdmin = typeof opt.isAdmin == 'boolean' ? opt.isAdmin : true
         }
-        if(!sig){
+        if (!sig) {
             Toast(i18n.global.t('sign.signature'))
             return
         }
-        if(!password){
+        if (!password) {
             Toast(i18n.global.t('sign.password'))
             router.replace({ name: "withpassword" });
-            return 
+            return
         }
         loading.value = true
         const params: ConnectWalletByPwdAddress = {
             password,
             address: address?.toString() || ''
         }
-        
-        
+
+
         return dispatch('account/connectWalletByPwdAddress', params).then(async (wallet) => {
-            console.log('wallet', wallet)
             try {
                 const sstr = sig
-                if(isAdmin){
+                if (isAdmin) {
                     //@ts-ignore   
                     sign.value = ethers.utils.joinSignature(new ethers.utils.SigningKey(wallet.privateKey).signDigest(sstr))
                     backUrl.value = `${back || ''}?sig=${sign.value}`
                 } else {
-                   sign.value = await wallet.signMessage(sstr)
+                    sign.value = await wallet.signMessage(sstr)
                 }
                 call(sign.value)
                 return Promise.resolve(sign.value)
-            } catch(err: any){
-                console.error(err || t('sign.unknownmistake'))
+            } catch (err: any) {
                 Toast(err || t('sign.unknownmistake'))
             }
         }).catch(err => Toast(err)).finally(() => loading.value = false)
-        
+
     }
     return {
         toSign,

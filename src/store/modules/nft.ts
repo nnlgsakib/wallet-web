@@ -85,14 +85,12 @@ export default {
       store.commit("account/PUSH_RECENTLIST", to);
       const d = {type:1,version:"v0.0.1",nft_address}
       const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d)}`;
-      console.warn('str----', str)
       const data3 =  web3.utils.fromUtf8(str);
       const tx = {
         from: address,
         to,
         data: data3,
       };
-      console.warn('tx', tx)
       const data = await store.dispatch('account/transaction', tx)
       return data
     },

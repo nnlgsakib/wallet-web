@@ -106,7 +106,6 @@ export default {
         const vuex = localStorage.getItem("vuex");
         const mnemonic = localStorage.getItem("mnemonic");
         const hasMove = localStorage.getItem("hasMove");
-        console.warn("move data");
         if (!hasMove && vuex && mnemonic) {
           router.replace({ name: "guidance" });
         }

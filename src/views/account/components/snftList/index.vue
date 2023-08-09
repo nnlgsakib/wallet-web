@@ -344,11 +344,7 @@ export default defineComponent({
           array: `${JSON.stringify(nftAddList)}`,
         });
 
-        console.warn('nftInfoList', nftInfoList)
         nfts.forEach((item: any) => {
-          // if(tabIndex.value == '2' && item.pledge_number !== null) {
-          //   item.hasUnfreeze = (blockNumber - Number(item.pledge_number)) > (network && network.chainId === 51888 ? 73 : 6307201)
-          // }
           const reallen = item.address.length;
           let str = item.address;
           const hexp = `0x${str.substr(3, 36)}`
@@ -403,7 +399,6 @@ export default defineComponent({
           // convert
           const str2 = item.nft_address.substr(item.nft_address.length - 4);
           // The last four digits of the position in the period turn to hexadecimal +1
-          console.warn('str2', str2)
           item.number = hex2int(str2) + 1;
 
           nftInfoList.forEach((child: any) => {
@@ -446,7 +441,6 @@ export default defineComponent({
     const isSelectAllChange = () => {
       isSelectAll.value = !isSelectAll.value;
       list.value.forEach((f: any) => {
-        console.warn('f:', f)
         const { hasUnfreeze, tag } = f
         if (f != 'F' && !hasUnfreeze && tabIndex.value === '1') {
           return
@@ -554,7 +548,6 @@ export default defineComponent({
 
     const handleSubmit = async () => {
       const data: any = list.value.filter((f: any) => f.flag);
-      console.warn('data', data)
       if (data.length) {
         const count = data.length
         const { t0, t1, t2, t3 } = store.state.configuration.setting.conversion
@@ -588,12 +581,6 @@ export default defineComponent({
         nstr ? numstr = numstr + `(L1*${nstr})` + '、' : ''
         fstr ? numstr = numstr + `(L0*${fstr})` + '、' : ''
         numstr = numstr.slice(0, numstr.length - 1)
-        console.warn('numstr pstr', pstr)
-        console.warn('numstr cstr', cstr)
-        console.warn('numstr nstr', nstr)
-        console.warn('numstr fstr', fstr)
-
-        console.warn('numstr', numstr)
         // isLoading.value = true;
         isSelectComputed.value = false;
         show.value = false;

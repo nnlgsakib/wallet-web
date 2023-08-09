@@ -7,7 +7,6 @@ import localforage from 'localforage'
 import eventBus from '@/utils/bus'
 import { utils } from 'ethers'
 import { web3 } from '@/utils/web3'
-console.warn('web3', web3)
 import BigNumber from 'bignumber.js'
 import { guid } from '@/utils'
 
@@ -39,7 +38,6 @@ export default {
     actions: {
         async updateRecordPage({ commit, state }: any, { transactions: list, total, chainId, hasRecord }) {
             const typerec = typeof hasRecord
-            console.warn('typeof hasRecord', typeof hasRecord, typeof typerec, list)
             const wallet = await getWallet()
             const addr = store.state.account.accountInfo.address.toUpperCase()
             const { id } = store.state.account.currentNetwork
@@ -142,10 +140,10 @@ export default {
                         } else {
                             const json = getInput(item.input)
                             if (json) {
-                                if(json && json.nft_address && json.owner) {
+                                if (json && json.nft_address && json.owner) {
                                     item.txType = 'normal'
-                                }else {
-                                    const {txType} = json
+                                } else {
+                                    const { txType } = json
                                     item.txType = store.getters['account/chainParsePrefix']
                                     item.jsonData = json
                                 }
@@ -170,18 +168,13 @@ export default {
             const addr = store.state.account.accountInfo.address.toUpperCase()
             const { id } = store.state.account.currentNetwork
             let page = '1'
-            // const wallet = await getWallet()
-            // const { chainId } = await wallet.provider.getNetwork()
             const chainId = store.state.account.currentNetwork.chainId
             const asyncRecordKey = `async-${id}-${chainId}-${addr}`
             const txInfo = await localforage.getItem(asyncRecordKey)
-            // const totalPage = Math.ceil(total/10)
-            // const listTotalPage = Math.ceil(txInfo.list.length/10)
             const realList = txInfo && txInfo.list.length ? txInfo.list.filter(item => !item.sendType) : []
             return new Promise(async (resolve) => {
                 if (total !== realList.length) {
                     const hasRecord1 = await handleUpdateList()
-                    console.warn('hasRecord1', hasRecord1)
                     if (!hasRecord1) {
                         resolve()
                         clearInterval(time2)
@@ -189,7 +182,6 @@ export default {
                     }
                     time2 = setInterval(async () => {
                         const hasRecord = await handleUpdateList()
-                        console.warn('hasRecord', hasRecord)
                         if (!hasRecord) {
                             resolve()
                             clearInterval(time2)
@@ -216,10 +208,8 @@ export default {
                     const qstr1 = `async-${id}-${chainId}-${addr.toUpperCase()}`
                     const qstr2 = `txQueue-${id}-${chainId}-${addr.toUpperCase()}`
                     await localforage.iterate(async (value, key, iterationNumber) => {
-                        console.log('clear cancel', key)
                         if (key !== "vuex") {
                             if (key == qstr1 || key == qstr2) {
-                                console.log('clear cancel', key)
                                 await localforage.removeItem(key);
                             }
                         } else {
@@ -249,8 +239,6 @@ export default {
                 if (transactions && transactions.length) {
                     newList = transactions.filter(item => !hashList.includes(item.hash.toUpperCase()))
                 }
-                console.warn('newList', newList)
-
                 let hasRecord = false
                 if (transactions && transactions.length >= 10) {
                     if (newList && newList.length == transactions.length) {
@@ -277,7 +265,6 @@ export default {
 
                     try {
                         const res = await dispatch('asyncAddrRecord')
-                        console.warn('res', res)
                         const txInfo = await localforage.getItem(res.asyncRecordKey)
                         const realList = txInfo && txInfo.list.length ? txInfo.list.filter(item => !item.sendType) : []
                         if (realList.length === res.total) {
@@ -322,7 +309,7 @@ export function getInput(input) {
     const prefix = store.getters['account/chainParsePrefix']
     if (input && input != '0x') {
         try {
-            
+
             const wormStr = web3.utils.toAscii(input)
             const [nullstr, jsonstr] = wormStr.split(`${prefix}:`)
             let jsonData = null
@@ -332,13 +319,11 @@ export function getInput(input) {
             } else {
                 jsonData = JSON.parse(wormStr)
             }
-  
-            console.warn('jsonData', jsonData)
-            if(txType) {
+            if (txType) {
                 jsonData.txType = prefix
             } else {
-                if(jsonData) {
-                    if(jsonData.nft_address && jsonData.owner) {
+                if (jsonData) {
+                    if (jsonData.nft_address && jsonData.owner) {
                         jsonData.txType = 'normal'
                     } else {
                         jsonData.txType = 'contract'
@@ -367,8 +352,6 @@ function unRepet(list, list2) {
                 if (!hashList.includes(item.hash.toUpperCase())) {
                     newList.unshift(item)
                 } else {
-                    console.warn('repeat data list2:', item)
-                    console.warn('repeat data list1:', list.find(child => child.hash.toUpperCase() == item.hash.toUpperCase()))
                 }
             })
             return newList

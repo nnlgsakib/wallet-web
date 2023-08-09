@@ -248,7 +248,6 @@ export default {
       list.sort((a: any, b: any) => {
         const [str1, idx] = a.name.split(' ')
         const [str2, idx2] = b.name.split(' ')
-        console.warn('idx, idx2', idx, idx2)
         if (sortType3.value == "1") {
           return a.name.split(' ')[1] - b.name.split(' ')[1]
         } else {
@@ -323,7 +322,6 @@ export default {
         $tradeConfirm.open({
           disabled: [TradeStatus.pendding],
         })
-        console.warn(accountInfo.value)
         try {
           loading.value = true;
           const tx = {
@@ -818,4 +816,5 @@ export default {
 
 .van-tabs {
   margin-bottom: 50px;
-}</style>
+}
+</style>

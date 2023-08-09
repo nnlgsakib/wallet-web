@@ -548,14 +548,8 @@ import { useDialog } from "@/plugins/dialog";
 import AccountModal from "@/views/account/wallet/action-sheet.vue";
 import AccountList from "@/views/account/miners/components/accountList.vue";
 import ModifPledgeModal from "@/views/account/components/modifPledgeModal/index.vue";
-import { debug } from "console";
-import { toHex } from "@/utils/utils";
 import { getRandomIcon } from "@/utils";
 import { useToast } from "@/plugins/toast";
-import {
-  VUE_APP_EXCHANGESMANAGEMENT_URL,
-  VUE_APP_EXCHANGES_URL,
-} from "@/enum/env";
 import { useTradeConfirm } from "@/plugins/tradeConfirmationsModal";
 import { TradeStatus } from "@/plugins/tradeConfirmationsModal/tradeConfirm";
 export default defineComponent({
@@ -659,7 +653,6 @@ export default defineComponent({
                 accountInfo.value.address.toUpperCase()
             );
             
-            console.warn("pledge", pledge);
             const selectAcc = accountList.value.find(
               (item: any) =>
                 item.address.toUpperCase() == pledge.Proxy.toUpperCase()
@@ -789,9 +782,6 @@ export default defineComponent({
             ? ""
             : selectAccount.value.address;
         const am = addNumber.value ? Number(addNumber.value) : 0 || 70000;
-        console.warn("proxy_address", proxy_address);
-        console.warn("am", am);
-        //
         await sendToPledge(am, isModif.value ? "" : proxy_address);
         isLoading.value = false;
         addNumber.value = null;
@@ -918,8 +908,6 @@ export default defineComponent({
           const mainProvider = ethers.getDefaultProvider(mainNetwork.value.URL);
           ;
           const { chainId: mainChainId } = await mainProvider.getNetwork();
-          console.warn("mainChainId", mainChainId);
-          console.warn("chainId", chainId);
           if (chainId != mainChainId) {
             isError.value = true;
             return t("minerspledge.invalidChainId", { chainId });
@@ -1099,11 +1087,9 @@ export default defineComponent({
     };
 
     const PledgedBalance = computed(() => {
-      console.warn("ethAccountInfo.value", ethAccountInfo.value);
       if (!ethAccountInfo.value?.Worm.PledgedBalance) {
         return 70000;
       }
-      console.warn("ethAccountInfo.value", ethAccountInfo.value);
       return decimal(
         new BigNumber(ethAccountInfo.value?.Worm.PledgedBalance)
           .div(1000000000000000000)
@@ -1202,7 +1188,6 @@ export default defineComponent({
     const {$tradeConfirm} = useTradeConfirm()
     
     const handleReConfirm = async() => {
-      console.warn(reconveryDetail.value)
       const {amount}: any = reconveryDetail.value
       const d2 = {type:26,version:"v0.0.1"}
       const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d2)}`;

@@ -204,7 +204,6 @@ const onSubmit = async () => {
     gasFee.value = gas1;
   }
   }catch(err) {
-    console.error('err', err)
     $wtoast.fail(t('common.noMoney'))
   }
 };

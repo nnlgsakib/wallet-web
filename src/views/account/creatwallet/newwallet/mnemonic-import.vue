@@ -115,9 +115,7 @@ export default {
     const { t } = useI18n()
     const router = useRouter()
     const route = useRoute()
-    console.warn('params', history.state.params)
     const mnemonic = decodeURIComponent(history.state.params ? history.state.params.mnemonic?.toString() : '')
-    console.warn('mnemonic', mnemonic)
     const store = useStore()
     const { commit, dispatch } = store
     const password: Ref<string> = ref('')

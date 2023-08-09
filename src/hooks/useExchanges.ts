@@ -311,7 +311,6 @@ export const useExchanges = () => {
       const { address } = wallet
       const d = {type:9,version:"v0.0.1",proxy_address,proxy_sign,url:""}
       const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d)}`
-      console.warn('str', str)
       const data3 = toHex(str);
       const tx1 = {
         to: address,
@@ -319,9 +318,6 @@ export const useExchanges = () => {
         data: `0x${data3}`,
         transitionType: '9'
       };
-      console.warn('tx1', tx1)
-      console.warn('amount', amount)
-
       const receipt = await store.dispatch('account/transaction', tx1)
       $tradeConfirm.update({ status: "approve" })
       const receipt2 = await wallet.provider.waitForTransaction(receipt.hash, null, 60000)
@@ -497,7 +493,6 @@ export const useExchanges = () => {
   const initExchangeData = async () => {
     const wallet = await getWallet()
     const { address } = wallet
-    console.warn('wallet', wallet)
     const res = await wallet.provider.send('eth_getAccountInfo', [address, "latest"])
     const { ExchangerName, BlockNumber } = res.Worm
     let exchange_name = ExchangerName;

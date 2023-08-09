@@ -145,8 +145,6 @@ export default defineComponent({
       handleChoose,
       handleChooseComfirm,
     } = useNetWork();
-    console.warn('VUE_APP_EXCHANGES_URL', VUE_APP_EXCHANGES_URL)
-    console.warn('VUE_APP_EXCHANGESMANAGEMENT_URL', VUE_APP_EXCHANGESMANAGEMENT_URL)
     const goHome = () => {
       router.push({
         path: '/home'

@@ -9,11 +9,6 @@ import 'vant/lib/index.css'
 // fix iOS String.prototype.normalize 
 import '@/utils/unorm.js'
 import '@/utils/ether'
-// import VConsole from 'vconsole'
-
-// if(process.env.VUE_APP_NODE_ENV != 'production') {
-//   new VConsole()
-// }
 import '@vant/touch-emulator';
 import { createApp } from 'vue'
 import i18n from '@/language/index'

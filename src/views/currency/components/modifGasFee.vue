@@ -208,7 +208,6 @@ export default defineComponent({
     const initGas = async () => {
       try {
         gasLimit.value = props.gasLimit || 21000;
-        console.warn("gasLimit.value", gasLimit.value);
         let gas = props.gasPrice || "0";
         if (!Number(gas)) {
           // 
@@ -248,7 +247,6 @@ export default defineComponent({
     const newLimit = new BigNumber(utils.formatEther(props.gasLimit))
       .multipliedBy(1000000000000000000)
       .toNumber();
-    console.warn("newLimit", newLimit);
     const gasLimit = ref(newLimit < 21000 ? 21000 : newLimit);
     watch(
       [() => gasFee.value, () => gasLimit.value],

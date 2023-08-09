@@ -381,7 +381,6 @@ export default {
         active.value = n
       })
       eventBus.on('changeAccount', async (e) => {
-        console.warn('changeAccount', e)
         dispatch('account/getEthAccountInfo')
         dispatch("account/updateBalance");
         handleGetValidator()
@@ -396,7 +395,6 @@ export default {
       dispatch("transfer/clearTx");
       dispatch("account/updateBalance");
       dispatch("account/getExchangeStatus").then((res) => {
-        console.warn("getExchangeStatus", res);
         autoexchange.value = res.status;
         autostat.value = res.ExchangerFlag;
         if (res.status == 2 && res.ExchangerFlag) {
@@ -451,7 +449,6 @@ export default {
 
     const ethAccountInfo = computed(() => store.state.account.ethAccountInfo)
     watch(() => validator.value, (n) => {
-      console.warn('validator', n)
       if (n) {
         let time = setTimeout(() => {
           showExpresion.value = true
@@ -474,7 +471,6 @@ export default {
     });
 
     const onClickTab = ({ name }: any) => {
-      console.warn('onClickTab', name)
       if (name != 2) {
         isSelect.value = false
       }
