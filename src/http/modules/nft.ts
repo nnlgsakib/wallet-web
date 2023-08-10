@@ -50,7 +50,7 @@ export interface GetDrawInfoParams {
   count: string
 }
 export const getDrawInfoByUser = (params: GetDrawInfoParams) => {
-  return httpPost(`${isProduct ?'': nftaimint}/v1/getDrawInfoByUser`, params)
+  return httpPost(`${nftaimint}/v1/getDrawInfoByUser`, params)
 
 }
 
@@ -58,7 +58,7 @@ export interface EmailParams {
   useraddr: string
 }
 export const getEmailByUser = (params: EmailParams) => {
-  return httpPost(`${isProduct ?'': nftaimint}/v1/getEmailByUser`, params)
+  return httpPost(`${nftaimint}/v1/getEmailByUser`, params)
 
 }
 
@@ -67,7 +67,7 @@ export interface DrawListParams {
   nftaddrs: string
 }
 export const getDrawInfoByNftaddrs = (params: DrawListParams) => {
-  return httpPost(`${isProduct ?'': nftaimint}/v1/getDrawInfoByNftaddrs`, params)
+  return httpPost(`${nftaimint}/v1/getDrawInfoByNftaddrs`, params)
 
 }
 
@@ -75,7 +75,7 @@ export const getDrawInfoByNftaddrs = (params: DrawListParams) => {
 
 
 export const getPaintFee = () => {
-  return httpPost(`${isProduct ?'': nftaimint}/v1/getPaintFee`, {})
+  return httpPost(`${nftaimint}/v1/getPaintFee`, {})
 }
 export interface DrawImageParams {
   useraddr: string
@@ -84,11 +84,11 @@ export interface DrawImageParams {
   drawflag: string
 }
 export const drawImage = (params: DrawImageParams) => {
-  return httpPost(`${isProduct ?'': nftaimint}/v1/drawImage`, params)
+  return httpPost(`${nftaimint}/v1/drawImage`, params)
 }
 
 
 export const getAiServerAddr = () => {
-  return httpPost(`${isProduct ?'': nftaimint}/v1/getAiServerAddr`, {})
+  return httpPost(`${nftaimint}/v1/getAiServerAddr`, {})
   
 }

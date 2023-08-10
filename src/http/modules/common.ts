@@ -17,11 +17,6 @@ export const is_install = (address: string) => {
     return httpGet(`${api}/install/is_install`, { address: address.toLowerCase() },null)
 }
 
-
-
-
-
-
 // One-click exchange to get the address
 export const getSysParams = (address: string, params = {}) => {
     return httpGet(`${exchangeApi}/c${address.toLowerCase()}/v2/querySysParams`, params)
