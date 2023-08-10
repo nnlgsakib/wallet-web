@@ -2,20 +2,17 @@
   <van-overlay :show="dislogShow" :z-index="2" class="custom-overlay">
     <div class="miners">
       <div class="miners-header">
-        <span>{{$t('minerspledge.open_exchange')}}</span>
+        <span>{{ $t('minerspledge.open_exchange') }}</span>
       </div>
       <div class="flex center">
-        <img
-          class="exchange-welcome-icon"
-          src="@/assets/exchange/SketchPng6487f59e1a3e4adec886c6b63f8c41c4aa0d61ebfe43fcaad735b3ff5ca97e8d.png"
-        />
+        <img class="exchange-welcome-icon" src="@/assets/exchange/SketchPng6487f59e1a3e4adec886c6b63f8c41c4aa0d61ebfe43fcaad735b3ff5ca97e8d.png" />
       </div>
       <div class="flex center">
-        <span class="text-s">{{$t('minerspledge.congratulations')}}</span>
+        <span class="text-s">{{ $t('minerspledge.congratulations') }}</span>
       </div>
       <div class="container-btn flex center">
-        <van-button class="btn" round @click="clickLeft">{{$t('minerspledge.gohome')}}</van-button>
-        <van-button type="primary" class="btn" round @click="$emit('success')">{{$t('minerspledge.next')}}</van-button>
+        <van-button class="btn" round @click="clickLeft">{{ $t('minerspledge.gohome') }}</van-button>
+        <van-button type="primary" class="btn" round @click="$emit('success')">{{ $t('minerspledge.next') }}</van-button>
       </div>
     </div>
   </van-overlay>
@@ -71,19 +68,23 @@ export default {
     background: #fff;
     margin: auto;
     border-radius: 8px;
+
     .miners-icons {
       margin: 20px 0;
     }
+
     .text-s {
       margin: 0 22px 41px 23px;
       font-size: 14px;
       color: #0f0f0f;
     }
+
     .exchange-welcome-icon {
       width: 41px;
       height: 41px;
       margin: 42px 0 41px 0;
     }
+
     .miners-header {
       height: 62px;
       line-height: 62px;
@@ -93,9 +94,11 @@ export default {
       font-size: 14px;
       color: #0f0f0f;
     }
+
     .miners-container {
       .contaienr-top-header {
         margin: 28px 0 21px 0;
+
         span {
           &:first-child {
             display: inline-block;
@@ -109,6 +112,7 @@ export default {
             color: #0287db;
             border: 3px solid #0287db;
           }
+
           &:last-child {
             font-weight: bold;
             font-size: 14px;
@@ -116,6 +120,7 @@ export default {
           }
         }
       }
+
       .contaienr-top-ipt {
         width: 315px;
         height: 115px;
@@ -125,23 +130,28 @@ export default {
         border-radius: 4px 4px 4px 4px;
         border: 1px solid #e4e7e8;
       }
+
       .conditions {
         margin: 0px 0 20px 0;
       }
+
       .text-a {
         height: 17px;
         line-height: 14px;
         font-size: 12px;
         color: #8f8f8f;
       }
+
       .m-r-5 {
         margin-right: 5px;
       }
+
       .text-b {
         text-decoration: underline;
         font-size: 12px;
         color: #0287db;
       }
+
       .block {
         display: inline-block;
         padding-bottom: 12px;
@@ -151,51 +161,64 @@ export default {
     }
   }
 }
+
 .conditions {
   margin: 0px 0 20px 0;
 }
+
 .text-a {
   height: 17px;
   line-height: 14px;
   font-size: 12px;
   color: #8f8f8f;
 }
+
 .m-r-5 {
   margin-right: 5px;
 }
+
 .text-b {
   text-decoration: underline;
   font-size: 12px;
   color: #0287db;
 }
-::v-deep .van-button {
-  width: 104px;
+
+:deep() {
+  .van-button {
+    width: 104px;
+  }
 }
+
 .container-btn {
   width: 240px;
   margin: 0 auto;
   justify-content: space-between;
+
   .btn {
     width: 104px;
     height: 45px;
   }
+
   span {
     font-size: 12px;
+
     &:first-child {
       margin: 0 5px 0 10px;
       color: #8f8f8f;
     }
+
     &:last-child {
       color: #0287db;
     }
   }
+
   .btn-text {
     margin: 15px 0 10px 0;
     font-size: 12px;
     color: #8f8f8f;
   }
+
   .underline {
     text-decoration: underline;
   }
-}
-</style>
+}</style>

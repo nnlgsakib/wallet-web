@@ -16,7 +16,7 @@
                     <div class="addr">{{ accountInfo.address }}</div>
                 </div>
                 <!-- icon-shangjiantou icon-shangjiantou -->
-                <div class="flex center">
+                <div class="flex center stakerArrow">
                     <i :class="`iconfont  f-14 ${showAccountModal ? 'icon-shangjiantou' : 'icon-xiajiantou'}`"></i>
                 </div>
             </div>

@@ -58,8 +58,8 @@
                   <div> {{ t("creatorSnft.labelPeriod") }}: {{ creatorStatus.count }}</div>
                   <div>{{ t("creatorSnft.labelProfit") }}: {{ creatorStatus.profitStr }} ERB</div>
                   <div>{{ t("creatorSnft.labelTimes") }}: {{ creatorStatus.count }}</div>
-                  <div>{{ t("creatorSnft.labelAward") }}: {{ creatorStatus.rewardEth }} ERB</div>
-                  <div>{{ t("creatorSnft.labelWeight") }}: {{ creatorStatus.weight }}</div>
+                  <!-- <div>{{ t("creatorSnft.labelAward") }}: {{ creatorStatus.rewardEth }} ERB</div>
+                  <div>{{ t("creatorSnft.labelWeight") }}: {{ creatorStatus.weight }}</div> -->
                 </div>
                 <template #reference>
                   <div class="tag-user type1 position relative hover" @mouseover="showPopover3 = true" @mouseleave="handleMouseLeave3" v-show="creatorStatus
@@ -276,7 +276,7 @@ import dialogWarnings from "@/components/dialogWarning/message.vue";
 import { useToast } from "@/plugins/toast";
 import { useDialog } from "@/plugins/dialog";
 import { isCommunityResourcable } from "@ethersproject/providers";
-import { VUE_APP_EXCHANGESMANAGEMENT_URL,VUE_APP_SCAN_URL } from "@/enum/env";
+import { VUE_APP_EXCHANGESMANAGEMENT_URL,VUE_APP_SCAN_URL,WALLET_DOC,OFFICIAL_WEBSITE } from "@/enum/env";
 import BigNumber from "bignumber.js";
 export default defineComponent({
   name: "NavHeader",
@@ -403,7 +403,7 @@ export default defineComponent({
       router.replace({ name: "home" });
     };
     const toOfficiaWebsite = () => {
-      window.open("https://www.erbie.io");
+      window.open(OFFICIAL_WEBSITE);
     };
 
     const routerTo = (name: string) => {
@@ -565,8 +565,7 @@ export default defineComponent({
     });
 
     const toHelp = () => {
-      // $wtoast.warn(t('common.commingsoon'))
-      window.open("https://www.wormholes.com/docs/wallet/");
+      window.open(WALLET_DOC);
     };
     const showAccount = ref(false);
     const toggleAccount = () => {

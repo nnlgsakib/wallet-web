@@ -1,96 +1,61 @@
 <template>
   <van-overlay :show="dislogShow" :z-index="9999" class="custom-overlay">
     <div class="miners">
-        <div class="miners-header">
-          <span style="color:#000;">{{t('bourse.closeExchange')}}</span>
+      <div class="miners-header">
+        <span style="color:#000;">{{ t('bourse.closeExchange') }}</span>
+      </div>
+      <div class="miners-container flex column between">
+        <div class="miners-container-item">
+          <div class="bourse-container-meaning bt">
+            <span class="c1">{{ t('bourse.name') }} </span>
+            <el-tooltip popper-class="tooltip2-abc" class="box-item" effect="dark" :content="t('bourse.tip5')" placement="bottom" trigger="hover">
+              <van-icon name="question" color="#9A9A9A" />
+            </el-tooltip>
+            <div class="exchange">{{ name }}</div>
+          </div>
+          <div class="bourse-container-meaning bt">
+            <span class="c1">{{ t('bourse.stakingFee') }} </span>
+            <el-tooltip popper-class="tooltip2-abc" class="box-item" effect="dark" :content="t('bourse.tip3')" placement="bottom" trigger="hover">
+              <van-icon name="question" color="#9A9A9A" />
+            </el-tooltip>
+            <!-- <div class="exchange">{{money * 10}} ERB(≈$20)</div> -->
+            <div class="exchange">200 ERB(≈$20)</div>
+          </div>
+          <div class="bourse-container-meaning bt">
+            <span class="c1">{{ t('bourse.hsitoryReturn') }} </span>
+            <el-tooltip popper-class="tooltip2-abc" class="box-item" effect="dark" :content="t('bourse.tip6')" placement="bottom" trigger="hover">
+              <van-icon name="question" color="#9A9A9A" />
+            </el-tooltip>
+            <div class="exchange">100,000 ERB</div>
+          </div>
+          <div class="bourse-container-meaning bt">
+            <span class="c1">{{ t('bourse.income') }} </span>
+            <el-tooltip popper-class="tooltip2-abc" class="box-item" effect="dark" :content="t('bourse.tip7')" placement="bottom" trigger="hover">
+              <van-icon name="question" color="#9A9A9A" />
+            </el-tooltip>
+            <div class="exchange exchange-z">
+              <span>≈ </span>
+              <span style="color:#93D6A7;"> 0.000000001 ERB(≈$</span>
+            </div>
+          </div>
+          <div class="">
+            <span class="c1">{{ t('bourse.gasFee') }} </span>
+            <el-tooltip popper-class="tooltip2-abc" class="box-item" effect="dark" :content="t('common.gasFee')" placement="bottom" trigger="hover">
+              <van-icon name="question" color="#9A9A9A" />
+            </el-tooltip>
+            <div class="exchange exchange-z">
+              <span>≈ </span>
+              <span class="c2"> 0.000000001 ERB(≈$)</span>
+            </div>
+          </div>
         </div>
-        <div class="miners-container flex column between">
-          <div class="miners-container-item">
-            <div class="bourse-container-meaning bt">
-              <span class="c1">{{t('bourse.name')}}  </span>
-              <el-tooltip
-                popper-class="tooltip2-abc"
-                class="box-item"
-                effect="dark"
-                :content="t('bourse.tip5')"
-                placement="bottom"
-                trigger="hover"
-              >
-                <van-icon name="question" color="#9A9A9A" />
-              </el-tooltip>
-              <div class="exchange">{{name}}</div>
-            </div>
-            <div class="bourse-container-meaning bt">
-              <span class="c1">{{t('bourse.stakingFee')}}  </span>
-              <el-tooltip
-                popper-class="tooltip2-abc"
-                class="box-item"
-                effect="dark"
-                :content="t('bourse.tip3')"
-                placement="bottom"
-                trigger="hover"
-              >
-                <van-icon name="question" color="#9A9A9A" />
-              </el-tooltip>
-              <!-- <div class="exchange">{{money * 10}} ERB(≈$20)</div> -->
-               <div class="exchange">200 ERB(≈$20)</div>
-            </div>
-            <div class="bourse-container-meaning bt">
-              <span class="c1">{{t('bourse.hsitoryReturn')}}  </span>
-              <el-tooltip
-                popper-class="tooltip2-abc"
-                class="box-item"
-                effect="dark"
-                :content="t('bourse.tip6')"
-                placement="bottom"
-                trigger="hover"
-              >
-                <van-icon name="question" color="#9A9A9A" />
-              </el-tooltip>
-              <div class="exchange">100,000 ERB</div>
-            </div>
-            <div class="bourse-container-meaning bt">
-              <span class="c1">{{t('bourse.income')}} </span>
-              <el-tooltip
-                popper-class="tooltip2-abc"
-                class="box-item"
-                effect="dark"
-                :content="t('bourse.tip7')"
-                placement="bottom"
-                trigger="hover"
-              >
-                <van-icon name="question" color="#9A9A9A" />
-              </el-tooltip>
-              <div class="exchange exchange-z">
-                <span>≈ </span>
-                <span style="color:#93D6A7;"> 0.000000001 ERB(≈$</span>
-              </div>
-            </div>
-            <div class="">
-              <span class="c1">{{t('bourse.gasFee')}} </span>
-              <el-tooltip
-                popper-class="tooltip2-abc"
-                class="box-item"
-                effect="dark"
-                :content="t('common.gasFee')"
-                placement="bottom"
-                trigger="hover"
-              >
-                <van-icon name="question" color="#9A9A9A" />
-              </el-tooltip>
-              <div class="exchange exchange-z">
-                <span >≈ </span>
-                <span class="c2"> 0.000000001 ERB(≈$)</span>
-              </div>
-            </div>
-          </div>
-          <div class="tips">
-            {{t('bourse.tip8')}}
-          </div>
-          <div class="container-btn flex center column">
-            <div>
-              <van-button  color="#000000" class="btn" plain @click="dislogShow = false">{{t('common.cancel')}}</van-button>
-              <van-button style="width: 113px;" color="#D73A49" type="primary"  round @click="submit">{{t('common.confirm')}}</van-button>
+        <div class="tips">
+          {{ t('bourse.tip8') }}
+        </div>
+        <div class="container-btn flex center column">
+          <div>
+            <van-button color="#000000" class="btn" plain @click="dislogShow = false">{{ t('common.cancel') }}</van-button>
+            <van-button style="width: 113px;" color="#D73A49" type="primary" round @click="submit">{{ t('common.confirm') }}</van-button>
           </div>
         </div>
       </div>
@@ -174,6 +139,7 @@ export default {
     margin: auto;
     overflow: hidden;
     border-radius: 8px;
+
     .miners-header {
       height: 62px;
       line-height: 62px;
@@ -183,9 +149,11 @@ export default {
       font-size: 14px;
       color: #B3B3B3;
     }
+
     .miners-container {
       .contaienr-top-header {
         margin: 28px 0 21px 0;
+
         span {
           &:first-child {
             display: inline-block;
@@ -199,6 +167,7 @@ export default {
             color: #0287db;
             border: 3px solid #0287db;
           }
+
           &:last-child {
             font-weight: bold;
             font-size: 14px;
@@ -206,6 +175,7 @@ export default {
           }
         }
       }
+
       .contaienr-top-ipt {
         width: 315px;
         height: 90px;
@@ -214,43 +184,53 @@ export default {
         box-sizing: border-box;
         border-radius: 4px 4px 4px 4px;
         border: 1px solid #e4e7e8;
+
         .ipt {
           width: 280px;
+
           span {
             font-size: 16px;
             font-weight: bold;
           }
         }
+
         .text {
           font-size: 14px;
         }
+
         .user-field {
           font-size: 12px;
         }
-        > span {
+
+        >span {
           font-size: 12px;
           color: #8f8f8f;
         }
+
         .ipt-text-a {
           padding-top: 20px;
           margin-top: 30px;
           font-size: 12px;
           color: #8f8f8f;
         }
+
         .ipt-text-b {
           margin: 5px 0 9px 0;
           color: #000;
           font-size: 12px;
           font-weight: bold;
         }
+
         .ipt-server {
           font-size: 12px;
           color: #8f8f8f;
           font-weight: bold;
+
           span {
             font-weight: 400;
             color: #000000;
           }
+
           .ipt-server-i {
             width: 133px;
             height: 30px;
@@ -261,75 +241,96 @@ export default {
             justify-content: space-between;
             background: #F8F3F9;
             border-radius: 7px 7px 7px 7px;
+
             &:first-child {
               padding: 0 18px;
             }
           }
+
           .ipt-server-i-active {
             color: #0287db;
             background: #F8F3F9;
             border: 1px solid #9F54BA;
+
             span {
               color: #0287db;
             }
           }
         }
+
         .money {
           margin: 10px 0 20px 0;
           font-size: 12px;
           font-weight: bold;
+
           span {
             &:first-child {
               color: #000000;
             }
+
             &:last-child {
               color: #0287db;
             }
           }
         }
+
         .ipt-slider {
           margin-left: 5px;
         }
+
         .stake {
           margin: 20px 0 5px 0;
           font-size: 12px;
           color: #8f8f8f;
+
           span {
             color: #3aae55;
           }
         }
-        ::v-deep .van-cell {
-          padding-left: 0px;
+
+        :deep() {
+          .van-cell {
+            padding-left: 0px;
+          }
         }
+
         .van-cell:after {
           display: none;
         }
       }
+
       .container-btn {
         margin-top: 10px;
+
         .btn {
           width: 104px;
           height: 45px;
           margin-top: 21px;
+
           &:first-child {
             margin-right: 35px;
           }
         }
+
         span {
           font-size: 12px;
+
           &:first-child {
             margin: 0 5px 0 10px;
             color: #8f8f8f;
           }
+
           &:last-child {
             color: #0287db;
           }
         }
+
         .btn-text {
           margin: 15px 0 10px 0;
           font-size: 12px;
           color: #8f8f8f;
         }
+
         .underline {
           text-decoration: underline;
         }
@@ -337,6 +338,7 @@ export default {
     }
   }
 }
+
 .miners-container-item {
   margin: 25px 12.5px 0 12.5px;
   padding: 17px 15px 0 15px;
@@ -344,23 +346,29 @@ export default {
   border-radius: 4px;
   border: 1px solid #E4E7E8;
 }
+
 .c1 {
   color: #8F8F8F;
 }
+
 .exchange {
   margin-top: 7px;
   padding-bottom: 16px;
   border-bottom: 1px solid #E4E7E8;
 }
+
 .bourse-container-meaning {
   margin-bottom: 16px;
 }
+
 .exchange-z {
   border: none;
 }
+
 .c2 {
   color: #3aae55;
 }
+
 .tips {
   padding: 40px 15px 10px 15px;
   line-height: 20px;
@@ -371,5 +379,4 @@ export default {
 <style>
 .tooltip2-abc {
   z-index: 10000 !important;
-}
-</style>
+}</style>

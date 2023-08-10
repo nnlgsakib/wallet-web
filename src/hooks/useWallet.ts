@@ -24,7 +24,6 @@ export const useWallet = () => {
             eventBus.emit('walletReady', newwallet)
         } catch (err) {
             const isDoc = location.href.indexOf('privacyNotice') > -1 || location.href.indexOf('termsOfUse') > -1 ? true : false
-            console.error('err', err)
             if(err && err.toString().indexOf('invalid password') > -1 && !isDoc) {
                 router.replace({ name: 'withpassword', query })
                 return 

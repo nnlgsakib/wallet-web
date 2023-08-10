@@ -13,7 +13,7 @@
         >
           <template v-slot:wormholesLink>
             <a
-              href="https://192.168.1.237:9012"
+              :href="OFFICIAL_WEBSITE"
               class="ml-4 mr-4 wormholeslink"
               target="_blank"
               rel="noopener noreferrer"
@@ -22,7 +22,6 @@
             </a>
           </template>
         </i18n-t>
-        <!-- <div class="right text-left f-12 lh-16">{{ t("addtokens.title") }}</div> -->
       </div>
       <van-form @submit="onSubmit">
         <van-cell-group inset>
@@ -86,8 +85,7 @@ import { useRouter } from "vue-router";
 import { getRandomIcon } from "@/utils";
 import { ethers, utils } from "ethers";
 const erc20Abi: any = require("@/assets/json/erc20Abi.json");
-
-// import { useToast } from '@/plugins/toast'
+import { OFFICIAL_WEBSITE } from '@/enum/env'
 export default {
   name: "import-token",
   components: {
@@ -312,6 +310,7 @@ export default {
       indexList,
       search,
       alist,
+      OFFICIAL_WEBSITE
     };
   },
 };

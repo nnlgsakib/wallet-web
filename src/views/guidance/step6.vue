@@ -151,7 +151,7 @@ export default defineComponent({
       width: 70px;
       display: inline-block;
       z-index: 999999;
-      border-top: 1px dotted #9F54BA;
+      border-top: 1px dashed #9F54BA;
     }
 
     &:after {
@@ -163,13 +163,13 @@ export default defineComponent({
       display: inline-block;
       z-index: 999999;
       transform: rotate(90deg);
-      border-top: 1px dotted #9F54BA;
+      border-top: 1px dashed #9F54BA;
     }
   }
 
   .header-right {
     height: 100%;
-    width: calc(100% - 50px);
+    width: calc(100% - 49px);
     background-color: rgba(0, 0, 0, 0.7);
   }
 }
@@ -233,8 +233,8 @@ export default defineComponent({
   }
 
   .dot {
-    width: 4px;
-    height: 4px;
+    width: 6px;
+    height: 6px;
     background-color: #9F54BA;
     border-radius: 50%;
   }

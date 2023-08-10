@@ -2,30 +2,30 @@
   <van-overlay :show="dislogShow" :z-index="2" class="custom-overlay">
     <div class="miners">
       <div class="miners-header">
-        <span>{{$t('createminerspledge.openexchange')}}</span>
+        <span>{{ $t('createminerspledge.openexchange') }}</span>
       </div>
       <div class="miners-container flex column between">
         <div>
           <div class="contaienr-top-header flex column center">
-            <span>{{$t('createminerspledge.hi')}}</span>
-            <span>{{$t('createminerspledge.welcome')}}</span>
+            <span>{{ $t('createminerspledge.hi') }}</span>
+            <span>{{ $t('createminerspledge.welcome') }}</span>
           </div>
           <div class="contaienr-top-ipt" style="font-size: 12px">
-            <span>{{$t('createminerspledge.node')}}</span>
+            <span>{{ $t('createminerspledge.node') }}</span>
             <van-field class="user-field" :placeholder="nodeValue" :disabled="true" />
-            <span class="mb-s-10">{{$t('createminerspledge.walletAddress')}}</span>
+            <span class="mb-s-10">{{ $t('createminerspledge.walletAddress') }}</span>
             <van-field class="user-field" :placeholder="address" :disabled="true" />
             <div class="stake">
-              {{$t('createminerspledge.stake')}}
+              {{ $t('createminerspledge.stake') }}
               <span>
                 (
-                {{$t('createminerspledge.yield')}}
+                {{ $t('createminerspledge.yield') }}
                 )
               </span>
             </div>
             <div class="money flex between center-v">
-              <span>{{money}}ERB $({{ utils.formatEther(Math.abs(money) + '')}})</span>
-              <span @click="customClick">{{$t('createminerspledge.custom')}}</span>
+              <span>{{ money }}ERB $({{ utils.formatEther(Math.abs(money) + '') }})</span>
+              <span @click="customClick">{{ $t('createminerspledge.custom') }}</span>
             </div>
             <div class="ipt-slider">
               <van-slider v-model="money" :min="100000" :max="balance" />
@@ -33,19 +33,19 @@
           </div>
         </div>
         <div class="container-btn flex center column">
-          <div class="btn-text">{{$t('createminerspledge.balance')}}{{Number(balance).toFixed(2)}} ERB($100,100,100e+22)</div>
+          <div class="btn-text">{{ $t('createminerspledge.balance') }}{{ Number(balance).toFixed(2) }} ERB($100,100,100e+22)</div>
           <div class="btn-warning">
             <van-icon color="#DB3849" size="22" name="warning" />
-            <div>{{$t('createminerspledge.congratulations')}}</div>
+            <div>{{ $t('createminerspledge.congratulations') }}</div>
           </div>
           <div class="flex center">
             <van-checkbox v-model="checked" shape="square" icon-size="16px"></van-checkbox>
-            <span class="text">{{$t('createminerspledge.confirmationof')}}</span>
-            <span class="underline" @click="showAgreement = true">{{$t('createminerspledge.termsAndConditions')}}</span>
+            <span class="text">{{ $t('createminerspledge.confirmationof') }}</span>
+            <span class="underline" @click="showAgreement = true">{{ $t('createminerspledge.termsAndConditions') }}</span>
           </div>
           <div>
-            <van-button color="#000000" class="btn" plain @click="dislogShow = false">{{$t('createminerspledge.cancel')}}</van-button>
-            <van-button type="primary" :loading="isLoading" class="btn" round @click="minersConfirm">{{$t('createminerspledge.confirm')}}</van-button>
+            <van-button color="#000000" class="btn" plain @click="dislogShow = false">{{ $t('createminerspledge.cancel') }}</van-button>
+            <van-button type="primary" :loading="isLoading" class="btn" round @click="minersConfirm">{{ $t('createminerspledge.confirm') }}</van-button>
           </div>
         </div>
       </div>
@@ -112,7 +112,7 @@ export default {
     const toCreate = async (name: string, amount: number, isServer: boolean) => {
       try {
         const dealMoney = Math.floor(amount) === Number(Number(accountInfo.value.amount).toFixed(2)) ? Math.floor(amount) - 1 : Math.floor(amount)
-        await sendToPledge( dealMoney)
+        await sendToPledge(dealMoney)
       } catch (err) {
         console.error(err)
       }
@@ -150,8 +150,8 @@ export default {
           let time = setTimeout(() => {
             dislogShow.value = false
             emit('success')
-          clearTimeout(time)
-          },300)
+            clearTimeout(time)
+          }, 300)
         }
       }
     )
@@ -186,6 +186,7 @@ export default {
     background: #fff;
     margin: auto;
     border-radius: 8px;
+
     .miners-header {
       height: 62px;
       line-height: 62px;
@@ -195,21 +196,25 @@ export default {
       font-size: 14px;
       color: #0f0f0f;
     }
+
     .miners-container {
       ::-webkit-input-placeholder {
         color: #232323;
         font-size: 12px;
       }
+
       :-moz-placeholder {
         /* Mozilla Firefox 4 to 18 */
         color: #232323;
         font-size: 12px;
       }
+
       ::-moz-placeholder {
         /* Mozilla Firefox 19+ */
         color: #232323;
         font-size: 12px;
       }
+
       :-ms-input-placeholder {
         /* Internet Explorer 10+ */
         color: #232323;
@@ -218,6 +223,7 @@ export default {
 
       .contaienr-top-header {
         margin: 28px 0 21px 0;
+
         span {
           &:first-child {
             display: inline-block;
@@ -233,6 +239,7 @@ export default {
             color: #0287db;
             border: 3px solid #0287db;
           }
+
           &:last-child {
             font-weight: bold;
             font-size: 14px;
@@ -240,6 +247,7 @@ export default {
           }
         }
       }
+
       .contaienr-top-ipt {
         width: 315px;
         height: 230px;
@@ -248,40 +256,52 @@ export default {
         box-sizing: border-box;
         border-radius: 4px 4px 4px 4px;
         border: 1px solid #e4e7e8;
-        ::v-deep .van-field__control:disabled {
-          color: #232323 !important;
-          -webkit-text-fill-color: #232323 !important;
+
+        :deep() {
+          .van-field__control:disabled {
+            color: #232323 !important;
+            -webkit-text-fill-color: #232323 !important;
+          }
+
+          .van-field__control {
+            font-size: 12px !important;
+          }
         }
-        ::v-deep .van-field__control {
-          font-size: 12px !important;
-        }
+
+
         ::-webkit-input-placeholder {
           color: #232323;
           font-size: 12px;
         }
+
         :-moz-placeholder {
           /* Mozilla Firefox 4 to 18 */
           color: #232323;
           font-size: 12px;
         }
+
         ::-moz-placeholder {
           /* Mozilla Firefox 19+ */
           color: #232323;
           font-size: 12px;
         }
+
         :-ms-input-placeholder {
           /* Internet Explorer 10+ */
           color: #232323;
           font-size: 12px;
         }
+
         .user-field {
           font-size: 12px;
           border-bottom: 1px solid #ecedef;
         }
-        > span {
+
+        >span {
           font-size: 12px;
           color: #8f8f8f;
         }
+
         .ipt-text-a {
           padding-top: 20px;
           margin-top: 30px;
@@ -289,20 +309,24 @@ export default {
           font-size: 12px;
           color: #8f8f8f;
         }
+
         .ipt-text-b {
           margin: 5px 0 9px 0;
           color: #000;
           font-size: 12px;
           font-weight: bold;
         }
+
         .ipt-server {
           font-size: 12px;
           color: #8f8f8f;
           font-weight: bold;
+
           span {
             font-weight: 400;
             color: #000000;
           }
+
           .ipt-server-i {
             width: 133px;
             height: 30px;
@@ -313,87 +337,110 @@ export default {
             justify-content: space-between;
             background: #F8F3F9;
             border-radius: 7px 7px 7px 7px;
+
             &:first-child {
               padding: 0 18px;
             }
           }
+
           .ipt-server-i-active {
             color: #0287db;
             background: #F8F3F9;
             border: 1px solid #9F54BA;
+
             span {
               color: #0287db;
             }
           }
         }
+
         .money {
           margin: 10px 0 20px 0;
           font-size: 12px;
           font-weight: bold;
+
           span {
             &:first-child {
               color: #000000;
             }
+
             &:last-child {
               color: #0287db;
             }
           }
         }
+
         .ipt-slider {
           margin-left: 5px;
         }
+
         .stake {
           margin: 20px 0 5px 0;
           font-size: 12px;
           color: #8f8f8f;
+
           span {
             color: #3aae55;
           }
         }
-        ::v-deep .van-cell {
-          padding: 5px 0;
+        :deep(){
+          .van-cell {
+            padding: 5px 0;
+          }
         }
+
       }
+
       .container-btn {
         margin-bottom: 30px;
+
         .btn {
           width: 104px;
           height: 45px;
           margin-top: 21px;
+
           &:first-child {
             margin-right: 35px;
           }
         }
+
         span {
           font-size: 12px;
+
           &:first-child {
             margin: 0 5px 0 10px;
             color: #8f8f8f;
           }
+
           &:last-child {
             color: #0287db;
           }
         }
+
         .btn-text {
           margin: 15px 0 20px 0;
           font-size: 12px;
           color: #8f8f8f;
         }
+
         .underline {
           text-decoration: underline;
         }
+
         .text {
           margin: 0 5px 0 10px;
         }
       }
-      ::v-deep .van-cell {
-        &:after {
-          display: none;
+      :deep(){
+          .van-cell:after {
+            display: none;
+          }
         }
-      }
+
     }
   }
 }
+
 .btn-warning {
   display: flex;
   width: 285px;
@@ -406,12 +453,13 @@ export default {
   opacity: 1;
   margin: 0 auto;
   margin-bottom: 23px;
+
   div {
     margin-left: 10px;
   }
 }
+
 .mb-s-10 {
   margin-top: 10px;
   display: block;
-}
-</style>
+}</style>

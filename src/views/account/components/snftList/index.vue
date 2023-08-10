@@ -25,7 +25,7 @@
       </van-list>
     </div>
   </div>
-<!-- 
+  <!-- 
   <SliderBottom>
     <i18n-t keypath="wallet.buySnft" tag="div" class="text-center f-12">
       <template v-slot:link><a :href="VUE_APP_OFFICIAL_EXCHANGE" target="__blank">{{ t('wallet.findMore') }}</a></template>
@@ -606,11 +606,11 @@ export default defineComponent({
             switch (tabIndex.value) {
               case "2":
                 transitionType = '6'
-                const d = {type:6,nft_address,version:"v0.0.1"}
+                const d = { type: 6, nft_address, version: "v0.0.1" }
                 str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d)}`;
                 break;
             }
-            
+
             const data3 = web3.utils.fromUtf8(str)
             const tx1 = {
               from: accountInfo.value.address,
@@ -703,8 +703,8 @@ export default defineComponent({
       const { nft_address } = nft
       switch (tabIndex.value) {
         case "2":
-        const d = {type:6,nft_address: nft_address,version:"v0.0.1"}
-        str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d)}`;
+          const d = { type: 6, nft_address: nft_address, version: "v0.0.1" }
+          str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d)}`;
           break;
       }
       const data3 = web3.utils.fromUtf8(str);
@@ -1406,4 +1406,5 @@ export default defineComponent({
     letter-spacing: 0px;
     font-size: 14px;
   }
-}</style>
+}
+</style>

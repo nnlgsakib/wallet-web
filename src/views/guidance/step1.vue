@@ -3,6 +3,7 @@
     <div class="custom-popover-header"></div>
     <div class="custom-popover-container"></div>
     <div class="custom-popover-footer">
+     <div class="container" style="height: 100%;">
       <div class="footer-text">
         <div>
           {{t('guidePopup.tip1')}}
@@ -14,6 +15,7 @@
         <span class="hover" @click="handleClick(1)">{{t('common.next')}} 1/7</span>
         </div>
       </div>
+    </div>
     </div>
   </div>
   <dialog-warning @warningSuccess="warningSuccess" theme="light" @close="handleClose"  :text="t('common.confirmExit')"  v-model:isWarning="isWarning"></dialog-warning>
@@ -105,15 +107,15 @@ export default defineComponent({
   z-index: 100000;
   }
   .custom-popover-header {
-    height: 48px;
+    height: 48PX;
     background-color: rgba(0, 0, 0, .7);
   }
   .custom-popover-container {
-    height: 271px;
+    height: 261px;
   }
   .custom-popover-footer {
     position: relative;
-    height: calc(100% - 320px);
+    height: calc(100% - 290px);
     background-color: rgba(0, 0, 0, .7);
   }
   .footer-btns {
@@ -151,7 +153,7 @@ export default defineComponent({
     color: #fff;
     top: 83px;
     left: 50%;
-    width: 50%;
+    width: 100%;
     div {
       display: inline-block;
       transform: translateX(-50%);
@@ -159,20 +161,20 @@ export default defineComponent({
         content: "";
         position: absolute;
         top: -44px;
-        left: 70px;
+        left: 85px;
         width: 76px;
         display: inline-block;
         z-index: 999999;
         transform: rotate(90deg);
-        border-top: 1px dotted #9F54BA;
+        border-top: 1px dashed #9F54BA;
       }
       &:after {
       content: "";
       position: absolute;
       top: -8px;
-      left: 106px;
-      width: 4px;
-      height: 4px;
+      left: 120px;
+      width: 6px;
+      height: 6px;
       background-color: #9F54BA;
       border-radius: 50%;
       display: inline-block;

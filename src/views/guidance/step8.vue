@@ -157,7 +157,7 @@ export default defineComponent({
 
   .line {
     width: 0;
-    border-right: 1px solid #9F54BA;
+    border-right: 1px dashed #9F54BA;
     height: 75px;
     position: absolute;
     right: 48px;
@@ -283,7 +283,7 @@ export default defineComponent({
 @media screen and (min-width:750px) {
   .custom-popover-container {
     .container-left {
-      width: 86%;
+      width: calc(100vw - 110px);
     }
   }
 }</style>

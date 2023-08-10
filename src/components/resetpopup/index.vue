@@ -1,13 +1,6 @@
 <template>
   <div class="resetpopup">
-    <van-dialog
-      v-model:show="showModal"
-      teleport="#page-box"
-      :showConfirmButton="false"
-      :showCancelButton="false"
-      closeOnClickOverlay
-      :title="''"
-    >
+    <van-dialog v-model:show="showModal" teleport="#page-box" :showConfirmButton="false" :showCancelButton="false" closeOnClickOverlay :title="''">
       <div class="title text-center f-16 bold van-hairline--bottom">{{ $t('restWallet.restWallet') }}</div>
       <div class="text-center">
         <div class="warn">
@@ -15,41 +8,28 @@
         </div>
         <div class="content">
           <div class="tosure">
-            <div>{{$t('restWallet.areyousure')}}</div>
-            <div>{{$t('restWallet.eraseyourwallet')}}</div>
+            <div>{{ $t('restWallet.areyousure') }}</div>
+            <div>{{ $t('restWallet.eraseyourwallet') }}</div>
           </div>
           <div class="notice">
-            <div>{{$t('restWallet.yourcurrentwallet')}}</div>
-            <div>{{$t('restWallet.accountsandassetswillbe')}}</div>
-            <div class="ft-big">{{$t('restWallet.removedfromthisapppermanently')}}</div>
-            <div>{{$t('restWallet.thisactioncannotbeundone')}}</div>
+            <div>{{ $t('restWallet.yourcurrentwallet') }}</div>
+            <div>{{ $t('restWallet.accountsandassetswillbe') }}</div>
+            <div class="ft-big">{{ $t('restWallet.removedfromthisapppermanently') }}</div>
+            <div>{{ $t('restWallet.thisactioncannotbeundone') }}</div>
           </div>
-          <!-- <div class="notice">
-            <div class="f-15">{{$t('restWallet.youcanONLYrecoverthiswallet')}}</div>
-            <div class="f-15">
-              {{$t('restWallet.withyour')}}
-              <span class="ft-big">{{$t('restWallet.secretRecoveryPhrase')}}</span>
-            </div>
-            <div class="f-15">{{$t('restWallet.metaMaskdoesnothave')}}</div>
-            <div class="f-15">{{$t('restWallet.yourSecretRecoveryPhrase')}}</div>
-          </div>-->
         </div>
       </div>
       <div class="flex evenly pt-30 pb-30 pl-16 pr-16 btn-box">
-        <van-button @click="cancel">{{$t('restWallet.cancel')}}</van-button>
-          <van-button 
-              color="#D73A49" 
-              @click="handleComfirm" 
-              :disabled="Time !== 0"
-              >
-              {{$t('restWallet.confirm')}}{{Time === 0 ? '' : `(${Time}s)`}}
-          </van-button>
+        <van-button @click="cancel">{{ $t('restWallet.cancel') }}</van-button>
+        <van-button color="#D73A49" @click="handleComfirm" :disabled="Time !== 0">
+          {{ $t('restWallet.confirm') }}{{ Time === 0 ? '' : `(${Time}s)` }}
+        </van-button>
       </div>
     </van-dialog>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, Ref, watch, SetupContext, reactive,nextTick } from 'vue'
+import { defineComponent, ref, Ref, watch, SetupContext, reactive, nextTick } from 'vue'
 import { Dialog, Button, Field, NumberKeyboard, Toast, Icon } from 'vant'
 import BigNumber from 'bignumber.js'
 import localforage from 'localforage';
@@ -100,22 +80,22 @@ export default defineComponent({
     )
     watch(
       () => props.show,
-      (now:any) => {
+      (now: any) => {
         if (now) {
-          btnDisabled.value=true;
+          btnDisabled.value = true;
           countdown();
         }
       }
     )
-     let timer: any = null;
-     function countdown() {
+    let timer: any = null;
+    function countdown() {
       if (count.value != 0) {
         clearInterval(timer)
         timer = setInterval(() => {
           count.value = count.value - 1;
           if (count.value <= 0) {
             clearInterval(timer);
-            timer = null; 
+            timer = null;
           }
         }, 3000);
       }
@@ -126,8 +106,8 @@ export default defineComponent({
     }
     const btnDisabled = ref(true)
     const handleComfirm = () => {
-          localforage.clear()
-          location.reload()
+      localforage.clear()
+      location.reload()
 
     }
     let Time = ref(3)
@@ -156,11 +136,13 @@ export default defineComponent({
     width: 100px;
   }
 }
+
 .title {
-font-weight: bold;
+  font-weight: bold;
   line-height: 62px;
   background: #FBF8FB;
 }
+
 .warn {
   margin: 26px auto 8px;
   width: 40px;
@@ -170,17 +152,21 @@ font-weight: bold;
   color: #ffffff;
   font-size: 38px;
 }
+
 .content {
   padding: 0 37px;
   font-size: 15px;
+
   .tosure {
     font-weight: 700;
     margin-bottom: 20px;
     line-height: 22px;
   }
+
   .notice {
     margin-bottom: 20px;
     line-height: 20px;
+
     .ft-big {
       font-weight: 700;
     }

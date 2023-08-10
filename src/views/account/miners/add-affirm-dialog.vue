@@ -24,11 +24,12 @@
               </div>
             </div>
             <div class="bourse-container-meaning bt">
-              <span class="c1">{{ t("createminerspledge.addStake") }} </span>
-              <el-tooltip popper-class="tooltip2" class="box-item" effect="dark" :content="t('createminerspledge.addStakeTip')" placement="top" trigger="hover">
+              <span class="c1">{{ t("bourse.addProfit") }} </span>
+              <el-tooltip popper-class="tooltip2" class="box-item" effect="dark" :content="t('bourse.addProfitDesc')" placement="top" trigger="hover">
                 <van-icon name="question" color="#9A9A9A" />
               </el-tooltip>
               <div class="exchange">
+                <span>≈</span>
                 {{ addprofit }} ERB
               </div>
             </div>
@@ -141,6 +142,7 @@ export default {
           try {
             gasFee.value = await getGasFee(tx1)
           } catch (err: any) {
+            console.warn(err);
             emit('error', err)
           }
           calcProfit();
@@ -167,7 +169,7 @@ export default {
       // addNumber + If the pledged amount is greater than or equal to 70,000, use erb reward, and less than 70,000, use snft reward
       const blockn = web3.utils.toHex(blockNumber.toString());
       if (isValidator) {
-        historyProfit.value = new BigNumber(rewardCoinCount).multipliedBy(0.16).toString()
+        historyProfit.value = new BigNumber(rewardCoinCount).multipliedBy(0.16).plus(new BigNumber(rewardSNFTCount).multipliedBy(average)).toString()
         const { Validators } = await wallet.provider.send("eth_getValidator", [blockn]);
         let total = new BigNumber(0);
         // @ts-ignore
@@ -178,11 +180,12 @@ export default {
         const totalStr = total.toFixed(6);
         // Total revenue one year
         const totalprofit = store.state.account.minerTotalProfit;
+        const snfttotalprofit = store.state.account.exchangeTotalProfit;
         myprofit.value = totalPledge.div(totalStr)
-          .multipliedBy(totalprofit)
+          .multipliedBy(totalprofit).plus(new BigNumber(props.addNumber).div(totalStr).multipliedBy(snfttotalprofit))
           .toFixed(6);
         addprofit.value = new BigNumber(props.addNumber).div(totalStr)
-          .multipliedBy(totalprofit).toFixed(6)
+          .multipliedBy(totalprofit).plus(new BigNumber(props.addNumber).div(totalStr).multipliedBy(snfttotalprofit)).toFixed(6)
       } else {
         historyProfit.value = new BigNumber(rewardSNFTCount).multipliedBy(average).toString()
         const { Stakers } = await wallet.provider.send("eth_getAllStakers", []);
@@ -196,8 +199,7 @@ export default {
         const totalStr = total.toFixed(6);
         // Total revenue one year
         const totalprofit = store.state.account.exchangeTotalProfit;
-        myprofit.value = totalPledge.div(totalStr)
-          .multipliedBy(totalprofit)
+        myprofit.value = totalPledge.div(totalStr).multipliedBy(totalprofit)
           .toFixed(6);
         addprofit.value = new BigNumber(props.addNumber).div(totalStr)
           .multipliedBy(totalprofit).toFixed(6)
@@ -221,8 +223,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.add-box {}
-
 .tip {
   margin: 12px 13px 0;
   color: #9F54BA;

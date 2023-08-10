@@ -2,6 +2,7 @@
 <template>
   <div v-if="showModal" class="custom-popover">
     <div class="custom-popover-header">
+      <div class="container" style="height: 100%;">
       <div class="footer-btns">
         <div class="container pl-20 pr-20 evenly flex">
           <span @click="dispatchClose">{{ t('common.cancel') }}</span>
@@ -12,6 +13,7 @@
         <div>
           {{ t('common.nftN') }}
         </div>
+      </div>
       </div>
     </div>
     <div class="custom-popover-container">
@@ -141,7 +143,7 @@ export default defineComponent({
 
 .custom-popover-container {
   padding-top: 80px;
-  height: 345px;
+  height: 245px;
 
   img {
     width: 100%;
@@ -167,12 +169,12 @@ export default defineComponent({
   font-size: 12px;
   color: #fff;
   bottom: 82px;
-  left: 50%;
-  width: 50%;
+  right: 85px;
+  width: 60px;
 
   div {
     display: inline-block;
-    transform: translateX(-50%);
+
 
     &:before {
       content: "";
@@ -183,16 +185,16 @@ export default defineComponent({
       display: inline-block;
       z-index: 999999;
       transform: rotate(90deg);
-      border-top: 1px dotted #9F54BA;
+      border-top: 1px dashed #9F54BA;
     }
 
     &:after {
       content: "";
       position: absolute;
       bottom: -5px;
-      left: 16px;
-      width: 4px;
-      height: 4px;
+      left: 14.8px;
+      width: 6px;
+      height: 6px;
       background-color: #9F54BA;
       border-radius: 50%;
       display: inline-block;
@@ -203,7 +205,7 @@ export default defineComponent({
 
 .custom-popover-footer {
   position: relative;
-  height: calc(100vh - 290px - 345px);
+  height: calc(100vh - 290px - 245px);
   background-color: rgba(0, 0, 0, .7);
 }
 
@@ -459,4 +461,16 @@ export default defineComponent({
       font-size: 20px;
     }
   }
-}</style>
+}
+
+
+@media screen and (max-width: 750px) {
+  .footer-text {
+    right: 20px;
+    left: inherit;
+  }
+  .custom-popover-header{
+    height: 310px;
+  }
+}
+</style>

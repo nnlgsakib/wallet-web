@@ -57,7 +57,7 @@
           <div class="action-icon flex center">
             <van-icon name="description" />
           </div>
-          <div class="send-action text-center">{{ t("sendNFT.more") }}</div>
+          <div class="send-action text-center">{{ t("sendNFT.details") }}</div>
         </div>
     </div>
   </div>

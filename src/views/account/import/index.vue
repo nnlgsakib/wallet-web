@@ -6,10 +6,7 @@
       </template>
     </NavHeader>
     <div class="import introduce">
-      <!-- <van-icon class="import close-icon" name="cross" @click="gohome" /> -->
-      <!-- <div class="import close-icon" @click="gohome"></div> -->
       <div class="import icon flex center" name="download">
-        <!-- <i class="iconfont icon-bottom"></i> -->
         <img src="@/assets/token/importpri.png" style="width:30px;height:30px;"/>
       </div>
       <div class="import account text-center">{{ t("import.importaccount") }}</div>
@@ -302,7 +299,7 @@ export default {
     font-size: 11px !important;
   }
 }
-::v-deep {
+:deep() {
   .custom-popup {
     width: 200px;
     .van-icon {

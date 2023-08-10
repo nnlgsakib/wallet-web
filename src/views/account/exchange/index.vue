@@ -355,9 +355,12 @@ export default {
             color: #3aae55;
           }
         }
-        ::v-deep .van-cell {
-          padding-left: 0px;
+        :deep(){
+          .van-cell {
+            padding-left: 0px;
+          }
         }
+
       }
       .container-btn {
         margin-bottom: 30px;
@@ -391,11 +394,12 @@ export default {
           margin: 0 5px 0 10px;
         }
       }
-      ::v-deep .van-cell {
-        &:after {
-          display: none;
+      :deep(){
+          .van-cell:after {
+            display: none;
+          }
         }
-      }
+
     }
   }
 }

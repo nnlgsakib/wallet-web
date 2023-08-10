@@ -134,7 +134,7 @@
     <guide-fore></guide-fore>
     <guide-five></guide-five>
     <guide-six></guide-six>
-    <guide-seven></guide-seven>
+    <!-- <guide-seven></guide-seven> -->
     <guide-eight></guide-eight>
     <action-sheet v-model="actionSheetShow"></action-sheet>
     <BackUpBottom />
@@ -201,9 +201,7 @@ import GuideModal8 from "@/views/guidance/step8.vue";
 import actionSheet from "./action-sheet.vue";
 import dialogWarning from "@/components/dialogWarning/message.vue";
 import { useToast } from "@/plugins/toast";
-import { useWallet } from "@/hooks/useWallet";
-import { getWallet } from '@/store/modules/account';
-
+import { WALLET_DOC } from '@/enum/env'
 export default {
   name: "wallet",
   components: {
@@ -439,7 +437,7 @@ export default {
       nftLen.value = len;
     };
     const toHelp = () => {
-      window.open("https://www.erbie.io/docs/wallet/");
+      window.open(WALLET_DOC);
     };
 
     const handleShowSwitch = (v: any) => {

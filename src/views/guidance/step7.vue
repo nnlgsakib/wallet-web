@@ -113,37 +113,6 @@ export default defineComponent({
   width: 100%;
   display: flex;
   background-color: rgba(0, 0, 0, 0.7);
-  // .header-left {
-  //   width: 50px;
-  //   height: 100%;
-  //   position: relative;
-  //   &:before {
-  //     content: "";
-  //     position: absolute;
-  //     top: 25px;
-  //     left: 50px;
-  //     width: 70px;
-  //     display: inline-block;
-  //     z-index: 999999;
-  //     border-top: 1px dotted #9F54BA;
-  //   }
-  //   &:after {
-  //     content: "";
-  //     position: absolute;
-  //     top: 59.5px;
-  //     left: 86px;
-  //     width: 70px;
-  //     display: inline-block;
-  //     z-index: 999999;
-  //     transform: rotate(90deg);
-  //     border-top: 1px dotted #9F54BA;
-  //   }
-  // }
-  // .header-right {
-  //   height: 100%;
-  //   width: calc(100% - 50px);
-  //   background-color: rgba(0, 0, 0, 0.7);
-  // }
 }
 
 .custom-popover-container {
@@ -170,7 +139,7 @@ export default defineComponent({
 
   .line {
     width: 0;
-    border-right: 1px solid #9F54BA;
+    border-right: 1px dashed #9F54BA;
     height: 75px;
     position: absolute;
     right: 126px;

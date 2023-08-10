@@ -1,60 +1,29 @@
 <template>
   <van-sticky offset-top="91">
-      <div class="flex between center-v create-box">
-        <span class="f-12 text-bold label">
-          <!-- <van-popover
-            v-model:show="showPopover"
-            :actions="actions"
-            @select="onSelect"
-            placement="bottom-start"
-          >
-            <template #reference>
-              <span class="hover flex center"
-                >{{ sortVal.text }}
-              </span>
-            </template>
-          </van-popover> -->
-          <span class="flex center"
-                >{{ sortVal.text }}
-              </span>
+    <div class="flex between center-v create-box">
+      <span class="f-12 text-bold label">
+        <span class="flex center">{{ sortVal.text }}
         </span>
+      </span>
 
-      </div>
-    </van-sticky>
-  <van-list
-    v-if="layoutType == 'list'"
-    v-model:loading="loadNft"
-    :finished="finished"
-    @load="handleOnLoad"
-    v-model:error="nftErr"
-  >
-    
+    </div>
+  </van-sticky>
+  <van-list v-if="layoutType == 'list'" v-model:loading="loadNft" :finished="finished" @load="handleOnLoad" v-model:error="nftErr">
+
     <div :class="`nft-list ${layoutType}`">
-      <AiNftCard
-        v-for="item in pageData.nftList"
-        :key="item.nft_address"
-        :data="item"
-      />
+      <AiNftCard v-for="item in pageData.nftList" :key="item.nft_address" :data="item" />
     </div>
   </van-list>
 
-  <div v-else   :class="`list-box ${pageData.nftList.length ? 'pt-20 hasLen' : ''}`">
-    <masonry-infinite-grid
-    :column="2"
-    @request-append="handleOnLoad"
-  >
-    <div
-    class="nftCard-card"
-      v-for="item in pageData.nftList"
-      :key="item.nft_address"
-      :data-grid-groupkey="item.nft_address"
-    >
-      <AiNftCard :data="item" />
+  <div v-else :class="`list-box ${pageData.nftList.length ? 'pt-20 hasLen' : ''}`">
+    <masonry-infinite-grid :column="2" @request-append="handleOnLoad">
+      <div class="nftCard-card" v-for="item in pageData.nftList" :key="item.nft_address" :data-grid-groupkey="item.nft_address">
+        <AiNftCard :data="item" />
+      </div>
+    </masonry-infinite-grid>
+    <div class="flex center pt-20" v-show="loadNft">
+      <van-loading size="16px">{{ t('common.loading') }}</van-loading>
     </div>
-  </masonry-infinite-grid>
-  <div class="flex center pt-20" v-show="loadNft">
-    <van-loading size="16px">{{ t('common.loading') }}</van-loading>
-  </div>
   </div>
 
 
@@ -84,7 +53,6 @@
 </template>
 
 <script lang="ts">
-// import NftCard from "./nftCard.vue";
 import AiNftCard from "./aiNftCard.vue";
 import {
   getDrawInfoByUser,
@@ -112,11 +80,10 @@ import { useRouter } from "vue-router";
 import { useToast } from "@/plugins/toast";
 import { decode } from "js-base64";
 import SliderBottom from "@/components/sliderBottom/index.vue";
-import { MasonryInfiniteGrid  } from "@egjs/vue3-infinitegrid";
+import { MasonryInfiniteGrid } from "@egjs/vue3-infinitegrid";
 export default defineComponent({
   name: "nft-list",
   components: {
-    // NftCard,
     AiNftCard,
     [List.name]: List,
     [Button.name]: Button,
@@ -225,8 +192,8 @@ export default defineComponent({
     };
     // List loading event
     const handleOnLoad = async () => {
-      if(layoutType.value == 'card') {
-        if(loadNft.value || finished.value){
+      if (layoutType.value == 'card') {
+        if (loadNft.value || finished.value) {
           return
         }
         loadNft.value = true;
@@ -320,64 +287,67 @@ export default defineComponent({
 <style lang="scss" scoped>
 .list-box {
   &.hasLen {
-    min-height:50px;
+    min-height: 50px;
   }
+
   padding-left: 15px;
   padding-right: 15px;
   overflow: hidden scroll;
+
   .nftCard-card {
     width: 48%;
 
   }
 }
+
 .icon-shangla {
   font-size: 18px;
 }
+
 .create-box {
   background: #f1f3f4;
   height: 36px;
   padding: 0 15px;
   position: relative;
+
   .label {
     color: #848484;
   }
+
   .add {
     width: 36px;
     height: 18px;
     background: #9f54ba;
     border-radius: 9px;
     cursor: pointer;
+
     i {
       color: #fff;
       font-size: 14px;
     }
   }
 }
+
 .nft-list {
   &.card {
     padding: 15px;
     display: grid;
     grid-gap: 15px;
     grid-template-columns: repeat(2, 1fr);
-
-    /* display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-content: flex-start; */
-    // :deep(.nft-card:nth-of-type(odd)) {
-    //   margin-right: 15px;
-    // }
   }
 }
+
 .tip1 {
   .toCreate {
     color: #9f54ba;
     font-size: 12px;
+
     &:hover {
       text-decoration: underline;
     }
   }
 }
+
 .tip2.disabled {
   color: #b3b3b3 !important;
 }

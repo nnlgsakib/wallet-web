@@ -1,253 +1,148 @@
 <template>
- <div>
-  <div :class="`bourse ${isModif ? 'modif' : ''}`">
-    <NavHeader
-      :title="
-        isModif
+  <div>
+    <div :class="`bourse ${isModif ? 'modif' : ''}`">
+      <NavHeader :title="isModif
           ? t('minerspledge.modifValidator')
           : t('minerspledge.beValidator')
-      "
-    >
-      <template v-slot:left>
-        <span class="back" @click="appProvide.back">{{
-          t("common.back")
-        }}</span>
-      </template>
-      <template v-slot:right>
-        <cancel-btn />
-      </template>
-    </NavHeader>
+        ">
+        <template v-slot:left>
+          <span class="back" @click="appProvide.back">{{
+            t("common.back")
+          }}</span>
+        </template>
+        <template v-slot:right>
+          <cancel-btn />
+        </template>
+      </NavHeader>
 
-    <div class="bourse-container" v-if="!pageLoading">
-      <div :class="`bourse-container-meaning}`">
-        <span class="card-tit">{{ t("minerspledge.stackTit") }} </span>
-        <el-tooltip
-          popper-class="tooltip2"
-          class="box-item"
-          effect="dark"
-          :content="t('minerspledge.stackTip')"
-          placement="right"
-          trigger="hover"
-        >
-          <van-icon name="question" color="#9A9A9A" />
-        </el-tooltip>
-      </div>
-      <div class="t3">
-        {{ PledgedBalance }}ERB 
-      </div>
-
-      <div v-if="isModif">
-        <div class="bourse-container-meaning bt" style="margin-bottom: 10px">
-          <span class="card-tit">{{ t("minerspledge.Delegatetit") }}</span>
-          <el-tooltip
-            popper-class="tooltip2"
-            class="box-item"
-            effect="dark"
-            :content="t('minerspledge.proxyAccountTip')"
-            placement="right"
-            trigger="hover"
-          >
+      <div class="bourse-container" v-if="!pageLoading">
+        <div :class="`bourse-container-meaning}`">
+          <span class="card-tit">{{ t("minerspledge.stackTit") }} </span>
+          <el-tooltip popper-class="tooltip2" class="box-item" effect="dark" :content="t('minerspledge.stackTip')" placement="right" trigger="hover">
             <van-icon name="question" color="#9A9A9A" />
           </el-tooltip>
         </div>
-        <div class="flex modif-acc pb-12">
-          <div class="userIcon">
-            <AccountIcon :data="selectAccount.icon" size="small" />
+        <div class="t3">
+          {{ PledgedBalance }}ERB
+        </div>
+
+        <div v-if="isModif">
+          <div class="bourse-container-meaning bt" style="margin-bottom: 10px">
+            <span class="card-tit">{{ t("minerspledge.Delegatetit") }}</span>
+            <el-tooltip popper-class="tooltip2" class="box-item" effect="dark" :content="t('minerspledge.proxyAccountTip')" placement="right" trigger="hover">
+              <van-icon name="question" color="#9A9A9A" />
+            </el-tooltip>
           </div>
-          <div
-            :class="`value  flex  account-box ${
-              selectAccount.name ? ' column between' : 'center-v'
-            }`"
-          >
-            <div class="name" v-if="selectAccount.name">
-              {{ selectAccount.name }}
+          <div class="flex modif-acc pb-12">
+            <div class="userIcon">
+              <AccountIcon :data="selectAccount.icon" size="small" />
             </div>
-            <div class="val">{{ selectAccount.address }}</div>
+            <div :class="`value  flex  account-box ${selectAccount.name ? ' column between' : 'center-v'
+              }`">
+              <div class="name" v-if="selectAccount.name">
+                {{ selectAccount.name }}
+              </div>
+              <div class="val">{{ selectAccount.address }}</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="bourse-container-warning" v-if="isWarning">
-        <van-icon name="warning" color="#F7BF03" size="20" />
-        <span>{{ t("minerspledge.isPoor") }}</span>
-      </div>
-
-      <div class="bourse-container-name" style="margin-top: 20px" v-if="isOpen">
-        <span class="card-tit">{{t('minerspledge.credibility')}} </span>
-      </div>
-      <div
-        class="maxBalance flex center-v between modif-acc pb-12"
-        v-if="isModif"
-      >
-        <div class="flex center-v">
-          <span :class="`mr-10 lh-12 f-16 text-bold ${expresionClass}`"
-            >{{ Coefficient }}
-          </span>
-          <van-popover
-            v-model:show="showExpresion"
-            theme="dark"
-            :close-on-click-outside="false"
-            z-index="1"
-            placement="right"
-            trigger="manual"
-            :class="`popover-btn-tip ${expresionClass}bg`"
-          >
-            <div :class="`${expresionClass}box popover-expresion p-10 hover`">
-              <div v-if="expresionClass == 'smile'">
-                {{ t("minerspledge.smileTip", { value: Coefficient }) }}
-              </div>
-              <div v-if="expresionClass == 'sad'">
-                {{ t("minerspledge.sadTip", { value: Coefficient }) }}
-              </div>
-              <div v-if="expresionClass == 'neutral'">
-                {{ t("minerspledge.neutralTip", { value: Coefficient }) }}
-              </div>
-            </div>
-            <template #reference>
-              <div
-                class="hover"
-                @mouseenter="showExpresion = true"
-                @mouseout="showExpresion = false"
-              >
-                <img
-                  :class="`expresion `"
-                  src="@/assets/smile.png"
-                  v-if="expresionClass == 'smile'"
-                  alt=""
-                />
-                <img
-                  :class="`expresion `"
-                  src="@/assets/sad.png"
-                  v-if="expresionClass == 'sad'"
-                  alt=""
-                />
-                <img
-                  :class="`expresion`"
-                  src="@/assets/neutral.png"
-                  alt=""
-                  v-if="expresionClass == 'neutral'"
-                />
-              </div>
-            </template>
-          </van-popover>
+        <div class="bourse-container-warning" v-if="isWarning">
+          <van-icon name="warning" color="#F7BF03" size="20" />
+          <span>{{ t("minerspledge.isPoor") }}</span>
         </div>
-        <div v-if="Coefficient < 70">
-        <!-- <div> -->
-          <el-tooltip
-            popper-class="reset-tooltip"
-            class="reset-tip"
-            effect="dark"
-            :content="t('minerspledge.resetBtnTip', {value: payErb})"
-            placement="top-end"
-            trigger="hover"
-          >
-            <div
-              class="add-btn flex center-v hover"
-              @click="handleShowReconveryModal"
-            >
-              <i class="iconfont icon-icplus mr-4"></i>
-              <span> {{t('common.recovery')}} </span>
-            </div>
+
+        <div class="bourse-container-name" style="margin-top: 20px" v-if="isOpen">
+          <span class="card-tit">{{ t('minerspledge.credibility') }} </span>
+        </div>
+        <div class="maxBalance flex center-v between modif-acc pb-12" v-if="isModif">
+          <div class="flex center-v">
+            <span :class="`mr-10 lh-12 f-16 text-bold ${expresionClass}`">{{ Coefficient }}
+            </span>
+            <van-popover v-model:show="showExpresion" theme="dark" :close-on-click-outside="false" z-index="1" placement="right" trigger="manual" :class="`popover-btn-tip ${expresionClass}bg`">
+              <div :class="`${expresionClass}box popover-expresion p-10 hover`">
+                <div v-if="expresionClass == 'smile'">
+                  {{ t("minerspledge.smileTip", { value: Coefficient }) }}
+                </div>
+                <div v-if="expresionClass == 'sad'">
+                  {{ t("minerspledge.sadTip", { value: Coefficient }) }}
+                </div>
+                <div v-if="expresionClass == 'neutral'">
+                  {{ t("minerspledge.neutralTip", { value: Coefficient }) }}
+                </div>
+              </div>
+              <template #reference>
+                <div class="hover" @mouseenter="showExpresion = true" @mouseout="showExpresion = false">
+                  <img :class="`expresion `" src="@/assets/smile.png" v-if="expresionClass == 'smile'" alt="" />
+                  <img :class="`expresion `" src="@/assets/sad.png" v-if="expresionClass == 'sad'" alt="" />
+                  <img :class="`expresion`" src="@/assets/neutral.png" alt="" v-if="expresionClass == 'neutral'" />
+                </div>
+              </template>
+            </van-popover>
+          </div>
+          <div v-if="Coefficient < 70">
+            <!-- <div> -->
+            <el-tooltip popper-class="reset-tooltip" class="reset-tip" effect="dark" :content="t('minerspledge.resetBtnTip', { value: payErb })" placement="top-end" trigger="hover">
+              <div class="add-btn flex center-v hover" @click="handleShowReconveryModal">
+                <i class="iconfont icon-icplus mr-4"></i>
+                <span> {{ t('common.recovery') }} </span>
+              </div>
+            </el-tooltip>
+          </div>
+        </div>
+
+        <div class="bourse-container-name" style="margin-top: 20px" v-if="isOpen">
+          <span class="card-tit">{{ t("minerspledge.addTit") }} </span>
+          <el-tooltip popper-class="tooltip4" class="box-item" effect="dark" :content="t('minerspledge.addTip')" placement="right" trigger="hover">
+            <van-icon name="question" color="#9A9A9A" />
           </el-tooltip>
         </div>
-      </div>
+        <div class="maxBalance" v-if="isModif">{{ addNumber2 || 0 }}ERB</div>
+        <el-slider v-if="isModif" class="slider-ipt" v-model="addNumber2" :min="0" :max="maxBalance" :marks="marks" @input="handleChangeSlider" />
+        <div class="create-new-password" v-if="isOpen">
+          <van-form @submit="onSubmitAddNumber" ref="formDom">
+            <div :class="isError ? 'error-field' : isSuccess ? 'success-field' : ''">
+              <van-field maxlength="25" v-model="addNumber" class="text" @blur="handleAddBlur" type="number" :placeholder="t('bourse.placeamount')">
+                <template #right-icon>
+                  <span style="font-weight: bold; font-size: 16px; color: #000">ERB</span>
+                </template>
+              </van-field>
+            </div>
+          </van-form>
+        </div>
 
-      <div class="bourse-container-name" style="margin-top: 20px" v-if="isOpen">
-        <span class="card-tit">{{ t("minerspledge.addTit") }} </span>
-        <el-tooltip
-          popper-class="tooltip4"
-          class="box-item"
-          effect="dark"
-          :content="t('minerspledge.addTip')"
-          placement="right"
-          trigger="hover"
-        >
-          <van-icon name="question" color="#9A9A9A" />
-        </el-tooltip>
-      </div>
-      <div class="maxBalance" v-if="isModif">{{ addNumber2 || 0 }}ERB</div>
-      <el-slider
-        v-if="isModif"
-        class="slider-ipt"
-        v-model="addNumber2"
-        :min="0"
-        :max="maxBalance"
-        :marks="marks"
-        @input="handleChangeSlider"
-      />
-      <div class="create-new-password" v-if="isOpen">
-        <van-form @submit="onSubmitAddNumber" ref="formDom">
-          <div
-            :class="isError ? 'error-field' : isSuccess ? 'success-field' : ''"
-          >
-            <van-field
-              maxlength="25"
-              v-model="addNumber"
-              class="text"
-              @blur="handleAddBlur"
-              type="number"
-              :placeholder="t('bourse.placeamount')"
-            >
-              <template #right-icon>
-                <span style="font-weight: bold; font-size: 16px; color: #000"
-                  >ERB</span
-                >
-              </template>
-            </van-field>
-          </div>
-        </van-form>
-      </div>
-
-      <div
-        class="bourse-container-meaning bt"
-        v-if="!isModif"
-        style="margin-bottom: 10px"
-      >
-        <span class="card-tit">{{
-          isDelegate
+        <div class="bourse-container-meaning bt" v-if="!isModif" style="margin-bottom: 10px">
+          <span class="card-tit">{{
+            isDelegate
             ? t("minerspledge.Stackingtit")
             : t("minerspledge.Delegatetit")
-        }}</span>
-        <el-tooltip
-          popper-class="tooltip2"
-          class="box-item"
-          effect="dark"
-          :content="t('minerspledge.proxyAccountTip')"
-          placement="right"
-          trigger="hover"
-        >
-          <van-icon name="question" color="#9A9A9A" />
-        </el-tooltip>
-      </div>
-      <div
-        class="flex between pl-14 pr-14 pt-20 pb-20 account-outBox hover"
-        @click="openModal"
-        v-if="!isModif"
-      >
-        <div class="flex account-info-box">
-          <div class="userIcon">
-            <AccountIcon :data="selectAccount.icon" size="small" />
-          </div>
-          <div
-            :class="`value  flex  account-box ${
-              selectAccount.name ? ' column between' : 'center-v'
-            }`"
-          >
-            <div class="name" v-if="selectAccount.name">
-              {{ selectAccount.name }}
+          }}</span>
+          <el-tooltip popper-class="tooltip2" class="box-item" effect="dark" :content="t('minerspledge.proxyAccountTip')" placement="right" trigger="hover">
+            <van-icon name="question" color="#9A9A9A" />
+          </el-tooltip>
+        </div>
+        <div class="flex between pl-14 pr-14 pt-20 pb-20 account-outBox hover" @click="openModal" v-if="!isModif">
+          <div class="flex account-info-box">
+            <div class="userIcon">
+              <AccountIcon :data="selectAccount.icon" size="small" />
             </div>
-            <div class="val van-ellipsis">{{ selectAccount.address }}</div>
+            <div :class="`value  flex  account-box ${selectAccount.name ? ' column between' : 'center-v'
+              }`">
+              <div class="name" v-if="selectAccount.name">
+                {{ selectAccount.name }}
+              </div>
+              <div class="val van-ellipsis">{{ selectAccount.address }}</div>
+            </div>
           </div>
+          <div class="rightIcon flex center">
+            <van-icon name="arrow-up" v-if="showAccountModal" />
+            <van-icon name="arrow-down" v-else />
+          </div>
+          <AccountList v-model="showAccountModal" @on-change="handleAccount" />
+          <!-- <AccountModal v-model:actionSheetShow="showAccountModal" :hasBtn="false" :showAmount="false" /> -->
         </div>
-        <div class="rightIcon flex center">
-          <van-icon name="arrow-up" v-if="showAccountModal" />
-          <van-icon name="arrow-down" v-else />
-        </div>
-        <AccountList v-model="showAccountModal" @on-change="handleAccount" />
-        <!-- <AccountModal v-model:actionSheetShow="showAccountModal" :hasBtn="false" :showAmount="false" /> -->
-      </div>
 
-      <!-- <div class="bourse-container-name pt-14 border-top" v-if="!isModif">
+        <!-- <div class="bourse-container-name pt-14 border-top" v-if="!isModif">
         <span class="card-tit">{{ t("minerspledge.node") }} </span>
         <el-tooltip
           popper-class="tooltip4"
@@ -284,193 +179,96 @@
           </div>
         </van-form>
       </div> -->
-      <div class="bourse-container-btns">
-        <div class="container pl-28 pr-28">
-          <Tip :message="t('minerspledge.tip4')" v-if="!isModif" />
+        <div class="bourse-container-btns">
+          <div class="container pl-28 pr-28">
+            <Tip :message="t('minerspledge.tip4')" v-if="!isModif" />
 
-          <div class="btns flex between">
-            <van-popover
-              v-model:show="showClose"
-              v-if="!showCloseBtn && isModif"
-              theme="dark"
-              :close-on-click-outside="false"
-              z-index="1"
-              placement="top"
-              trigger="manual"
-              class="popover-btn-tip"
-            >
-              <div class="f-12 pl-10 pr-10 pt-10 pb-10">
-                {{ t("minerspledge.closeTip2") }}
-              </div>
-              <template #reference>
-                <van-button
-                  :disabled="showCloseBtn ? false : true"
-                  plain
-                  @click="closeDialogTime = true"
-                  >{{ t("minerspledge.stackinglabel") }}</van-button
-                >
-              </template>
-            </van-popover>
-            <van-button
-              v-if="isModif && showCloseBtn"
-              :disabled="showCloseBtn ? false : true"
-              plain
-              @click="closeDialogTime = true"
-              >{{ t("minerspledge.stackinglabel") }}</van-button
-            >
+            <div class="btns flex between">
+              <van-popover v-model:show="showClose" v-if="!showCloseBtn && isModif" theme="dark" :close-on-click-outside="false" z-index="1" placement="top" trigger="manual" class="popover-btn-tip">
+                <div class="f-12 pl-10 pr-10 pt-10 pb-10">
+                  {{ t("minerspledge.closeTip2") }}
+                </div>
+                <template #reference>
+                  <van-button :disabled="showCloseBtn ? false : true" plain @click="closeDialogTime = true">{{ t("minerspledge.stackinglabel") }}</van-button>
+                </template>
+              </van-popover>
+              <van-button v-if="isModif && showCloseBtn" :disabled="showCloseBtn ? false : true" plain @click="closeDialogTime = true">{{ t("minerspledge.stackinglabel") }}</van-button>
 
-            <van-button
-              :loading="isLoading"
-              @click="onSubmit"
-              type="primary"
-              :style="{ width: isModif ? '48%' : '100%' }"
-              >{{
+              <van-button :loading="isLoading" @click="onSubmit" type="primary" :style="{ width: isModif ? '48%' : '100%' }">{{
                 !isModif ? t("common.confirm") : t("bourse.saveExchange")
-              }}</van-button
-            >
+              }}</van-button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <agreement-view
-        v-model:check="checked"
-        v-if="showAgreement"
-        v-model:show="showAgreement"
-        @submitCheck="submitCheck"
-      ></agreement-view>
-      <amount-view
-        v-if="showAcount"
-        :moneyMinF="moneyMin"
-        :moneyMax="moneyMax"
-        v-model:show="showAcount"
-        v-model:minersMoney="money"
-      ></amount-view>
+        <agreement-view v-model:check="checked" v-if="showAgreement" v-model:show="showAgreement" @submitCheck="submitCheck"></agreement-view>
+        <amount-view v-if="showAcount" :moneyMinF="moneyMin" :moneyMax="moneyMax" v-model:show="showAcount" v-model:minersMoney="money"></amount-view>
 
-      <van-dialog
-        v-model:show="showExchange1"
-        z-index="9999"
-        show-cancel-button
-        teleport="#page-box"
-        :showConfirmButton="false"
-      >
-        <div class="miners-success" v-if="isClose">
-          <div class="miners-header">
-            <span>{{ t("minerspledge.stackinglabel") }}</span>
+        <van-dialog v-model:show="showExchange1" z-index="9999" show-cancel-button teleport="#page-box" :showConfirmButton="false">
+          <div class="miners-success" v-if="isClose">
+            <div class="miners-header">
+              <span>{{ t("minerspledge.stackinglabel") }}</span>
+            </div>
+            <div class="flex center">
+              <img class="exchange-welcome-icon" src="@/assets/exchange/SketchPng6487f59e1a3e4adec886c6b63f8c41c4aa0d61ebfe43fcaad735b3ff5ca97e8d.png" />
+            </div>
+            <div class="flex center">
+              <span class="text-s">{{ t("bourse.closeSuccess") }}</span>
+            </div>
+            <div class="container-btn flex center">
+              <van-button type="primary" class="btn" round @click="tohome">{{
+                $t("createExchange.gohome")
+              }}</van-button>
+            </div>
           </div>
-          <div class="flex center">
-            <img
-              class="exchange-welcome-icon"
-              src="@/assets/exchange/SketchPng6487f59e1a3e4adec886c6b63f8c41c4aa0d61ebfe43fcaad735b3ff5ca97e8d.png"
-            />
+          <div class="miners-success" v-else-if="isOne">
+            <div class="miners-header">
+              <span>{{ $t("createExchange.open_exchange") }}</span>
+            </div>
+            <div class="flex center">
+              <img class="exchange-welcome-icon" src="@/assets/exchange/SketchPng6487f59e1a3e4adec886c6b63f8c41c4aa0d61ebfe43fcaad735b3ff5ca97e8d.png" />
+            </div>
+            <div class="flex center">
+              <span class="text-s">{{ $t("createExchange.openyourself") }}</span>
+            </div>
+            <div class="container-btn flex center">
+              <van-button type="primary" class="btn" round @click="tohome">{{
+                $t("createExchange.gohome")
+              }}</van-button>
+            </div>
           </div>
-          <div class="flex center">
-            <span class="text-s">{{ t("bourse.closeSuccess") }}</span>
-          </div>
-          <div class="container-btn flex center">
-            <van-button type="primary" class="btn" round @click="tohome">{{
-              $t("createExchange.gohome")
-            }}</van-button>
-          </div>
-        </div>
-        <div class="miners-success" v-else-if="isOne">
-          <div class="miners-header">
-            <span>{{ $t("createExchange.open_exchange") }}</span>
-          </div>
-          <div class="flex center">
-            <img
-              class="exchange-welcome-icon"
-              src="@/assets/exchange/SketchPng6487f59e1a3e4adec886c6b63f8c41c4aa0d61ebfe43fcaad735b3ff5ca97e8d.png"
-            />
-          </div>
-          <div class="flex center">
-            <span class="text-s">{{ $t("createExchange.openyourself") }}</span>
-          </div>
-          <div class="container-btn flex center">
-            <van-button type="primary" class="btn" round @click="tohome">{{
-              $t("createExchange.gohome")
-            }}</van-button>
-          </div>
-        </div>
-      </van-dialog>
+        </van-dialog>
 
-      <affirm-dialog
-        @open="sendToPledgeHttp"
-        :name="name"
-        :address="selectAccount.address"
-        :amount="PledgedAmount"
-        v-model:show="isAffirmDialog"
-        v-if="isAffirmDialog"
-      ></affirm-dialog>
-      <add-affirm-dialog
-        @open="sendToPledgeHttp"
-        :name="name"
-        :address="selectAccount.address"
-        :amount="PledgedBalance"
-        :addNumber="PledgedAmount"
-        v-model:show="isAddAffirmDialog"
-      >
-      </add-affirm-dialog>
-      <SwitchNetwork
-        v-model:show="showModalNetwork"
-        @close="showModalNetwork = false"
-      />
-      <close-dialog
-        @warningSuccess="isCloseAffirm = true"
-        v-model:isWarning="isCloseDialog"
-        v-if="isCloseDialog"
-      ></close-dialog>
-      <close-submit-dialog
-        @open="submitOpen"
-        :formatValueNumber="PledgedBalance"
-        v-model:show="closeDialogSubmit"
-        :address="accountInfo.address"
-      ></close-submit-dialog>
-      <!-- <close-dialog-time
+        <affirm-dialog @open="sendToPledgeHttp" :name="name" :address="selectAccount.address" :amount="PledgedAmount" v-model:show="isAffirmDialog" v-if="isAffirmDialog"></affirm-dialog>
+        <add-affirm-dialog @open="sendToPledgeHttp" :name="name" :address="selectAccount.address" :amount="PledgedBalance" :addNumber="PledgedAmount" v-model:show="isAddAffirmDialog">
+        </add-affirm-dialog>
+        <SwitchNetwork v-model:show="showModalNetwork" @close="showModalNetwork = false" />
+        <close-dialog @warningSuccess="isCloseAffirm = true" v-model:isWarning="isCloseDialog" v-if="isCloseDialog"></close-dialog>
+        <close-submit-dialog @open="submitOpen" :formatValueNumber="PledgedBalance" v-model:show="closeDialogSubmit" :address="accountInfo.address"></close-submit-dialog>
+        <!-- <close-dialog-time
         @affirmClose="closeDialogSubmit = true"
         v-model:show="closeDialogTime"
       ></close-dialog-time> -->
-      <affirm-close
-        name="name"
-        :serverIndex="serverIndex"
-        :money="money"
-        v-model:show="isCloseAffirm"
-        @affirmClose="affirmClose"
-        v-if="isCloseAffirm"
-      ></affirm-close>
-      <close-home
-        v-model:isWarning="isCloseHome"
-        v-if="isCloseHome"
-      ></close-home>
-      <!-- Adjust the amount of pledge -->
-      <ModifPledgeModal
-        v-model="closeDialogTime"
-        :max="Number(PledgedBalance)"
-        @confirm="handleMinusConfirm"
-      />
+        <affirm-close name="name" :serverIndex="serverIndex" :money="money" v-model:show="isCloseAffirm" @affirmClose="affirmClose" v-if="isCloseAffirm"></affirm-close>
+        <close-home v-model:isWarning="isCloseHome" v-if="isCloseHome"></close-home>
+        <!-- Adjust the amount of pledge -->
+        <ModifPledgeModal v-model="closeDialogTime" :max="Number(PledgedBalance)" @confirm="handleMinusConfirm" />
 
-      <!-- Reduce the pledge pop-up window -->
-      <MinusStackDialog
-        v-model:show="showMinusModal"
-        :minusNumber="minusNumber"
-        :amount="formatValueNumber || PledgedAmount"
-      />
+        <!-- Reduce the pledge pop-up window -->
+        <MinusStackDialog v-model:show="showMinusModal" :minusNumber="minusNumber" :amount="formatValueNumber || PledgedAmount" />
 
-      <!-- reconvery modal -->
-      <CommonModal v-model="showReconveryModal" title="Credibility Recovery">
-        <ReconveryDetail
-          @cancel="handleReCancel"
-          @confirm="handleReConfirm"
-          :data="reconveryDetail"
-        />
-      </CommonModal>
-    </div>
-    <div class="loading-box flex center" v-else>
-      <div class="p-30">
-        <van-loading color="#9F54BA" />
+        <!-- reconvery modal -->
+        <CommonModal v-model="showReconveryModal" title="Credibility Recovery">
+          <ReconveryDetail @cancel="handleReCancel" @confirm="handleReConfirm" :data="reconveryDetail" />
+        </CommonModal>
+      </div>
+      <div class="loading-box flex center" v-else>
+        <div class="p-30">
+          <van-loading color="#9F54BA" />
+        </div>
       </div>
     </div>
   </div>
- </div>
 </template>
 <script lang="ts">
 import {
@@ -619,10 +417,10 @@ export default defineComponent({
       chainId: null
     })
     const payErb = computed(() => {
-      return (70 - Coefficient.value)/10
+      return (70 - Coefficient.value) / 10
     })
     onMounted(async () => {
-      
+
       try {
         const wallet = await getWallet();
         const { address } = wallet;
@@ -632,7 +430,7 @@ export default defineComponent({
           "eth_getAccountInfo",
           [address, "latest"]
         );
-        
+
         const blockn = web3.utils.toHex(blockNumber.value.toString());
         // Amount of the first pledge/total amount of the pledge *36 (start time of the second cancellation of the pledge calculation)+ Amount of the second pledge/total amount *72=54 = (time when the second cancellation of the pledge can be revoked)
         showCloseBtn.value = new BigNumber(blockNumber.value)
@@ -652,7 +450,7 @@ export default defineComponent({
                 item.Addr.toUpperCase() ==
                 accountInfo.value.address.toUpperCase()
             );
-            
+
             const selectAcc = accountList.value.find(
               (item: any) =>
                 item.address.toUpperCase() == pledge.Proxy.toUpperCase()
@@ -778,7 +576,7 @@ export default defineComponent({
 
         const proxy_address =
           selectAccount.value.address.toUpperCase() ==
-          accountInfo.value.address.toUpperCase()
+            accountInfo.value.address.toUpperCase()
             ? ""
             : selectAccount.value.address;
         const am = addNumber.value ? Number(addNumber.value) : 0 || 70000;
@@ -1121,17 +919,17 @@ export default defineComponent({
       addNumber.value = addNumber2.value;
     };
     const handleAddBlur = () => {
-      if(addNumber.value) {
+      if (addNumber.value) {
         const addNum = new BigNumber(addNumber.value);
-      if (addNum.gte(accountInfo.value.amount)) {
-        $wtoast.warn(t("createExchange.ispoor"));
-        addNumber.value = addNumber2.value.toString();
-        return;
-      } else {
-        nextTick(() => {
-          addNumber2.value = parseFloat(addNumber.value);
-        });
-      }
+        if (addNum.gte(accountInfo.value.amount)) {
+          $wtoast.warn(t("createExchange.ispoor"));
+          addNumber.value = addNumber2.value.toString();
+          return;
+        } else {
+          nextTick(() => {
+            addNumber2.value = parseFloat(addNumber.value);
+          });
+        }
       } else {
         addNumber2.value = 0
       }
@@ -1150,16 +948,16 @@ export default defineComponent({
     const showReconveryModal = ref(false);
     const reconveryDetail = ref({});
     const handleShowReconveryModal = async () => {
-      const sendAmount = (70 - Coefficient.value)/10 ;
+      const sendAmount = (70 - Coefficient.value) / 10;
       if (
-        new BigNumber(accountInfo.value.amount).lt(sendAmount+ 1)
+        new BigNumber(accountInfo.value.amount).lt(sendAmount + 1)
       ) {
-        $wtoast.warn(t("minerspledge.noMoney", {value: sendAmount+ 1}));
+        $wtoast.warn(t("minerspledge.noMoney", { value: sendAmount + 1 }));
         return;
       }
       try {
-        Toast.loading({ duration: 0,forbidClick: true });
-        const d2 = {type:26,version:"v0.0.1"}
+        Toast.loading({ duration: 0, forbidClick: true });
+        const d2 = { type: 26, version: "v0.0.1" }
 
         const tx = {
           to: accountInfo.value.address,
@@ -1174,7 +972,7 @@ export default defineComponent({
           gasFee,
         };
         showReconveryModal.value = true;
-      }catch(err: any){
+      } catch (err: any) {
         $wtoast.warn(err.reason)
       } finally {
         Toast.clear();
@@ -1185,38 +983,38 @@ export default defineComponent({
       showReconveryModal.value = false;
     };
 
-    const {$tradeConfirm} = useTradeConfirm()
-    
-    const handleReConfirm = async() => {
-      const {amount}: any = reconveryDetail.value
-      const d2 = {type:26,version:"v0.0.1"}
+    const { $tradeConfirm } = useTradeConfirm()
+
+    const handleReConfirm = async () => {
+      const { amount }: any = reconveryDetail.value
+      const d2 = { type: 26, version: "v0.0.1" }
       const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d2)}`;
       const tx = {
         value: amount,
         data: web3.utils.fromUtf8(str),
         to: accountInfo.value.address,
-        transitionType:'26'
+        transitionType: '26'
       }
       const callBack = () => {
-        router.replace({name:'home'})
+        router.replace({ name: 'home' })
       }
-      
+
       $tradeConfirm.open({
-        disabled:[TradeStatus.pendding, TradeStatus.approve],
+        disabled: [TradeStatus.pendding, TradeStatus.approve],
         callBack
       })
       try {
         const data = await dispatch('account/transaction', tx)
-        $tradeConfirm.update({status:"approve",callBack})
+        $tradeConfirm.update({ status: "approve", callBack })
         const receipt = await data.wallet.provider.waitForTransaction(data.hash)
-        const {status} = receipt
-        if(!status) {
-          $tradeConfirm.update({status:"fail",callBack, hash: data.hash})
+        const { status } = receipt
+        if (!status) {
+          $tradeConfirm.update({ status: "fail", callBack, hash: data.hash })
         } else {
-          $tradeConfirm.update({status:"success",callBack, hash: data.hash})
+          $tradeConfirm.update({ status: "success", callBack, hash: data.hash })
         }
         dispatch('account/waitTxQueueResponse')
-      }catch(err: any){
+      } catch (err: any) {
         if (err.toString().indexOf("timeout") > -1) {
           $tradeConfirm.update({
             status: "warn",
@@ -1354,19 +1152,23 @@ export default defineComponent({
 .border-top {
   border-top: 1px solid #e4e7e8;
 }
+
 .maxBalance {
   font-size: 15px;
   font-weight: bold;
   margin-top: 6px;
   margin-bottom: 10px;
 }
+
 :deep() {
   .wormholes-tip {
     margin: 0 0 20px;
   }
+
   .van-field__right-icon span {
     font-size: 12px !important;
   }
+
   .slider-ipt {
     padding: 0;
     margin-bottom: 11px;
@@ -1402,53 +1204,66 @@ export default defineComponent({
     padding: 0;
   }
 }
+
 .card-tit {
   color: #848484;
 }
+
 .loading-box {
   height: calc(100vh - 48px);
 }
+
 :deep(.el-select-dropdown__item) {
   height: auto;
 }
+
 .rightIcon {
   i {
     color: #9F54BA;
     font-size: 16px;
   }
 }
+
 .account-info-box {
   width: 95%;
 }
+
 .account-outBox {
   border-radius: 5px;
   border: 1px solid #bbc0c5;
   margin: 15px 0;
 }
+
 .modif-acc .account-box {
   // width: 95%;
 }
+
 .modif-acc {
   border-bottom: 1px solid #e4e7e8;
+
   .val {
     letter-spacing: 0px !important;
   }
 }
+
 .modif-acc .account-info-box {
   width: 100%;
 }
+
 .account-box {
   // width: 250px;
   // width: 85%;
   padding-left: 5px;
-  .name {
-  }
+
+  .name {}
+
   .val {
     font-size: 12px;
     color: #9a9a9a;
     letter-spacing: -0.8px;
   }
 }
+
 .userIcon {
   width: 35px;
   height: 35px;
@@ -1461,6 +1276,7 @@ export default defineComponent({
   justify-content: center;
   transition: ease 0.3s;
 }
+
 .exchange-container1 {
   height: 550px;
 
@@ -1470,21 +1286,25 @@ export default defineComponent({
     line-height: 62px;
     background-color: #FBF8FB;
   }
+
   .exchange-welcome-icon {
     height: 35px;
     width: 35px;
     margin: 27px auto 0;
     display: block;
   }
+
   .echange-slogan1 {
     font-size: 15px;
     text-align: center;
     margin: 11px auto 20px;
   }
+
   .exchange-create-form {
     border: 1px solid #e4e7e8;
     width: 315px;
     margin: auto;
+
     .form-title {
       height: 56px;
       background-color: #ccffff;
@@ -1492,6 +1312,7 @@ export default defineComponent({
       line-height: 24px;
     }
   }
+
   .echange-slogan2 {
     width: 100%;
     height: 17px;
@@ -1499,16 +1320,19 @@ export default defineComponent({
     line-height: 17px;
     margin: 21px auto 23px;
     text-align: center;
+
     .right {
       color: #9F54BA;
       text-decoration: underline;
     }
   }
+
   .exchange-button {
     display: flex;
     justify-content: space-evenly;
   }
 }
+
 .exchange-container {
   height: 300px;
 
@@ -1518,22 +1342,26 @@ export default defineComponent({
     line-height: 62px;
     background-color: #FBF8FB;
   }
+
   .exchange-welcome-icon {
     height: 35px;
     width: 35px;
     margin: 27px auto 0;
     display: block;
   }
+
   .echange-slogan1 {
     font-size: 15px;
     text-align: center;
     margin-top: 20px;
   }
+
   .exchange-create-form {
     border: 1px solid #e4e7e8;
     width: 315px;
     margin: auto;
   }
+
   .echange-slogan2 {
     width: 100%;
     height: 17px;
@@ -1541,16 +1369,19 @@ export default defineComponent({
     line-height: 17px;
     margin: 21px auto 23px;
     text-align: center;
+
     .right {
       color: #9F54BA;
       text-decoration: underline;
     }
   }
+
   .exchange-button {
     display: flex;
     justify-content: space-evenly;
   }
 }
+
 .progress-bar {
   margin: 69px auto;
   display: flex;
@@ -1561,21 +1392,26 @@ export default defineComponent({
   width: 315px;
   height: 116px;
   margin: auto;
+
   .table {
     height: 37px;
     padding: 10px 13px;
+
     .top {
       display: flex;
       justify-content: space-between;
+
       .right {
         width: 12px;
         height: 12px;
+
         img {
           width: 12px;
           height: 12px;
         }
       }
     }
+
     .down {
       height: 24px;
       line-height: 24px;
@@ -1585,6 +1421,7 @@ export default defineComponent({
       overflow: hidden;
     }
   }
+
   .exchange-line {
     height: 1px;
     width: 285px;
@@ -1597,23 +1434,28 @@ export default defineComponent({
 <style scoped lang="scss">
 .btns {
   width: 100%;
+
   button {
     width: 48%;
   }
+
   :deep(.van-popover__wrapper) {
     position: relative;
     width: 48%;
+
     button {
       width: 100%;
     }
   }
 }
+
 .miners {
   width: 341px;
   height: 646px;
   background: #fff;
   margin: auto;
   border-radius: 8px;
+
   .miners-header {
     height: 62px;
     line-height: 62px;
@@ -1623,21 +1465,25 @@ export default defineComponent({
     font-size: 14px;
     color: #0f0f0f;
   }
+
   .miners-container {
     ::-webkit-input-placeholder {
       color: #232323;
       font-size: 12px;
     }
+
     :-moz-placeholder {
       /* Mozilla Firefox 4 to 18 */
       color: #232323;
       font-size: 12px;
     }
+
     ::-moz-placeholder {
       /* Mozilla Firefox 19+ */
       color: #232323;
       font-size: 12px;
     }
+
     :-ms-input-placeholder {
       /* Internet Explorer 10+ */
       color: #232323;
@@ -1646,6 +1492,7 @@ export default defineComponent({
 
     .contaienr-top-header {
       margin: 28px 0 21px 0;
+
       span {
         &:first-child {
           display: inline-block;
@@ -1659,6 +1506,7 @@ export default defineComponent({
           color: #0287db;
           border: 3px solid #0287db;
         }
+
         &:last-child {
           font-weight: bold;
           font-size: 14px;
@@ -1666,6 +1514,7 @@ export default defineComponent({
         }
       }
     }
+
     .contaienr-top-ipt {
       width: 315px;
       height: 303px;
@@ -1674,14 +1523,17 @@ export default defineComponent({
       box-sizing: border-box;
       border-radius: 4px 4px 4px 4px;
       border: 1px solid #e4e7e8;
+
       .user-field {
         font-size: 12px;
         border-bottom: 1px solid #ecedef;
       }
-      > span {
+
+      >span {
         font-size: 12px;
         color: #8f8f8f;
       }
+
       .ipt-text-a {
         padding-top: 20px;
         margin-top: 30px;
@@ -1689,20 +1541,24 @@ export default defineComponent({
         font-size: 12px;
         color: #8f8f8f;
       }
+
       .ipt-text-b {
         margin: 5px 0 9px 0;
         color: #000;
         font-size: 12px;
         font-weight: bold;
       }
+
       .ipt-server {
         font-size: 12px;
         color: #8f8f8f;
         font-weight: bold;
+
         span {
           font-weight: 400;
           color: #000000;
         }
+
         .ipt-server-i {
           width: 133px;
           height: 30px;
@@ -1713,92 +1569,118 @@ export default defineComponent({
           justify-content: space-between;
           background: #F8F3F9;
           border-radius: 7px 7px 7px 7px;
+
           &:first-child {
             padding: 0 18px;
           }
         }
+
         .ipt-server-i-active {
           color: #0287db;
           background: #F8F3F9;
           border: 1px solid #9F54BA;
+
           span {
             color: #0287db;
           }
         }
       }
+
       .money {
         margin: 10px 0 20px 0;
         font-size: 12px;
         font-weight: bold;
+
         span {
           &:first-child {
             color: #000000;
           }
+
           &:last-child {
             color: #0287db;
           }
         }
       }
+
       .ipt-slider {
         margin-left: 5px;
       }
+
       .stake {
         margin: 20px 0 5px 0;
         font-size: 12px;
         color: #8f8f8f;
+
         span {
           color: #3aae55;
         }
       }
-      ::v-deep .van-cell {
-        padding-left: 0px;
+
+      :deep() {
+        .van-cell {
+          padding-left: 0px;
+        }
       }
     }
+
     .container-btn {
       margin-bottom: 30px;
+
       .btn {
         width: 104px;
         height: 45px;
         margin-top: 21px;
+
         &:first-child {
           margin-right: 35px;
         }
       }
+
       span {
         font-size: 12px;
+
         &:first-child {
           margin: 0 5px 0 10px;
           color: #8f8f8f;
         }
+
         &:last-child {
           color: #0287db;
         }
       }
+
       .btn-text {
         margin: 15px 0 20px 0;
         font-size: 12px;
         color: #8f8f8f;
       }
+
       .underline {
         text-decoration: underline;
       }
+
       .text {
         margin: 0 5px 0 10px;
       }
     }
-    ::v-deep .van-cell {
-      &:after {
+
+    :deep() {
+      .van-cell:after {
         display: none;
       }
     }
+
   }
 }
+
 :deep(.el-input__inner) {
   display: none;
 }
+
 :deep(.el-select) {
   width: 100%;
 }
+
 :deep(.el-input__prefix) {
   width: calc(100% - 60px);
 }
@@ -1812,52 +1694,67 @@ export default defineComponent({
   padding: 0 10px;
   margin-top: -10px;
 }
+
 .reset-tip,
 .reset-tooltip {
   background: #85e19b !important;
   border-color: #85e19b !important;
 }
+
 .reset-tooltip .el-popper__arrow::before {
   background: #85e19b !important;
   border-color: #85e19b !important;
 }
+
 .add-btn i {
   font-size: 18px;
 }
+
 .smile {
   color: #3aae55;
 }
+
 .smilebox {
   background: #3aae55;
 }
+
 .sad {
   color: #d73a49;
 }
+
 .sadbox {
   background: #d73a49;
 }
+
 .sadbg .van-popover__arrow {
   color: #d73a49;
 }
+
 .smilebg .van-popover__arrow {
   color: #3aae55;
 }
+
 .neutral {
   color: #f7bf03;
 }
+
 .neutralbox {
   background: #f7bf03;
 }
+
 .neutralbg .van-popover__arrow {
   color: #f7bf03;
 }
+
 .expresion {
   width: 22px;
   display: block;
 }
+
 .popover-expresion {
   width: 160px;
 }
+
 .dialog-c {
   top: 50% !important;
 }
@@ -1866,6 +1763,7 @@ export default defineComponent({
 :deep(.el-input__wrapper) {
   padding: 0;
 }
+
 .select-header {
   display: flex;
   align-items: center;
@@ -1873,6 +1771,7 @@ export default defineComponent({
   height: 75px;
   //  margin-left: -30px;
 }
+
 .select-header-c {
   text-align: left;
   line-height: 25px;
@@ -1881,36 +1780,43 @@ export default defineComponent({
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+
   div {
     &:first-child {
       color: #000;
     }
   }
 }
+
 .open-c {
   :deep(.van-cell) {
     background-color: #f1f3f4;
   }
 }
+
 .miners-success {
   width: 341px;
   height: 327px;
   background: #fff;
   margin: auto;
   border-radius: 8px;
+
   .miners-icons {
     margin: 20px 0;
   }
+
   .text-s {
     margin: 0 22px 41px 23px;
     font-size: 14px;
     color: #0f0f0f;
   }
+
   .exchange-welcome-icon {
     width: 41px;
     height: 41px;
     margin: 42px 0 41px 0;
   }
+
   .miners-header {
     height: 62px;
     line-height: 62px;
@@ -1920,9 +1826,11 @@ export default defineComponent({
     font-size: 14px;
     color: #0f0f0f;
   }
+
   .miners-container {
     .contaienr-top-header {
       margin: 28px 0 21px 0;
+
       span {
         &:first-child {
           display: inline-block;
@@ -1936,6 +1844,7 @@ export default defineComponent({
           color: #0287db;
           border: 3px solid #0287db;
         }
+
         &:last-child {
           font-weight: bold;
           font-size: 14px;
@@ -1943,6 +1852,7 @@ export default defineComponent({
         }
       }
     }
+
     .contaienr-top-ipt {
       width: 315px;
       height: 115px;
@@ -1952,56 +1862,68 @@ export default defineComponent({
       border-radius: 4px 4px 4px 4px;
       border: 1px solid #e4e7e8;
     }
+
     .conditions {
       margin: 0px 0 20px 0;
     }
+
     .text-a {
       height: 17px;
       line-height: 14px;
       font-size: 12px;
       color: #8f8f8f;
     }
+
     .m-r-5 {
       margin-right: 5px;
     }
+
     .text-b {
       text-decoration: underline;
       font-size: 12px;
       color: #0287db;
     }
+
     .block {
       display: inline-block;
       padding-bottom: 12px;
       margin-bottom: 11px;
       border-bottom: 1px solid #ecedef;
     }
+
     .container-btn {
       .btn {
         width: 104px;
         height: 45px;
         margin-top: 21px;
       }
+
       span {
         font-size: 12px;
+
         &:first-child {
           margin: 0 5px 0 10px;
           color: #8f8f8f;
         }
+
         &:last-child {
           color: #0287db;
         }
       }
+
       .btn-text {
         margin: 15px 0 10px 0;
         font-size: 12px;
         color: #8f8f8f;
       }
+
       .underline {
         text-decoration: underline;
       }
     }
   }
 }
+
 .snftmiddle-text {
   display: inline-block;
   max-width: 220px;
@@ -2009,18 +1931,22 @@ export default defineComponent({
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .conditions {
   margin: 0px 0 20px 0;
 }
+
 .text-a {
   height: 17px;
   line-height: 14px;
   font-size: 12px;
   color: #8f8f8f;
 }
+
 .m-r-5 {
   margin-right: 5px;
 }
+
 .text-b {
   text-decoration: underline;
   font-size: 12px;
@@ -2030,6 +1956,7 @@ export default defineComponent({
 <style  lang="scss" scoped>
 .bourse {
   height: 100%;
+
   &.modif {
     .nodeIpt {
       :deep(.van-field__body) {
@@ -2037,14 +1964,17 @@ export default defineComponent({
         border: 1px solid #bbc0c5;
       }
     }
+
     .account-outBox {
       background: #f1f3f4;
       border: 1px solid #bbc0c5;
+
       .rightIcon {
         display: none;
       }
     }
   }
+
   .bourse-header {
     // position: fixed;
     position: absolute;
@@ -2068,28 +1998,34 @@ export default defineComponent({
     padding: 23px 15px 25px 15px;
     font-size: 14px;
   }
+
   .bourse-container-meaning {
     // margin-top: 15px;
     padding-top: 15px;
   }
+
   .bourse-container-pull {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     .hundred {
       color: #3aae55;
       font-size: 18px;
       line-height: 30px;
     }
   }
+
   .bourse-container-slider {
     margin: 33.5px 0;
   }
+
   .bourse-container-server {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 15px;
+
     div {
       width: 310px;
       height: 85px;
@@ -2102,36 +2038,44 @@ export default defineComponent({
       border-radius: 7.5px;
       box-sizing: border-box;
     }
+
     .active {
       border: 1px solid #9F54BA;
+
       span {
         color: #9F54BA;
       }
     }
+
     .t1 {
       font-size: 12px;
       color: #848484;
       line-height: 20px;
     }
+
     .t2 {
       font-size: 12px;
       font-weight: bold;
       line-height: 20px;
     }
   }
+
   .bourse-container-server-b {
     div {
       background-color: #f1f3f4 !important;
     }
+
     .active-d {
       border: 1px solid #000;
     }
   }
+
   .bourse-container-btns {
     position: fixed;
     left: 0;
     right: 0;
     bottom: 25px;
+
     // position: absolute;
     // bottom: 20px;
     // display: flex;
@@ -2142,6 +2086,7 @@ export default defineComponent({
       width: 160px;
     }
   }
+
   .bourse-container-error,
   .bourse-container-warning {
     width: 100%;
@@ -2152,11 +2097,13 @@ export default defineComponent({
     display: flex;
     align-items: center;
     padding: 0 15px;
+
     span {
       margin-left: 10px;
       font-size: 12px;
     }
   }
+
   .bourse-container-error-text {
     width: 100%;
     margin-bottom: 20px;
@@ -2166,11 +2113,13 @@ export default defineComponent({
     display: flex;
     align-items: center;
     padding: 0 15px;
+
     span {
       margin-left: 10px;
       font-size: 12px;
     }
   }
+
   .bourse-container-error-text-warning {
     width: 100%;
     margin-bottom: 20px;
@@ -2180,15 +2129,18 @@ export default defineComponent({
     display: flex;
     align-items: center;
     padding: 0 15px;
+
     span {
       margin-left: 10px;
       font-size: 12px;
     }
   }
+
   .t1 {
     font-size: 14px;
     color: #9F54BA;
   }
+
   .t3 {
     font-size: 15px;
     font-weight: bold;
@@ -2196,6 +2148,7 @@ export default defineComponent({
     margin-top: 10px;
     padding-bottom: 15px;
   }
+
   .t2 {
     font-size: 16px;
   }
@@ -2205,30 +2158,39 @@ export default defineComponent({
     height: 18px;
     margin-top: -2px;
   }
+
   .create-new-password {
     margin-top: 13.5px;
+
     .tit-small {
       color: #848484;
     }
+
     .right {
       color: #9F54BA;
       text-decoration: underline;
     }
+
     .icon-yanjing {
       color: #9F54BA;
     }
+
     :deep(.van-field__label) {
       display: none;
     }
+
     :deep(.van-field__error-message) {
       margin-bottom: 0px;
     }
+
     :deep(.van-cell:after) {
       display: none;
     }
+
     :deep(.van-cell) {
       padding: 0;
     }
+
     :deep(.van-field__body) {
       margin-bottom: 10px;
       border-radius: 5px;
@@ -2237,37 +2199,46 @@ export default defineComponent({
       //   border: 1px solid #9F54BA;
       // }
     }
+
     .error-field {
       :deep(.van-field__body) {
         border: 1px solid #d73a49 !important;
         background: #fbf2f3;
       }
     }
+
     .success-field {
       :deep(.van-field__body) {
         border: 1px solid #9F54BA !important;
       }
     }
+
     .tool {
       color: #9F54BA;
     }
+
     .pointer {
       cursor: pointer;
     }
+
     .check-box {
       margin-top: 30px;
     }
   }
 }
+
 .bt {
   border-top: 1px solid #e4e7e8;
 }
+
 :deep(.van-icon-arrow-down) {
   margin-top: 13px !important;
 }
+
 :deep(.van-cell-group) {
   border: 1px solid #e4e7e8;
 }
+
 .right-img-cell {
   width: 30px;
   height: 30px;
@@ -2277,6 +2248,7 @@ export default defineComponent({
   display: block;
   margin-right: 10px;
 }
+
 :deep(.el-icon) {
   color: #9F54BA !important;
 }
@@ -2289,42 +2261,50 @@ export default defineComponent({
   max-width: 267px !important;
 }
 
-.appendto2 > span::before {
+.appendto2>span::before {
   background-color: #9F54BA !important;
   border: none !important;
 }
-.appendto1 > span::before {
+
+.appendto1>span::before {
   background-color: #9F54BA !important;
   border: none !important;
 }
+
 .tooltip1 {
   max-width: 180px;
 }
+
 .tooltip2 {
   max-width: 200px;
 }
+
 .tooltip3 {
   max-width: 220px;
 }
+
 .tooltip4 {
   max-width: 200px;
 }
+
 .appendtobear {
   background-color: #f1f3f4 !important;
 }
 
-.appendtobear > span::before {
+.appendtobear>span::before {
   background-color: #848484 !important;
   border: none !important;
 }
+
 .appendtobear {
   background-color: #848484 !important;
   border: none !important;
   max-width: 267px !important;
 }
+
 .warning {
   border-color: #f00;
 }
-.error-field {
-}
+
+.error-field {}
 </style>

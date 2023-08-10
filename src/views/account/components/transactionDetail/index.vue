@@ -13,11 +13,9 @@
               <span @click="handleCancel">{{ t("common.cancel") }}</span>
             </div>
           </div>
-          <div
-            :class="`value flex right center-v status ${transactionStatusClass(
-              data
-            )}`"
-          >
+          <div :class="`value flex right center-v status ${transactionStatusClass(
+            data
+          )}`">
             <span>{{ transactionStatus(data) }}</span>
           </div>
         </div>
@@ -43,8 +41,8 @@
           <div class="label">
             {{
               data.transitionType == "6"
-                ? t("common.convertAmount")
-                : t("transactionDetails.transferAmount")
+              ? t("common.convertAmount")
+              : t("transactionDetails.transferAmount")
             }}
           </div>
           <div class="value">{{ transferAmountText(data) }} {{ currentNetwork.currencySymbol }}</div>
@@ -52,23 +50,12 @@
         <div class="card flex between card-sml">
           <div class="label">
             {{ t("transactionDetails.gasfee") }}
-            <van-popover
-              v-model:show="showPopover"
-              theme="dark"
-              placement="top-start"
-            >
-              <div
-                class="f-12 pl-10 pr-10 pt-10 pb-10"
-                @click="showPopover = false"
-              >
+            <van-popover v-model:show="showPopover" theme="dark" placement="top-start">
+              <div class="f-12 pl-10 pr-10 pt-10 pb-10" @click="showPopover = false">
                 {{ t("common.gasFee") }}
               </div>
               <template #reference>
-                <van-icon
-                  name="question hover"
-                  @mouseover="showPopover = true"
-                  @mouseout="showPopover = false"
-                />
+                <van-icon name="question hover" @mouseover="showPopover = true" @mouseout="showPopover = false" />
               </template>
             </van-popover>
           </div>
@@ -175,7 +162,7 @@ export default defineComponent({
     // gas= gasLimit * gasPrice
     const gasFee = computed(() => {
       const { status, gasPrice, gasUsed, sendStatus } = props.data;
-      if(sendStatus && sendStatus === 'pendding') {
+      if (sendStatus && sendStatus === 'pendding') {
         return new BigNumber('0')
       }
       const bigP = new BigNumber(gasPrice).div(1000000000);

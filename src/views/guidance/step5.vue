@@ -27,8 +27,9 @@
         </div>
       </div>
     </div>
+    <dialog-warning @warningSuccess="warningSuccess" theme="light" @close="handleClose" :text="t('common.confirmExit')" v-model:isWarning="isWarning"></dialog-warning>
+
   </div>
-  <dialog-warning @warningSuccess="warningSuccess" theme="light" @close="handleClose" :text="t('common.confirmExit')" v-model:isWarning="isWarning"></dialog-warning>
 </template>
 
 <script lang="ts">
@@ -155,7 +156,7 @@ export default defineComponent({
       width: 70px;
       display: inline-block;
       z-index: 999999;
-      border-top: 1px dotted #9F54BA;
+      border-top: 1px dashed #9F54BA;
     }
 
     &:after {
@@ -167,7 +168,7 @@ export default defineComponent({
       display: inline-block;
       z-index: 999999;
       transform: rotate(90deg);
-      border-top: 1px dotted #9F54BA;
+      border-top: 1px dashed #9F54BA;
     }
   }
 }
@@ -180,7 +181,7 @@ export default defineComponent({
 
 .custom-popover-footer {
   position: relative;
-  height: calc(100% - 320px);
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -233,8 +234,8 @@ export default defineComponent({
   }
 
   .dot {
-    width: 4px;
-    height: 4px;
+    width: 6px;
+    height: 6px;
     background-color: #9F54BA;
     border-radius: 50%;
   }

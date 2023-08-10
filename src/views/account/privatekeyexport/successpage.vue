@@ -18,12 +18,7 @@
         </div>
       </div>
 
-      <van-tabs
-        v-if="check"
-        title-active-color="#9F54BA"
-        title-inactive-color
-        v-model:active="activeName"
-      >
+      <van-tabs v-if="check" title-active-color="#9F54BA" title-inactive-color v-model:active="activeName">
         <van-tab :title="$t('exportprivatekey.text')" name="a">
           <div class="privatekey-content">
             <div class="title">{{ $t("exportprivatekey.hint") }}</div>
@@ -32,15 +27,9 @@
             </div>
             <div class="btn-groups">
               <div class="container pl-26 pr-26">
-                <van-button
-                  @click="tocopy"
-                  type="default"
-                  plain
-                  block
-                >
+                <van-button @click="tocopy" type="default" plain block>
                   <i class="iconfont icon-copy"></i>
-                  {{ $t("exportprivatekey.copyText") }}</van-button
-                >
+                  {{ $t("exportprivatekey.copyText") }}</van-button>
               </div>
             </div>
           </div>
@@ -50,57 +39,37 @@
             <div class="title">{{ $t("exportprivatekey.hint") }}</div>
             <div class="flex center">
               <div class="qccode-display flex center">
-                <qrcode-vue
-                  size="217"
-                  v-if="privateKey"
-                  :value="privateKey"
-                  level="L"
-                />
+                <qrcode-vue size="217" v-if="privateKey" :value="privateKey" level="L" />
               </div>
             </div>
           </div>
-          <div  class="btn-groups">
-                  <div class="container pl-26 pr-26">
-                  <van-button
-          type="default"
-          plain
-          block
-          v-if="check"
-          @click="download"
-        >
-          <i class="iconfont icon-bottom"></i>
-          {{ $t("exportprivatekey.saveText") }}</van-button
-        >
-                  </div>
+          <div class="btn-groups">
+            <div class="container pl-26 pr-26">
+              <van-button type="default" plain block v-if="check" @click="download">
+                <i class="iconfont icon-bottom"></i>
+                {{ $t("exportprivatekey.saveText") }}</van-button>
+            </div>
           </div>
 
         </van-tab>
       </van-tabs>
       <div :class="`pwd-ipt pl-26 pr-26 ${isError ? 'error' : ''}`" v-if="!check">
         <div class="flex between pwd-tit">
-          <span>{{t('exportprivatekey.password')}}</span>
+          <span>{{ t('exportprivatekey.password') }}</span>
           <span>
             <i @click="mask = !mask" :class="`iconfont hover  ${mask ? 'icon-yanjing1' : 'icon-yanjing'} `"></i>
           </span>
         </div>
-        <van-field
-
-          v-model="password"
-          :placeholder="t('loginwithpassword.pleaseinput')"
-          :type="mask ? 'password' : 'text'"
-        />
-        <div class="err-msg">{{errMsg}}</div>
+        <van-field v-model="password" :placeholder="t('loginwithpassword.pleaseinput')" :type="mask ? 'password' : 'text'" />
+        <div class="err-msg">{{ errMsg }}</div>
       </div>
     </div>
     <div class="btn-groups" v-if="!check">
       <div class="container pl-26 pr-26">
-        <van-button block type="primary" @click="handleConfirm">{{t('common.confirm')}}</van-button>
+        <van-button block type="primary" @click="handleConfirm">{{ t('common.confirm') }}</van-button>
       </div>
     </div>
-    <SwitchNetwork
-      v-model:show="showModalNetwork"
-      @close="showModalNetwork = false"
-    />
+    <SwitchNetwork v-model:show="showModalNetwork" @close="showModalNetwork = false" />
   </div>
 </template>
 
@@ -212,14 +181,14 @@ export default {
     const isError = ref(false)
     const errMsg = ref('')
     const password = ref('')
-    const handleConfirm = async() => {
+    const handleConfirm = async () => {
       isError.value = false
-      if(!regPassword1.test(password.value)){
+      if (!regPassword1.test(password.value)) {
         isError.value = true
         errMsg.value = t('createAccountpage.pwdWorng')
         return
       }
-    
+
       // Unlock wallet directly
       try {
         const params = {
@@ -227,9 +196,9 @@ export default {
           json: store.state.account.accountInfo.keyStore
         }
         //   Encrypt and store the time with a password according to the, transfer it to Step2, and then use PWD to restore the time at Step2
-         privateKey.value = decryptPrivateKey(params);
-         isError.value = false
-         check.value = true
+        privateKey.value = decryptPrivateKey(params);
+        isError.value = false
+        check.value = true
       } catch (err) {
         isError.value = true
         errMsg.value = t('loginwithpassword.wrong_password')
@@ -269,6 +238,7 @@ export default {
 .icon-yanjing1 {
   font-size: 14px !important;
 }
+
 .icon-yanjing {
   font-size: 18px !important;
   color: #9F54BA;
@@ -276,31 +246,35 @@ export default {
 
 .content {
 
-      .pwd-ipt.error  {
+  .pwd-ipt.error {
     :deep(.van-field__body) {
-    border: 1px solid #d73a49 !important;
-        background: #fbf2f3;
+      border: 1px solid #d73a49 !important;
+      background: #fbf2f3;
     }
   }
-.err-msg {
-  color: #d73a49;
-  font-size: 12px;
-}
+
+  .err-msg {
+    color: #d73a49;
+    font-size: 12px;
+  }
 
   .pwd-ipt {
     .pwd-tit {
       height: 24px;
+
       span {
         line-height: 24px;
       }
     }
   }
+
   .title {
     margin: 10px 15px;
     font-size: 12px;
     line-height: 21px;
     font-weight: bold;
   }
+
   .userwarning {
     margin: 15px;
     border-radius: 5px;
@@ -321,6 +295,7 @@ export default {
       line-height: 16px;
     }
   }
+
   .display-box {
     margin: 0 15px;
     height: 90px;
@@ -330,8 +305,9 @@ export default {
     padding: 16px;
     font-size: 12px;
     position: relative;
+
     &::after {
-      content:"";
+      content: "";
       display: block;
       // background:#7ebdeb;
       // filter: blur(4px); 
@@ -342,6 +318,7 @@ export default {
       bottom: 0;
       border-radius: 5px;
     }
+
     .copy-function {
       height: 30px;
       border-top: 1px solid rgba(104, 113, 123, 1);
@@ -353,21 +330,26 @@ export default {
     }
   }
 
-  ::v-deep .van-tabs__line {
-    z-index: 0;
-    width: 50%;
-    height: 0.05333rem;
-    background: #9F54BA;
-  }
-  ::v-deep .van-tab {
-    position: inherit;
-    color: #848484;
-  }
-  ::v-deep .van-tab {
-    border-bottom: 0.5px solid rgba(151, 151, 151, 1);
-    font-size: 11px;
+  :deep() {
+    .van-tabs__line {
+      z-index: 0;
+      width: 50%;
+      height: 0.05333rem;
+      background: #9F54BA;
+    }
+
+    .van-tab {
+      position: inherit;
+      color: #848484;
+    }
+
+    .van-tab {
+      border-bottom: 0.5px solid rgba(151, 151, 151, 1);
+      font-size: 11px;
+    }
   }
 }
+
 .qccode-content {
   width: 100%;
 
@@ -379,20 +361,25 @@ export default {
 }
 </style>
 <style  lang="scss" scoped>
-    :deep(.van-cell:after) {
-      display: none;
-    }
-    :deep(.van-cell) {
-      padding: 0;
-    }
-    :deep(.van-field__body) {
-      margin-bottom: 10px;
-      &:hover {
-        border: 1px solid #9F54BA;
-      }
-    }
+:deep(.van-cell:after) {
+  display: none;
+}
+
+:deep(.van-cell) {
+  padding: 0;
+}
+
+:deep(.van-field__body) {
+  margin-bottom: 10px;
+
+  &:hover {
+    border: 1px solid #9F54BA;
+  }
+}
+
 .bourse {
   height: 100%;
+
   .bourse-header {
     display: flex;
     justify-content: space-between;
@@ -407,63 +394,77 @@ export default {
   .bourse-container {
     padding: 23px 15px 25px 15px;
     font-size: 14px;
+
     .bourse-container-w {
       height: 160px;
       border: 1px solid #e4e7e8;
       padding: 0 17.5px;
+
       .da {
         height: 80px;
         display: flex;
         align-items: center;
         justify-content: space-between;
+
         &:first-child {
           border-bottom: 1px solid #e4e7e8;
         }
       }
     }
+
     .da-c {
       display: flex;
       align-items: center;
+
       span {
         margin: 0 35.5px 0 10px;
       }
     }
+
     .da-img {
       width: 20px;
       height: 20px;
       margin-top: -4px;
     }
+
     .right {
       padding-left: 15px;
       border-left: 1px solid #e4e7e8;
+
       img {
         width: 14px;
         height: 14px;
       }
     }
   }
+
   .bourse-container-meaning {
     margin-top: 15px;
     padding-top: 15px;
   }
+
   .bourse-container-pull {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     .hundred {
       color: #3aae55;
       font-size: 18px;
       line-height: 30px;
     }
   }
+
   .bourse-container-slider {
     margin: 33.5px 0;
   }
+
   .bourse-container-server {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 15px;
+
     div {
       width: 310px;
       height: 85px;
@@ -476,31 +477,38 @@ export default {
       border-radius: 7.5px;
       box-sizing: border-box;
     }
+
     .active {
       border: 1px solid #9F54BA;
+
       span {
         color: #9F54BA;
       }
     }
+
     .t1 {
       font-size: 12px;
       color: #848484;
       line-height: 20px;
     }
+
     .t2 {
       font-size: 12px;
       font-weight: bold;
       line-height: 20px;
     }
   }
+
   .bourse-container-server-b {
     div {
       background-color: #f1f3f4 !important;
     }
+
     .active-d {
       border: 1px solid #000;
     }
   }
+
   .bourse-container-btns {
     width: calc(100% - 30px);
     position: absolute;
@@ -508,10 +516,12 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     .b1 {
       width: 160px;
     }
   }
+
   .bourse-container-error {
     margin: 0 15px 25px 15px;
     height: 56.5px;
@@ -520,20 +530,24 @@ export default {
     display: flex;
     align-items: center;
     padding: 0 15px;
+
     span {
       margin-left: 10px;
       font-size: 12px;
     }
   }
+
   .t1 {
     font-size: 14px;
     color: #9F54BA;
   }
+
   .t3 {
     font-size: 18px;
     font-weight: bold;
     line-height: 40px;
   }
+
   .t2 {
     font-size: 16px;
   }
@@ -543,21 +557,27 @@ export default {
     height: 18px;
     margin-top: -2px;
   }
+
   .create-new-password {
     margin-top: 13.5px;
+
     .tit-small {
       color: #848484;
     }
+
     .right {
       color: #9F54BA;
       text-decoration: underline;
     }
+
     .icon-yanjing {
       color: #9F54BA;
     }
+
     :deep(.van-field__label) {
       display: none;
     }
+
     :deep(.van-field__error-message) {
       margin-bottom: 0px;
     }
@@ -567,25 +587,31 @@ export default {
         border: 1px solid #d73a49 !important;
       }
     }
+
     .success-field {
       :deep(.van-field__body) {
         border: 1px solid #9F54BA !important;
       }
     }
+
     .tool {
       color: #9F54BA;
     }
+
     .pointer {
       cursor: pointer;
     }
+
     .check-box {
       margin-top: 30px;
     }
   }
 }
+
 .bt {
   border-top: 1px solid #e4e7e8;
 }
+
 .bourse-img {
   height: 135px;
   background-color: #F8F3F9;
@@ -593,19 +619,23 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
   .exchange-welcome-icon {
     height: 35px;
     width: 35px;
   }
+
   .d1 {
     margin: 10px 0;
     font-size: 15px;
   }
+
   .d2 {
     font-size: 12px;
     color: #848484;
   }
 }
+
 .bourse-container-error,
 .bourse-container-warning {
   height: 72px;
@@ -616,19 +646,21 @@ export default {
   align-items: center;
   padding: 0 15px;
   margin-bottom: 36.5px;
+
   span {
     margin-left: 10px;
     font-size: 12px;
   }
 }
+
 .btns-footer {
   position: fixed;
   bottom: 25px;
   width: 100%;
   max-width: 750px;
 }
+
 .right-img-copy {
   width: 15px;
   height: 15px;
-}
-</style>
+}</style>

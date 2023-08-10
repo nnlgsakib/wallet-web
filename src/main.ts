@@ -2,6 +2,7 @@
 
 // @ts-nocheck
 import 'babel-polyfill';
+import '@vant/touch-emulator';
 import { encode, decode } from 'js-base64';
 window.encode = encode
 window.decode = decode
@@ -9,7 +10,6 @@ import 'vant/lib/index.css'
 // fix iOS String.prototype.normalize 
 import '@/utils/unorm.js'
 import '@/utils/ether'
-import '@vant/touch-emulator';
 import { createApp } from 'vue'
 import i18n from '@/language/index'
 import App from './App.vue'

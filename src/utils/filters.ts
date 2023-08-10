@@ -207,6 +207,13 @@ export const txTypeToIcon = (data: any) => {
       if (jsonData.type == 6) {
         return 'icon-bottom'
       }
+      if (jsonData.type == 0) {
+        if (to.toUpperCase() == myAddr) {
+          return 'icon-bottom'
+        } else {
+          return 'icon-jiantou_youshang'
+        }
+      }
       if (txTypes.includes(jsonData.type)) {
         return 'icon-jiantou_youshang'
       }
@@ -227,45 +234,49 @@ export const handleTxType = (item: any) => {
   if (txType === store.getters['account/chainParsePrefix']) {
     const data = getInput(input)
     if (data) {
-        if (data.type == 6) {
-          const { nft_address } = data
-          const level = getSNFTLevel(nft_address)
-          return `SNFT(${level}) ` + i18n.global.t('common.conver')
+      if (data.type == 6) {
+        const { nft_address } = data
+        const level = getSNFTLevel(nft_address)
+        return `SNFT(${level}) ` + i18n.global.t('common.conver')
+      }
+      if (data.type == 1) {
+        const { nft_address } = data
+        const level = getSNFTLevel(nft_address)
+        let txType = ''
+        let nftType = ''
+        if (to.toUpperCase() == myAddr) {
+          txType = i18n.global.t('transactiondetails.recive')
+        } else {
+          txType = i18n.global.t('transationHistory.send')
         }
-        if (data.type == 1) {
-          const { nft_address } = data
-          const level = getSNFTLevel(nft_address)
-          let txType = ''
-          let nftType = ''
-          if (to.toUpperCase() == myAddr) {
-            txType = i18n.global.t('transactiondetails.recive')
-          } else {
-            txType = i18n.global.t('transationHistory.send')
-          }
-          if(nft_address.substr(0,3) == '0x8') {
-            nftType = `SNFT(${level}) `
-          }
-          if(nft_address.substr(0,3) == '0x0') {
-            nftType = 'NFT '
-          }
-          return `${nftType}${txType}`
+        if (nft_address.substr(0, 3) == '0x8') {
+          nftType = `SNFT(${level}) `
         }
-        if (data.type == 0) {
-          if (to.toUpperCase() == myAddr) {
-            return `NFT ` + i18n.global.t('transactiondetails.recive')
-          } else {
-            return `NFT ` + i18n.global.t('transationHistory.send')
-          }
+        if (nft_address.substr(0, 3) == '0x0') {
+          nftType = 'NFT '
         }
+        return `${nftType}${txType}`
+      }
+      if (data.type == 0) {
+        if (to.toUpperCase() == myAddr) {
+          return `NFT ` + i18n.global.t('transactiondetails.recive')
+        } else {
+          return `NFT ` + i18n.global.t('transationHistory.send')
+        }
+      }
       if (txTypes.includes(data.type)) {
         return i18n.global.t('transationHistory.send')
       }
     }
   } else {
-    if(txType == 'contract') {
+    if (txType == 'contract') {
       return i18n.global.t('transationHistory.contract')
     } else {
-      return i18n.global.t('transationHistory.send')
+      if (to.toUpperCase() == myAddr) {
+        return i18n.global.t('transactiondetails.recive')
+      } else {
+        return i18n.global.t('transationHistory.send')
+      }
     }
   }
 

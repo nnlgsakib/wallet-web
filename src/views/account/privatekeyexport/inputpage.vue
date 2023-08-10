@@ -1,5 +1,5 @@
 <template>
-  <div class="bourse">
+  <div class="input-page">
        <NavHeader :title="`${toName ? t('restWallet.restWallet') : t('setting.safety')}`">
       <template v-slot:left>
         <span class="back" @click="appProvide.back">{{t('common.back')}}</span>
@@ -191,9 +191,12 @@ export default {
 
 <style lang="scss" scoped>
 .error {
-  :deep(.van-field__body) {
-    border: 1px solid #d73a49 !important;
+  :deep() {
+    .van-field__body {
+      border: 1px solid #d73a49 !important;
     background: #fbf2f3;
+
+    }
   }
 }
 
@@ -234,9 +237,7 @@ export default {
 .error-field {
   background-color: #000 !important;
 }
-:deep(.error-field) {
-  background-color: #000 !important;
-}
+
 .create-new-password {
   .rember_me{
       // background-color:red;
@@ -266,22 +267,28 @@ export default {
   .icon-yanjing {
     color: #9F54BA;
   }
-  :deep(.van-field__label) {
-    display: none;
-  }
-  :deep(.van-field__error-message) {
-    margin-bottom: 12px;
-  }
-  :deep(.van-cell:after) {
-    display: none;
-  }
-  :deep(.van-cell) {
-    padding: 0;
-  }
-  :deep(.van-field__body) {
-    margin-bottom: 10px;
+  :deep(){
+    .error-field{
+      background-color: #000 !important;
+    }
+    .van-field__label{
+      display: none;
+    }
+    .van-field__error-message{
+      margin-bottom: 12px;
+
+    }
+    .van-cell:after{
+      display: none;
+    }
+    .van-cell {
+      padding: 0;
+    }
+    .van-field__body{
+      margin-bottom: 10px;
     &:hover {
       border: 1px solid #9F54BA;
+    }
     }
   }
 }
@@ -311,140 +318,8 @@ export default {
 
 </style>
 <style  lang="scss" scoped>
-.bourse {
+.input-page {
   height: 100%;
-  .bourse-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 48px;
-    padding: 0 16px;
-    background: #fff;
-    box-sizing: border-box;
-    box-shadow: 0 1px 2px rgb(135 134 134 / 10%);
-  }
-
-  .bourse-container {
-    padding: 23px 15px 25px 15px;
-    font-size: 14px;
-    .bourse-container-w {
-      height: 160px;
-      border: 1px solid #E4E7E8;
-      padding: 0 17.5px;
-      .da {
-        height: 80px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        &:first-child {
-          border-bottom: 1px solid #E4E7E8;
-        }
-      }
-    }
-    .da-c {
-      display: flex;
-      align-items: center;
-      span {
-        margin: 0 35.5px 0 10px;
-      }
-    }
-    .da-img {
-      width: 20px;
-      height: 20px;
-      margin-top: -4px;
-    }
-    .right {
-      padding-left: 15px;
-      border-left: 1px solid #E4E7E8;
-      img {
-        width: 14px;
-        height: 14px;
-      }
-    }
-  }
-  .bourse-container-meaning {
-    margin-top: 15px;
-    padding-top: 15px;
-  }
-  .bourse-container-pull {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .hundred {
-      color: #3aae55;
-      font-size: 18px;
-      line-height: 30px;
-    }
-  }
-  .bourse-container-slider {
-    margin: 33.5px 0;
-  }
-  .bourse-container-server {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 15px;
-    div {
-      width: 310px;
-      height: 85px;
-      display: flex;
-      margin-left:15px;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      background: #F8F3F9;
-      border-radius: 7.5px;
-      box-sizing: border-box;
-    }
-    .active {
-      border: 1px solid #9F54BA;
-      span {
-        color: #9F54BA;
-      }
-    }
-    .t1 {
-      font-size: 12px;
-      color: #848484;
-      line-height: 20px;
-    }
-    .t2 {
-      font-size: 12px;
-      font-weight: bold;
-      line-height: 20px;
-    }
-  }
-  .bourse-container-server-b {
-    div {
-      background-color: #f1f3f4 !important;
-    }
-    .active-d {
-      border: 1px solid #000;
-    }
-  }
-  .bourse-container-btns {
-    width: calc(100% - 30px);
-    position: absolute;
-    bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .b1 {
-      width: 160px;
-    }
-  }
-  .bourse-container-error {
-    margin: 0 15px 25px 15px;
-    height: 56.5px;
-    background: #F8F3F9;
-    border-radius: 7.5px;
-    display: flex;
-    align-items: center;
-    padding: 0 15px;
-    span {
-      margin-left: 10px;
-      font-size: 12px;
-    }
-  }
   .t1 {
     font-size: 14px;
     color: #9F54BA;
@@ -517,26 +392,6 @@ export default {
 .bt {
   border-top: 1px solid #e4e7e8;
 }
-.bourse-img {
-  height: 135px;
-  background-color: #F8F3F9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  .exchange-welcome-icon {
-    height: 35px;
-    width: 35px;
-  }
-  .d1 {
-    margin: 10px 0;
-    font-size: 15px;
-  }
-  .d2 {
-    font-size: 12px;
-    color: #848484;
-  }
-}
 
 .error-field {
   :deep(.van-field__body) {
@@ -544,21 +399,6 @@ export default {
   }
 }
 
-.bourse-container-error,
-.bourse-container-warning {
-  height: 72px;
-  background: #fbf2f3;
-  border-radius: 7.5px;
-  margin-top: 15px !important;
-  display: flex;
-  align-items: center;
-  padding: 0 15px;
-  margin-bottom: 36.5px;
-  span {
-    margin-left: 10px;
-    font-size: 12px;
-  }
-}
 .btns-footer {
   position: fixed;
   bottom: 25px;

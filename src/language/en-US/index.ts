@@ -8,7 +8,7 @@ export default {
     send: 'Send',
     swap: 'Swap',
     token: 'Tokens',
-    collection: 'SNFTs',
+    collection: 'NFTs',
     return: 'Return',
     cancel: 'Cancel',
     next: 'Next',
@@ -1137,7 +1137,8 @@ export default {
     success: "Send operation was succeeful",
     backHome: "Back Home",
     tomore: 'Stay tuned! ! !',
-    enterErr: "The format of your input is not correct!"
+    enterErr: "The format of your input is not correct!",
+    details:"Details"
   },
   nftDetail: {
     name: 'Name',
@@ -1265,6 +1266,8 @@ export default {
     at: 'at'
   },
   bourse: {
+    addProfit:"Additional income",
+		addProfitDesc:"Additional amount of income generated in a year",
     placename: "Please enter the name of your NFT Staker",
     vainame: "The name cannot be empty",
     vainame2: "It is 4-20 in length and supports Chinese and English and numbers    ",
@@ -1319,7 +1322,7 @@ export default {
     tip19: "Tips：If you continue to perform this operation, you will not be able to obtain subsequent benefits.",
     closeSuccess: "Close the success",
     minusTit:"Staking Redemption",
-    addTit:"Stake Additional Tokens",
+    addTit:"Staking Additional",
     serverFee:"Server Fee",
     minusStaking:"After you redeem 700 ERB, you will have nochance to earn SNFT rewards again.",
     period: "Server Period Remaining",

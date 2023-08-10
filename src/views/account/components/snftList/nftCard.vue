@@ -3,7 +3,6 @@
     <div class="snft-card-l flex">
       <div :class="`level flex center-v ${select ? '' : 'pl-14'}`">
         <div :class="`icon flex center-h ${data.tagName.toLowerCase()}`"> 
-          <!-- {{ data.tagName }} -->
           <span>L</span><span>{{ data.tagIdx }}</span>
         
         </div>
@@ -14,16 +13,6 @@
     </div>
     <div class="snft-card-r" v-show="!select">
       <div class="flex right center-v link-icons">
-        <!-- <van-popover
-        v-model:show="showPopover2"
-        placement="top"
-        class="nft-tag-popover"
-      >
-        <div class="lh-16 text-center">{{ t('common.viewInExchange') }}</div>
-        <template #reference>
-          <i class="iconfont icon-fangwujianzhuwugoujianbeifen" @click.stop="toNftExchange"  @mouseover="showPopover2 = true" @mouseout="showPopover2 = false"></i>
-        </template>
-      </van-popover> -->
       <van-popover
         v-model:show="showPopover"
         placement="top"
@@ -34,8 +23,6 @@
           <i class="iconfont icon-network" @click.stop="toBrowser"  @mouseover="showPopover = true" @mouseout="showPopover = false"></i>
         </template>
       </van-popover>
-        
-    
       </div>
     </div>
 

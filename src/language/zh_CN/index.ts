@@ -1149,7 +1149,8 @@ export default {
         success: "发送操作成功",
         backHome: "回到首页",
         tomore: '敬请期待!!!',
-        enterErr: "你输入的格式不正确！"
+        enterErr: "你输入的格式不正确！",
+        details:"详情"
 
     },
     // nft详情
@@ -1273,6 +1274,8 @@ export default {
         at: '的',
     },
     bourse: {
+        addProfit:"追加收益",
+        addProfitDesc:"追加金额一年产生的收益",
         placename: "请输入名称",
         vainame: "名称不能为空",
         vainame2: "4-20个长度,支持中英文、数字",
