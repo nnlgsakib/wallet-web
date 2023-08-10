@@ -8,7 +8,7 @@ You can find the code here.If you find any issue,feel free to contact us.
 
 For more information,you can view our document.
 
-[Wormholes Wallet Document](https://www.erbie.io/docs/wallet/)
+[Erbie Wallet Document](https://www.erbie.io/docs/wallet/)
 
 ## Project setup
 ```
