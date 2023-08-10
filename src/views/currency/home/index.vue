@@ -39,15 +39,15 @@
     </div>
     <div class="tx-tit lh-30 pl-14 pr-14 mt-20">{{ t("common.hsitory") }}</div>
     <div class="swap-list" v-show="!loading">
-      <DynamicScroller class="scroller" :items="txList" minItemSize="30" keyField="txId" pageMode>
+      <!-- <DynamicScroller class="scroller" :items="txList" minItemSize="30" keyField="txId" pageMode>
         <template v-slot="{ item, active, index }">
           <DynamicScrollerItem :item="item" :active="active" :data-index="index">
             <CollectionCard @handleClick="handleView(item)" @handleSend="handleSend" @handleCancel="handleCancel" :data="item" />
           </DynamicScrollerItem>
         </template>
 
-      </DynamicScroller>
-
+      </DynamicScroller> -->
+      <CollectionCard @handleClick="handleView(item)" v-for="item in txList" :key="item.hash" @handleSend="handleSend" @handleCancel="handleCancel" :data="item" />
       <NoData v-if="!txList.length" :message="$t('wallet.no')" />
 
       <van-dialog v-model:show="showTransactionModal" title :showCancelButton="false" :showConfirmButton="false" closeOnClickOverlay class="transfer-detail-modal">

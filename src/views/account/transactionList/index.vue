@@ -8,13 +8,15 @@
   </NavHeader>
   <div class="transaction-history">
     <div class="all" v-show="!loading">
-      <DynamicScroller class="scroller" :items="transactionList" minItemSize="30" keyField="txId" :pageMode="true">
+      <!-- <DynamicScroller class="scroller" :items="transactionList" minItemSize="30" keyField="txId" :pageMode="true">
         <template v-slot="{ item, active, index }">
           <DynamicScrollerItem :item="item" :active="active" :data-index="index">
             <CollectionCard @handleClick="handleView(item)" @handleSend="handleSend" @handleCancel="handleCancel" :data="item" :active="route.query.hash?.toString() === item.hash" />
           </DynamicScrollerItem>
         </template>
-      </DynamicScroller>
+      </DynamicScroller> -->
+      <CollectionCard @handleClick="handleView(item)" @handleSend="handleSend" v-for="item in transactionList" :key="item.hash" @handleCancel="handleCancel" :data="item" :active="route.query.hash?.toString() === item.hash" />
+
       <div v-show="!transactionList.length">
         <no-data />
       </div>
