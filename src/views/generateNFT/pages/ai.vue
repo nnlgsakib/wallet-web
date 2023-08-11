@@ -234,7 +234,7 @@ const handleGetGas = async () => {
     to: myAddr,
     from: myAddr,
     data: newdata,
-    value: ethers.utils.parseEther(sendVal.value.toString()),
+    value: isNormalCreate ? ethers.utils.parseEther('0') :ethers.utils.parseEther(sendVal.value.toString()),
   };
   const gas1 = await getGasFee(tx);
   return gas1;

@@ -147,7 +147,11 @@ export default defineComponent({
         });
         const darwedList =
           drawList.data && drawList.data.length
-            ? drawList.data.map((item: any) => item.nft_address)
+            ? drawList.data.filter((item: any) => {
+              if(item.drawed && item.drawfee) {
+                return item
+              }
+            }).map(item => item.nft_address.toLowerCase())
             : [];
         // @ts-ignore
         if (nfts && nfts.length) {
@@ -157,8 +161,9 @@ export default defineComponent({
               // 1: normal  value = 0
               // 2: ai drawed value = 1
               // 3: ai not draw value = 2
-              const pa = JSON.parse(web3.utils.toUtf8(item.raw_meta_url));
-              if (darwedList.includes(item.address)) {
+              const pa = JSON.parse(web3.utils.toUtf8(item.meta_url));
+              console.warn('===', pa,darwedList)
+              if (darwedList.includes(item.address.toLowerCase())) {
                 item.category = 1;
               } else {
                 if (pa.meta_url) {
@@ -170,17 +175,13 @@ export default defineComponent({
               item.meta_url = pa.meta_url;
               item.prompt = pa.meta_url;
               item.randomNumber = pa.randomNumber;
-              // item.nftCategory =
-              console.warn(
-                "web3.utils.toUtf8(item.raw_meta_url)",
-                web3.utils.toUtf8(item.raw_meta_url)
-              );
-              item.info = web3.utils.toUtf8(item.raw_meta_url);
+              item.info = JSON.stringify(pa);
             } catch (err) {
-              console.error(err);
+              console.error('-------------err', err);
               item.info = {};
             }
           });
+          console.warn('nfts', nfts)
           // @ts-ignore
           pageData.nftList.push(...nfts);
         }

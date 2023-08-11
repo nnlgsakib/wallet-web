@@ -8,8 +8,6 @@
        @click="showImg"
         v-if="!isAiNft"
         :src="nftInfo.meta_url"
-        width="6.8rem"
-        height="6.8rem"
       ></van-image>
       <div :class="`nft-ai ${nftInfo.category == 2 ? 'fail' : 'success'}`" v-else>
           <div class="flex center">
