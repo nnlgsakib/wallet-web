@@ -289,7 +289,7 @@ export default {
       if (name == 'erbie' && version >= 'v0.14.0') {
         return chainDataParse.erbie
       }
-      return ''
+      return chainDataParse.erbie
     }
   },
   mutations: {
