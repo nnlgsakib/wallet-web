@@ -64,7 +64,7 @@ const vuexLocal = new VuexPersistence({
       movePwd,
       hasBackUpMnemonic,
       lastDelayTime,
-      chainVersion
+      chainVersion: chainVersion2
     },
     common,
     transfer,
@@ -100,7 +100,7 @@ const vuexLocal = new VuexPersistence({
       system: {
         language,
         version,
-        chainVersion,
+        chainVersion: chainVersion2,
         layoutType,
         transferUSDRate,
         transferCNYRate,
