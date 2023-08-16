@@ -8,7 +8,7 @@
         </div>
       </div>
     </van-sticky>
-    <div :class="`${!loading && list.length ? 'pb-80' : ''}`">
+    <div>
       <van-list v-model:loading="loading" :finished="finished" @load="onLoad" :finished-text="finished ? '' : t('common.noMore')">
         <div :class="`snft-list-box ${list && list.length && finished ? 'pb-80' : ''}`">
           <div class="flex " v-for="(item) in list" :key="item.nft_address">
