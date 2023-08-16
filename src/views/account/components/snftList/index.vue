@@ -10,7 +10,7 @@
     </van-sticky>
     <div :class="`${!loading && list.length ? 'pb-80' : ''}`">
       <van-list v-model:loading="loading" :finished="finished" @load="onLoad" :finished-text="finished ? '' : t('common.noMore')">
-        <div :class="`snft-list-box `">
+        <div :class="`snft-list-box ${list && list.length && finished ? 'pb-80' : ''}`">
           <div class="flex " v-for="(item) in list" :key="item.nft_address">
             <div :class="`checkbox_img flex center-v pr-10 right pl-14 ${item.hasUnfreeze || typeof item.hasUnfreeze == 'undefined' ? '' : 'disabled'}`" v-show="isSelectComputed">
               <i v-if="item.flag" @click.stop="handleSelect(item)" class="iconfont icon-xuanzhong2"></i>
