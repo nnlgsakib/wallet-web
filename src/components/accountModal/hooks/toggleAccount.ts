@@ -49,11 +49,7 @@ export const useToggleAccount = () => {
       dispatch('account/updateTokensBalances')
       dispatch("account/getProviderWallet");
       dispatch('account/getChainVersion')
-      // dispatch("account/getExchangeStatus").then(res => {
-      //   if (res.status == 2 && res.ExchangerFlag) {
-      //     initExchangeData()
-      //   }
-      // })
+      dispatch("account/getExchangeStatus")
       dispatch('account/getCreatorStatus', wall.address)
 
       handleUpdate()
