@@ -25,12 +25,6 @@
       </van-list>
     </div>
   </div>
-  <!-- 
-  <SliderBottom>
-    <i18n-t keypath="wallet.buySnft" tag="div" class="text-center f-12">
-      <template v-slot:link><a :href="VUE_APP_OFFICIAL_EXCHANGE" target="__blank">{{ t('wallet.findMore') }}</a></template>
-    </i18n-t>
-  </SliderBottom> -->
   <Transition name="slider">
     <div class="load-tip flex center" v-if="isSelectComputed && loading">
       <div class="load-tip-con flex-1 flex center"><van-loading color="#9F54BA" size="13" /> <span class="ml-4">{{ t('common.loading') }}</span></div>
@@ -152,12 +146,9 @@ import { useTradeConfirm } from "@/plugins/tradeConfirmationsModal";
 import { TradeStatus } from "@/plugins/tradeConfirmationsModal/tradeConfirm";
 import { VUE_APP_EXCHANGES_URL, VUE_APP_OFFICIAL_EXCHANGE } from "@/enum/env";
 import SnftModal from "./snftModal.vue";
-import { getRandomColor } from "@/utils";
 import { web3 } from "@/utils/web3";
 import { ethers } from "ethers";
-import { TransactionTypes } from "@/store/modules/account";
 import Tip from '@/components/tip/index.vue'
-import { debounce, throttle } from "@/utils/utils";
 import router from "@/router";
 import SliderBottom from '@/components/sliderBottom/index.vue'
 export default defineComponent({
@@ -468,17 +459,17 @@ export default defineComponent({
       params2.page = "1";
       list.value = [];
       value.value = false
-      // onLoad();
     };
-    eventBus.on("changeAccount", (address) => {
-      show.value = false
-      params2.owner = address;
-      reLoading();
-      onLoad();
-    });
+    onMounted(() => {
+      eventBus.on("changeAccount", (address) => {
+        show.value = false
+        params2.owner = address;
+        reLoading();
+        onLoad();
+      });
+    })
     onUnmounted(() => {
       eventBus.off('changeAccount')
-      // window.removeEventListener('scroll', deFun)
     })
 
     const tabList = ref([
@@ -845,10 +836,6 @@ export default defineComponent({
   }
 }
 
-.snft-list-box {
-  // padding-bottom:70px;
-}
-
 .conver-label {
   font-weight: bold;
   color: #848484;
@@ -914,8 +901,6 @@ export default defineComponent({
 
 
 }
-
-.switch-box {}
 
 .tab-list {
   width: 200px;
@@ -1163,8 +1148,6 @@ export default defineComponent({
   border-radius: 5px;
   background: #fff;
   color: #9F54BA;
-
-  &-con {}
 }
 
 .snft_bottom {

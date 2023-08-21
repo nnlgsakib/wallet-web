@@ -1,6 +1,7 @@
 
 import { httpGet,httpPost } from '../request'
 import { nftaimint } from './nft'
+const contractApi = '/contractApi'  
 
 export type ValidParams = {
     index: string
@@ -15,6 +16,18 @@ export type GetCoefParams = {
 }
 export const getUsersCoefficient = (params: GetCoefParams) => {
     return httpPost(`${nftaimint}/v1/getUsersCoefficient`, params)
+  
+}
+
+export type ValidatorPageParams = {
+    order: 'score desc' | 'score asc' | 'amount desc' | 'amount asc' | 'weight desc' | 'weight asc',
+    page: string,
+    page_size: string
+}
+
+
+export const validatorPage = (params: ValidatorPageParams) => {
+    return httpGet(`${contractApi}/validator/page`, params)
   
 }
 

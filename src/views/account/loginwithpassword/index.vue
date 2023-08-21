@@ -220,7 +220,6 @@ export default {
         ? (switchPassType.value = false)
         : (switchPassType.value = true);
     };
-    let cookies = inject("$cookies");
     onMounted(() => {
     });
     const cancel = () => {

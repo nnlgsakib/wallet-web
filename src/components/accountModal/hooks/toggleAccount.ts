@@ -48,17 +48,19 @@ export const useToggleAccount = () => {
       commit('account/UPDATE_ACCOUNTINFO', account)
       dispatch('account/updateTokensBalances')
       dispatch("account/getProviderWallet");
-      dispatch("account/getExchangeStatus").then(res => {
-        if (res.status == 2 && res.ExchangerFlag) {
-          initExchangeData()
-        }
-      })
+      dispatch('account/getChainVersion')
+      // dispatch("account/getExchangeStatus").then(res => {
+      //   if (res.status == 2 && res.ExchangerFlag) {
+      //     initExchangeData()
+      //   }
+      // })
       dispatch('account/getCreatorStatus', wall.address)
 
       handleUpdate()
       return wall
     } catch (err) {
       const errstr = String(err)
+      console.warn('change addr', errstr)
       if (errstr.indexOf('password') > -1) {
         router.replace({ name: 'withpassword' })
       }

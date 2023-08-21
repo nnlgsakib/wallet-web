@@ -1,111 +1,5 @@
 <template>
-  <div class="guide-page pt-30">
-    <!-- <van-swipe class="my-swipe" :autoplay="3000" indicator-color="#9F54BA" @change="handleChange" :loop="true" lazy-render :stop-propagation="false">
-      <van-swipe-item key="1">
-        <div>
-          <WormTransition v-if="idx == 0">
-            <template v-slot:t1>
-              <img class="icon" src="./imgs/symbol2.png" />
-            </template>
-            <template v-slot:t2>
-              <img class="icon" src="./imgs/symbol3.png" />
-            </template>
-            <template v-slot:t3>
-              <img class="icon" src="./imgs/symbol4.png" />
-            </template>
-            <template v-slot:t4>
-              <img class="icon" src="./imgs/symbol5.png" />
-            </template>
-            <template v-slot:t5>
-              <img class="icon" src="./imgs/black.png" />
-            </template>
-            <template v-slot:icon>
-              <img class="logo" src="@/assets/token/logowallet.png" />
-            </template>
-          </WormTransition>
-          <div class="title tit-big text-center f-24">{{ t("introductorypage.bootstrap1") }}</div>
-          <div class="title-center tit-small text-center f-12">{{ t("introductorypage.bootstrap1title") }}</div>
-        </div>
-      </van-swipe-item>
-      <van-swipe-item key="2" >
-        <div>
-          <WormTransition  v-if="idx == 1">
-            <template v-slot:t1>
-              <img class="icon" src="./imgs/symbol2.png" />
-            </template>
-            <template v-slot:t2>
-              <img class="icon" src="./imgs/symbol3.png" />
-            </template>
-            <template v-slot:t3>
-              <img class="icon" src="./imgs/symbol4.png" />
-            </template>
-            <template v-slot:t4>
-              <img class="icon" src="./imgs/symbol5.png" />
-            </template>
-            <template v-slot:t5>
-              <img class="icon" src="./imgs/black.png" />
-            </template>
-            <template v-slot:icon>
-              <img src="./imgs/shakehands.png" />
-            </template>
-          </WormTransition>
-          <div class="title tit-big text-center f-24">{{ t("introductorypage.bootstrap2") }}</div>
-          <div class="title-center tit-small text-center f-12">{{ t("introductorypage.bootstrap2title") }}</div>
-        </div>
-      </van-swipe-item>
-      <van-swipe-item key="3">
-        <div>
-          <WormTransition  v-if="idx == 2">
-            <template v-slot:t1>
-              <img class="icon" src="./imgs/symbol2.png" />
-            </template>
-            <template v-slot:t2>
-              <img class="icon" src="./imgs/symbol3.png" />
-            </template>
-            <template v-slot:t3>
-              <img class="icon" src="./imgs/symbol4.png" />
-            </template>
-            <template v-slot:t4>
-              <img class="icon" src="./imgs/symbol5.png" />
-            </template>
-            <template v-slot:t5>
-              <img class="icon" src="./imgs/black.png" />
-            </template>
-            <template v-slot:icon>
-              <img src="./imgs/upload.png" />
-            </template>
-          </WormTransition>
-          <div class="title tit-big text-center f-24">{{ t("introductorypage.bootstrap3") }}</div>
-          <div class="title-center tit-small text-center f-12">{{ t("introductorypage.bootstrap3title") }}</div>
-        </div>
-      </van-swipe-item>
-      <van-swipe-item key="4">
-        <div>
-          <WormTransition  v-if="idx == 3">
-            <template v-slot:t1>
-              <img class="icon" src="./imgs/symbol2.png" />
-            </template>
-            <template v-slot:t2>
-              <img class="icon" src="./imgs/symbol3.png" />
-            </template>
-            <template v-slot:t3>
-              <img class="icon" src="./imgs/symbol4.png" />
-            </template>
-            <template v-slot:t4>
-              <img class="icon" src="./imgs/symbol5.png" />
-            </template>
-            <template v-slot:t5>
-              <img class="icon" src="./imgs/black.png" />
-            </template>
-            <template v-slot:icon>
-              <img src="./imgs/shield.png" />
-            </template>
-          </WormTransition>
-          <div class="title tit-big text-center f-24">{{ t("introductorypage.bootstrap4") }}</div>
-          <div class="title-center tit-small text-center f-12">{{ t("introductorypage.bootstrap4title") }}</div>
-        </div>
-      </van-swipe-item>
-    </van-swipe> -->
+  <div class="guide-page pt-20">
     <el-carousel autoplay @change="handleChange" indicator-position="outside">
       <el-carousel-item style="height: 70vh">
         <div>
@@ -417,7 +311,7 @@ export default {
 
   .title {
     line-height: 20px;
-    margin-top: 44px;
+    margin-top: 24px;
     margin-bottom: 16px;
   }
 

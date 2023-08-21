@@ -90,7 +90,25 @@ export default {
         ownValidator:"您自己的验证器地址",
         ownValidatorTip:"验证者需要将至少700个ERB押注到他们自己的地址，才能成为合格的完整节点，他们押注的越多，他们的权重就越高。",
         otherValidator:"其他验证器地址",
-        otherValidatorTip:"通过将ERB与具有高在线权重的验证器或指定的验证器进行押注，参与者可以参与SNFT挖矿。"
+        otherValidatorTip:"通过将ERB与具有高在线权重的验证器或指定的验证器进行押注，参与者可以参与SNFT挖矿。",
+        scoreTip:`Validator信誉值积分规则如下（百分制）：<br/><br/>
+
+        信誉值评分=在线权重(50%)+ERB收益(20%)+最近一次ERB收益与最新高度的高度差(30%)<br/><br/>
+        
+        - 在线权重积分方式：<br/>
+        &nbsp&nbsp在线权重   &nbsp&nbsp 积分<br/>
+        &nbsp&nbsp70&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp             50<br/>
+        &nbsp&nbsp50&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp             40<br/>
+        &nbsp&nbsp30&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp               0<br/>
+        &nbsp&nbsp30&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp               0<br/>
+        &nbsp&nbsp10&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp              0<br/>
+        &nbsp&nbsp1&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp              -50<br/><br/>
+        
+        - ERB收益按照个人收益占比积分：<br/>
+        &nbsp&nbspERB收益积分=个人ERB收益*验证者数量/验证者总ERB收益* 20，积分范围:0-20。<br/>
+        
+        - 高度差按照相差Validator数量的倍数积分：<br/>
+        &nbsp&nbsp每相差验证者数量的高度，即减一分，直至达到验证者数量的30倍高度差后，减至0分。 &nbsp&nbsp积分范围：0～30。`
     },
     // 引导窗口
     bootstrapwindow: {

@@ -49,7 +49,6 @@
       <van-button @click="reLoading">{{ t("createNft.retry") }}</van-button>
     </div>
   </div>
-  <!-- </van-pull-refresh> -->
 </template>
 
 <script lang="ts">
@@ -72,6 +71,7 @@ import {
   defineComponent,
   SetupContext,
   onUnmounted,
+  onMounted
 } from "vue";
 import { useStore } from "vuex";
 import { List, Toast, Button, PullRefresh, Sticky, Icon, Popover, Loading } from "vant";
@@ -148,7 +148,7 @@ export default defineComponent({
         const darwedList =
           drawList.data && drawList.data.length
             ? drawList.data.filter((item: any) => {
-              if(item.drawed && item.drawfee) {
+              if (item.drawed && item.drawfee) {
                 return item
               }
             }).map(item => item.nft_address.toLowerCase())
@@ -162,7 +162,7 @@ export default defineComponent({
               // 2: ai drawed value = 1
               // 3: ai not draw value = 2
               const pa = JSON.parse(web3.utils.toUtf8(item.meta_url));
-              console.warn('===', pa,darwedList)
+              console.warn('===', pa, darwedList)
               if (darwedList.includes(item.address.toLowerCase())) {
                 item.category = 1;
               } else {
@@ -234,10 +234,12 @@ export default defineComponent({
       eventBus.off("changeAccount")
     })
     // Update the current collectibles list each time you switch accounts
-    eventBus.on("changeAccount", (address) => {
-      params.owner = address;
-      reLoading();
-    });
+    onMounted(() => {
+      eventBus.on("changeAccount", (address) => {
+        params.owner = address;
+        reLoading();
+      });
+    })
     const toCreate = () => {
       if (Number(accountInfo.value.amount) == 0) {
         $wtoast.warn(t("wallet.haveNoMoney"));
