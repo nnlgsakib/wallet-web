@@ -104,15 +104,8 @@ export default defineComponent({
     const handleClose = () => {
       showModal.value = true
     }
-    // onMounted(() => {
-    //   let time = setTimeout(() => {
-    //       eventBus.emit('guideSnftModal',1)
-    //       clearTimeout(time)
-    //   },1000)
-    // })
     return {
       t,
-      // show2,
       handleClick,
       handleClose,
       showModal,

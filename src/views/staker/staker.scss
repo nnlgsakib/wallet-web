@@ -194,5 +194,8 @@ $fontColor: #848484;
         display: flex;
         align-items: center;
         justify-content: center;
+        .van-icon-question {
+            margin-left: 0 !important;
+        }
     }
 }

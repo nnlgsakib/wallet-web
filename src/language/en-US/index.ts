@@ -851,7 +851,24 @@ export default {
 		ownValidator:"Your own validator address",
     ownValidatorTip:"Validators need to stake a minimum of 700 ERB to their own address to become qualified full nodes, and the more they stake, the higher their weight will be.",
     otherValidator:"Other validator addresses",
-    otherValidatorTip:"Stakers can participate in SNFT mining by staking ERB either with validators who have high online weights or with specified validators."
+    otherValidatorTip:"Stakers can participate in SNFT mining by staking ERB either with validators who have high online weights or with specified validators.",
+    scoreTip:`The Validator Reputation Score rules are as follows (scored on a 100-point scale):<br/><br/>
+
+    Reputation Score = Online Weight (50%) + ERB Earnings (20%) + Difference between the most recent ERB earnings and the latest height (30%)<br/><br/>
+    
+    - Online Weight Scoring Method:<br/>
+    &nbsp&nbspOnline Weight   Points<br/>
+    &nbsp&nbsp70&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp             50<br/>
+    &nbsp&nbsp50&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp            40<br/>
+    &nbsp&nbsp30&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp              0<br/>
+    &nbsp&nbsp10&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp              0<br/>
+    &nbsp&nbsp1 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp             -50<br/><br/>
+    
+    - ERB Earnings are scored based on an individual’s proportionate earnings:<br/>
+    &nbsp&nbspERB Earnings Score = Individual ERB Earnings * Number of Validators / Validator Total &nbsp&nbspERB Earnings * 20, Score range: 0-20.<br/><br/>
+    
+    - Height Difference is scored based on the multiple of the number of Validators:<br/>
+    &nbsp&nbspFor every difference in height equivalent to the number of Validators, the score is &nbsp&nbspdecreased by one, until it reaches a height difference of 30 times the number of &nbsp&nbspValidators, at which point it is reduced to 0. Score range: 0-30.`
 
 
 

@@ -566,7 +566,7 @@ const isStaker = computed(() => {
 const freezeStatus = computed(() => {
     const select = stakerExtensions.value.find(item => item.selected)
     if (select && select.BlockNumber) {
-        return (blockNumber.value - select.BlockNumber) > (process.env.VUE_APP_NODE_ENV == 'production' ? 6307200 : 1) ? false : true
+        return (blockNumber.value - select.BlockNumber) > (process.env.VUE_APP_NODE_ENV == 'production' ? 17280 : 1) ? false : true
     } else {
         return false
     }

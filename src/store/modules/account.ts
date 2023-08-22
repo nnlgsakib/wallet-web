@@ -1072,7 +1072,7 @@ export default {
           const wall = await dispatch("createWalletByJson", { password, json });
           const newWallet = wall.connect(newprovider)
           const res = await newWallet.provider.getNetwork()
-          dispatch('getChainVersion')
+          
           commit('UPDATE_ETHNETWORK', res)
           commit('UPDATE_NETSTATUS', NetStatus.success)
           commit("UPDATE_WALLET", newWallet);
@@ -1087,8 +1087,6 @@ export default {
             commit('UPDATE_NETSTATUS', NetStatus.success)
             commit("UPDATE_WALLET", newWallet);
             commit('UPDATE_ETHNETWORK', res)
-            dispatch('getChainVersion')
-
             return newWallet
           } else {
             commit('UPDATE_NETSTATUS', NetStatus.success)
@@ -1103,7 +1101,6 @@ export default {
           const newWallet = wallet.connect(newprovider)
           const res = await newWallet.provider.getNetwork()
           commit('UPDATE_ETHNETWORK', res)
-          dispatch('getChainVersion')
           commit("UPDATE_WALLET", newWallet);
           commit('UPDATE_NETSTATUS', NetStatus.success)
           return newWallet

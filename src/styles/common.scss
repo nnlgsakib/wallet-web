@@ -290,7 +290,9 @@ a {
   bottom: 25px;
 }
 
-
+.validPopover {
+  max-width: 500px !important;
+}
 .nft-tag-popover {
   .van-popover__content {
     background: rgba($color: #000, $alpha: .7);
