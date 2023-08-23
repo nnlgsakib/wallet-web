@@ -197,7 +197,7 @@ export default defineComponent({
         $tradeConfirm.update({ status: "approve" });
         eventBus.emit('sendComfirm')
         const receipt = await txData.wait()
-
+        store.dispatch("account/waitTxQueueResponse")
         // await store.dispatch("account/waitTxQueueResponse", {
         //   callback(e: any) {
         //     waitTime.value = e;
