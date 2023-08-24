@@ -110,6 +110,7 @@
 </template>
 
 <script lang="ts">
+// @ts-nocheck
 import { defineComponent, onDeactivated, onUnmounted } from "@vue/runtime-core";
 import { computed, ref, onBeforeMount, onMounted, watch } from "vue";
 import { useStore } from "vuex";
