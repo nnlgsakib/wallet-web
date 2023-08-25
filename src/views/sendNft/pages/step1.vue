@@ -202,6 +202,9 @@ export default {
     :deep(.van-image) {
       border-radius: 7px;
       overflow: hidden;
+      width: 256px;
+      height: 256px;
+      border: 1px solid #eee;
     }
   }
   .info {
