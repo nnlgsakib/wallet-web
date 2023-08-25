@@ -824,7 +824,7 @@ export default {
         ispoor: "请确保余额充足",
         addPl: "追加质押",
         pledgeRed: "质押赎回",
-        addTips: "抱歉，质押赎回预计时间为 1 年。",
+        addTips: "抱歉，质押赎回预计时间为 1 天。",
         redemption: "赎回",
         snft: "SNFT",
         desc1: "您可以质押您的 SNFT，并有机会在创建新区块时获得奖励。",
@@ -924,7 +924,7 @@ export default {
         addTit: "追加的质押金额",
         addTip: "这是追加的质押金额",
         proxyAccountTip: "提示：质押期为一年。详情请参阅条款和规定。",
-        closeTip2: "抱歉，质押时间超过1年才可赎回。",
+        closeTip2: "抱歉，质押时间超过1天才可赎回。",
 
         beValidator: "成为矿工",
         modifValidator: "矿工管理",
@@ -1360,7 +1360,7 @@ export default {
         tipprofit:"这是您通过质押获得的总利润。",
         tipincome:"这是您在赎回后将获得的估计年度利润。",
         tipadd:"这是您想要质押的额外 ERB 数量。",
-        closeTip:"抱歉，质押预计赎回时间为 1 年。",
+        closeTip:"抱歉，质押预计赎回时间为 1 天。",
         sendProxyExchange:"发送代理质押者交易",
 
 
