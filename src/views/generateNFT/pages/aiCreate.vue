@@ -15,7 +15,7 @@
             </template>
           </van-popover>
         </div>
-        <van-field :class="wordErr ? 'error' : ''" label-align="top" v-model="promptWord" :disabled="query.address ? true : false" autosize :rows="6" clearable type="textarea" label="" :placeholder="t('generateNFT.placeholder')" :rules="[{ validator: validatorWord }]" />
+        <van-field :class="wordErr ? 'error' : ''" maxlength="112" label-align="top" v-model="promptWord" :disabled="query.address ? true : false" autosize :rows="6" clearable type="textarea" label="" :placeholder="t('generateNFT.placeholder')" :rules="[{ validator: validatorWord }]" />
 
         <div class="label mt-16">
           <span class="mr-4">*</span>{{ t("castingnft.royalty") }} ( 1%-10% )
@@ -136,7 +136,7 @@ const onSubmit = async () => {
     $wtoast.warn(t("generateNFT.normalNftTip"));
     return;
   }
-  if(readonlySwitch.value && !emailAddr.value){
+  if (readonlySwitch.value && !emailAddr.value) {
     return
   }
   try {
@@ -163,7 +163,7 @@ const onSubmit = async () => {
       gasFee.value = gas1;
     }
   } catch (err) {
-    $wtoast.fail(err.reason)
+    $wtoast.fail(err.message)
   }
 };
 
@@ -188,12 +188,12 @@ const handleGetGas = async () => {
   };
   const parstr = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(par)}`;
   const newdata = web3.utils.fromUtf8(parstr);
-  
+
   const tx = {
     to: myAddr,
     from: myAddr,
     data: newdata,
-    value: isNormalCreate ? ethers.utils.parseEther('0') :ethers.utils.parseEther(sendVal.value.toString()),
+    value: isNormalCreate ? ethers.utils.parseEther('0') : ethers.utils.parseEther(sendVal.value.toString()),
   };
   const gas1 = await getGasFee(tx);
   return gas1;

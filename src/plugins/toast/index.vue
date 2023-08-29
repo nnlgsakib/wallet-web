@@ -111,8 +111,10 @@ defineExpose({
   transform: translate3d(-50%, -50%, 0);
 }
 .wormholes-toast {
-  max-width: 200px;
+  max-width: 300px;
   min-width: 150px;
+  max-height: 90vh;
+  overflow-y: scroll;
   background: rgba($color: #000000, $alpha: 0.8);
   color: #fff;
   border-radius: 10px;

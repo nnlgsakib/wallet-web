@@ -413,7 +413,7 @@ export default {
         promptTip1:"使用人工智能:输入你想要描绘的提示或描述，选择人工智能模式，并支付一定的ERB费用。AI将专门为您创建NFT内容并将其发送到您的电子邮件。",
         promptTip2:"使用URL:输入现有NFT内容的URL，这些内容可以从OpenSea等可以读取图像信息的平台上获取。",
         promptTip:"可以通过两种方式生成链层NFT:",
-        placeholder:"提示词:请输入文字描述图片，例如:按照维米尔的《戴珍珠耳环的女孩》的风格画一个海唐。 \nSourceUrl:资产URL",
+        placeholder:"提示词:请输入文字描述图片，例如:按照维米尔的《戴珍珠耳环的女孩》的风格画一个海唐。 \nSourceUrl:资产URL(长度不超过112)",
         promptWordErr:"最多可输入70个字符串，只支持英文俚语、特殊符号或url地址",
         promptWordNotNull:"提示词/SourceUrl不能为空",
         normalNftTip:"您已勾选AI绘画，请填写有效提示词，最多输入70个字符串，仅支持英语俚语和特殊符号。",

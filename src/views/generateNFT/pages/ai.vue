@@ -32,6 +32,7 @@
           :rows="6"
           clearable
           type="textarea"
+          maxlength="112"
           label=""
           :placeholder="t('generateNFT.placeholder')"
           :rules="[{ validator: validatorWord }]"
@@ -204,7 +205,7 @@ const onSubmit = async () => {
     gasFee.value = gas1;
   }
   }catch(err) {
-    $wtoast.fail(t('common.noMoney'))
+    $wtoast.fail(err.message)
   }
 };
 
