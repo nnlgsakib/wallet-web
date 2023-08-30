@@ -12,9 +12,8 @@ import transfer  from './modules/transfer'
 import nft  from './modules/nft'
 import VuexPersistence from 'vuex-persist';
 import localforage from 'localforage';
-
-window.localforage = localforage
-const vuexLocal = new VuexPersistence({
+import deepmerge from 'deepmerge'
+export const vuexLocal = new VuexPersistence({
   storage: localforage,
   asyncStorage: true,
   reducer: (store) => {
@@ -154,8 +153,17 @@ const store = createStore({
   ]
 })
 
+// Actively synchronizes from cache to store
+export const asyncStoreFromLocal = () => {
+  let time = setTimeout(async() => {
+    const savedState = await vuexLocal.restoreState(vuexLocal.key, vuexLocal.storage)
+    store.replaceState(deepmerge(store.state, savedState || {}, {
+      arrayMerge: (destinationArray, sourceArray, options) => sourceArray
+    }))
+    clearTimeout(time)
+   },500)
+}
 
-window.store = store
 export default store
 export interface StoreReturns {
   [key: string]: any

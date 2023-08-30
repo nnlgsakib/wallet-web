@@ -34,6 +34,7 @@ import localforage, { clear } from "localforage";
 import eventBus from "./utils/bus";
 import { useWallet } from './hooks/useWallet';
 import { VUE_APP_NODE_URL, VUE_APP_NODE_NAME, VUE_APP_SCAN_URL } from "./enum/env";
+import { asyncStoreFromLocal } from "./store";
 
 export default {
   components: {
@@ -95,7 +96,7 @@ export default {
             action == "wromHoles-update" &&
             id != state.system.conversationId
           ) {
-            window.location.reload();
+            asyncStoreFromLocal()
           }
         }
       };

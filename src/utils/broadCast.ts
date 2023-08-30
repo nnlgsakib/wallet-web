@@ -21,9 +21,9 @@ export const useBroadCast = () => {
     }
     // Wallet update event
     const handleUpdate = () => {
-        if(judgeClient() != 'IOS') {
-        // @ts-ignore
-        postMessage({ action: 'wromHoles-update', id: store.state.system.conversationId })
+        if (judgeClient() != 'IOS') {
+            // @ts-ignore
+            postMessage({ action: 'wromHoles-update', id: store.state.system.conversationId })
 
         }
     }
