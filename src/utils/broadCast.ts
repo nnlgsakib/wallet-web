@@ -1,15 +1,10 @@
 //The same window broadcast synchronizes the data of each window
 
 import store from '@/store/index'
+import { BroadcastChannel } from 'broadcast-channel';
 
 export const useBroadCast = () => {
-    let broad: any = {
-        onmessage: (e: any) => { },
-        postMessage: (params: any) => { },
-    };
-    if (judgeClient() != 'IOS' && BroadcastChannel) {
-        broad = new BroadcastChannel('WormHoles-Wallet')
-    }
+    const broad = new BroadcastChannel('WormHoles-Wallet')
     // broadcast
 
     const postMessage = (params: any) => {
@@ -21,11 +16,7 @@ export const useBroadCast = () => {
     }
     // Wallet update event
     const handleUpdate = () => {
-        if (judgeClient() != 'IOS') {
-            // @ts-ignore
-            postMessage({ action: 'wromHoles-update', id: store.state.system.conversationId })
-
-        }
+        postMessage({ action: 'wromHoles-update', id: store.state.system.conversationId })
     }
     return {
         postMessage,

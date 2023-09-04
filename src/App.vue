@@ -89,9 +89,8 @@ export default {
       initWallet()
       const { handleUpdate, broad } = useBroadCast();
       broad.onmessage = (e: any) => {
-        const { data }: any = e;
-        const { action, id } = data;
-        if (data && action) {
+        const { action, id } = e;
+        if (e && action) {
           if (
             action == "wromHoles-update" &&
             id != state.system.conversationId

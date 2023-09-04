@@ -190,7 +190,7 @@ const onSubmit = async () => {
     if (!isNormalCreate) {
     const gas2 = await getGasFee({
       to: myAddr,
-      value: ethers.utils.parseEther("1"),
+      value: ethers.utils.parseEther("0"),
     });
 
     // Judge whether it is simple drawing or casting + drawing
