@@ -78,7 +78,7 @@ import {
   Popover as VanPopover,
   Switch as VanSwitch,
 } from "vant";
-import { onMounted, ref, Ref, watch } from "vue";
+import { onMounted, ref, Ref, watch, computed } from "vue";
 import BigNumber from "bignumber.js";
 import { useI18n } from "vue-i18n";
 import {
@@ -90,7 +90,7 @@ import {
 } from "@/http/modules/nft";
 import CommonModal from "@/components/commonModal/index.vue";
 import CreateModal from "../components/createModal.vue";
-import { getWallet } from "@/store/modules/account";
+import { getWallet, getProvider } from "@/store/modules/account";
 import { useStore } from "vuex";
 import { ethers } from "ethers";
 import { web3 } from "@/utils/web3";
@@ -117,6 +117,7 @@ const route = useRoute();
 const query: any = route.query;
 const drawInfo = query.data ? JSON.parse(decodeURIComponent(query.data)) : null;
 const info = drawInfo && drawInfo.info ? JSON.parse(drawInfo.info) : drawInfo
+const accountInfo = computed(() => store.state.account.accountInfo)
 
 const promptWord = ref(info ? info.prompt : "");
 const checked = ref(info.aiModel || drawInfo.modif || false);
@@ -198,13 +199,25 @@ const handleGetGas = async () => {
   const gas1 = await getGasFee(tx);
   return gas1;
 };
-
+const handleChange = async() => {
+    const provider = await getProvider()
+    const balance = await provider.getBalance(accountInfo.value.address)
+    const am = ethers.utils.formatEther(balance);
+    const minVal = sendVal.value + 1
+    if(new BigNumber(am).lt(minVal)) {
+      $wtoast.warn(t('common.ispoor'))
+      checked.value = false
+      showGenerateModal.value = false
+    }
+}
 
 watch(() => checked.value, n => {
   if (!n) {
     emailAddr.value = ''
+  } else {
+    handleChange()
   }
-})
+},{immediate: true})
 
 const successCallback = () => {
   const back = decode(query.backUrl)
@@ -476,6 +489,8 @@ onMounted(async () => {
     onSubmit()
   }
 });
+
+
 </script>
 <style lang="scss" scoped>
 .ai-page {

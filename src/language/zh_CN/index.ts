@@ -220,7 +220,7 @@ export default {
     },
     common: {
         importerror: '导入失败',
-
+        ispoor: '余额不足，请补充资金！',
         clearCanche:"清除缓存",
         clearCancheSuccess:"缓存清除成功",
         days:"天",
@@ -426,7 +426,7 @@ export default {
         emailError:"该地址不符合电子邮箱地址规则",
         geneateComfirm:"生成NFT确认",
         drawVal:"AI绘画费用",
-        aiDrawTip:"输入AI提示词并选择此模式后，AI会为您创建一个NFT。这需要少量的ERB费用，在测试网阶段，10 ERB是测试标准。",
+        aiDrawTip:"输入AI提示词并选择此模式后，AI会为您创建一个NFT。这需要少量的ERB费用，在测试网阶段，{money} ERB是测试标准。",
         emailTip:"邮箱将接收 ErbieChain 为您生成的 AI NFT。"
     },
     // 复制弹窗

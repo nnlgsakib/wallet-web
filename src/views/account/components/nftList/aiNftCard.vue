@@ -1,7 +1,7 @@
 <template>
   <div @click="toDetail" :class="`nft-card    ${layoutType == 'list' ? ' flex between' : ''
     } ${layoutType} pb-14`">
-    <div :class="`info clickActive  ${layoutType == 'list' ? 'flex between' : ''}`">
+    <div :class="`info ${layoutType == 'list' ? 'flex between' : 'clickActive'}`">
       <div class="icon flex center">
         <van-image :src="data.meta_url" fit="cover" v-if="data.meta_url" />
         <div :class="`nft-ai ${data.category == 2 ? 'fail' : 'success'}`" v-else>
@@ -20,6 +20,9 @@
       <div :class="`address  ${layoutType == 'list' ? 'flex center-v between' : ''}`">
         <div class="add lh-14 h-14">{{ addressMask(data.address) }}</div>
         <div class="draw-btn" v-if="data.category == 2" @click.stop="toDraw">
+          {{ t("generateNFT.AIDrawing2") }}
+        </div>
+        <div class="draw-btn gary" v-if="data.category == 4">
           {{ t("generateNFT.AIDrawing2") }}
         </div>
       </div>
@@ -158,19 +161,20 @@ export default defineComponent({
   .draw-btn {
     width: 82px;
     margin-top: 5px;
+    cursor: pointer;
+    &.gary {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
   }
 }
 
 .nft-card {
-
   &.card:hover {
     cursor: pointer;
-
     .info {
       transition: 0.3s ease;
       box-shadow: 0px 2px 14px rgba($color: #ccc, $alpha: 0.4);
-
-      /* background:#F8F3F9; */
       color: #9f54ba;
     }
 
@@ -300,5 +304,8 @@ export default defineComponent({
   color: #fff;
   background: #9f54ba;
   border-radius: 12px;
+  &.gary {
+      background-color: #ccc;
+    }
 }
 </style>

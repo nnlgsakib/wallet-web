@@ -26,9 +26,9 @@
           </div>
         </div>
         <div class="line-box flex between center-v pl-16 pr-16">
-          <div class="line van-hairline--bottom"></div>
+          <div class="line"></div>
           <div class="text-bold f-12">{{ t("sendNFT.to") }}</div>
-          <div class="line van-hairline--bottom"></div>
+          <div class="line"></div>
         </div>
         <!-- recipient -->
         <div class="to from flex between center-v" :title="account.data.address">
@@ -640,8 +640,9 @@ export default {
 
 .line-box {
   .line {
-    height: 1px;
+    height: 0;
     width: 46%;
+    border-bottom:1PX solid #eee;
   }
 }
 

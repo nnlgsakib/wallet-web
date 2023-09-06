@@ -145,14 +145,19 @@ export default defineComponent({
         const drawList = await getDrawInfoByNftaddrs({
           nftaddrs: JSON.stringify(nftaddrs),
         });
+        const nowTime = new Date().getTime()
         const darwedList =
           drawList.data && drawList.data.length
-            ? drawList.data.filter((item: any) => {
-              if (item.drawed && item.drawfee) {
-                return item
+            ? drawList.data.map((item: any) => {
+              const { drawtime } = item;
+              const isOverTime = (nowTime - (drawtime * 1000)) < 600000 ? false : true
+              return {
+                ...item,
+                progress: isOverTime
               }
-            }).map(item => item.nft_address.toLowerCase())
+            })
             : [];
+            console.log('darwedList', darwedList)
         // @ts-ignore
         if (nfts && nfts.length) {
           nfts.forEach((item: any) => {
@@ -161,10 +166,20 @@ export default defineComponent({
               // 1: normal  value = 0
               // 2: ai drawed value = 1
               // 3: ai not draw value = 2
+              // 4: ai is drawing value = 4
               const pa = JSON.parse(web3.utils.toUtf8(item.meta_url));
-              console.warn('===', pa, darwedList)
-              if (darwedList.includes(item.address.toLowerCase())) {
-                item.category = 1;
+              const current = darwedList.find(child => item.address.toUpperCase() == child.nft_address.toUpperCase())
+              if (current) {
+                if(current.drawfee && current.drawed) {
+                  item.category = 1;
+                } else {
+                  if(!current.progress && current.drawtime) {
+                    item.category = 4;
+                  } else {
+                    item.category = 2;
+                  }
+                }
+                item.progress = current.progress;
               } else {
                 if (pa.meta_url) {
                   item.category = 0;
@@ -200,19 +215,11 @@ export default defineComponent({
         loadNft.value = true;
       }
       try {
-        if (sortVal.value == 0) {
           params.page = Number(params.page) + 1 + "";
           const list = await getNftList(params);
           if (!list || !list.length) {
             finished.value = true;
           }
-        } else {
-          aiparams.index = Number(aiparams.index) + Number(aiparams.count) + "";
-          const list = await getAiNftList(aiparams);
-          if (!list || !list.length) {
-            finished.value = true;
-          }
-        }
       } catch (err) {
         nftErr.value = true;
         Toast(JSON.stringify(err));

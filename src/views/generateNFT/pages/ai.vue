@@ -56,7 +56,7 @@
         <div class="label mt-16 mb-8">
           {{ t("generateNFT.creativeMode") }}
           <van-popover v-model:show="showSwitch" theme="dark" placement="right">
-            <p class="pl-10 pr-10">{{ t("generateNFT.aiDrawTip") }}</p>
+            <p class="pl-10 pr-10">{{ t("generateNFT.aiDrawTip",{money: sendVal}) }}</p>
             <template #reference>
               <van-icon
                 name="question hover"
@@ -67,7 +67,7 @@
           </van-popover>
         </div>
         <div class="form-item">
-          <van-switch v-model="checked" size="20" :disabled="readonlySwitch" />
+          <van-switch v-model="checked" size="20" @change="handleChange" :disabled="readonlySwitch" />
         </div>
 
         <div v-if="checked">
@@ -151,7 +151,7 @@ import {
 } from "@/http/modules/nft";
 import CommonModal from "@/components/commonModal/index.vue";
 import CreateModal from "../components/createModal.vue";
-import { getWallet } from "@/store/modules/account";
+import { getProvider, getWallet } from "@/store/modules/account";
 import { useStore } from "vuex";
 import { ethers } from "ethers";
 import { web3 } from "@/utils/web3";
@@ -174,7 +174,7 @@ const wordErr = ref(false);
 const royaltyErr = ref(false);
 const showPopover3 = ref(false);
 const route = useRoute();
-
+const accountInfo = computed(() => store.state.account.accountInfo)
 const chainPrefix = computed(() => store.getters['account/chainParsePrefix'])
 const onSubmit = async () => {
   if (checked.value && RegUrl.test(promptWord.value)) {
@@ -540,6 +540,19 @@ onMounted(async () => {
     emailAddr.value = resEmail.data;
   }
 });
+
+const handleChange = async(e) => {
+  if(e) {
+    const provider = await getProvider()
+    const balance = await provider.getBalance(accountInfo.value.address)
+    const am = ethers.utils.formatEther(balance);
+    const minVal = sendVal.value + 1
+    if(new BigNumber(am).lt(minVal)) {
+      $wtoast.warn(t('common.ispoor'))
+      checked.value = false
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .ai-page {
