@@ -26,6 +26,7 @@
     "localStorage": "^1.0.4",
     "mitt": "^3.0.0",
     "moment": "^2.29.1",
+    "nprogress": "^0.2.0",
     "postcss-px2rem": "^0.3.0",
     "qrcode.vue": "^3.3.3",
     "tslib": "^2.4.0",

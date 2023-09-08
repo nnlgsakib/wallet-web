@@ -1,7 +1,6 @@
 
-import localforage from 'localforage';
 import store from '@/store'
-
+import NProgress from 'nprogress'
 
 import { createRouter, createWebHashHistory, RouteRecordRaw, createWebHistory } from 'vue-router'
 import Home from '../views/account/home.vue'
@@ -325,7 +324,7 @@ const router = createRouter({
 
 
 router.beforeEach(async (to, form, next) => {
-
+  NProgress.start();
   // @ts-ignore
   await store.restored;
   const localPwd = localStorage.getItem(pwdKey)
@@ -392,6 +391,10 @@ router.beforeEach(async (to, form, next) => {
   }
 })
 
+router.afterEach((to) => {
+  console.warn('NProgress',NProgress)
+  NProgress.done()
+})
 
 
 export default router
