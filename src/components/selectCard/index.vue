@@ -1,5 +1,5 @@
 <template>
-  <div class="select-card flex van-hairline--bottom clickActive" @click.stop="handleClick">
+  <div class="select-card flex border-bottom clickActive" @click.stop="handleClick">
     <div class="net-status flex center" v-if="hasSelect">
       <i :class="`iconfont ${
           select ? 'icon-danxuan' : 'icon-danxuan1'

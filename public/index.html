@@ -6,15 +6,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <% if (htmlWebpackPlugin.options.env.VUE_APP_NODE_ENV === 'development') { %>
+  <% if (htmlWebpackPlugin.options.env.VUE_APP_NODE_ENV==='development' ) { %>
     <link rel="icon" href="/favicon.ico">
     <link rel="stylesheet" href="/styles/loading.css">
-  <% } else { %>
-    <link rel="icon" href="/wallet/favicon.ico">
-    <link rel="stylesheet" href="/wallet/styles/loading.css">
-  <% } %>
-  <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
-  <title>Erbie Wallet</title>
+    <% } else { %>
+      <link rel="icon" href="/wallet/favicon.ico">
+      <link rel="stylesheet" href="/wallet/styles/loading.css">
+      <% } %>
+        <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
+        <title>Erbie Wallet</title>
 </head>
 
 <body class="scrollBar">
@@ -25,19 +25,18 @@
   <div class="container loading-container" id="loading-page-box">
     <div class="out-box">
       <div class="loading-page-box">
-        <% if (htmlWebpackPlugin.options.env.VUE_APP_NODE_ENV === 'development') { %>
+        <% if (htmlWebpackPlugin.options.env.VUE_APP_NODE_ENV==='development' ) { %>
           <img src="/icons/logo1.png" alt="">
-        <% } else { %>
-          <img src="/wallet/icons/logo1.png" alt="">
-        <% } %>
+          <% } else { %>
+            <img src="/wallet/icons/logo1.png" alt="">
+            <% } %>
       </div>
       <div class="loading-page-box">
-        <% if (htmlWebpackPlugin.options.env.VUE_APP_NODE_ENV === 'development') { %>
+        <% if (htmlWebpackPlugin.options.env.VUE_APP_NODE_ENV==='development' ) { %>
           <img class="loading-spinner" src="/icons/loading.svg" alt="" />
-        <% } else { %>
-          <img class="loading-spinner" src="/wallet/icons/loading.svg" alt="" />
-        <% } %>
-
+          <% } else { %>
+            <img class="loading-spinner" src="/wallet/icons/loading.svg" alt="" />
+            <% } %>
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="choose-token-card flex between van-hairline--bottom clickActive" @click="toTokenHome">
+  <div class="choose-token-card flex between border-bottom clickActive" @click="toTokenHome">
     <div class="choose-token-card-left flex">
       <div class="token-icon flex center">
         <div class="icon-box">

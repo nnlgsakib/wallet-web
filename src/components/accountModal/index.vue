@@ -8,7 +8,7 @@
     closeOnClickOverlay
   >
     <!-- <van-action-sheet v-model:show="show" class="account-action-sheet" teleport="#page-box"> -->
-    <div class="sheet-header van-hairline--bottom">
+    <div class="sheet-header border-bottom">
       {{ t("wallet.account") }}
     </div>
     <div class="account-container">
@@ -16,7 +16,7 @@
         <div
           v-for="(item, index) in options"
           :key="item.value"
-          class="van-hairline--bottom clickActive"
+          class="border-bottom clickActive"
           @click="handleSelect(item, index)"
           :data-selected="accountInfo.address.toUpperCase() ==
                   item.address.toUpperCase() ? true : false"

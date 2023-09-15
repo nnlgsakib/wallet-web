@@ -464,6 +464,8 @@ export default defineComponent({
     onMounted(() => {
       eventBus.on("changeAccount", (address) => {
         show.value = false
+        value.value = false
+        isSelectComputed.value = false;
         params2.owner = address;
         reLoading();
         onLoad();

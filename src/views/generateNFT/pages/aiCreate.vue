@@ -1,6 +1,6 @@
 <template>
   <div class="ai-page">
-    <van-form @submit="onSubmit">
+    <van-form @submit="onSubmit" ref="formRef">
       <van-cell-group class="formGroup">
         <div class="label mb-6">
           <span class="mr-4">*</span>{{ t("generateNFT.promptWord") }}
@@ -15,13 +15,12 @@
             </template>
           </van-popover>
         </div>
-        <van-field :class="wordErr ? 'error' : ''" maxlength="112" label-align="top" v-model="promptWord" :disabled="query.address ? true : false" autosize :rows="6" clearable type="textarea" label="" :placeholder="t('generateNFT.placeholder')" :rules="[{ validator: validatorWord }]" />
+        <van-field :class="wordErr ? 'error' : ''" maxlength="112" label-align="top" v-model="promptWord" :disabled="isModif" autosize :rows="6" clearable type="textarea" label="" :placeholder="t('generateNFT.placeholder')" :rules="[{ validator: validatorWord }]" />
 
         <div class="label mt-16">
           <span class="mr-4">*</span>{{ t("castingnft.royalty") }} ( 1%-10% )
-
         </div>
-        <van-field v-model="royalty" name="royalty" :disabled="query.address ? true : false" :class="royaltyErr ? 'error' : ''" type="digit" @blur="blurRoyalty" :placeholder="$t('castingnft.royaltyPlaceholder')" :rules="[{ validator: validRoyalty }]" />
+        <van-field v-model="royalty" name="royalty" :disabled="isModif" :class="royaltyErr ? 'error' : ''" type="digit" @blur="blurRoyalty" :placeholder="$t('castingnft.royaltyPlaceholder')" :rules="[{ validator: validRoyalty }]" />
 
         <div class="label mt-16 mb-8">
           {{ t("generateNFT.creativeMode") }}
@@ -101,11 +100,12 @@ import { useRouter, useRoute } from "vue-router";
 import { getGasFee } from "@/store/modules/account";
 import { decode } from "js-base64";
 
+const formRef = ref()
 const { $wtoast } = useToast();
 const { $tradeConfirm } = useTradeConfirm();
 const router = useRouter();
 const store = useStore();
-const { dispatch, state } = store
+const { dispatch, state } = store;
 const { t } = useI18n();
 const showWord = ref(false);
 const emailErr = ref(false);
@@ -116,8 +116,9 @@ const route = useRoute();
 
 const query: any = route.query;
 const drawInfo = query.data ? JSON.parse(decodeURIComponent(query.data)) : null;
-const info = drawInfo && drawInfo.info ? JSON.parse(drawInfo.info) : drawInfo
-const accountInfo = computed(() => store.state.account.accountInfo)
+const info = drawInfo && drawInfo.info ? JSON.parse(drawInfo.info) : drawInfo;
+const accountInfo = computed(() => store.state.account.accountInfo);
+const sensitiveWords = computed(() => store.state.configuration.setting.sensitiveWords)
 
 const promptWord = ref(info ? info.prompt : "");
 const checked = ref(info.aiModel || drawInfo.modif || false);
@@ -130,6 +131,7 @@ const isModif = ref(drawInfo.modif ? true : false);
 const royalty: Ref<number | string> = ref(
   drawInfo.royalty ? Number(drawInfo.royalty) : ""
 );
+debugger
 
 const showGenerateModal = ref(false);
 const onSubmit = async () => {
@@ -138,7 +140,7 @@ const onSubmit = async () => {
     return;
   }
   if (readonlySwitch.value && !emailAddr.value) {
-    return
+    return;
   }
   try {
     showGenerateModal.value = true;
@@ -164,7 +166,7 @@ const onSubmit = async () => {
       gasFee.value = gas1;
     }
   } catch (err) {
-    $wtoast.fail(err.message)
+    $wtoast.fail(err.message);
   }
 };
 
@@ -178,7 +180,7 @@ const handleGetGas = async () => {
   } else {
     nft_data.prompt = promptWord.value;
     nft_data.randomNumber = randomNumber;
-    nft_data.version = 'v1'
+    nft_data.version = "v1";
   }
   const par = {
     version: "0.0.1",
@@ -187,42 +189,50 @@ const handleGetGas = async () => {
     exchanger: "",
     meta_url: web3.utils.fromUtf8(JSON.stringify(nft_data)),
   };
-  const parstr = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(par)}`;
+  const parstr = `${store.getters["account/chainParsePrefix"]}:${JSON.stringify(
+    par
+  )}`;
   const newdata = web3.utils.fromUtf8(parstr);
 
   const tx = {
     to: myAddr,
     from: myAddr,
     data: newdata,
-    value: isNormalCreate ? ethers.utils.parseEther('0') : ethers.utils.parseEther(sendVal.value.toString()),
+    value: isNormalCreate
+      ? ethers.utils.parseEther("0")
+      : ethers.utils.parseEther(sendVal.value.toString()),
   };
   const gas1 = await getGasFee(tx);
   return gas1;
 };
-const handleChange = async() => {
-    const provider = await getProvider()
-    const balance = await provider.getBalance(accountInfo.value.address)
-    const am = ethers.utils.formatEther(balance);
-    const minVal = sendVal.value + 1
-    if(new BigNumber(am).lt(minVal)) {
-      $wtoast.warn(t('common.ispoor'))
-      checked.value = false
-      showGenerateModal.value = false
-    }
-}
-
-watch(() => checked.value, n => {
-  if (!n) {
-    emailAddr.value = ''
-  } else {
-    handleChange()
+const handleChange = async () => {
+  const provider = await getProvider();
+  const balance = await provider.getBalance(accountInfo.value.address);
+  const am = ethers.utils.formatEther(balance);
+  const minVal = sendVal.value + 1;
+  if (new BigNumber(am).lt(minVal)) {
+    $wtoast.warn(t("common.ispoor"));
+    checked.value = false;
+    showGenerateModal.value = false;
   }
-},{immediate: true})
+};
+
+watch(
+  () => checked.value,
+  (n) => {
+    if (!n) {
+      emailAddr.value = "";
+    } else {
+      handleChange();
+    }
+  },
+  { immediate: true }
+);
 
 const successCallback = () => {
-  const back = decode(query.backUrl)
+  const back = decode(query.backUrl);
   location.href = `${back}?action=createNft&status=${true}`;
-}
+};
 // 1 normal create nft
 const normalCreate = async () => {
   const nft_data = {
@@ -249,7 +259,7 @@ const aiCreate = async () => {
   const nft_data = {
     prompt: promptWord.value,
     randomNumber,
-    version: 'v1'
+    version: "v1",
   };
   const { receipt, nft_address, owner } = await handleSendCreate(nft_data);
   const drawParams = {
@@ -262,12 +272,12 @@ const aiCreate = async () => {
   const sendData = {
     nft_address,
     owner,
-    version: "v1"
-  }
+    version: "v1",
+  };
   const txData = await dispatch("account/transaction", {
     value: sendVal.value,
     to: sendAddr.value,
-    data: web3.utils.fromUtf8(JSON.stringify(sendData))
+    data: web3.utils.fromUtf8(JSON.stringify(sendData)),
   });
   $tradeConfirm.update({ status: "approve" });
   const txReceipt = await txData.wait();
@@ -277,12 +287,13 @@ const aiCreate = async () => {
       status: "fail",
       hash: txData.hash,
       callBack() {
-        location.href = `${decode(query.backUrl)}?action=createNft&status=${false}`;
+        location.href = `${decode(
+          query.backUrl
+        )}?action=createNft&status=${false}`;
       },
     });
-    return Promise.reject('tx fail');
+    return Promise.reject("tx fail");
   }
-
 
   return { nft_address, owner, hash: txData.hash };
 };
@@ -297,7 +308,9 @@ const handleSendCreate = async (nft_data = {}, call = (v: any) => { }) => {
     exchanger: "",
     meta_url: web3.utils.fromUtf8(JSON.stringify(nft_data)),
   };
-  const parstr = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(par)}`;
+  const parstr = `${store.getters["account/chainParsePrefix"]}:${JSON.stringify(
+    par
+  )}`;
   const newdata = web3.utils.fromUtf8(parstr);
   const tx = {
     to: myAddr,
@@ -331,13 +344,13 @@ const handleConfirm = async () => {
   $tradeConfirm.open({
     disabled: [TradeStatus.pendding, TradeStatus.approve],
     callback() {
-      location.href = `${decode(query.backUrl)}?action=createNft&status=${true}`;
+      location.href = `${decode(
+        query.backUrl
+      )}?action=createNft&status=${true}`;
     },
-
   });
   try {
     const myAddr = state.account.accountInfo.address;
-    ;
     if (!readonlySwitch.value) {
       if (isNormalCreate) {
         await normalCreate();
@@ -355,7 +368,7 @@ const handleConfirm = async () => {
           const nft_data = {
             prompt: promptWord.value,
             randomNumber,
-            version: 'v1'
+            version: "v1",
           };
           const { receipt, nft_address, owner } = await handleSendCreate(
             nft_data
@@ -368,13 +381,12 @@ const handleConfirm = async () => {
         }
       }
     } else {
-      ;
-      const nft_address = drawInfo.address ? drawInfo.address.toString() : ""
+      const nft_address = drawInfo.address ? drawInfo.address.toString() : "";
       const sendData = {
         owner: myAddr,
         nft_address,
-        version: "v1"
-      }
+        version: "v1",
+      };
       const drawParams = {
         useraddr: myAddr.toString(),
         nftaddr: nft_address,
@@ -386,19 +398,19 @@ const handleConfirm = async () => {
       const txData = await dispatch("account/transaction", {
         value: sendVal.value,
         to: sendAddr.value,
-        data: web3.utils.fromUtf8(JSON.stringify(sendData))
+        data: web3.utils.fromUtf8(JSON.stringify(sendData)),
       });
       $tradeConfirm.update({ status: "approve" });
       const txReceipt = await txData.wait();
-
 
       if (txReceipt.status != 1) {
         $tradeConfirm.update({
           status: "fail",
           hash: txData.hash,
           callBack() {
-            location.href = `${decode(query.backUrl)}?action=createNft&status=${false}`;
-
+            location.href = `${decode(
+              query.backUrl
+            )}?action=createNft&status=${false}`;
           },
         });
         return;
@@ -413,7 +425,7 @@ const handleConfirm = async () => {
     console.error(err);
     $wtoast.warn(err.reason);
   } finally {
-    dispatch('account/waitTxQueueResponse')
+    dispatch("account/waitTxQueueResponse");
     showGenerateModal.value = false;
   }
 };
@@ -430,15 +442,31 @@ const validatorEmail = (v: string) => {
   emailErr.value = false;
   return true;
 };
+
 const validatorWord = (v: string) => {
   if (!v) {
     wordErr.value = true;
     return t("generateNFT.promptWordNotNull");
   }
-  if (
-    (regAa.test(v) && !RegUrl.test(v)) ||
-    (!regAa.test(v) && RegUrl.test(v))
-  ) {
+  if (regAa.test(v) && !RegUrl.test(v)) {
+    // Sensitive word blocking
+    const wordList = [];
+    sensitiveWords.value.forEach((e) => {
+      if (v.replace(/\s+/g, " ").toUpperCase().search(e.toUpperCase()) > -1) {
+        wordList.push(e);
+      }
+    });
+    if (wordList.length) {
+      wordErr.value = true;
+      return t("generateNFT.promptWordIsSensitive", {
+        words: wordList.join(","),
+      });
+    } else {
+      wordErr.value = false;
+      return true;
+    }
+  }
+  if (!regAa.test(v) && RegUrl.test(v)) {
     wordErr.value = false;
     return true;
   }
@@ -447,6 +475,7 @@ const validatorWord = (v: string) => {
     wordErr.value = true;
     return t("generateNFT.promptWordErr");
   }
+
   wordErr.value = false;
   return true;
 };
@@ -475,22 +504,24 @@ const blurRoyalty = () => {
 };
 
 const sendAddr = ref("");
-const sendVal = ref(0)
+const sendVal = ref(0);
 onMounted(async () => {
   const res = await getAiServerAddr();
   sendAddr.value = res.data;
-  const res2 = await getPaintFee()
-  sendVal.value = Number(ethers.utils.formatUnits(res2.data, 'ether'))
-  onSubmit()
-  if (readonlySwitch.value) {
-    const myAddr = state.account.accountInfo.address;
-    const resEmail = await getEmailByUser({ useraddr: myAddr });
-    emailAddr.value = resEmail.data;
-    onSubmit()
-  }
+  const res2 = await getPaintFee();
+  sendVal.value = Number(ethers.utils.formatUnits(res2.data, "ether"));
+  formRef.value?.validate().then(async(e) => {
+    console.log('valid', e)
+    onSubmit();
+    if (readonlySwitch.value) {
+      const myAddr = state.account.accountInfo.address;
+      const resEmail = await getEmailByUser({ useraddr: myAddr });
+      emailAddr.value = resEmail.data;
+      onSubmit();
+    }
+  })
+
 });
-
-
 </script>
 <style lang="scss" scoped>
 .ai-page {

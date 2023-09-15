@@ -22,7 +22,8 @@ import { Icon, Toast, Button, Sticky, Field } from "vant";
 import NavHeader from "@/components/navHeader/index.vue";
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
-import Vue, { inject } from "vue";
+import Vue, { inject, onMounted } from "vue";
+import { useStore } from 'vuex'
 export default {
   name: "pageMnemonic",
   components: {
@@ -35,6 +36,7 @@ export default {
     const route = useRoute();
     const router = useRouter();
     const { t } = useI18n();
+    const { dispatch } = useStore()
     const clickLeft = () => {
       router.back();
     };
@@ -44,6 +46,9 @@ export default {
         name: "home",
       });
     };
+    onMounted(() => {
+      dispatch("configuration/getConfiguration");
+    })
     return {
       appProvide,
       t,

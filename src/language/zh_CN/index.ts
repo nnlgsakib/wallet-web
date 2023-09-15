@@ -415,6 +415,7 @@ export default {
         promptTip:"可以通过两种方式生成链层NFT:",
         placeholder:"提示词:请输入文字描述图片，例如:按照维米尔的《戴珍珠耳环的女孩》的风格画一个海唐。 \nSourceUrl:资产URL(长度不超过112)",
         promptWordErr:"最多可输入70个字符串，只支持英文俚语、特殊符号或url地址",
+        promptWordIsSensitive:"您的提示词涉及到敏感词汇，请修改后再提交，\"{words}\"",
         promptWordNotNull:"提示词/SourceUrl不能为空",
         normalNftTip:"您已勾选AI绘画，请填写有效提示词，最多输入70个字符串，仅支持英语俚语和特殊符号。",
         creativeMode:"AI绘画模式",

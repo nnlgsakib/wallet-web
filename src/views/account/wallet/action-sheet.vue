@@ -17,7 +17,7 @@
         <div
           v-for="(item, index) in options"
           :key="item.value"
-          :class="`van-hairline--bottom clickActive ${
+          :class="`border-bottom clickActive ${
                   accountInfo.address.toUpperCase() ==
                   item.address.toUpperCase()
                     ? 'select'
