@@ -7,7 +7,7 @@
     </NavHeader>
     <div class="import introduce">
       <div class="import icon flex center" name="download">
-        <img src="@/assets/token/importpri.png" style="width:30px;height:30px;"/>
+        <img src="@/assets/token/importpri2.png" style="width:30px;height:30px;"/>
       </div>
       <div class="import account text-center">{{ t("import.importaccount") }}</div>
       <div>

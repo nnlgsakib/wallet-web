@@ -18,22 +18,12 @@ import { getRandomIcon, guid } from "@/utils/index";
 import { toRaw } from "vue";
 import { TransactionData, TransactionParams } from "./index";
 import { ETH, Token } from "@/utils/token";
-import { getPath } from "@/utils/ether";
-import { useStore } from "vuex";
 import store from "@/store/index";
 import {
   NetWorkData,
   netWorklist,
-  TransactionList,
-  TransactionRecord,
 } from "@/enum/network";
-// import { getEtherBalances } from "@mycrypto/eth-scan";
-import { useGasPrice } from "@/hooks/useGasPrice";
 import { setCookies, getCookies } from "@/utils/jsCookie";
-import router from "@/router";
-import { is_install } from "@/http/modules/common";
-import { getQuery } from "@/utils/utils";
-import { useI18n } from "vue-i18n";
 import i18n from "@/language/index";
 const erc20Abi: any = require("@/assets/json/erc20Abi.json");
 import { getContractAddress } from "@/http/modules/common";

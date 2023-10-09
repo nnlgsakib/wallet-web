@@ -83,7 +83,7 @@ export default {
         // @ts-ignore
         document.getElementById("app").style.display = "block";
         clearTimeout(time);
-      }, 300);
+      }, 400);
     };
     onMounted(() => {
       initWallet()

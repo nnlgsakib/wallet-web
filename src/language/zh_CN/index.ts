@@ -402,6 +402,7 @@ export default {
 
     },
     generateNFT: {
+        repeatImgUrl:'该URL已经铸造过，请勿重复铸造',
         noPic:"The creation",
         noPic2:"has failed",
         okPic:"Check your",
@@ -1382,6 +1383,7 @@ export default {
 
     error:{
         500:"参数有误",
+        addrError:"地址参数没有找到！",
         timeout:"此时网络繁忙。交易已放入队列，请稍等，不要再发送相同的交易。",
         stakeredeem:"还未到赎回时间"
 

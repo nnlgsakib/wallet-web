@@ -2,7 +2,7 @@
   <NavHeader>
     <template v-slot:left>
       <span class="back hover" @click="back">{{
-      t("createAccountpage.back")
+        t("createAccountpage.back")
       }}</span>
     </template>
   </NavHeader>
@@ -15,14 +15,12 @@ import { Toast } from "vant";
 import { onBeforeRouteLeave, useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { getWallet } from "@/store/modules/account";
-import { JsonObject } from "type-fest";
 import { getCookies } from "@/utils/jsCookie";
 import NavHeader from "@/components/navHeader/index.vue";
 import { useToggleAccount } from '@/components/accountModal/hooks/toggleAccount'
-import { ethers } from "ethers";
 import { useI18n } from "vue-i18n";
 import { decode } from "js-base64";
-import localforage from 'localforage';
+import { useDialog } from "@/plugins/dialog";
 export enum Actions {
   getAddress = "getAddress",
   login = "login",
@@ -53,6 +51,7 @@ export default {
     const { backUrl, action, address, params }: any = query;
     const queryData = params ? JSON.parse(decodeURIComponent(params)) : {};
     const { $wtoast } = useToast();
+    const { $wdialog } = useDialog()
     Toast.loading({
       message: "loading...",
       duration: 0,
@@ -61,12 +60,12 @@ export default {
     const accountList = computed(() => state.account.accountList);
     const accountInfo = computed(() => state.account.accountInfo);
     const currentNetwork = computed(() => state.account.currentNetwork);
-    if(!accountList.value.length){
-      router.replace({name:"guidance"})
+    if (!accountList.value.length) {
+      router.replace({ name: "guidance" })
     }
-    if(!password) {
-        // @ts-ignore
-        router.replace({name:"withpassword",query: {backUrl:'connectWallet',loginParams: {...query}}})
+    if (!password) {
+      // @ts-ignore
+      router.replace({ name: "withpassword", query: { backUrl: 'connectWallet', loginParams: { ...query } } })
     }
 
     const nowAccount = computed(() => {
@@ -77,7 +76,7 @@ export default {
       }
       return null;
     });
-    
+
     const handleInitData = () => {
 
       const handleList = [
@@ -125,39 +124,39 @@ export default {
           createNft();
           break
         case "sendTransaction":
-        if (!nowAccount.value) {
-        $wtoast.warn("common.addressnotfound");
-        return;
-      }
+          if (!nowAccount.value) {
+            $wtoast.warn("common.addressnotfound");
+            return;
+          }
           sendTransaction();
           break;
         case "sendOpenExchangeTransaction":
-        if (!nowAccount.value) {
-        $wtoast.warn("common.addressnotfound");
-        return;
-      }
+          if (!nowAccount.value) {
+            $wtoast.warn("common.addressnotfound");
+            return;
+          }
           sendOpenExchangeTransaction()
           break;
         case "sendContractTransaction":
-        if (!nowAccount.value) {
-        $wtoast.warn("common.addressnotfound");
-        return;
-      }
+          if (!nowAccount.value) {
+            $wtoast.warn("common.addressnotfound");
+            return;
+          }
 
-        sendContractTransaction()
-        break;
+          sendContractTransaction()
+          break;
         case 'addNetwork':
-        addNetwork()
-        break;
+          addNetwork()
+          break;
       }
       Toast.clear();
     };
 
     handleInitData();
-                                                                                                                                                                                                                                                                                                                                                                          
+
     function addNetwork() {
       router.replace({
-        name:'addNetwork',
+        name: 'addNetwork',
         query: {
           backUrl,
           URL: queryData.URL,
@@ -165,7 +164,7 @@ export default {
       })
     }
 
-    async function sendContractTransaction (){
+    async function sendContractTransaction() {
       const wallet = await getWallet2();
       router.replace({
         name: "sendContractTransaction",
@@ -178,7 +177,7 @@ export default {
     }
 
     async function createNft() {
-      
+
       const wallet = await getWallet2();
       router.replace({
         name: "ai-create",
@@ -239,17 +238,17 @@ export default {
       });
     }
     async function login() {
-   
+
       const accountInfo = computed(() => state.account.accountInfo);
       const { address } = accountInfo.value;
-   
+
       let netWork: any = {
         chainId: 51888
       }
       try {
         const wallet = await getWallet();
         netWork = await wallet.provider.getNetwork();
-      }catch(err){
+      } catch (err) {
         console.error(err)
       }
       const data = {
@@ -313,21 +312,37 @@ export default {
     };
     // How to obtain a wallet without affecting the wallet status
     async function getWallet2() {
-      if(!address){
-        $wtoast.warn('The address parameter cannot be empty')
-        return null;
+      if (!address) {
+        // $wtoast.warn('The address parameter cannot be empty')
+        $wdialog.open({
+          type: 'fail',
+          title: t('contacts.hint'),
+          message: t("error.addrError"),
+          hasCancelBtn: false,
+          callBack() {
+            history.back()
+          }
+        })
+        return Promise.reject({message:  t("error.addrError")});
       }
       if (!nowAccount.value) {
-        $wtoast.warn("common.addressnotfound");
-        // router.replace({name:'import'})
-        return null;
+        $wdialog.open({
+          type: 'fail',
+          title: t('contacts.hint'),
+          message: t("common.addressnotfound"),
+          hasCancelBtn: false,
+          callBack() {
+            router.push({ name: "import" })
+          }
+        })
+        return Promise.reject({message: t("common.addressnotfound")});
       }
       if (nowAccount.value.address.toUpperCase() != accountInfo.value.address.toUpperCase()) {
         return await handleAccount(nowAccount.value, 0)
       } else {
         try {
           return await getWallet()
-        }catch(err: any){
+        } catch (err: any) {
           Toast(err.toString())
         }
       }
@@ -349,7 +364,6 @@ export function handleConnectBackUrl(params: URLParams) {
   const { action, data, backUrl } = params;
   const back = decode(backUrl);
   const url = `${back}${back.indexOf("?") > -1 ? "&" : "?"}action=${action}&data=${encodeURIComponent(JSON.stringify(data))}`
-  
   return url;
 }
 </script>
@@ -358,5 +372,4 @@ export function handleConnectBackUrl(params: URLParams) {
   color: #9F54BA;
   font-size: 12px;
 }
-
 </style>

@@ -387,12 +387,10 @@ router.beforeEach(async (to, form, next) => {
         return
       }
     }
-    next()
   }
 })
 
 router.afterEach((to) => {
-  console.warn('NProgress',NProgress)
   NProgress.done()
 })
 

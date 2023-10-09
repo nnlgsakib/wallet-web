@@ -313,6 +313,7 @@ export default {
 
   },
   generateNFT: {
+    repeatImgUrl:'This URL has been cast, do not repeat the casting',
     noPic:"The creation",
     noPic2:"has failed",
     okPic:"Check your",
@@ -1368,6 +1369,7 @@ export default {
   },
   error:{
     500:"Parameter is invalid.",
+    addrError:"The Address parameter was not found",
     timeout:"Network is busy at this moment.The transaction has been put into the queue,please wait for a moment and do not send same tranactions.",
     stakeredeem:"It's not redemption time yet"
 

@@ -15,7 +15,7 @@
             </template>
           </van-popover>
         </div>
-        <van-field :class="wordErr ? 'error' : ''" label-align="top" v-model="promptWord" :disabled="query.address ? true : false" autosize :rows="6" clearable type="textarea" maxlength="112" label="" :placeholder="t('generateNFT.placeholder')" :rules="[{ validator: validatorWord }]" />
+        <van-field :class="wordErr ? 'error' : ''" label-align="top" v-model="promptWord" :disabled="query.address ? true : false" autosize :rows="6" clearable type="textarea" maxlength="112"  :placeholder="t('generateNFT.placeholder')" :rules="[{ validator: validatorWord }]" />
 
         <div class="label mt-16">
           <span class="mr-4">*</span>{{ t("castingnft.royalty") }} ( 1%-10% )
@@ -99,8 +99,8 @@ import { TradeStatus } from "@/plugins/tradeConfirmationsModal/tradeConfirm";
 import { useToast } from "@/plugins/toast";
 import { useRouter, useRoute } from "vue-router";
 import { getGasFee } from "@/store/modules/account";
-import { computeAddress } from "ethers/lib/utils";
-
+import localforage from 'localforage';
+import { clone } from 'pouchdb-utils';
 
 const { $wtoast } = useToast();
 const { $tradeConfirm } = useTradeConfirm();
@@ -112,11 +112,39 @@ const showWord = ref(false);
 const emailErr = ref(false);
 const wordErr = ref(false);
 const royaltyErr = ref(false);
-const showPopover3 = ref(false);
 const route = useRoute();
 const accountInfo = computed(() => store.state.account.accountInfo)
 const sensitiveWords = computed(() => store.state.configuration.setting.sensitiveWords)
-const chainPrefix = computed(() => store.getters['account/chainParsePrefix'])
+interface ForBidImg {
+  time: number;
+  url: string
+}
+
+const filtersImgUrls:Ref<ForBidImg[]> = ref([])
+
+const query: any = route.query;
+const info = query.info ? JSON.parse(query.info) : null;
+const promptWord = ref(info ? info.prompt : "");
+const checked = ref(info ? true : false);
+const showAddr = ref(false);
+const showSwitch = ref(false);
+const readonlySwitch = ref(info ? true : false);
+const emailAddr = ref(query.user_mail || "");
+const isModif = ref(query.address ? true : false);
+const royalty: Ref<number | string> = ref(
+  query.royalty_ratio ? Number(query.royalty_ratio) / 100 : ""
+);
+
+const showGenerateModal = ref(false);
+// const grnerateLoading = ref(false)
+const gasFee = ref("");
+const sendAddr = ref("");
+const sendVal = ref(0)
+watch(() => checked.value, n => {
+  if (!n) {
+    emailAddr.value = ''
+  }
+})
 const onSubmit = async () => {
   if (checked.value && RegUrl.test(promptWord.value)) {
     $wtoast.warn(t("generateNFT.normalNftTip"));
@@ -182,27 +210,6 @@ const handleGetGas = async () => {
   return gas1;
 };
 
-const query: any = route.query;
-const info = query.info ? JSON.parse(query.info) : null;
-const promptWord = ref(info ? info.prompt : "");
-const checked = ref(info ? true : false);
-const showAddr = ref(false);
-const showSwitch = ref(false);
-const readonlySwitch = ref(info ? true : false);
-const emailAddr = ref(query.user_mail || "");
-const isModif = ref(query.address ? true : false);
-const royalty: Ref<number | string> = ref(
-  query.royalty_ratio ? Number(query.royalty_ratio) / 100 : ""
-);
-
-const showGenerateModal = ref(false);
-
-watch(() => checked.value, n => {
-  if (!n) {
-    emailAddr.value = ''
-  }
-})
-
 // 1 normal create nft
 const normalCreate = async () => {
   const nft_data = {
@@ -211,6 +218,9 @@ const normalCreate = async () => {
   const { receipt, nft_address, owner, hash } = await handleSendCreate(
     nft_data,
     () => {
+      const localUrls = filtersImgUrls.value
+      localUrls.push({url: promptWord.value, time: new Date().getTime()})
+      localforage.setItem('forbid-img-urls', clone(localUrls))
       $tradeConfirm.update({ status: "approve" });
     }
   );
@@ -310,8 +320,6 @@ const handleSendCreate = async (nft_data = {}, call = (v: any) => { }) => {
 
 };
 
-// const grnerateLoading = ref(false)
-const gasFee = ref("");
 const handleConfirm = async () => {
   const isNormalCreate = !checked.value && RegUrl.test(promptWord.value);
   // grnerateLoading.value = true
@@ -447,7 +455,12 @@ const validatorWord = (v: string) => {
       return true;
     }
   }
-  if (!regAa.test(v) && RegUrl.test(v)) {
+  if (RegUrl.test(v)) {
+    const hasUrl = filtersImgUrls.value.find(item => item.url == v);
+    if(hasUrl) {
+      wordErr.value = true;
+      return t('generateNFT.repeatImgUrl')
+    }
     wordErr.value = false;
     return true;
   }
@@ -456,7 +469,6 @@ const validatorWord = (v: string) => {
     wordErr.value = true;
     return t("generateNFT.promptWordErr");
   }
-
   wordErr.value = false;
   return true;
 };
@@ -484,8 +496,7 @@ const blurRoyalty = () => {
   royalty.value = parseInt(bigInt.toFormat(1).toString());
 };
 
-const sendAddr = ref("");
-const sendVal = ref(0)
+
 onMounted(async () => {
   const res = await getAiServerAddr();
   sendAddr.value = res.data;
@@ -496,6 +507,9 @@ onMounted(async () => {
     const resEmail = await getEmailByUser({ useraddr: myAddr });
     emailAddr.value = resEmail.data;
   }
+  localforage.getItem('forbid-img-urls').then(res => {
+    filtersImgUrls.value = res ? res as Array<ForBidImg> : []
+  })
 });
 
 const handleChange = async (e) => {

@@ -1,16 +1,4 @@
 <template>
-    <!-- <div class="loading-bg pt-24 pb-24">
-      <div class="tit-big text-center f-16">{{t('castingnft.createNFT')}}</div>
-      <div class="flex between center-v dotted-box">
-        <div class="step2 f-12 lh-16">1</div>
-        <span class="dotted-line"></span>
-        <div class="step2 f-12 lh-16 no">2</div>
-      </div>
-      <div class="flex between f-12 dotted-box">
-        <div class="tit-small">{{t('castingnft.information')}}</div>
-        <div class="tit-small">{{t('castingnft.done')}}</div>
-      </div>
-    </div> -->
     <!-- icon -->
     <div class="icon-box flex center">
       <div class="iconele flex center" :style="{backgroundImage: `url(${require('@/views/createNft/imgs/circle.png')})`}">

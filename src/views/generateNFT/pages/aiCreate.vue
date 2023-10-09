@@ -99,6 +99,8 @@ import { useToast } from "@/plugins/toast";
 import { useRouter, useRoute } from "vue-router";
 import { getGasFee } from "@/store/modules/account";
 import { decode } from "js-base64";
+import localforage from 'localforage';
+import { clone } from 'pouchdb-utils';
 
 const formRef = ref()
 const { $wtoast } = useToast();
@@ -111,9 +113,7 @@ const showWord = ref(false);
 const emailErr = ref(false);
 const wordErr = ref(false);
 const royaltyErr = ref(false);
-const showPopover3 = ref(false);
 const route = useRoute();
-
 const query: any = route.query;
 const drawInfo = query.data ? JSON.parse(decodeURIComponent(query.data)) : null;
 const info = drawInfo && drawInfo.info ? JSON.parse(drawInfo.info) : drawInfo;
@@ -131,9 +131,17 @@ const isModif = ref(drawInfo.modif ? true : false);
 const royalty: Ref<number | string> = ref(
   drawInfo.royalty ? Number(drawInfo.royalty) : ""
 );
-debugger
+interface ForBidImg {
+  time: number;
+  url: string
+}
 
+const filtersImgUrls:Ref<ForBidImg[]> = ref([])
 const showGenerateModal = ref(false);
+// const grnerateLoading = ref(false)
+const gasFee = ref("");
+const sendAddr = ref("");
+const sendVal = ref(0);
 const onSubmit = async () => {
   if (checked.value && RegUrl.test(promptWord.value)) {
     $wtoast.warn(t("generateNFT.normalNftTip"));
@@ -241,6 +249,9 @@ const normalCreate = async () => {
   const { receipt, nft_address, owner, hash } = await handleSendCreate(
     nft_data,
     () => {
+      const localUrls = filtersImgUrls.value
+      localUrls.push({url: promptWord.value, time: new Date().getTime()})
+      localforage.setItem('forbid-img-urls', clone(localUrls))
       $tradeConfirm.update({ status: "approve" });
     }
   );
@@ -335,8 +346,7 @@ const handleSendCreate = async (nft_data = {}, call = (v: any) => { }) => {
   return { receipt, nft_address, owner: myAddr, hash: txRes.hash };
 };
 
-// const grnerateLoading = ref(false)
-const gasFee = ref("");
+
 const handleConfirm = async () => {
   const isNormalCreate = !checked.value && RegUrl.test(promptWord.value);
   // grnerateLoading.value = true
@@ -466,7 +476,12 @@ const validatorWord = (v: string) => {
       return true;
     }
   }
-  if (!regAa.test(v) && RegUrl.test(v)) {
+  if (RegUrl.test(v)) {
+    const hasUrl = filtersImgUrls.value.find(item => item.url == v)
+    if(hasUrl) {
+      wordErr.value = true;
+      return t('generateNFT.repeatImgUrl')
+    }
     wordErr.value = false;
     return true;
   }
@@ -503,8 +518,6 @@ const blurRoyalty = () => {
   royalty.value = parseInt(bigInt.toFormat(1).toString());
 };
 
-const sendAddr = ref("");
-const sendVal = ref(0);
 onMounted(async () => {
   const res = await getAiServerAddr();
   sendAddr.value = res.data;
@@ -520,7 +533,9 @@ onMounted(async () => {
       onSubmit();
     }
   })
-
+  localforage.getItem('forbid-img-urls').then(res => {
+    filtersImgUrls.value = res ? res as Array<ForBidImg> : []
+  })
 });
 </script>
 <style lang="scss" scoped>
