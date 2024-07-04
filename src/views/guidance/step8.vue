@@ -1,10 +1,9 @@
-
 <template>
   <div v-if="showModal" class="custom-popover">
     <div class="custom-popover-header">
       <div class="footer-btns">
         <div class="container pl-20 pr-20 evenly flex">
-          <span @click="handleClick(7)">{{ t("returnreceipt.done") }} 7/7</span>
+          <span @click="handleClick(6)">{{ t("returnreceipt.done") }} 6/6</span>
         </div>
       </div>
     </div>
@@ -43,10 +42,10 @@ export default defineComponent({
   setup(props: any, context: SetupContext) {
     const { t } = useI18n();
     const { state, dispatch } = useStore();
-    const show7 = computed(() => state.system.show7);
+    const show6 = computed(() => state.system.show6);
     const showModal = ref(false);
     watch(
-      () => show7,
+      () => show6,
       (n) => (showModal.value = n.value),
       { immediate: true, deep: true }
     );
@@ -286,4 +285,5 @@ export default defineComponent({
       width: calc(100vw - 110px);
     }
   }
-}</style>
+}
+</style>

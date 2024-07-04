@@ -130,7 +130,7 @@
     <GuideModal @guideModalSuccess="guideModalSuccess" v-model="showGuideModal" />
     <guide-one></guide-one>
     <guide-two></guide-two>
-    <guide-three></guide-three>
+    <!-- <guide-three></guide-three> -->
     <guide-fore></guide-fore>
     <guide-five></guide-five>
     <guide-six></guide-six>
@@ -192,7 +192,7 @@ import { useExchanges } from "@/hooks/useExchanges";
 import GuideModal from "@/views/guidance/dialogModal.vue";
 import GuideModal1 from "@/views/guidance/step1.vue";
 import GuideModal2 from "@/views/guidance/step2.vue";
-import GuideModal3 from "@/views/guidance/step3.vue";
+// import GuideModal3 from "@/views/guidance/step3.vue";
 import GuideModal4 from "@/views/guidance/step4.vue";
 import GuideModal5 from "@/views/guidance/step5.vue";
 import GuideModal6 from "@/views/guidance/step6.vue";
@@ -230,7 +230,7 @@ export default {
     [GuideModal.name]: GuideModal,
     "guide-one": GuideModal1,
     "guide-two": GuideModal2,
-    "guide-three": GuideModal3,
+    // "guide-three": GuideModal3,
     "guide-fore": GuideModal4,
     "guide-five": GuideModal5,
     "guide-six": GuideModal6,

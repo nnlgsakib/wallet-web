@@ -3,22 +3,22 @@
     <div class="custom-popover-header"></div>
     <div class="custom-popover-container"></div>
     <div class="custom-popover-footer">
-     <div class="container" style="height: 100%;">
-      <div class="footer-text">
-        <div>
-          {{t('guidePopup.tip1')}}
+      <div class="container" style="height: 100%;">
+        <div class="footer-text">
+          <div>
+            {{ t('guidePopup.tip1') }}
+          </div>
+        </div>
+        <div class="footer-btns">
+          <div class="container pl-20 pr-20 evenly flex">
+            <span class="hover" @click="dispatchClose">{{ t('common.cancel') }}</span>
+            <span class="hover" @click="handleClick(1)">{{ t('common.next') }} 1/6</span>
+          </div>
         </div>
       </div>
-      <div class="footer-btns">
-        <div class="container pl-20 pr-20 evenly flex">
-          <span class="hover" @click="dispatchClose">{{t('common.cancel')}}</span>
-        <span class="hover" @click="handleClick(1)">{{t('common.next')}} 1/7</span>
-        </div>
-      </div>
-    </div>
     </div>
   </div>
-  <dialog-warning @warningSuccess="warningSuccess" theme="light" @close="handleClose"  :text="t('common.confirmExit')"  v-model:isWarning="isWarning"></dialog-warning>
+  <dialog-warning @warningSuccess="warningSuccess" theme="light" @close="handleClose" :text="t('common.confirmExit')" v-model:isWarning="isWarning"></dialog-warning>
 
 </template>
 
@@ -99,76 +99,87 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .custom-popover {
-    position: fixed;
-    top: 0;
+  position: fixed;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 100000;
-  }
-  .custom-popover-header {
-    height: 48PX;
-    background-color: rgba(0, 0, 0, .7);
-  }
-  .custom-popover-container {
-    height: 261px;
-  }
-  .custom-popover-footer {
-    position: relative;
-    height: calc(100% - 290px);
-    background-color: rgba(0, 0, 0, .7);
-  }
-  .footer-btns {
-    position: fixed;
-    bottom: 30px;
-    left: 0;
-    right: 0;
-    width: 100%;
-    div {
-      span {
+}
+
+.custom-popover-header {
+  height: 48PX;
+  background-color: rgba(0, 0, 0, .7);
+}
+
+.custom-popover-container {
+  height: 261px;
+}
+
+.custom-popover-footer {
+  position: relative;
+  height: calc(100% - 290px);
+  background-color: rgba(0, 0, 0, .7);
+}
+
+.footer-btns {
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  width: 100%;
+
+  div {
+    span {
       display: inline-block;
       width: 100px;
       height: 45px;
       font-size: 12px;
       border-radius: 50px;
-            cursor: pointer;
+      cursor: pointer;
 
       text-align: center;
       line-height: 45px;
       color: #fff;
       box-sizing: border-box;
+
       &:first-child {
         border: 1px solid #fff;
         margin-right: 40px;
       }
+
       &:last-child {
         background-color: #9F54BA;
       }
     }
-    }
   }
-  .footer-text {
-    position: absolute;
-    font-size: 12px;
-    color: #fff;
-    top: 83px;
-    left: 50%;
-    width: 100%;
-    div {
+}
+
+.footer-text {
+  position: absolute;
+  font-size: 12px;
+  color: #fff;
+  top: 83px;
+  left: 50%;
+  width: 100%;
+
+  div {
+    display: inline-block;
+    transform: translateX(-50%);
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: -44px;
+      left: 85px;
+      width: 76px;
       display: inline-block;
-      transform: translateX(-50%);
-      &:before {
-        content: "";
-        position: absolute;
-        top: -44px;
-        left: 85px;
-        width: 76px;
-        display: inline-block;
-        z-index: 999999;
-        transform: rotate(90deg);
-        border-top: 1px dashed #9F54BA;
-      }
-      &:after {
+      z-index: 999999;
+      transform: rotate(90deg);
+      border-top: 1px dashed #9F54BA;
+    }
+
+    &:after {
       content: "";
       position: absolute;
       top: -8px;
@@ -180,12 +191,14 @@ export default defineComponent({
       display: inline-block;
       z-index: 999999;
     }
-    }
   }
+}
+
 .dialog-box {
   // max-width: 340px;
   padding-bottom: 25px;
   position: relative;
+
   .serial-number {
     display: flex;
     justify-content: flex-end;
@@ -193,10 +206,12 @@ export default defineComponent({
     padding-bottom: 14px;
     padding-right: 14px;
     font-size: 12px;
+
     .left {
       color: #9F54BA;
     }
   }
+
   .tip2 {
     position: absolute;
     bottom: -100px;
@@ -209,17 +224,20 @@ export default defineComponent({
     font-weight: bold;
     line-height: 30px;
   }
+
   .small-tit {
     text-align: center;
     margin-bottom: 50px;
     font-size: 12px;
     color: #848484;
   }
+
   :deep {
     button {
       min-width: 100px;
     }
   }
+
   :deep(.van-popover__wrapper) {
     height: 0;
   }

@@ -185,7 +185,7 @@ export default {
     gasFee: "This is the estimated gas fee for this transaction.",
     nftP: "Period",
     nftC: "Collection",
-    nftN: "SNFT",
+    nftN: "CSBT",
     nftF: "Fragment",
     moveDataTit: "Hint",
     moveTip:

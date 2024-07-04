@@ -1,19 +1,18 @@
-
 <template>
   <div v-if="showModal" class="custom-popover">
     <div class="custom-popover-header">
       <div class="container" style="height: 100%;">
         <div class="footer-btns">
-        <div class="container pl-20 pr-20 evenly flex">
-          <span @click="dispatchClose">{{ t('common.cancel') }}</span>
-          <span @click="handleClick(2)">{{ t('common.next') }} 2/7</span>
+          <div class="container pl-20 pr-20 evenly flex">
+            <span @click="dispatchClose">{{ t('common.cancel') }}</span>
+            <span @click="handleClick(2)">{{ t('common.next') }} 2/6</span>
+          </div>
         </div>
-      </div>
-      <div class="footer-text">
-        <div>
-          {{ t('guidePopup.tip2') }}
+        <div class="footer-text">
+          <div>
+            {{ t('guidePopup.tip2') }}
+          </div>
         </div>
-      </div>
       </div>
     </div>
     <div class="custom-popover-container"></div>
@@ -143,6 +142,7 @@ export default defineComponent({
   bottom: 82px;
   left: 110px;
   width: 100px;
+
   div {
     display: inline-block;
     /* transform: translateX(-50%); */
@@ -248,11 +248,13 @@ export default defineComponent({
     height: 0;
   }
 }
+
 @media screen and (max-width: 750px) {
   .footer-text {
     left: 45px;
   }
-  .custom-popover-header{
+
+  .custom-popover-header {
     height: 310px;
   }
 }

@@ -5,7 +5,7 @@
         <div class="footer-btns">
           <div class="container pl-20 pr-20 evenly flex">
             <span @click="dispatchClose">{{ t('common.cancel') }}</span>
-            <span @click="handleClick(4)">{{ t('common.next') }} 4/7</span>
+            <span @click="handleClick(3)">{{ t('common.next') }} 3/6</span>
           </div>
         </div>
         <div class="footer-text">
@@ -50,7 +50,7 @@ export default defineComponent({
   props: {
     type: {
       type: Number,
-      default: 4,
+      default: 3,
     },
   },
   setup(props: any, context: SetupContext) {
@@ -58,10 +58,10 @@ export default defineComponent({
     const { t } = useI18n()
     const { state, dispatch } = useStore();
     const showModal = ref(false);
-    const show4 = computed(() => state.system.show4);
+    const show3 = computed(() => state.system.show3);
 
     watch(
-      () => show4,
+      () => show3,
       (n) => {
         if (n.value) {
           let time = setTimeout(() => {
