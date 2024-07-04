@@ -2,25 +2,25 @@
   <van-sticky>
     <NavHeader :hasRight="false">
       <template v-slot:left>
-       <span class="back hover f-12" @click="back">{{t('createAccountpage.back')}}</span>
+        <span class="back hover f-12" @click="back">{{ t('createAccountpage.back') }}</span>
       </template>
       <template v-slot:title>
-        <div class="flex center title">{{t("createAccountpage.mnemonicBtn")}}</div>
+        <div class="flex center title">{{ t("createAccountpage.mnemonicBtn") }}</div>
       </template>
     </NavHeader>
   </van-sticky>
   <div class="mnemonic-page">
     <div class="title-w">
       <!-- <img class="iconele flex center" src="@/assets/token/logowallet.png" /> -->
-      <WormTransition size="small" >
+      <WormTransition size="small">
         <template v-slot:icon>
           <img class="iconele flex center" src="@/assets/token/logowallet.png" />
         </template>
       </WormTransition>
 
-      
-    <div class="tit-big f-24  text-center mt-10">{{ t("createAccountpage.mneTit") }}</div>
-    <div class="tit-small text-center f-12 mt-16 lh-16">{{ t("createAccountpage.iptMne") }}</div>
+
+      <div class="tit-big f-24  text-center mt-10">{{ t("createAccountpage.mneTit") }}</div>
+      <div class="tit-small text-center f-12 mt-16 lh-16">{{ t("createAccountpage.iptMne") }}</div>
     </div>
 
     <div class="flex between con f-12 center-v mb-12">
@@ -33,7 +33,7 @@
       <div :class="`ipt flex center-v right ${item.validator ? 'err' : ''}`" v-for="(item, idx) in list" :key="idx">
         <div class="idx text-center f-12" v-if="!item.validator">{{ idx + 1 }}</div>
         <div class="idx text-center f-12" @click="clear(idx)" v-else><van-icon name="cross" /></div>
-        <input :type="`${mask ? 'password' : 'text'}`" @blur="handleBlur(item.value,idx)" @focus="handleFocus(idx)" @input="search" v-model="item.value" />
+        <input :type="`${mask ? 'password' : 'text'}`" @blur="handleBlur(item.value, idx)" @focus="handleFocus(idx)" @input="search" v-model="item.value" />
       </div>
     </div>
     <div class="warning f-12" v-show="!searchList.length && isSearch">{{ t("createAccountpage.mneWarn") }}</div>
@@ -44,7 +44,7 @@
 
     <div class="btn-box">
       <div class="container">
-        <van-button  type="primary" block @click="next">{{t('createAccountpage.next')}}</van-button>
+        <van-button type="primary" block @click="next">{{ t('createAccountpage.next') }}</van-button>
       </div>
     </div>
 
@@ -58,7 +58,7 @@ import { ref, Ref, computed, toRaw, SetupContext, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import WormTransition from '@/components/wromTransition/index.vue'
 import NavHeader from '@/components/navHeader/index.vue'
-import {ethers} from 'ethers'
+import { ethers } from 'ethers'
 // Loading the dictionary
 const mneList = require('@/assets/json/mnemonic.json')
 import { useI18n } from 'vue-i18n'
@@ -106,9 +106,9 @@ export default {
     const searchList = ref([])
     // The input component subscript of the current query
     const iptIdx = ref(0)
-    const handleBlur = (val:string,idx:number) => {
+    const handleBlur = (val: string, idx: number) => {
       const mne = mneList.find((item: any) => item == val.trim())
-      if(!mne) {
+      if (!mne) {
         list.value[idx].validator = true
       } else {
         list.value[idx].validator = false
@@ -119,12 +119,12 @@ export default {
     // Whether the query is in the state
     const isSearch = ref(false)
     const search = (e: any) => {
-      if(e.target.value) {
+      if (e.target.value) {
         const newlist = e.target.value.split(' ')
-        if(newlist.length == 12) {
-          newlist.forEach((item: string,idx: number) => {
+        if (newlist.length == 12) {
+          newlist.forEach((item: string, idx: number) => {
             list.value[idx].value = item
-            handleBlur(item,idx)
+            handleBlur(item, idx)
           })
           return
         }
@@ -145,10 +145,10 @@ export default {
     const handleSelect = (str: string) => {
       list.value[iptIdx.value].value = str
       searchList.value = []
-      handleBlur(str,iptIdx.value)
+      handleBlur(str, iptIdx.value)
     }
 
-    const {$wtoast} = useToast()
+    const { $wtoast } = useToast()
 
     const next = () => {
       const mnemonic = list.value.map(item => item.value.trim()).join(' ')
@@ -160,8 +160,8 @@ export default {
       }
       try {
         ethers.Wallet.fromMnemonic(mnemonic, "m/44'/60'/0'/0/0")
-        router.push({ name: "mnemonic-import", state: { params: {mnemonic} } })
-      }catch(err){
+        router.push({ name: "mnemonic-import", state: { params: { mnemonic } } })
+      } catch (err) {
         $wtoast.warn(t('importByMnemonic.errorMonic'))
       }
     }
@@ -192,70 +192,86 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  .title-w {
-    .tit-big {
-      font-weight: bold;
-    }
+.title-w {
+  .tit-big {
+    font-weight: bold;
   }
-  .iconele {
-    width: 20px;
-  }
+}
+
+.iconele {
+  width: 20px;
+}
+
 .icon-yanjing1 {
   color: #9F54BA;
 }
+
 .icon-yanjing {
   font-size: 20px;
 }
+
 .logo {
   width: 20px !important;
 }
+
 .mnemonic-page {
   padding-bottom: 100px;
 }
+
 .title {
   font-weight: 600;
   font-size: 16px;
 }
+
 .tit-small {
   line-height: 15px;
   color: #848484;
   margin-bottom: 42px;
 }
+
 .con {
   width: 320px;
   margin: 0 auto 10px;
   height: 20px;
 }
+
 .phrase-box {
   padding: 15px 15px 5px;
   width: 320px;
   margin: 0 auto;
   flex-wrap: wrap;
+
   &::after {
     border-radius: 8px;
   }
+
   .ipt {
     width: 89px;
     height: 25px;
-    background: #F8F3F9;
+    background: #220a35;
     border-radius: 25px;
     border: 1PX solid #9F54BA;
     position: relative;
     margin-right: 10px;
     margin-bottom: 10px;
     transition: ease .3s;
+
     &.err {
-        border: 1PX solid #d73a49;
-        .idx {
-          background: #d73a49;
-        }
-        input {
-          color: #d73a49;
-        }
+      border: 1PX solid #d73a49;
+
+      .idx {
+        background: #d73a49;
       }
+
+      input {
+        color: #d73a49;
+      }
+    }
+
     &:nth-of-type(3n + 0) {
       margin-right: 0;
     }
+
     .idx {
       width: 24px;
       line-height: 24px;
@@ -269,6 +285,7 @@ export default {
       bottom: 0;
 
     }
+
     input {
       width: 65px;
       border: none;
@@ -280,13 +297,15 @@ export default {
     }
   }
 }
+
 .phrase-search-list {
   margin-top: 15px;
   padding: 27.5px;
   flex-wrap: wrap;
+
   .card {
     line-height: 25px;
-    background: #F8F3F9;
+    background: #220a35;
     border-radius: 12.5px;
     padding: 0 13px;
     margin-right: 10px;
@@ -294,25 +313,30 @@ export default {
     color: #9F54BA;
   }
 }
+
 .warning {
   color: #d73a49;
   padding: 0 27.5px;
   line-height: 14px;
   margin-top: 12px;
 }
+
 .link {
   color: #9F54BA;
 }
+
 :deep() {
   .van-checkbox__icon {
     font-size: 14px;
   }
 }
+
 .btn-box {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 50px;
+
   .container {
     padding: 0 27.5px;
   }

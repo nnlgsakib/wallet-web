@@ -30,8 +30,8 @@
       <van-button plain block @click="copy">
         <i class="iconfont icon-copy"></i>
         {{
-          t("receive.copyTip")
-        }}</van-button>
+      t("receive.copyTip")
+    }}</van-button>
     </div>
   </div>
   <div class="code-inner">
@@ -71,7 +71,7 @@ import { ref, Ref } from "@vue/reactivity";
 import { useRoute } from "vue-router";
 import { computed } from "@vue/runtime-core";
 import { inject } from 'vue'
-import {isDev} from '@/enum/env'
+import { isDev } from '@/enum/env'
 import { AppProvide } from "@/provides/app";
 
 const query = useRoute().query;
@@ -99,7 +99,7 @@ const handlerQRcode = () => {
   codeShow.value = true;
 };
 const sendLink = computed(() => {
-  
+
   return `${location.origin}${isDev ? '' : '/wallet'}/transferAccount/send?value=${amount.value}&tokenContractAddress=${tokenContractAddress.value}&address=${address.value}&action=transfer`;
 });
 const isWarning = ref(false);
@@ -107,12 +107,12 @@ const isWarning = ref(false);
 <style lang="scss">
 .title {
   font-size: 16px;
-  color: #000;
+
   font-weight: bold;
 }
 
 .link-bg {
-  background: #F8F3F9;
+  background: #220a35;
   height: 150px;
   padding-top: 25px;
 
@@ -174,7 +174,7 @@ const isWarning = ref(false);
   .code-box {
     width: 322px;
     height: 332px;
-    background: #fff;
+    background: #150520;
     padding: 20px 30px 23px;
     border-radius: 15px;
 

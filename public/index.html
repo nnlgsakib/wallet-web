@@ -7,10 +7,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <% if (htmlWebpackPlugin.options.env.VUE_APP_NODE_ENV==='development' ) { %>
-    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/logo.svg">
     <link rel="stylesheet" href="/styles/loading.css">
     <% } else { %>
-      <link rel="icon" href="/wallet/favicon.ico">
+      <link rel="icon" href="/wallet/logo.svg">
       <link rel="stylesheet" href="/wallet/styles/loading.css">
       <% } %>
         <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
@@ -26,9 +26,9 @@
     <div class="out-box">
       <div class="loading-page-box">
         <% if (htmlWebpackPlugin.options.env.VUE_APP_NODE_ENV==='development' ) { %>
-          <img src="/icons/logo1.png" alt="">
+          <img src="/icons/logo.svg" alt="">
           <% } else { %>
-            <img src="/wallet/icons/logo1.png" alt="">
+            <img src="/wallet/icons/logo.svg" alt="">
             <% } %>
       </div>
       <div class="loading-page-box">

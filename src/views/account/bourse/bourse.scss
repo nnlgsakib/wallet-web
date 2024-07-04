@@ -1,21 +1,22 @@
 .loading-page {
     height: 80vh;
 }
+
 .insufficientMoney-tip {
     color: #F7BF03;
 }
-.add-amount {
-    color: #000;
-}
+
 .active-d {
     border: 1px solid #B3B3B3;
 }
+
 .pwd-tip {
     .hover {
         color: #9F54BA;
         text-decoration: underline;
     }
 }
+
 :deep() {
     .slider-ipt {
         padding: 0;
@@ -24,7 +25,7 @@
 
     .el-slider__runway {
         height: 3px;
-        background: #f1f3f4;
+        background: #220a35;
     }
 
     .el-slider__bar {
@@ -42,21 +43,24 @@
     .el-slider__stop {
         height: 4px;
         width: 3px;
-        background-color: #f1f3f4;
+        background: #220a35;
         // background-color: red;
         margin-top: -4px;
         border-radius: 0;
         // transform: translateY(-4px) translateX(-3px);
     }
+
     .el-slider__stop:nth-of-type(1) {
         height: 7px;
         margin-right: -2px;
     }
+
     .el-slider__stop:nth-last-of-type(1) {
         height: 7px;
         margin-left: -2px;
 
     }
+
     .van-cell {
         padding: 0;
     }
@@ -230,7 +234,7 @@
 .miners {
     width: 341px;
     height: 646px;
-    background: #fff;
+    background: #150520;
     margin: auto;
     border-radius: 8px;
 
@@ -239,9 +243,9 @@
         line-height: 62px;
         text-align: center;
         font-weight: bold;
-        background: #FBF8FB;
+        background: #24152f;
         font-size: 14px;
-        color: #0f0f0f;
+        color: white;
     }
 
     .miners-container {
@@ -322,7 +326,7 @@
 
             .ipt-text-b {
                 margin: 5px 0 9px 0;
-                color: #000;
+
                 font-size: 12px;
                 font-weight: bold;
             }
@@ -334,7 +338,7 @@
 
                 span {
                     font-weight: 400;
-                    color: #000000;
+                    color: white;
                 }
 
                 .ipt-server-i {
@@ -345,7 +349,7 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    background: #F8F3F9;
+                    background: #220a35;
                     border-radius: 7px 7px 7px 7px;
 
                     &:first-child {
@@ -355,7 +359,7 @@
 
                 .ipt-server-i-active {
                     color: #0287db;
-                    background: #F8F3F9;
+                    background: #220a35;
                     border: 1px solid #9F54BA;
 
                     span {
@@ -371,7 +375,7 @@
 
                 span {
                     &:first-child {
-                        color: #000000;
+                        color: white;
                     }
 
                     &:last-child {
@@ -393,10 +397,11 @@
                     color: #3aae55;
                 }
             }
-            :deep(){
+
+            :deep() {
                 .van-cell {
                     padding-left: 0px;
-                } 
+                }
             }
         }
 
@@ -440,12 +445,13 @@
                 margin: 0 5px 0 10px;
             }
         }
-        :deep(){
+
+        :deep() {
             .van-cell {
                 &:after {
                     display: none;
                 }
-            } 
+            }
         }
 
     }
@@ -459,14 +465,14 @@
 .text.error {
     :deep(.van-field__body) {
         border: 1px solid #d73a49 !important;
-        background: #fbf2f3;
+        background: transparent;
     }
 }
 
 .miners-success {
     width: 341px;
     height: 327px;
-    background: #fff;
+    background: #150520;
     margin: auto;
     border-radius: 8px;
 
@@ -491,9 +497,9 @@
         line-height: 62px;
         text-align: center;
         font-weight: bold;
-        background: #FBF8FB;
+        background: #24152f;
         font-size: 14px;
-        color: #0f0f0f;
+        color: white;
     }
 
     .miners-container {
@@ -629,7 +635,7 @@
         align-items: center;
         height: 48px;
         padding: 0 16px;
-        background: #fff;
+        background: #150520;
         box-sizing: border-box;
         box-shadow: 0 1px 2px rgb(135 134 134 / 10%);
     }
@@ -662,15 +668,18 @@
         justify-content: space-between;
         align-items: center;
         margin-top: 15px;
+
         &.bourse-container-server-b {
             :deep(.van-popover__wrapper) {
                 width: 100%;
             }
         }
+
         :deep(.van-popover__wrapper) {
             position: relative;
             height: 85px;
             width: 48%;
+
             i {
                 position: absolute;
                 right: 15px;
@@ -686,7 +695,7 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            background: #F8F3F9;
+            background: #220a35;
             border-radius: 7.5px;
             cursor: pointer;
             box-sizing: border-box;
@@ -700,6 +709,7 @@
                 color: #9F54BA;
             }
         }
+
         .disabled {
             border: 1px solid #ccc;
 
@@ -731,25 +741,31 @@
             }
         }
     }
- 
+
     .bourse-container-server-b {
         .van-popover__wrapper {
             width: 100%;
         }
+
         div {
             background-color: #f1f3f4 !important;
         }
 
 
     }
+
     .btn-groups .container {
-        &>button{width: 100%;}
+        &>button {
+            width: 100%;
+        }
 
     }
+
     .btn-groups {
-        :deep(){
+        :deep() {
             .van-popover__wrapper {
                 width: 100%;
+
                 button {
                     width: 100% !important;
                 }
@@ -774,7 +790,7 @@
     .bourse-container-warning {
         margin-top: 160px;
         height: 40px;
-        background: #fbf2f3;
+        background: transparent;
         border-radius: 7.5px;
         display: flex;
         align-items: center;
@@ -916,7 +932,7 @@
     border-color: #f00;
 }
 
-.error-field {}
+
 .border-top {
     border-top: 1px solid #e4e7e8;
-  }
+}

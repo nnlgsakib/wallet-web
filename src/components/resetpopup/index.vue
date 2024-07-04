@@ -140,7 +140,7 @@ export default defineComponent({
 .title {
   font-weight: bold;
   line-height: 62px;
-  background: #FBF8FB;
+  background: #24152f;
 }
 
 .warn {

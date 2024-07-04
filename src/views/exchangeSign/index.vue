@@ -4,8 +4,8 @@
       <NavHeader :hasRight="false" :title="t('sign.title')">
         <template v-slot:left>
           <span class="back hover" @click="back">{{
-            t("createAccountpage.back")
-          }}</span>
+        t("createAccountpage.back")
+      }}</span>
 
         </template>
       </NavHeader>
@@ -146,7 +146,7 @@ export default {
   }
 
   .sign-bg {
-    background: #F8F3F9;
+    background: #220a35;
     height: 135px;
 
     &-icon {
@@ -212,4 +212,5 @@ export default {
       user-select: text;
     }
   }
-}</style>
+}
+</style>

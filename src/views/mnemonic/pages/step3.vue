@@ -16,13 +16,8 @@
       </div>
     </div>
     <div class="tip pl-14 pr-14 pb-14 van-hairline--surround flex">
-      <div
-        :class="`tip-card clickActive mt-16 f-12 flex van-hairline--surround  ${
-          item.status ? 'error' : ''
-        }`"
-        v-for="(item, idx) in chooseList.data"
-        :key="idx"
-      >
+      <div :class="`tip-card clickActive mt-16 f-12 flex van-hairline--surround  ${item.status ? 'error' : ''
+          }`" v-for="(item, idx) in chooseList.data" :key="idx">
         <div :class="`icon lh-24 van-hairline--surround text-center`">
           <span v-if="!item.status">
             {{ idx + 1 }}
@@ -33,12 +28,7 @@
       </div>
     </div>
     <div class="tip tip-2 pl-14 pr-14 pb-14 van-hairline--surround flex">
-      <div
-        class="tip-card h-24 clickActive mt-16 f-12 flex van-hairline--surround"
-        v-for="(item, idx) in list.data"
-        :key="idx"
-        @click="sort(item, idx)"
-      >
+      <div class="tip-card h-24 clickActive mt-16 f-12 flex van-hairline--surround" v-for="(item, idx) in list.data" :key="idx" @click="sort(item, idx)">
         <div class="word lh-24 text-center van-ellipsis">{{ item.name }}</div>
       </div>
     </div>
@@ -78,7 +68,7 @@ export default {
     const { t } = useI18n();
     const router = useRouter();
     const store = useStore()
-    
+
     // Unsorted
     const list = reactive({
       data: [],
@@ -179,18 +169,22 @@ export default {
 </script>
 <style lang="scss" scoped>
 .mnemonic-bg {
-  background: #F8F3F9;
+  background: #150520;
+
   .tit-big {
     line-height: 21px;
   }
+
   .tit-small {
     width: 290px;
     color: rgba(132, 132, 132, 1);
   }
+
   .color-p {
     color: #9F54BA;
   }
 }
+
 .icon-box {
   .iconele {
     width: 100px;
@@ -199,9 +193,11 @@ export default {
     overflow: hidden;
   }
 }
+
 .warn {
   color: #d73a49;
 }
+
 .tip {
   width: 320px;
   margin: 30px auto;
@@ -210,47 +206,59 @@ export default {
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: flex-start;
+
   &:after {
     border-radius: 4px;
   }
+
   &-card {
     width: 90px;
-    background: #F8F3F9;
+    background: #220a35;
     color: #9F54BA;
     transition: ease 0.3s;
     border-radius: 12px;
+
     &:hover {
-      background: #cae5fc;
+      /* background: #cae5fc; */
     }
+
     &.error {
+
       &:after,
       .icon:after {
         border-color: #d73a49;
       }
+
       .icon {
         background: #d73a49;
       }
+
       i:hover {
         color: #fff;
       }
+
       .word {
         color: #d73a49;
       }
     }
+
     .icon {
       width: 24px;
       height: 24px;
-      background: #9F54BA;
+      /* background: #9F54BA; */
       border-radius: 50%;
 
       color: #fff;
+
       &.error {
         background: #d73a49;
       }
     }
+
     .word {
       width: calc(90px - 26px);
     }
+
     &:after,
     .icon:after {
       border-color: #9F54BA;
@@ -258,18 +266,22 @@ export default {
     }
   }
 }
+
 .tip-2 {
   margin-bottom: 15px !important;
+
   .tip-card .word {
     width: 100% !important;
   }
 }
+
 .btn-group {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 50px;
 }
+
 .m-page {
   padding-bottom: 100px;
 }

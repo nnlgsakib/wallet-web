@@ -1,36 +1,20 @@
-
 <template>
-  <van-dialog
-    v-model:show="show"
-    show-cancel-button
-    teleport="#page-box"
-    :showConfirmButton="false"
-    closeOnClickOverlay
-  >
+  <van-dialog v-model:show="show" show-cancel-button teleport="#page-box" :showConfirmButton="false" closeOnClickOverlay>
     <!-- <van-action-sheet v-model:show="show" class="account-action-sheet" teleport="#page-box"> -->
     <div class="sheet-header border-bottom">
       {{ t("wallet.account") }}
     </div>
     <div class="account-container">
       <div class="account-list" ref="listDom" id="listDom">
-        <div
-          v-for="(item, index) in options"
-          :key="item.value"
-          class="border-bottom clickActive"
-          @click="handleSelect(item, index)"
-          :data-selected="accountInfo.address.toUpperCase() ==
-                  item.address.toUpperCase() ? true : false"
-        >
+        <div v-for="(item, index) in options" :key="item.value" :class="`clickActive ${index !== options.length - 1 ? 'border-bottom' : ''}`" @click="handleSelect(item, index)" :data-selected="accountInfo.address.toUpperCase() ==
+    item.address.toUpperCase() ? true : false">
           <div class="flex account-card-s">
             <div class="flex center account-icon">
-              <i
-                :class="`iconfont f-14 ${
-                  accountInfo.address.toUpperCase() ==
-                  item.address.toUpperCase()
-                    ? 'icon-xuanzhong1'
-                    : 'icon-danxuanxuanzhong'
-                }`"
-              ></i>
+              <i :class="`iconfont f-14 ${accountInfo.address.toUpperCase() ==
+    item.address.toUpperCase()
+    ? 'icon-xuanzhong1'
+    : 'icon-danxuanxuanzhong'
+    }`"></i>
             </div>
             <div class="account-icon-s flex center">
               <div class="account-icon-box-s">
@@ -49,17 +33,12 @@
             <div class="account-import-tag flex center"></div>
             <div class="flex right center-v add-choose-icon">
               <span v-show="item.imported" class="imported">{{
-                t("sidebar.imported")
-              }}</span>
-              <van-loading
-                class="ml-14"
-                v-show="
-                  accountLoading &&
-                  clickAccountIdx != null &&
-                  clickAccountIdx == index
-                "
-                color="#9F54BA"
-              />
+    t("sidebar.imported")
+  }}</span>
+              <van-loading class="ml-14" v-show="accountLoading &&
+    clickAccountIdx != null &&
+    clickAccountIdx == index
+    " color="#9F54BA" />
             </div>
           </div>
         </div>
@@ -67,19 +46,14 @@
     </div>
     <div v-if="hasBtn" class="btn-box">
       <div class="create hover">
-        <van-button
-          block
-          plain
-          @click="handleCreateAccount"
-        >
-          {{ t("account.createaccount") }}</van-button
-        > 
+        <van-button block plain @click="handleCreateAccount">
+          {{ t("account.createaccount") }}</van-button>
 
       </div>
       <div class="import hover pt-12 pb-12">
         <van-button plain block @click="toImport">{{
-          t("account.importaccount")
-        }}</van-button>
+    t("account.importaccount")
+  }}</van-button>
       </div>
     </div>
     <!-- </van-action-sheet> -->
@@ -167,11 +141,11 @@ export default defineComponent({
       () => props.modelValue,
       (n: boolean) => {
         show.value = n;
-        if(n){
+        if (n) {
           let time = setTimeout(() => {
             handleScroll()
             clearTimeout(time)
-          },100)
+          }, 100)
         }
       }
     );
@@ -201,7 +175,7 @@ export default defineComponent({
       const ele: any = newList.find((item: any) => item.dataset.selected == 'true')
       const hei = ele.offsetTop - ele.offsetHeight
       dispatch('common/scrollTop', {
-        id:'listDom',
+        id: 'listDom',
         top: hei
       })
     };
@@ -232,25 +206,31 @@ export default defineComponent({
 <style lang="scss" scoped>
 .btn-box {
   padding: 12px 45px;
-   button:hover {
+
+  button:hover {
     border: 1px solid #9F54BA;
     color: #9F54BA;
     background: none;
-   }
+  }
 }
+
 .icon-danxuanxuanzhong {
   font-size: 16px !important;
 }
+
 .account-icon {
   color: #848285;
   margin-right: 10px;
+
   i {
     font-size: 20px;
   }
+
   i.icon-xuanzhong1 {
     color: #9F54BA;
   }
 }
+
 .imported {
   line-height: 20px;
   background: #ebf9ee;
@@ -258,6 +238,7 @@ export default defineComponent({
   color: #4bb865;
   padding: 0 6px;
 }
+
 .account-groups {
   .createBtn {
     color: #9F54BA;
@@ -273,18 +254,24 @@ export default defineComponent({
     line-height: 50px;
   }
 }
+
 .account-card-s {
   height: 72px;
   padding: 0 15px;
   transition: ease 0.3s;
+
   &:hover {
-    background: #F8F3F9;
-    .account-value,.account-name {
+    background: #220a35;
+
+    .account-value,
+    .account-name {
       color: #9F54BA;
     }
   }
+
   .account-icon-s {
     padding: 0 10px 0 0;
+
     .account-icon-box-s {
       width: 30px;
       height: 30px;
@@ -293,11 +280,13 @@ export default defineComponent({
       overflow: hidden;
     }
   }
+
   .account-name {
     line-height: 24px;
     font-size: 15px;
     justify-content: flex-start;
   }
+
   .account-value {
     color: rgba(131, 131, 131, 1);
     line-height: 16px;
@@ -307,6 +296,7 @@ export default defineComponent({
   .account-info-box {
     min-width: 160px;
   }
+
   .account-import-tag {
     span {
       display: inline-block;
@@ -319,23 +309,28 @@ export default defineComponent({
       color: rgba(154, 161, 168, 1);
     }
   }
+
   .add-choose-icon {
     width: 100%;
+
     i {
       color: #4bb865;
       font-size: 18px;
     }
   }
 }
+
 .account-modal-title {
   line-height: 21px;
   font-size: 15px;
   padding: 14px 0;
 }
+
 .account-list {
   max-height: 45vh;
   overflow-y: scroll;
 }
+
 .create {
   text-align: center;
   font-size: 12px;
@@ -344,21 +339,24 @@ export default defineComponent({
   color: #9F54BA;
   border-bottom: 1px solid #ECEDEF;
 }
+
 .import {
   text-align: center;
   font-size: 12px;
   color: #9F54BA;
 }
+
 .bt {
   border-bottom: 1px solid #ecedef;
 }
+
 .sheet-header {
   height: 60px;
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center;
-  background: #FBF8FB;
+  background: #24152f;
   font-size: 15px;
   font-weight: bold;
   // border-radius: 20px 20px 0px 0px;

@@ -28,7 +28,7 @@
 
 
   <div class="no-list" v-show="!pageData.nftList.length && !nftErr && finished">
-    <NoData  />
+    <NoData />
   </div>
   <!-- <SliderBottom :finished="finished">
     <div class="text-center tip1">
@@ -157,7 +157,7 @@ export default defineComponent({
               }
             })
             : [];
-            console.log('darwedList', darwedList)
+        console.log('darwedList', darwedList)
         // @ts-ignore
         if (nfts && nfts.length) {
           nfts.forEach((item: any) => {
@@ -170,10 +170,10 @@ export default defineComponent({
               const pa = JSON.parse(web3.utils.toUtf8(item.meta_url));
               const current = darwedList.find(child => item.address.toUpperCase() == child.nft_address.toUpperCase())
               if (current) {
-                if(current.drawfee && current.drawed) {
+                if (current.drawfee && current.drawed) {
                   item.category = 1;
                 } else {
-                  if(!current.progress && current.drawtime) {
+                  if (!current.progress && current.drawtime) {
                     item.category = 4;
                   } else {
                     item.category = 2;
@@ -215,11 +215,11 @@ export default defineComponent({
         loadNft.value = true;
       }
       try {
-          params.page = Number(params.page) + 1 + "";
-          const list = await getNftList(params);
-          if (!list || !list.length) {
-            finished.value = true;
-          }
+        params.page = Number(params.page) + 1 + "";
+        const list = await getNftList(params);
+        if (!list || !list.length) {
+          finished.value = true;
+        }
       } catch (err) {
         nftErr.value = true;
         Toast(JSON.stringify(err));
@@ -315,7 +315,7 @@ export default defineComponent({
 }
 
 .create-box {
-  background: #f1f3f4;
+  background: #220a35;
   height: 36px;
   padding: 0 15px;
   position: relative;

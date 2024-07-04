@@ -1,18 +1,10 @@
 <template>
   <div class="custom-exchange-modal">
-    <van-dialog
-      v-model:show="showModal"
-      teleport="#page-box"
-      :showConfirmButton="false"
-      :showCancelButton="false"
-      closeOnClickOverlay
-      :title="''"
-    >
+    <van-dialog v-model:show="showModal" teleport="#page-box" :showConfirmButton="false" :showCancelButton="false" closeOnClickOverlay :title="''">
       <div class="title text-center f-16 bold van-hairline--bottom">
         {{ t("exchange.setAmount") }}
       </div>
-      <div
-        class="
+      <div class="
           amount-box
           pt-20
           pb-20
@@ -24,40 +16,29 @@
           mr-12
           mt-20
           mb-20
-        "
-      >
+        ">
         <div class="flex-6">
           <div class="f-18 amount-ipt flex center-v">
-            <van-field
-              class="hover"
-              type="number"
-              :placeholder="t('amountreminder.pleaseenter')"
-              v-model="amount"
-              @focus="handleFocus"
-            />
+            <van-field class="hover" type="number" :placeholder="t('amountreminder.pleaseenter')" v-model="amount" @focus="handleFocus" />
           </div>
         </div>
-        <div
-          class="flex-4 transfer flex center-v right pr-6  hover"
-          v-if="hasTransferToken"
-          @click.stop="handleChooseToken"
-        >
+        <div class="flex-4 transfer flex center-v right pr-6  hover" v-if="hasTransferToken" @click.stop="handleChooseToken">
           <div class="token-info flex between center-v pl-6  pr-6">
             <div class="xuanwo flex center">
-            <img src="@/assets/icon_blue.svg" alt />
-          </div>
-          <div class="van-ellipsis ml-6 mr-6 token-name lh-14">
-            {{ chooseToken.name }}
-          </div>
-          <van-icon name="arrow" />
+              <img src="@/assets/currency.svg" alt />
+            </div>
+            <div class="van-ellipsis ml-6 mr-6 token-name lh-14">
+              {{ chooseToken.name }}
+            </div>
+            <van-icon name="arrow" />
           </div>
         </div>
       </div>
       <div class="flex between pb-30 btn-group">
         <van-button @click="reset">{{ t("receive.reset") }}</van-button>
         <van-button type="primary" @click="handleComfirm">{{
-          t("receive.confirm")
-        }}</van-button>
+      t("receive.confirm")
+          }}</van-button>
       </div>
     </van-dialog>
   </div>
@@ -183,8 +164,8 @@ export default defineComponent({
       return token
         ? token
         : {
-            name,
-          };
+          name,
+        };
     });
 
     const handleFocus = () => {
@@ -215,46 +196,57 @@ export default defineComponent({
 .btn-group {
   padding: 0 56px 20px;
 }
+
 .title {
-  color: #b3b3b3;
+
   line-height: 62px;
-  background: #FBF8FB;
+  background: #24152f;
 }
+
 .van-cell:after {
   display: none;
 }
+
 .amount-box {
   box-sizing: border-box;
   border-radius: 5px;
   border: 1PX solid #BBC0C5;
 }
+
 :deep(.van-button) {
   width: 100px !important;
 }
+
 .imitate-input {
   width: auto;
   min-width: 30px;
   outline: none;
   display: inline-block;
 }
+
 .imitate-placeholder {
   color: #999;
 }
+
 .amount-ipt {
   color: #8f8f8f;
   height: 35px;
+
   .van-field {
     padding: 0;
     width: 140px;
     display: inline-block;
+
     :deep(input) {
       font-size: 12px;
       font-weight: bold;
+
       &::placeholder {
         font-weight: normal;
       }
     }
   }
+
   // input {
   //   display: inline-block;
   //   width: auto;
@@ -262,23 +254,26 @@ export default defineComponent({
   //   font-size: 15px;
   // }
   span {
-    color: #000;
+
     display: block;
     font-size: 15px;
   }
 }
+
 .token-info {
   height: 35px;
   min-width: 90px;
   max-width: 150px;
-  background: #f1f3f4;
+  background: #220a35;
   border-radius: 17.5px;
+
   .xuanwo {
     width: 24px;
     height: 24px;
     border-radius: 10px;
     // background: #0b80d7;
     padding: 2px;
+
     img {
       display: block;
       width: 100%;
@@ -286,12 +281,12 @@ export default defineComponent({
       // border-radius: 50%;
     }
   }
+
   i {
     color: #9F54BA;
     font-size: 15px;
   }
-  .token-name {
-    color: #000;
-  }
+
+  .token-name {}
 }
 </style>

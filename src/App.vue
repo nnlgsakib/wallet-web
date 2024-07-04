@@ -65,7 +65,7 @@ export default {
 
       waittxlist();
     });
-    eventBus.on('walletReady',newwallet => {
+    eventBus.on('walletReady', newwallet => {
       dispatch('system/getChainVersion', newwallet);
     })
     window.onload = async () => {
@@ -76,7 +76,7 @@ export default {
           label: VUE_APP_NODE_NAME
         });
         clearTimeout(time2);
-      },2000);
+      }, 2000);
       let time = setTimeout(() => {
         // @ts-ignore
         document.getElementById("loading-page-box").style.display = "none";
@@ -101,7 +101,7 @@ export default {
       };
       dispatch("account/getContractAddress");
       dispatch("configuration/getConfiguration");
-    
+
       (async function () {
         const vuex = localStorage.getItem("vuex");
         const mnemonic = localStorage.getItem("mnemonic");
@@ -133,29 +133,31 @@ export default {
   min-height: calc(100vh - 48px);
   position: relative;
   box-sizing: border-box;
+
   &::-webkit-scrollbar {
     display: none;
-    /* Chrome Safari */
+
   }
 }
+
 :deep(.van-popup) {
   position: absolute;
 }
+
 .page-box {
   transition: transform 0.35s, opacity 0.35s;
   position: relative;
   margin: 0 auto;
   min-height: 100vh;
-  background: #fff;
+  background: radial-gradient(ellipse at center, #270d3b, #0d0316 55%, #0d0316);
   box-sizing: border-box;
-  // &::-webkit-scrollbar {
-  //   width: 0 !important;
-  //   display: none;
-  // }
+
+
   :deep(.van-toast) {
     word-break: keep-all !important;
   }
-  & > .container > .loading-box {
+
+  &>.container>.loading-box {
     height: 100vh;
   }
 }

@@ -2,11 +2,11 @@
   <div class="currency">
     <div class="flex center">
       <div class="flex center currency-icon">
-        <img class="currency-symbol" :src="require(`@/assets/token/icon_black.svg`)" alt="'" />
+        <img class="currency-symbol" :src="require(`@/assets/currency.svg`)" alt="'" />
       </div>
     </div>
     <div :class="`amount text-center ${decimal(pageData.data.balance).length > 30 ? 'small' : 'big'
-      }`">
+          }`">
       {{ decimal(pageData.data.balance) }} {{ pageData.data.symbol }}
     </div>
 
@@ -46,7 +46,7 @@
           </DynamicScrollerItem>
         </template>
 
-      </DynamicScroller> -->
+</DynamicScroller> -->
       <CollectionCard @handleClick="handleView(item)" v-for="item in txList" :key="item.hash" @handleSend="handleSend" @handleCancel="handleCancel" :data="item" />
       <NoData v-if="!txList.length" :message="$t('wallet.no')" />
 
@@ -60,20 +60,20 @@
       </div>
     </div>
   </div>
-  <SliderBottom>
+  <div class=" fixed-bottom">
     <i18n-t tag="div" keypath="wallet.toBrowser" class="flex center scan-link">
       <template v-slot:link>
-        <span @click="toScan(accountInfo.address, '/AccountDetail')" class="f-12 view-history hover" rel="noopener noreferrer">{{ t("wallet.scanLink") }}</span>
+        <span @click="toScan(accountInfo.address, '/accountDetail')" class="f-12 view-history hover" rel="noopener noreferrer">{{ t("wallet.scanLink") }}</span>
       </template>
     </i18n-t>
-  </SliderBottom>
+  </div>
   <!-- <Transition name="slider">
 
   </Transition> -->
   <CommonModal v-model="showSpeedModal" :title="sendTxType == 1
-    ? t('common.gasSpeedUp')
-    : t('transationHistory.cancelDealTit')
-    " className="transactionDetailsModal">
+          ? t('common.gasSpeedUp')
+          : t('transationHistory.cancelDealTit')
+          " className="transactionDetailsModal">
     <div class="m-14 pl-14 pr-14 border-round detail-modal">
       <div class="flex between lh-16 pt-12 pb-8">
         <span>{{ t("transactionDetails.nonce") }}</span>
@@ -89,37 +89,37 @@
         <span>{{ t("converSnft.amount") }}</span>
         <span>{{
           !sendTx.tokenAddress
-          ? ethers.utils.formatEther(sendTx.sendData.value)
-          : sendTx.amount
+            ? ethers.utils.formatEther(sendTx.sendData.value)
+            : sendTx.amount
         }}</span>
       </div>
       <div class="flex between lh-16 pt-8 pb-8">
         <span>{{ t("transactionDetails.gasfee") }}</span>
         <span>{{
           sendTx.sendData.gasPrice
-          ? ethers.utils.formatEther(sendTx.sendData.gasPrice)
-          : 0
+            ? ethers.utils.formatEther(sendTx.sendData.gasPrice)
+            : 0
         }}</span>
       </div>
       <div class="flex between lh-16 pt-8 pb-12">
         <span>{{ t("transactionDetails.totalAmount") }}</span>
         <span>≈
           {{
-            !sendTx.tokenAddress
+          !sendTx.tokenAddress
             ? ethers.utils.formatEther(sendTx.sendData.value)
             : sendTx.amount
-          }}
+        }}
           {{ currentNetwork.currencySymbol }}</span>
       </div>
     </div>
     <ModifGasFee :show="showSpeedModal" :to="sendTx.to" :gasPrice="sendTx.gasPrice" :gasLimit="sendTx.gasLimit" :amount="ethers.utils.formatEther(sendTx.sendData.value)" @change="handleGasChange" />
     <div class="sendBtnBox pb-20 mt-20">
       <van-button @click="showSpeedModal = false" class="mr-26">{{
-        t("common.cancel")
-      }}</van-button>
+          t("common.cancel")
+        }}</van-button>
       <van-button type="primary" @click="reSendTx" :loading="reloading">{{
-        t("common.confirm")
-      }}</van-button>
+          t("common.confirm")
+        }}</van-button>
     </div>
   </CommonModal>
 </template>
@@ -648,7 +648,7 @@ export default {
 .tx-tit {
   height: 30px;
   color: #848484;
-  background: #F1F3F4;
+  background: #220a35;
 }
 
 .fixed-bottom {
@@ -663,7 +663,7 @@ export default {
     padding: 3px 5px;
     box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    background: #fff;
+    background: #150520;
   }
 }
 

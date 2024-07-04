@@ -10,19 +10,13 @@
     </div>
   </div>
   <div class="icon-box flex center">
-    <div
-      class="iconele flex center"
-      :style="{
+    <div class="iconele flex center" :style="{
         backgroundImage: `url(${require('@/views/mnemonic/imgs/circle.png')})`,
-      }"
-    >
-      <div
-        class="iconinner flex center"
-        :style="{
-          backgroundImage: `url(${require('@/views/mnemonic/imgs/circle2.png')})`,
-        }"
-      >
-      <i class="iconfont success icon-duihao2"></i>
+      }">
+      <div class="iconinner flex center" :style="{
+        backgroundImage: `url(${require('@/views/mnemonic/imgs/circle2.png')})`,
+      }">
+        <i class="iconfont success icon-duihao2"></i>
       </div>
     </div>
   </div>
@@ -85,7 +79,7 @@ export default {
       // Get the decrypted mnemonic
       const password = getCookies("password");
       // const mnemonicJson = await localforage.getItem('mnemonic')
-      data.value = await parseMnemonic(password,keyStore.value);
+      data.value = await parseMnemonic(password, keyStore.value);
       commit("system/UPDATE_HASBACKUPMNEMONIC", true);
     });
 
@@ -104,18 +98,23 @@ export default {
   font-size: 40px;
   color: #3eae58;
 }
+
 .mnemonic-bg {
-  background: #F8F3F9;
+  background: #150520;
+
   .tit-big {
     line-height: 21px;
   }
+
   .tit-small {
     width: 290px;
     color: rgba(132, 132, 132, 1);
   }
 }
+
 .icon-box {
   margin-top: 50px;
+
   .iconele {
     width: 175px;
     height: 175px;
@@ -125,6 +124,7 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: left 0 top 0 right 0 bottom 0;
+
     .iconinner {
       width: 110px;
       height: 110px;
@@ -139,11 +139,13 @@ export default {
     }
   }
 }
+
 .tip-info {
   width: 255px;
   margin: 0 auto;
   color: #848484;
 }
+
 .btn-group {
   button:nth-of-type(1) {
     margin-right: 10px;

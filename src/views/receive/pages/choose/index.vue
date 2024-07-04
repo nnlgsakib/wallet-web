@@ -178,14 +178,14 @@ export default {
 
 .title {
   font-size: 16px;
-  color: #000;
+
   font-weight: bold;
 }
 
 .choose-list {
 
   :deep(.van-index-anchor) {
-    background: #f1f3f4;
+    background: #220a35;
     color: #aeaeae;
     line-height: 30px;
   }

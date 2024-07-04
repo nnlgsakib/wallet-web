@@ -127,8 +127,8 @@ export default defineComponent({
     const { state } = store
     const calcFee = async () => {
       const { nft_address, to } = props.tx
-      const d2 = {type:1,nft_address, version:"v0.0.1"}
-      const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d2)}`;
+      const d2 = { type: 1, nft_address, version: "v0.0.1" }
+      const str = `erbie:${JSON.stringify(d2)}`;
       const data3 = web3.utils.fromUtf8(str);
       const myAddr = accountInfo.value.address
       const tx = {
@@ -203,10 +203,9 @@ export default defineComponent({
   line-height: 62px;
   font-weight: bold;
   font-size: 14px;
-  background: #F8F3F9;
+  background: #220a35;
 }
 
-.createNftModal {}
 
 .btn-box {
   padding: 0 52px 20px;

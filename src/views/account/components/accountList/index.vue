@@ -67,7 +67,7 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 :deep(.van-index-anchor) {
-  background: #f1f3f4;
+  background: #220a35;
   color: #aeaeae;
   line-height: 30px;
 }
@@ -100,7 +100,7 @@ export default defineComponent({
     border-bottom: 1PX solid rgba($color: #B3B3B3, $alpha: 0.5);
 
     &:hover {
-      background: #F8F3F9;
+      background: #220a35;
       color: #9F54BA;
 
       .info .address {
@@ -129,4 +129,5 @@ export default defineComponent({
       }
     }
   }
-}</style>
+}
+</style>

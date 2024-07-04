@@ -16,18 +16,8 @@
         <div class="text-bold f-12 mt-10 mb-6 lh-16 form-tit">
           <span class="warning">*</span>
           {{ t("castingnft.metaUrl") }}
-          <van-popover
-            v-model:show="showPopover"
-            :offset="[-12, 8]"
-            theme="dark"
-            placement="top-start"
-            class="createNft-popover one"
-            teleport="#page-box"
-          >
-            <div
-              class="f-12 pl-10 pr-10 pt-10 pb-10"
-              @click="showPopover = false"
-            >
+          <van-popover v-model:show="showPopover" :offset="[-12, 8]" theme="dark" placement="top-start" class="createNft-popover one" teleport="#page-box">
+            <div class="f-12 pl-10 pr-10 pt-10 pb-10" @click="showPopover = false">
               <span class="lh-14">{{ $t("castingnft.urlpopover") }}</span>
               <span class="highSpan block">
                 {{ $t("castingnft.urlpopover2") }}
@@ -38,27 +28,12 @@
             </template>
           </van-popover>
         </div>
-        <van-field
-          v-model="meta_url"
-          name="meta_url"
-          :placeholder="$t('castingnft.metaUrlPlaceholder')"
-          :rules="[{ required: true, message: t('castingnft.errorEntered') }]"
-        />
+        <van-field v-model="meta_url" name="meta_url" :placeholder="$t('castingnft.metaUrlPlaceholder')" :rules="[{ required: true, message: t('castingnft.errorEntered') }]" />
         <div class="text-bold f-12 mt-10 mb-6 lh-16 form-tit">
           <span class="warning">*</span>
           {{ t("castingnft.collectibleName") }}
-          <van-popover
-            v-model:show="showPopover1"
-            theme="dark"
-            :offset="[-12, 8]"
-            placement="top-start"
-            class="createNft-popover two"
-            teleport="#page-box"
-          >
-            <div
-              class="f-12 pl-10 pr-10 pt-10 pb-10"
-              @click="showPopover1 = false"
-            >
+          <van-popover v-model:show="showPopover1" theme="dark" :offset="[-12, 8]" placement="top-start" class="createNft-popover two" teleport="#page-box">
+            <div class="f-12 pl-10 pr-10 pt-10 pb-10" @click="showPopover1 = false">
               <span class="highSpan">{{ $t("castingnft.namepopover2") }}</span>
               <span class="lh-14">{{ $t("castingnft.namepopover") }}</span>
             </div>
@@ -67,35 +42,19 @@
             </template>
           </van-popover>
         </div>
-        <van-field
-          v-model="name"
-          name="name"
-          :placeholder="$t('castingnft.collectibleNamePlaceholder')"
-          maxlength="60"
-          :rules="[
-            { required: true, message: t('castingnft.errorEntered') },
-            {
-              validator: collcetionname,
-              message: t('castingnft.collectibleNamePlaceholder'),
-            },
-          ]"
-        />
+        <van-field v-model="name" name="name" :placeholder="$t('castingnft.collectibleNamePlaceholder')" maxlength="60" :rules="[
+          { required: true, message: t('castingnft.errorEntered') },
+          {
+            validator: collcetionname,
+            message: t('castingnft.collectibleNamePlaceholder'),
+          },
+        ]" />
 
         <div class="text-bold f-12 mt-10 mb-6 form-tit lh-16">
           <span class="warning">*</span>
           {{ t("castingnft.collectionIntroduction") }}
-          <van-popover
-            v-model:show="showPopover2"
-            :offset="[-12, 8]"
-            theme="dark"
-            placement="top-start"
-            class="createNft-popover three"
-            teleport="#page-box"
-          >
-            <div
-              class="f-12 pl-10 pr-10 pt-10 pb-10"
-              @click="showPopover2 = false"
-            >
+          <van-popover v-model:show="showPopover2" :offset="[-12, 8]" theme="dark" placement="top-start" class="createNft-popover three" teleport="#page-box">
+            <div class="f-12 pl-10 pr-10 pt-10 pb-10" @click="showPopover2 = false">
               {{ $t("castingnft.descpopover") }}
             </div>
             <template #reference>
@@ -103,37 +62,18 @@
             </template>
           </van-popover>
         </div>
-        <van-field
-          v-model="desc"
-          rows="2"
-          type="textarea"
-          class="textarea"
-          name="desc"
-          :placeholder="$t('castingnft.collectionIntroductionPlaceholder')"
-          maxlength="60"
-          :rules="[
-            { required: true, message: t('castingnft.errorEntered') },
-            {
-              validator: collcetiondesc,
-              message: t('castingnft.collectibleNamePlaceholder'),
-            },
-          ]"
-        />
+        <van-field v-model="desc" rows="2" type="textarea" class="textarea" name="desc" :placeholder="$t('castingnft.collectionIntroductionPlaceholder')" maxlength="60" :rules="[
+          { required: true, message: t('castingnft.errorEntered') },
+          {
+            validator: collcetiondesc,
+            message: t('castingnft.collectibleNamePlaceholder'),
+          },
+        ]" />
         <div class="text-bold f-12 mt-10 mb-6 form-tit lh-16">
           <span class="warning">*</span>
           {{ t("castingnft.royalty") }}
-          <van-popover
-            v-model:show="showPopover3"
-            theme="dark"
-            :offset="[-12, 8]"
-            placement="top-start"
-            class="createNft-popover"
-            teleport="#page-box"
-          >
-            <div
-              class="f-12 pl-10 pr-10 pt-10 pb-10"
-              @click="showPopover3 = false"
-            >
+          <van-popover v-model:show="showPopover3" theme="dark" :offset="[-12, 8]" placement="top-start" class="createNft-popover" teleport="#page-box">
+            <div class="f-12 pl-10 pr-10 pt-10 pb-10" @click="showPopover3 = false">
               {{ $t("castingnft.royaltypopover") }}
             </div>
             <template #reference>
@@ -141,31 +81,14 @@
             </template>
           </van-popover>
         </div>
-        <van-field
-          v-model="royalty"
-          name="royalty"
-          type="digit"
-          @blur="blurRoyalty"
-          :placeholder="$t('castingnft.royaltyPlaceholder')"
-          :rules="[
-            { required: true, message: t('castingnft.numbersof') },
-          ]"
-        />
+        <van-field v-model="royalty" name="royalty" type="digit" @blur="blurRoyalty" :placeholder="$t('castingnft.royaltyPlaceholder')" :rules="[
+          { required: true, message: t('castingnft.numbersof') },
+        ]" />
         <div class="text-bold f-12 mt-10 mb-6 form-tit lh-16">
           <span class="warning">*</span>
           {{ t("castingnft.category") }}
-          <van-popover
-            v-model:show="showPopover4"
-            :offset="[-12, 8]"
-            theme="dark"
-            placement="top-start"
-            class="createNft-popover"
-            teleport="#page-box"
-          >
-            <div
-              class="f-12 pl-10 pr-10 pt-10 pb-10"
-              @click="showPopover4 = false"
-            >
+          <van-popover v-model:show="showPopover4" :offset="[-12, 8]" theme="dark" placement="top-start" class="createNft-popover" teleport="#page-box">
+            <div class="f-12 pl-10 pr-10 pt-10 pb-10" @click="showPopover4 = false">
               {{ $t("castingnft.royaltypopover") }}
             </div>
             <template #reference>
@@ -173,33 +96,16 @@
             </template>
           </van-popover>
         </div>
-        <van-field
-          v-model="category.label"
-          class="hover"
-          style="cursor: pointer"
-          right-icon="arrow-down"
-          name="category"
-          readonly
-          @click="handleCategory"
-          :placeholder="$t('castingnft.categoryPlaceholder')"
-          :rules="[
-            {
-              required: true,
-              message: t('castingnft.selectaCollectionCategory'),
-            },
-          ]"
-        />
+        <van-field v-model="category.label" class="hover" style="cursor: pointer" right-icon="arrow-down" name="category" readonly @click="handleCategory" :placeholder="$t('castingnft.categoryPlaceholder')" :rules="[
+          {
+            required: true,
+            message: t('castingnft.selectaCollectionCategory'),
+          },
+        ]" />
       </van-cell-group>
       <div class="form-button">
         <div class="container pl-28 pr-28">
-          <van-button
-            :loading="loading"
-            round
-            block
-            type="primary"
-            native-type="submit"
-            >{{ t("castingnft.next") }}</van-button
-          >
+          <van-button :loading="loading" round block type="primary" native-type="submit">{{ t("castingnft.next") }}</van-button>
         </div>
       </div>
     </van-form>
@@ -234,7 +140,7 @@ import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 import Categoryform from "@/components/categoryform/index.vue";
 import BigNumber from "bignumber.js";
-import { collectibleRules,regExchangeName } from "@/enum/regexp";
+import { collectibleRules, regExchangeName } from "@/enum/regexp";
 import { useTradeConfirm } from "@/plugins/tradeConfirmationsModal";
 import { TradeStatus } from "@/plugins/tradeConfirmationsModal/tradeConfirm";
 import { getWallet, wallet } from "@/store/modules/account";
@@ -290,11 +196,11 @@ export default {
       loading.value = true;
       try {
 
-        txPorp.value ={
-          meta_url:meta_url.value,
-          name:name1,
-          desc:desc1,
-          royalty:Number(royalty.value),
+        txPorp.value = {
+          meta_url: meta_url.value,
+          name: name1,
+          desc: desc1,
+          royalty: Number(royalty.value),
           category: toRaw(category.value)
         }
         showNftModal.value = true
@@ -308,7 +214,7 @@ export default {
     };
     const { $tradeConfirm } = useTradeConfirm();
 
-    const handleCreate = async() => {
+    const handleCreate = async () => {
       showNftModal.value = false
       $tradeConfirm.open({
         disabled: [TradeStatus.pendding],
@@ -327,29 +233,33 @@ export default {
         });
         $tradeConfirm.update({ status: "approve" });
         const receipt = await wallet.provider.waitForTransaction(data.hash, null, 60000)
-        if(receipt.status == 1) {
-          $tradeConfirm.update({ status: "success", hash:data.hash,callBack(){
-            router.replace({ name: "createNft-step3" });
-          } });
-          
+        if (receipt.status == 1) {
+          $tradeConfirm.update({
+            status: "success", hash: data.hash, callBack() {
+              router.replace({ name: "createNft-step3" });
+            }
+          });
+
         } else {
-          $tradeConfirm.update({ status: "fail", hash:data.hash,callBack(){
-            router.replace({ name: "home" });
-          } });
+          $tradeConfirm.update({
+            status: "fail", hash: data.hash, callBack() {
+              router.replace({ name: "home" });
+            }
+          });
         }
-      }catch(err: any){
+      } catch (err: any) {
         if (err.toString().indexOf("timeout") > -1) {
           $tradeConfirm.update({
-              status: "warn",
-              failMessage: t("error.timeout"),
-            });
+            status: "warn",
+            failMessage: t("error.timeout"),
+          });
         } else {
           $tradeConfirm.update({
             status: "fail",
             failMessage: err.reason,
           });
         }
-      }finally{
+      } finally {
 
       }
     }
@@ -397,7 +307,7 @@ export default {
     const showPopover3 = ref(false);
     const showPopover4 = ref(false);
 
-    const showNftModal:Ref<boolean> = ref(false)
+    const showNftModal: Ref<boolean> = ref(false)
 
     return {
       showNftModal,
@@ -433,15 +343,18 @@ export default {
 .block {
   display: block;
 }
-:deep(){
+
+:deep() {
   .van-field__error-message {
     margin-top: 4px;
   }
 }
+
 :deep(.van-icon-question) {
   color: #b3b3b3;
   font-size: 14px;
 }
+
 .highSpan {
   color: #9F54BA;
   line-height: 14px;
@@ -455,25 +368,31 @@ export default {
     .van-cell-group--inset {
       overflow: inherit;
     }
+
     .van-field__control--min-height {
       min-height: auto;
     }
+
     .van-field__right-icon {
       color: #9F54BA;
     }
 
     .van-cell {
       padding: 0;
+
       &::after {
         display: none;
       }
     }
+
     .van-cell-group--inset {
       margin: 0 27px;
       padding-bottom: 1px;
     }
+
     .form-tit {
       position: relative;
+
       .warning {
         color: red;
       }
@@ -484,11 +403,14 @@ export default {
     width: 45vw;
     margin: 0 auto;
   }
+
   .loading-bg {
-    background: #F8F3F9;
+    background: #220a35;
+
     .tit-big {
       line-height: 21px;
     }
+
     .step {
       width: 17px;
       height: 17px;
@@ -497,6 +419,7 @@ export default {
       text-align: center;
       border-radius: 50%;
     }
+
     .step2 {
       width: 17px;
       height: 17px;
@@ -505,6 +428,7 @@ export default {
       text-align: center;
       border-radius: 50%;
     }
+
     .step3 {
       width: 16px;
       height: 16px;
@@ -514,12 +438,14 @@ export default {
       text-align: center;
       border-radius: 50%;
     }
+
     .dotted-line {
       text-align: center;
       width: 88%;
       height: 0px;
       border-bottom: 1px dashed #9F54BA;
     }
+
     .dotted-line2 {
       margin-top: 2px;
       text-align: center;
@@ -528,31 +454,39 @@ export default {
       border: 1PX dashed #979797;
       transform: scale(0.8);
     }
+
     .tit-small {
       color: #9F54BA;
     }
+
     .now {
       color: #9F54BA;
     }
+
     .no {
       color: #b3b3b3;
     }
   }
+
   .content {
     margin-top: 45px;
   }
+
   .tit-small {
     color: #bbbbbb;
     margin-top: 5px;
   }
+
   .form-button {
     position: fixed;
     right: 0px;
     left: 0px;
     bottom: 26px;
   }
+
   .icon-box {
     margin-top: 50px;
+
     .iconele {
       width: 175px;
       height: 175px;
@@ -561,6 +495,7 @@ export default {
       background-size: cover;
       background-repeat: no-repeat;
       background-position: left 0 top 0 right 0 bottom 0;
+
       .iconinner {
         width: 110px;
         height: 110px;
@@ -575,11 +510,13 @@ export default {
       }
     }
   }
+
   .tip-info {
     width: 255px;
     margin: 0 auto;
     color: #848484;
   }
+
   .text {
     border-radius: 3px;
     border: 2px solid #e8e9eb;

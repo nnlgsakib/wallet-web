@@ -6,18 +6,9 @@
         <div class="left flex center">
           <van-icon name="warning" />
         </div>
-        <i18n-t
-          keypath="addtokens.title"
-          tag="div"
-          class="right text-left f-12 lh-16"
-        >
+        <i18n-t keypath="addtokens.title" tag="div" class="right text-left f-12 lh-16">
           <template v-slot:wormholesLink>
-            <a
-              :href="OFFICIAL_WEBSITE"
-              class="ml-4 mr-4 wormholeslink"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a :href="OFFICIAL_WEBSITE" class="ml-4 mr-4 wormholeslink" target="_blank" rel="noopener noreferrer">
               {{ t("wallet.wormHoles") }}
             </a>
           </template>
@@ -29,14 +20,7 @@
             <span>*</span>
             {{ t("addtokens.contractAdd") }}
           </div>
-          <van-field
-            submit-on-enter
-            v-model="tokenContractAddress"
-            name="contract"
-            :class="tokenError ? 'error' : ''"
-            :placeholder="$t('addtokens.contractAddeg')"
-            :rules="[{ validator: asynToken }]"
-          />
+          <van-field submit-on-enter v-model="tokenContractAddress" name="contract" :class="tokenError ? 'error' : ''" :placeholder="$t('addtokens.contractAddeg')" :rules="[{ validator: asynToken }]" />
         </van-cell-group>
         <div class="btn-group">
           <div class="container pl-28 pr-28 flex between">
@@ -319,25 +303,30 @@ export default {
 .error {
   :deep(.van-field__body) {
     border: 1px solid #d73a49 !important;
-    background: #fbf2f3;
+    background: transparent;
   }
 }
+
 .wormholeslink {
   color: #9F54BA;
 }
+
 .list {
   height: calc(100vh - 48px - 16px);
   overflow-y: scroll;
 }
+
 :deep(.van-index-anchor) {
-  background: #f1f3f4;
+  background: #220a35;
   color: #aeaeae;
   line-height: 30px;
 }
+
 :deep(.van-index-bar__sidebar) {
   color: #909090;
   right: 8px;
 }
+
 :deep(.van-index-bar__index) {
   width: 18px;
   height: 18px;
@@ -346,27 +335,33 @@ export default {
   margin-bottom: 4px;
   padding: 0;
 }
+
 :deep(.van-index-bar__index--active) {
   background: #9F54BA;
   color: #fff;
   border-radius: 9px;
 }
+
 * {
   box-sizing: border-box;
 }
+
 .tabs {
   width: 200px;
+
   // border-radius: 20px;
   // border: 1PX solid #9F54BA;
   &::after {
     border-color: #9F54BA;
     border-radius: 26px;
   }
+
   .tab {
     width: 100px;
     line-height: 26px;
     border-radius: 12px;
     font-size: 12px;
+
     &.active {
       background: #9F54BA;
       // border: 1PX solid #9F54BA;
@@ -374,32 +369,39 @@ export default {
     }
   }
 }
+
 .title {
   text-align: center;
-  background: #F8F3F9;
+  background: #220a35;
   margin-top: 25px;
+
   .left {
     width: 20px;
+
     i {
       font-size: 16px;
       color: #9F54BA;
     }
   }
+
   .right {
     width: calc(100% - 20px);
     padding-left: 3px;
+
     a {
       text-decoration: underline;
       color: #9F54BA;
     }
   }
 }
+
 .title-label {
   font-size: 12px;
   line-height: 16px;
   margin-bottom: 10px;
   font-weight: bold;
   position: relative;
+
   span {
     position: absolute;
     left: 0;
@@ -407,42 +409,51 @@ export default {
     color: red;
   }
 }
+
 .search-box {
   border: 1px solid #bbc0c5;
   border-radius: 5px;
 }
+
 .ipt-box {
   width: 96%;
+
   i {
     color: #9F54BA;
     font-size: 22px;
   }
+
   :deep(.van-field__body) {
     margin-bottom: 0;
     line-height: 100%;
     border: none;
     outline: none;
+
     &:hover {
       border: none;
     }
   }
 }
+
 .close {
   width: 30px;
+
   i {
     font-size: 16px;
     color: #9F54BA;
   }
 }
+
 .icon-right-box {
   i {
     font-size: 18px;
   }
+
   .icon-add {
     color: #9F54BA;
   }
-  .icon-minus {
-  }
+
+  .icon-minus {}
 }
 
 .btn-group {
@@ -451,22 +462,28 @@ export default {
   right: 0;
   bottom: 25px;
 }
+
 :deep(.van-cell-group--inset) {
   margin: 0;
 }
+
 :deep(.van-field__label) {
   display: none;
 }
+
 :deep(.van-field__error-message) {
   margin-bottom: 12px;
   line-height: 12px;
 }
+
 :deep(.van-cell:after) {
   display: none;
 }
+
 :deep(.van-cell) {
   padding: 0;
 }
+
 :deep(.van-field__body) {
   margin-bottom: 10px;
 

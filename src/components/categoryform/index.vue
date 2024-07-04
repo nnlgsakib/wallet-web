@@ -1,33 +1,19 @@
 <template>
   <div class="categoryform">
-    <van-dialog
-      v-model:show="showModal"
-      teleport="#page-box"
-      :showConfirmButton="false"
-      :showCancelButton="false"
-      closeOnClickOverlay
-      :title="''"
-    >
+    <van-dialog v-model:show="showModal" teleport="#page-box" :showConfirmButton="false" :showCancelButton="false" closeOnClickOverlay :title="''">
       <div class="title text-center text-bold van-hairline--bottom">
         {{ $t("receive.selectCategory") }}
       </div>
       <div class="category-list">
-        <SelectCard
-          class="card"
-          v-for="item in categoryList"
-          @handleClick="handleClick"
-          :select="item.select"
-          :data="item"
-          :key="item.value"
-        ></SelectCard>
+        <SelectCard class="card" v-for="item in categoryList" @handleClick="handleClick" :select="item.select" :data="item" :key="item.value"></SelectCard>
       </div>
       <div class="flex between pb-30 pl-16 pr-16 btn-box pt-20">
         <van-button block @click="tocancel">{{
-          t("receive.cancel")
-        }}</van-button>
+      t("receive.cancel")
+    }}</van-button>
         <van-button block type="primary" @click="handleComfirm">{{
-          t("receive.confirm")
-        }}</van-button>
+      t("receive.confirm")
+          }}</van-button>
       </div>
     </van-dialog>
   </div>
@@ -69,7 +55,7 @@ export default defineComponent({
     [Radio.name]: Radio,
     SelectCard,
   },
-  emits: ["handleComfirm","update:modelValue"],
+  emits: ["handleComfirm", "update:modelValue"],
   props: {
     // Popup window title
     title: {
@@ -203,8 +189,8 @@ export default defineComponent({
   line-height: 62px;
   font-weight: bold;
   font-size: 14px;
-  background: #F8F3F9;
 }
+
 .category-list {
   max-height: 350px;
   overflow-y: scroll;
@@ -216,19 +202,24 @@ export default defineComponent({
   outline: none;
   display: inline-block;
 }
+
 .imitate-placeholder {
   color: #999;
 }
+
 .amount-ipt {
   color: #8f8f8f;
+
   .van-field {
     padding: 0;
     width: 40px;
     display: inline-block;
+
     :deep(input) {
       font-size: 15px;
     }
   }
+
   // input {
   //   display: inline-block;
   //   width: auto;
@@ -236,20 +227,23 @@ export default defineComponent({
   //   font-size: 15px;
   // }
   span {
-    color: #000;
+
     display: block;
     font-size: 15px;
   }
 }
+
 .transfer {
   i {
     color: #B3B3B3;
     font-size: 14px;
   }
 }
+
 .btn-box {
   width: 260px;
   margin: 0 auto;
+
   button {
     width: 103px;
   }

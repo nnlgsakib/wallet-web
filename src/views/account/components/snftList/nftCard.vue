@@ -95,7 +95,7 @@ export default defineComponent({
 
     const toBrowser = () => {
       const { tag, nft_address, source_url, metaData } = props.data;
-      toScan(nft_address, "/SNFTDetails");
+      toScan(nft_address, "/accountDetail");
     };
 
     const showPopover2 = ref(false);
@@ -202,4 +202,5 @@ $L3Color: #d73a49;
       font-size: 18px;
     }
   }
-}</style>
+}
+</style>

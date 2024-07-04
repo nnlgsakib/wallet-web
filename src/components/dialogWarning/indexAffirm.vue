@@ -1,21 +1,21 @@
 <template>
-    <div class="mask flex center" v-if="show" >
-    <div :class="`dialog-warning ${theme}`">
-        <div class="warning-icon">
-            <van-icon color="#F7BF03" name="warning"  />
-        </div>
-        <div class="warning-text">
-            <span>{{text}}</span>
-        </div>
-        <div class="footer-btns">
-            <div>
-
-                <span @click="emitClose">{{t('common.no')}}</span>
-                <span @click="emitWarningSuccess">{{t('common.yes')}}</span>
+    <div class="mask flex center" v-if="show">
+        <div :class="`dialog-warning ${theme}`">
+            <div class="warning-icon">
+                <van-icon color="#F7BF03" name="warning" />
             </div>
-      </div>
+            <div class="warning-text">
+                <span>{{ text }}</span>
+            </div>
+            <div class="footer-btns">
+                <div>
+
+                    <span @click="emitClose">{{ t('common.no') }}</span>
+                    <span @click="emitWarningSuccess">{{ t('common.yes') }}</span>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 </template>
 
 <script lang="ts">
@@ -38,12 +38,12 @@ export default {
         },
         theme: {
             type: String,
-            default:"dark"
+            default: "dark"
         }
     },
     setup(props: any, context: SetupContext) {
         const { emit }: any = context
-        const {t} = useI18n()
+        const { t } = useI18n()
         const show = computed({
             get() {
                 return props.isWarning
@@ -72,86 +72,99 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .mask {
-        background: rgba($color: #000000, $alpha: 0.7);
-        position: fixed;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        z-index: 1000000;
-    }
-    .dialog-warning {
-        width: 340px;
-        font-weight: bold;
-        font-size: 15px;
-        height: 236px;
-        border-radius: 8px;
-        &.dark {
-            background: rgba($color: #000000, $alpha: 0.8);
-            color: #fff;
-            .footer-btns {
-                div span {
+.mask {
+    background: rgba($color: #000000, $alpha: 0.7);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000000;
+}
+
+.dialog-warning {
+    width: 340px;
+    font-weight: bold;
+    font-size: 15px;
+    height: 236px;
+    border-radius: 8px;
+
+    &.dark {
+        background: rgba($color: #000000, $alpha: 0.8);
+        color: #fff;
+
+        .footer-btns {
+            div span {
                 color: #fff;
+
                 &:first-child {
                     border: 1px solid #fff;
                     margin-right: 40px;
                 }
+
                 &:last-child {
                     background-color: #9F54BA;
                 }
             }
-            }
-    
         }
-        &.light {
-            background: rgba($color: #fff, $alpha: 1);
-            color: #000;
-            .footer-btns {
-                div span {
-                color: #000000;
+
+    }
+
+    &.light {
+        background: rgba($color: #24152f, $alpha: 1);
+
+        .footer-btns {
+            div span {
+                color: white;
+
                 &:first-child {
-                    border: 1px solid #000;
+                    border: 1px solid #ccc;
                     margin-right: 40px;
                 }
+
                 &:last-child {
                     color: #fff;
                     background-color: #9F54BA;
                 }
             }
-            }
         }
     }
-    .warning-icon {
+}
+
+.warning-icon {
+    padding: 25px;
+    padding-top: 50px;
+    text-align: center;
+
+    i {
+        font-size: 40px;
+    }
+}
+
+.warning-text {
+    text-align: center;
+    padding: 0 35px;
+    font-size: 14px;
+}
+
+.footer-btns {
+    div {
         padding: 25px;
-        padding-top: 50px;
         text-align: center;
-        i {
-            font-size: 40px;
-        }
-    }
-    .warning-text {
-        text-align: center;
-        padding: 0 35px;
-        font-size: 14px;
-    }
-    .footer-btns {
-        div {
-            padding: 25px;
+
+        span {
+            cursor: pointer;
+            display: inline-block;
+            width: 100px;
+            height: 45px;
+            font-size: 12px;
+            border-radius: 50px;
             text-align: center;
-            span {
-                cursor: pointer;
-                display: inline-block;
-                width: 100px;
-                height: 45px;
-                font-size: 12px;
-                border-radius: 50px;
-                text-align: center;
-                line-height: 45px;
-     
-                box-sizing: border-box;
-   
-            }
+            line-height: 45px;
+
+            box-sizing: border-box;
+
         }
     }
+}
 </style>

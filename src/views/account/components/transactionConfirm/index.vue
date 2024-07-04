@@ -2,7 +2,7 @@
   <div class="transactionConfirmComponent">
     <div class="text-center tit">AMOUNT</div>
     <div :class="`balance text-center ${loading ? 'loading' : ''}`">
-      <van-skeleton row-width="100%" :loading="loading" :row="1">{{data.deposit}} {{currentNetwork.currencySymbol}}</van-skeleton>
+      <van-skeleton row-width="100%" :loading="loading" :row="1">{{ data.deposit }} {{ currentNetwork.currencySymbol }}</van-skeleton>
     </div>
     <div class="flex center">
       <div :class="`transactionConfirmComponent-con van-hairline--surround`">
@@ -15,11 +15,7 @@
               </van-skeleton>
             </div>
             <div class="value text-right tip">
-              <van-skeleton
-                :loading="loading"
-                class="load"
-                :row="1"
-              >{{decimal(ethTractionPrice(data.gas, data.gasPrice))}} {{currentNetwork.currencySymbol}}</van-skeleton>
+              <van-skeleton :loading="loading" class="load" :row="1">{{ decimal(ethTractionPrice(data.gas, data.gasPrice)) }} {{ currentNetwork.currencySymbol }}</van-skeleton>
             </div>
           </div>
           <div class="flex between maxfee">
@@ -27,11 +23,7 @@
               <van-skeleton :loading="loading" class="load" :row="1">Like in 30 Secnds</van-skeleton>
             </div>
             <div class="value text-right">
-              <van-skeleton
-                :loading="loading"
-                class="load"
-                :row="1"
-              >Max fee: {{decimal(ethTractionPrice(data.gas, data.gasPrice))}} {{currentNetwork.currencySymbol}}</van-skeleton>
+              <van-skeleton :loading="loading" class="load" :row="1">Max fee: {{ decimal(ethTractionPrice(data.gas, data.gasPrice)) }} {{ currentNetwork.currencySymbol }}</van-skeleton>
             </div>
           </div>
         </div>
@@ -42,18 +34,10 @@
           </div>
           <div class="text-right info">
             <div class="value">
-              <van-skeleton
-                :loading="loading"
-                class="load"
-                :row="1"
-              >{{gasTotal(data.deposit, ethTractionPrice(data.gas, data.gasPrice))}} {{currentNetwork.currencySymbol}}</van-skeleton>
+              <van-skeleton :loading="loading" class="load" :row="1">{{ gasTotal(data.deposit, ethTractionPrice(data.gas, data.gasPrice)) }} {{ currentNetwork.currencySymbol }}</van-skeleton>
             </div>
             <div class="maxacc">
-              <van-skeleton
-                :loading="loading"
-                class="load"
-                :row="1"
-              >Max Account: {{gasTotal(data.deposit, ethTractionPrice(data.gas, data.gasPrice))}} {{currentNetwork.currencySymbol}}</van-skeleton>
+              <van-skeleton :loading="loading" class="load" :row="1">Max Account: {{ gasTotal(data.deposit, ethTractionPrice(data.gas, data.gasPrice)) }} {{ currentNetwork.currencySymbol }}</van-skeleton>
             </div>
           </div>
         </div>
@@ -112,80 +96,100 @@ export default defineComponent({
     font-size: 12px;
     margin-top: 16px;
   }
+
   .balance {
     font-size: 36px;
     margin: 20px auto 24px;
+
     &.loading {
       width: 60%;
     }
   }
+
   &-con {
     min-height: 128px;
     font-size: 12px;
     padding: 16px;
     max-width: 700px;
+
     &.loading {
       padding: 0;
     }
+
     box-sizing: border-box;
+
     &:after {
       border-radius: 20px;
     }
+
     .card-top {
       .gasfree {
         margin-bottom: 7px;
+
         .label {
-          color: #000;
+
           font-weight: bold;
           min-width: 100%;
+
           i {
             color: #656671;
           }
         }
+
         .value {
           color: rgba(3, 124, 214, 1);
           // min-width: 30vw;
         }
       }
+
       .maxfee {
         margin-bottom: 12px;
+
         .label {
           color: rgba(40, 167, 69, 1);
           min-width: 26;
         }
+
         .value {
           color: rgba(101, 102, 113, 1);
           font-size: 12px;
           min-width: 20vw;
         }
       }
+
       .label,
       .value {
         line-height: 16px;
       }
+
       .tip {
         margin-left: -50px;
       }
-      .label {
-      }
-      .value {
-      }
+
+      .label {}
+
+      .value {}
     }
+
     .card-bottom {
       padding-top: 12px;
+
       .maxacc {
         color: rgba(90, 91, 102, 1);
       }
+
       .label {
         font-weight: bold;
         min-width: 100px;
       }
+
       .info {
         div {
           line-height: 16px;
           margin-bottom: 4px;
           min-width: 36vw;
         }
+
         div:nth-of-type(2) {
           font-size: 12px;
           min-width: 32vw;

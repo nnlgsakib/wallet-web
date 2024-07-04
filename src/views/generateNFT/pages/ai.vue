@@ -15,7 +15,7 @@
             </template>
           </van-popover>
         </div>
-        <van-field :class="wordErr ? 'error' : ''" label-align="top" v-model="promptWord" :disabled="query.address ? true : false" autosize :rows="6" clearable type="textarea" maxlength="112"  :placeholder="t('generateNFT.placeholder')" :rules="[{ validator: validatorWord }]" />
+        <van-field :class="wordErr ? 'error' : ''" label-align="top" v-model="promptWord" :disabled="query.address ? true : false" autosize :rows="6" clearable type="textarea" maxlength="112" :placeholder="t('generateNFT.placeholder')" :rules="[{ validator: validatorWord }]" />
 
         <div class="label mt-16">
           <span class="mr-4">*</span>{{ t("castingnft.royalty") }} ( 1%-10% )
@@ -120,7 +120,7 @@ interface ForBidImg {
   url: string
 }
 
-const filtersImgUrls:Ref<ForBidImg[]> = ref([])
+const filtersImgUrls: Ref<ForBidImg[]> = ref([])
 
 const query: any = route.query;
 const info = query.info ? JSON.parse(query.info) : null;
@@ -197,7 +197,7 @@ const handleGetGas = async () => {
     exchanger: "",
     meta_url: web3.utils.fromUtf8(JSON.stringify(nft_data)),
   };
-  const parstr = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(par)}`;
+  const parstr = `erbie:${JSON.stringify(par)}`;
 
   const newdata = web3.utils.fromUtf8(parstr);
   const tx = {
@@ -219,7 +219,7 @@ const normalCreate = async () => {
     nft_data,
     () => {
       const localUrls = filtersImgUrls.value
-      localUrls.push({url: promptWord.value, time: new Date().getTime()})
+      localUrls.push({ url: promptWord.value, time: new Date().getTime() })
       localforage.setItem('forbid-img-urls', clone(localUrls))
       $tradeConfirm.update({ status: "approve" });
     }
@@ -290,7 +290,7 @@ const handleSendCreate = async (nft_data = {}, call = (v: any) => { }) => {
       exchanger: "",
       meta_url: web3.utils.fromUtf8(JSON.stringify(nft_data)),
     };
-    const parstr = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(par)}`;
+    const parstr = `erbie:${JSON.stringify(par)}`;
     const newdata = web3.utils.fromUtf8(parstr);
     const tx = {
       to: myAddr,
@@ -457,7 +457,7 @@ const validatorWord = (v: string) => {
   }
   if (RegUrl.test(v)) {
     const hasUrl = filtersImgUrls.value.find(item => item.url == v);
-    if(hasUrl) {
+    if (hasUrl) {
       wordErr.value = true;
       return t('generateNFT.repeatImgUrl')
     }

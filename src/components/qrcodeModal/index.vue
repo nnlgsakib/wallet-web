@@ -1,13 +1,6 @@
 <template>
   <div class="qrcode-modal">
-    <van-dialog
-      v-model:show="showModal"
-      teleport="#page-box"
-      :showConfirmButton="false"
-      :showCancelButton="false"
-      closeOnClickOverlay
-      :title="''"
-    >
+    <van-dialog v-model:show="showModal" teleport="#page-box" :showConfirmButton="false" :showCancelButton="false" closeOnClickOverlay :title="''">
       <div class="title text-center text-bold van-hairline--bottom">{{ $t('mnemonic.backup') }}</div>
       <div class="tip f-12 lh-16 text-center pl-24 pr-24 mt-12 mb-12">{{ $t('mnemonic.backupyourQRcodeinasafeenvironment') }}</div>
       <div id="qrcode" class="flex center mb-24">
@@ -113,31 +106,35 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .title {
-  color: #000;
   font-size: 15px;
   line-height: 62px;
-  background: #FBF8FB;
+  background: #24152f;
 }
+
 .savebtn {
   width: 250px;
-  background: #F8F3F9;
+  background: #220a35;
   border-radius: 30px;
   color: #9F54BA;
+
   i {
     font-size: 12px;
   }
-  &:hover {
+
+  /* &:hover {
     background: #dcecf9;
-  }
+  } */
 }
+
 .code {
   width: 190px !important;
   height: 190px !important;
 }
+
 .code-box {
   width: 210px;
   height: 210px;
-  border: 7px solid #000;
+  border: 7px solid #fff;
   padding: 1px;
 }
 </style>

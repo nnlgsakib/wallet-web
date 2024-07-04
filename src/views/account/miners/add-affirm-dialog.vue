@@ -29,7 +29,7 @@
                 <van-icon name="question" color="#9A9A9A" />
               </el-tooltip>
               <div class="exchange">
-                <span>≈</span>
+                <span>≈ </span>
                 {{ addprofit }} ERB
               </div>
             </div>
@@ -62,9 +62,9 @@
           <div class="tip">{{ t("bourse.tip3") }}</div>
           <div class="container-btn flex center column">
             <div>
-              <van-button color="#000000" class="btn" plain @click="dislogShow = false">{{ t("common.cancel") }}</van-button>
+              <van-button color="white" class="btn" plain @click="dislogShow = false">{{ t("common.cancel") }}</van-button>
               <van-button type="primary" class="btn" :disabled="Time !== 0" round @click="submit">{{ t("common.confirm")
-              }}{{ Time === 0 ? "" : `(${Time}s)` }}</van-button>
+                }}{{ Time === 0 ? "" : `(${Time}s)` }}</van-button>
             </div>
           </div>
         </div>
@@ -123,8 +123,6 @@ export default {
         }
       }, 1000);
     });
-    const gasPrice = ref("");
-    const gasLimit = ref("");
     const accountInfo = computed(() => store.state.account.accountInfo);
     const gasFee = ref("");
 
@@ -132,7 +130,7 @@ export default {
       () => props.show,
       async (n) => {
         if (n) {
-          const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify({ type: 9, proxy_address: accountInfo.value.address, "fee_rate": 1000, "name": "", "url": "", "version": "0.0.1" })}`;
+          const str = `erbie:${JSON.stringify({ type: 3, proxy_address: accountInfo.value.address, "fee_rate": 1000, "name": "", "url": "", "version": "0.0.1" })}`;
           const data3 = web3.utils.fromUtf8(str)
           const tx1 = {
             to: props.to,
@@ -154,56 +152,36 @@ export default {
     const historyProfit = ref("");
     const addprofit = ref("")
     const calcProfit = async () => {
-      const { t0, t1, t2, t3 } = store.state.configuration.setting.conversion
-      //snft rewards require an average conversion rate
-      const average = (t0 + t1 + t2 + t3) / 4
       const totalPledge = new BigNumber(props.addNumber).plus(props.amount)
-      const isValidator = totalPledge.gte(70000)
       // Two algorithms
       // 1：The miner calculates the total amount pledged by the miner
       // 2：staker is calculated according to the total staker pledge
       const wallet = await getWallet();
-      const blockNumber = await wallet.provider.getBlockNumber();
       const addressInfo = await getAccountAddr(wallet.address)
-      const { rewardCoinCount, rewardSNFTCount } = addressInfo
+      const { stakerReward } = addressInfo
       // addNumber + If the pledged amount is greater than or equal to 70,000, use erb reward, and less than 70,000, use snft reward
-      const blockn = web3.utils.toHex(blockNumber.toString());
-      if (isValidator) {
-        historyProfit.value = new BigNumber(rewardCoinCount).multipliedBy(0.16).plus(new BigNumber(rewardSNFTCount).multipliedBy(average)).toString()
-        const { Validators } = await wallet.provider.send("eth_getValidator", [blockn]);
-        let total = new BigNumber(0);
-        // @ts-ignore
-        Validators.forEach((item: any) => {
-          total = total.plus(new BigNumber(item.Balance).div(1000000000000000000));
-        });
-        // Total amount of pledge
-        const totalStr = total.toFixed(6);
-        // Total revenue one year
-        const totalprofit = store.state.account.minerTotalProfit;
-        const snfttotalprofit = store.state.account.exchangeTotalProfit;
-        myprofit.value = totalPledge.div(totalStr)
-          .multipliedBy(totalprofit).plus(new BigNumber(props.addNumber).div(totalStr).multipliedBy(snfttotalprofit))
-          .toFixed(6);
-        addprofit.value = new BigNumber(props.addNumber).div(totalStr)
-          .multipliedBy(totalprofit).plus(new BigNumber(props.addNumber).div(totalStr).multipliedBy(snfttotalprofit)).toFixed(6)
-      } else {
-        historyProfit.value = new BigNumber(rewardSNFTCount).multipliedBy(average).toString()
-        const { Stakers } = await wallet.provider.send("eth_getAllStakers", []);
-        // const data2 = await getAccount(accountInfo.value.address)
-        let total = new BigNumber(0);
-        // @ts-ignore
-        Stakers.forEach((item: any) => {
-          total = total.plus(new BigNumber(item.Balance).div(1000000000000000000));
-        })
-        // Total amount of pledge
-        const totalStr = total.toFixed(6);
-        // Total revenue one year
-        const totalprofit = store.state.account.exchangeTotalProfit;
-        myprofit.value = totalPledge.div(totalStr).multipliedBy(totalprofit)
-          .toFixed(6);
-        addprofit.value = new BigNumber(props.addNumber).div(totalStr)
-          .multipliedBy(totalprofit).toFixed(6)
-      }
+      historyProfit.value = stakerReward || 0
+      const res: {
+        Staker: {
+          Validators: {
+            Validators: Array<{ Addr: string, Balance: number }>
+          }
+        }
+      } = await wallet.provider.send('eth_getAccountInfo', ['0x0000000000000000000000000000000000000002', "latest"])
+
+      let total = new BigNumber(0);
+      // @ts-ignore
+      res.Staker.Validators.Validators.forEach((item: any) => {
+        total = total.plus(new BigNumber(item.Balance).div(1000000000000000000));
+      })
+      // Total amount of pledge
+      const totalStr = total.toFixed(6);
+      // Total revenue one year
+      const totalprofit = store.state.account.exchangeTotalProfit;
+      myprofit.value = totalPledge.div(totalStr).multipliedBy(totalprofit)
+        .toFixed(6);
+      addprofit.value = new BigNumber(props.addNumber).div(totalStr)
+        .multipliedBy(totalprofit).toFixed(6)
 
     };
 
@@ -225,7 +203,7 @@ export default {
 <style lang="scss" scoped>
 .tip {
   margin: 12px 13px 0;
-  color: #9F54BA;
+  color: white;
   font-size: 12px;
   line-height: 16px;
 }
@@ -236,7 +214,7 @@ export default {
   .miners {
     min-height: 460px;
     padding-bottom: 30px;
-    background: #fff;
+    background: #150520;
     margin: auto;
     border-radius: 8px;
     overflow: hidden;
@@ -246,10 +224,10 @@ export default {
       line-height: 62px;
       text-align: center;
       font-weight: bold;
-      background: #F8F3F9;
+      background: rgba(255, 255, 255, .05);
       font-size: 14px;
-      color: #0f0f0f;
-      border-bottom: 1px solid #f2f4f5;
+      color: white;
+      border-bottom: 1px solid #363232;
 
       span {
         font-size: 15px;
@@ -277,7 +255,7 @@ export default {
           &:last-child {
             font-weight: bold;
             font-size: 14px;
-            color: #0f0f0f;
+            color: white;
           }
         }
       }
@@ -289,7 +267,7 @@ export default {
         padding: 11px 15px 20px 15px;
         box-sizing: border-box;
         border-radius: 4px 4px 4px 4px;
-        border: 1px solid #e4e7e8;
+        border: 1px solid #363232;
 
         .ipt {
           width: 280px;
@@ -322,7 +300,7 @@ export default {
 
         .ipt-text-b {
           margin: 5px 0 9px 0;
-          color: #000;
+          color: white;
           font-size: 12px;
           font-weight: bold;
         }
@@ -334,7 +312,7 @@ export default {
 
           span {
             font-weight: 400;
-            color: #000000;
+            color: white;
           }
 
           .ipt-server-i {
@@ -345,7 +323,7 @@ export default {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #F8F3F9;
+            background: rgba(255, 255, 255, .05);
             border-radius: 7px 7px 7px 7px;
 
             &:first-child {
@@ -355,8 +333,8 @@ export default {
 
           .ipt-server-i-active {
             color: #0287db;
-            background: #F8F3F9;
-            border: 1px solid #9F54BA;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid white;
 
             span {
               color: #0287db;
@@ -371,7 +349,7 @@ export default {
 
           span {
             &:first-child {
-              color: #000000;
+              color: white;
             }
 
             &:last-child {
@@ -449,19 +427,21 @@ export default {
   padding: 17px 15px 0 15px;
   font-size: 12px;
   border-radius: 4px;
-  border: 1px solid #e4e7e8;
+  border: 1px solid #363232;
   max-height: 300px;
   overflow-y: scroll;
+  color: white;
+
 }
 
 .c1 {
-  color: #8f8f8f;
+  color: white;
 }
 
 .exchange {
   margin-top: 7px;
   padding-bottom: 16px;
-  border-bottom: 1px solid #e4e7e8;
+  border-bottom: 1px solid #363232;
 }
 
 .bourse-container-meaning {

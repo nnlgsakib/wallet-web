@@ -8,12 +8,12 @@
       </div>
 
       <div class="list">
-      <div class="receive-addr ml-20 mr-20 pb-12">
-        <div class="addr-tit flex between center-v">
-          <span class="f-14 lh-20 text-bold ">{{t('receiveRewards.addrTit')}}</span> <span class="copy-box"><i class="iconfont icon-copy hover" @click="copyAddr"></i></span>
+        <div class="receive-addr ml-20 mr-20 pb-12">
+          <div class="addr-tit flex between center-v">
+            <span class="f-14 lh-20 text-bold ">{{ t('receiveRewards.addrTit') }}</span> <span class="copy-box"><i class="iconfont icon-copy hover" @click="copyAddr"></i></span>
           </div>
-        <div class="addr-value f-12 lh-16 mt-6">{{address}}</div>
-      </div>
+          <div class="addr-value f-12 lh-16 mt-6">{{ address }}</div>
+        </div>
         <div class="list-card flex between">
           <div class="info flex">
             <div class="icon-box flex center">
@@ -29,10 +29,10 @@
           <div class="flex center btn-box">
             <div :class="`btn ${disabled1 ? 'disabled' : ''} `" @click="send1">
               {{
-                disabled1
-                  ? t("receiveRewards.hasBrought")
-                  : t("receiveRewards.toReceive")
-              }}
+          disabled1
+            ? t("receiveRewards.hasBrought")
+            : t("receiveRewards.toReceive")
+        }}
             </div>
           </div>
         </div>
@@ -47,18 +47,18 @@
               </div>
               <div class="text-info-text">
                 {{
-                  t("receiveRewards.exchangetext", { num: userInfo.exchange || 0 })
-                }}
+          t("receiveRewards.exchangetext", { num: userInfo.exchange || 0 })
+        }}
               </div>
             </div>
           </div>
           <div class="flex center btn-box">
             <div :class="`btn ${disabled2 ? 'disabled' : ''}`" @click="send2">
               {{
-                disabled2
-                  ? t("receiveRewards.hasBrought")
-                  : t("receiveRewards.toReceive")
-              }}
+          disabled2
+            ? t("receiveRewards.hasBrought")
+            : t("receiveRewards.toReceive")
+        }}
             </div>
           </div>
         </div>
@@ -77,10 +77,10 @@
           <div class="flex center btn-box">
             <div :class="`btn ${disabled3 ? 'disabled' : ''}`" @click="send3">
               {{
-                disabled3
-                  ? t("receiveRewards.hasBrought")
-                  : t("receiveRewards.toReceive")
-              }}
+          disabled3
+            ? t("receiveRewards.hasBrought")
+            : t("receiveRewards.toReceive")
+        }}
             </div>
           </div>
         </div>
@@ -97,7 +97,7 @@
         <div class="info-card">
           <div class="info-card-tit">{{ t("receiveRewards.tiptit1") }}</div>
           <div class="info-card-text">
-             <i18n-t keypath="receiveRewards.tip1" tag="div">
+            <i18n-t keypath="receiveRewards.tip1" tag="div">
               <template v-slot:br>
                 <br /><br />
               </template>
@@ -112,7 +112,7 @@
                 <br /><br />
               </template>
             </i18n-t>
-            
+
           </div>
         </div>
         <div class="info-card">
@@ -127,8 +127,8 @@
 
   <div class="btn-groups">
     <div class="container flex between pl-14 pr-14">
-      <div class="btn-ele btn1 hover" @click="toWallet">{{t('receiveRewards.toWallet')}}</div>
-      <div class="btn-ele btn2 hover" @click="toExchange">{{t('receiveRewards.toExchange')}}</div>
+      <div class="btn-ele btn1 hover" @click="toWallet">{{ t('receiveRewards.toWallet') }}</div>
+      <div class="btn-ele btn2 hover" @click="toExchange">{{ t('receiveRewards.toExchange') }}</div>
     </div>
   </div>
   <!-- dialog -->
@@ -210,7 +210,7 @@ const receiveAward = async (award_type: string) => {
     duration: 0,
   });
   try {
- 
+
   } catch (err: any) {
     // @ts-ignore
     if (!window.ethereum) {
@@ -274,12 +274,12 @@ const send3 = async () => {
 const userInfo: Ref<any> = ref({});
 const successModal = ref(false);
 const failModal = ref(false);
-const {$wtoast} = useToast()
-const copyAddr = async() => {
+const { $wtoast } = useToast()
+const copyAddr = async () => {
   try {
     await toClipboard(address.toString() || '')
     $wtoast.success(t('copy.copy'))
-  }catch(err){
+  } catch (err) {
     console.error(err)
   }
 }
@@ -287,7 +287,7 @@ const toExchange = () => {
   window.open(`${VUE_APP_EXCHANGES_URL}/c${address.toLowerCase()}/#/`)
 }
 const toWallet = () => {
-  router.replace({name:"home"})
+  router.replace({ name: "home" })
 }
 onMounted(async () => {
   wallet.value = await getWallet();
@@ -297,6 +297,7 @@ onMounted(async () => {
 <style lang="scss" scoped>
 .receive-addr {
   border-bottom: 1px solid #fff;
+
   .copy-box {
     i {
       font-size: 19px;
@@ -304,14 +305,17 @@ onMounted(async () => {
     }
   }
 }
+
 .receive-page {
   background: url(./../imgs/bg.png) no-repeat;
   background-size: cover;
   min-height: 100vh;
   padding: 380px 15px 100px;
 }
+
 .ctit1 {
   position: relative;
+
   .bg {
     margin: 0;
     position: absolute;
@@ -321,8 +325,10 @@ onMounted(async () => {
     z-index: 1;
   }
 }
+
 .ctit2 {
   position: relative;
+
   .bg {
     margin: 0;
     position: absolute;
@@ -332,26 +338,31 @@ onMounted(async () => {
     z-index: 1;
   }
 }
+
 .card1 {
   background-image: linear-gradient(90deg, #fceafc 40%, #fefcfe 100%);
   min-height: 280px;
   margin: 0 auto 20px;
   border-radius: 10px;
   border: 2px solid #fff;
+
   .list {
     margin-top: 50px;
   }
 }
+
 .card2 {
   background-image: linear-gradient(90deg, #effcfd 60%, #ffffff 100%);
   border-radius: 10px;
   min-height: 330px;
   margin: 0 auto 20px;
   border: 2px solid #fff;
+
   .list {
     margin-top: 60px;
   }
 }
+
 .card-tit {
   img {
     position: absolute;
@@ -361,33 +372,41 @@ onMounted(async () => {
     z-index: 1;
   }
 }
+
 .card2 {
   margin-bottom: 0;
 }
+
 .list-card {
   padding-bottom: 14px;
   padding-top: 14px;
   margin-left: 20px;
   margin-right: 20px;
   border-bottom: 1px solid #fff;
+
   &:nth-last-of-type(1) {
     border-bottom: none;
   }
+
   img {
     width: 42px;
     height: 42px;
   }
+
   .text-info {
     margin-left: 11px;
     padding: 3px 0;
+
     &-tit {
       font-size: 14px;
       font-weight: bold;
     }
+
     &-text {
       font-size: 12px;
     }
   }
+
   .btn {
     width: 87px;
     height: 25px;
@@ -399,6 +418,7 @@ onMounted(async () => {
     text-align: center;
     cursor: pointer;
     font-size: 12px;
+
     &.disabled {
       background: #d9d9d9;
       cursor: not-allowed;
@@ -406,24 +426,29 @@ onMounted(async () => {
     }
   }
 }
+
 .info-card {
   font-size: 12px;
   padding: 0 12px 0 20px;
+
   &:nth-of-type(1) {
     margin-top: 35px;
   }
+
   &-tit {
     line-height: 20px;
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 5px;
   }
+
   &-text {
     margin-bottom: 15px;
     font-size: 12px;
     line-height: 15px;
   }
 }
+
 .mask {
   background: rgba($color: #000000, $alpha: 0.6);
   left: 0;
@@ -432,30 +457,32 @@ onMounted(async () => {
   bottom: 0;
   position: fixed;
   z-index: 100;
+
   .modal-container {
     width: 250px;
     min-height: 200px;
     padding-bottom: 27px;
-    background: #fff;
+    background: #150520;
     border-radius: 8px;
     overflow: hidden;
+
     &-header {
       height: 43px;
       background: linear-gradient(90deg, #34f3ff 0%, #ff9de9 100%);
     }
+
     &-icon {
       .icon {
-        background: linear-gradient(
-          178deg,
-          #7bffcf 0%,
-          #ff53f8 91%,
-          #ff85cc 91%
-        );
+        background: linear-gradient(178deg,
+            #7bffcf 0%,
+            #ff53f8 91%,
+            #ff85cc 91%);
         width: 41px;
         height: 41px;
         border-radius: 50%;
         position: relative;
         margin-top: 23px;
+
         img {
           width: 100%;
           position: absolute;
@@ -464,12 +491,14 @@ onMounted(async () => {
           top: 0;
           bottom: 0;
         }
+
         i {
           color: #fff;
           font-size: 30px;
         }
       }
     }
+
     .msg {
       margin-top: 13px;
       line-height: 14px;
@@ -477,6 +506,7 @@ onMounted(async () => {
       padding: 0 20px;
       // font-size: 12px;
     }
+
     .btn-done {
       line-height: 31px;
       background: linear-gradient(90deg, #34f3ff 0%, #ff9de9 100%);
@@ -488,13 +518,15 @@ onMounted(async () => {
     }
   }
 }
+
 .btn-groups {
   position: fixed;
   bottom: 20px;
   z-index: 1000;
   left: 0;
-   right: 0;
-   .btn-ele {
+  right: 0;
+
+  .btn-ele {
     width: 164px;
     line-height: 54px;
     height: 54px;
@@ -503,17 +535,21 @@ onMounted(async () => {
     text-align: center;
     font-size: 14px;
     transition: ease .3s;
+
     &:hover {
-      box-shadow:1px 5px 10px rgb(135 134 134 / 50%);
+      box-shadow: 1px 5px 10px rgb(135 134 134 / 50%);
     }
-   }
-   .btn-ele.btn1 {
+  }
+
+  .btn-ele.btn1 {
     background: linear-gradient(to right, #5ae5f8 0%, #a8c3f4 50%, #eea3eb 100%);
-   }
+  }
+
   .btn-ele.btn2 {
     background: linear-gradient(to right, #fca7f5 0%, #fdcfe6 50%, #fff3da 100%);
-   }
+  }
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.2s ease-in;

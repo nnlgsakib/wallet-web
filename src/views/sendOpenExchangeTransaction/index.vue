@@ -31,8 +31,8 @@
       <div class="flex between btn-box">
         <van-button type="default" @click="router.replace({ name: 'home' })" plain>{{ t("sign.cancel") }}</van-button>
         <van-button type="primary" @click="toSend" :loading="sendLoading">{{
-          t("sign.confirm")
-        }}</van-button>
+      t("sign.confirm")
+    }}</van-button>
       </div>
     </div>
   </div>
@@ -284,7 +284,7 @@ async function send1(
   const wallet = await getWallet();
   const { address } = wallet;
   const baseName = web3.utils.fromUtf8(name)
-  const str = `${store.getters['account/chainParsePrefix']}:{"version": "0","type": 11,"fee_rate": ${fee_rate},"name":"${name}","url":""}`;
+  const str = `erbie:{"version": "0","type": 11,"fee_rate": ${fee_rate},"name":"${name}","url":""}`;
   const data3 = web3.utils.fromUtf8(str);
   const tx1 = {
     from: address,
@@ -309,7 +309,7 @@ async function send2(package_id: string = "", amount: string = "0") {
     throw new Error("Parameter is invalid package_id is undefined");
   }
   try {
-    
+
     const network = clone(state.account.currentNetwork);
     const wallet = await getWallet();
     const contractWithSigner = await getContract(wallet, tx2.contractAddr);
@@ -369,7 +369,7 @@ async function send2(package_id: string = "", amount: string = "0") {
   }
 
   .sign-bg {
-    background: #F8F3F9;
+    background: #220a35;
     height: 135px;
 
     &-icon {

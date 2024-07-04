@@ -1,12 +1,6 @@
 <template>
   <div class="send-success-modal">
-    <van-dialog
-      v-model:show="showModal"
-      teleport="#page-box"
-      :showConfirmButton="false"
-      :showCancelButton="false"
-      :title="''"
-    >
+    <van-dialog v-model:show="showModal" teleport="#page-box" :showConfirmButton="false" :showCancelButton="false" :title="''">
       <!-- <div class="title text-center f-16 bold van-hairline--bottom">
         {{ title }}
       </div>-->
@@ -15,10 +9,10 @@
           <i class="iconfont icon-duihao"></i>
         </div>
       </div>
-      <div class="text-center msg mt-10 mb-20">{{$t('sendNFT.success')}}</div>
+      <div class="text-center msg mt-10 mb-20">{{ $t('sendNFT.success') }}</div>
 
       <div class="flex center p-24 ml-24 mr-24">
-        <van-button type="primary" :disabled="disabled" block @click="toHome">{{$t('sendNFT.backHome')}} ({{downTime}}s)</van-button>
+        <van-button type="primary" :disabled="disabled" block @click="toHome">{{ $t('sendNFT.backHome') }} ({{ downTime }}s)</van-button>
       </div>
     </van-dialog>
   </div>
@@ -97,7 +91,7 @@ export default defineComponent({
       router.replace({ name: props.toName })
     }
     const disabled = computed(() => {
-      if(downTime.value !=0){
+      if (downTime.value != 0) {
         return true
       }
       return false
@@ -114,27 +108,30 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .title {
-  color: #b3b3b3;
   line-height: 62px;
-  background: #F8F3F9;
+  background: #220a35;
   font-weight: bold;
 
 }
-.send-success-modal {
-}
+
+.send-success-modal {}
+
 .modal-box {
   padding-top: 50px;
 }
+
 .icon-bg {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   background: #3aae55;
   color: #fff;
+
   i {
     font-size: 28px;
   }
 }
+
 .msg {
   font-size: 15px;
   line-height: 21px;

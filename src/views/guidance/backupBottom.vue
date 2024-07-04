@@ -12,11 +12,11 @@
       </div>
       <div class="flex between btn-box mt-20 pl-8 pr-8">
         <van-button @click="remindLater">{{
-          t("backup.remindMeLater")
-        }}</van-button>
+    t("backup.remindMeLater")
+  }}</van-button>
         <van-button type="primary" @click="backUp">{{
-          t("backup.backup")
-        }}</van-button>
+    t("backup.backup")
+  }}</van-button>
       </div>
     </div>
   </van-popup>
@@ -76,16 +76,16 @@ export default defineComponent({
       }
     );
 
-      // watch(() =>[show0.value,show1.value,show2.value,show3.value,show4.value,show5.value,show6.value, show13.value, hasBackUpMnemonic.value],(newVal, oldVal) => {
-      //   
-      //   const len = [...newVal].splice(0,8).filter(item => !item).length
-        
-      //   if(len === 8 && !newVal[newVal.length - 1]){
-      //     showModal.value = true;
-      //   }
-      // }, {
+    // watch(() =>[show0.value,show1.value,show2.value,show3.value,show4.value,show5.value,show6.value, show13.value, hasBackUpMnemonic.value],(newVal, oldVal) => {
+    //   
+    //   const len = [...newVal].splice(0,8).filter(item => !item).length
 
-      // })
+    //   if(len === 8 && !newVal[newVal.length - 1]){
+    //     showModal.value = true;
+    //   }
+    // }, {
+
+    // })
 
     const backUp = () => {
       // dispatch("system/showDialog", props.type);
@@ -110,24 +110,29 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .backup-box {
-  background: #F8F3F9;
+  background: #220a35;
   padding-bottom: 24px;
 }
+
 .title {
   line-height: 20px;
   font-size: 15px;
 }
+
 .small-tit {
   font-size: 15px;
 }
+
 .tip {
   color: #848484;
 }
+
 .btn-box {
   button {
     width: 160px;
   }
 }
+
 .remindLater {
   line-height: 12px;
   font-weight: bold;

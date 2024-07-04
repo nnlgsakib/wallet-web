@@ -5,28 +5,28 @@
     // Popup window width
     --van-dialog-width: 350px;
     // Popover confirm button color
-    --van-dialog-confirm-button-text-color:#9F54BA;
+    --van-dialog-confirm-button-text-color: white;
     // Popover button font
     --van-font-size-lg: 12px;
     // Button border color
-    --van-button-primary-border-color: #9F54BA;
+    --van-button-primary-border-color: #e25ac4;
     // Button font size
     --van-button-default-font-size: 16px;
     // Button with rounded corners
     --van-button-border-radius: 30PX;
 
     // Button rounded default button font color
-    --van-button-primary-background-color:#9F54BA;
+    --van-button-primary-background-color: transparent;
     // The border color
-    --van-border-color:#eeeeee;
+    --van-border-color: #eeeeee;
     // Button default height
     --van-button-default-height: 44px;
     // Mask Mask color
-    --van-overlay-background-color: rgba(0, 0, 0, .7);
-    --van-button-default-border-color: #000;
-    --van-button-danger-background-color:#D73A49;
-    --van-button-danger-border-color:#D73A49;
-    --van-border-width-base:1px;
+    --van-overlay-background-color: rgba(255, 255, 255, .1);
+    --van-button-default-border-color: white;
+    --van-button-danger-background-color: #D73A49;
+    --van-button-danger-border-color: #D73A49;
+    --van-border-width-base: 1px;
     --van-sticky-z-index: 1;
     // --van-radius-md: 22px;
     // --van-blue: #9F54BA;
@@ -35,6 +35,16 @@
 
     --van-cell-vertical-padding: 15px;
     --van-popover-action-height: 33px;
+    --van-button-plain-background-color: transparent;
+    --van-cell-group-background-color: transparent;
+    --van-cell-background-color: transparent;
+    --van-field-input-text-color: white;
+    --van-button-default-background-color: transparent;
+    --van-dialog-background-color: #150520;
+    --van-tabs-nav-background-color: #220a35;
+    --van-popup-background-color: #150520;
+    --van-skeleton-row-background-color: #24152f;
+    --van-skeleton-avatar-background-color: #24152f;
 }
 
 
@@ -42,6 +52,7 @@
 .color-error {
     color: #D73A49;
 }
+
 .color-warn {
     color: #FFBE00;
 }

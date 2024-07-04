@@ -1,12 +1,5 @@
 <template>
-  <van-dialog
-    v-model:show="showService"
-    show-cancel-button
-    class="dialog-box-service"
-    :showConfirmButton="false"
-    :showCancelButton="false"
-    closeOnClickOverlay
-  >
+  <van-dialog v-model:show="showService" show-cancel-button class="dialog-box-service" :showConfirmButton="false" :showCancelButton="false" closeOnClickOverlay>
     <div class="dia-con">
       <div class="container text-info">
         <!-- <div class="logo mt-20"></div> -->
@@ -406,13 +399,16 @@ export default defineComponent({
 .dia-con {
   padding: 22px 15px 0;
 }
+
 .worm-box {
   width: 43%;
 }
+
 .worm-icon {
   color: #0287db;
   font-size: 24px;
 }
+
 .container {
   .logo {
     width: 60px;
@@ -420,17 +416,21 @@ export default defineComponent({
     background-color: #0287db;
     border-radius: 50%;
   }
+
   .tit-big {
     color: #0287db;
     font-weight: 600;
   }
+
   .paragraph {
     overflow: normal;
   }
+
   .tit-small {
     color: #b3b3b3;
   }
 }
+
 .text-info {
   position: relative;
   height: 80vh;
@@ -440,24 +440,29 @@ export default defineComponent({
 :deep(.van-dialog) {
   border-radius: 0 !important;
 }
+
 :deep() {
   .dialog-box {
     border-radius: 0 !important;
   }
+
   .icon-box {
     margin-top: 0;
   }
 }
+
 .dialog-box {
   border-radius: 0 !important;
 }
+
 .nullele {
   margin-bottom: 105px;
 }
+
 .argee-box {
   opacity: 0;
   position: fixed;
-  background: #fff;
+  background: #150520;
   padding: 0 15px;
   bottom: 0;
   left: 0;
@@ -465,14 +470,17 @@ export default defineComponent({
   padding-bottom: 20px;
   height: 106px;
   transition: ease 0.6s;
+
   &.show {
     opacity: 1;
   }
 }
+
 :deep(.dialog-box) {
   .dialog-box {
     border-radius: 0 !important;
   }
+
   .icon-box {
     margin-top: 0;
   }

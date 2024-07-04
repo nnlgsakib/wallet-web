@@ -40,7 +40,7 @@
         </div>
         <div class="container-btn flex center column">
           <div>
-            <van-button color="#000000" class="btn" plain @click="dislogShow = false">{{ t('common.cancel') }}</van-button>
+            <van-button class="btn" plain @click="dislogShow = false">{{ t('common.cancel') }}</van-button>
             <van-button type="primary" class="btn" :disabled="Time !== 0" round @click="submit">{{ t('common.confirm') }}{{ Time === 0 ? '' : `(${Time}s)` }}</van-button>
           </div>
         </div>
@@ -97,14 +97,14 @@ export default {
     const gasFee = ref('0')
     watch(() => props.show, async () => {
       const { address } = store.state.account.accountInfo
-      const d2 = {type:9,proxy_address:"",proxy_sign:"",version:"v0.0.1"}
+      const d2 = { type: 9, proxy_address: "", proxy_sign: "", version: "v0.0.1" }
       // Agent pledge
-      const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d2)}`
+      const str = `erbie:${JSON.stringify(d2)}`
       const data3 = web3.utils.fromUtf8(str);
       const tx1 = {
         to: address,
         value: ethers.utils.parseEther(props.amount + ""),
-        data:data3,
+        data: data3,
       };
       gasFee.value = await getGasFee(tx1) || '0'
 
@@ -149,7 +149,7 @@ export default {
   .miners {
     width: 341px;
     height: 480.5px;
-    background: #fff;
+    background: #150520;
     margin: auto;
     border-radius: 8px;
     overflow: hidden;
@@ -159,7 +159,7 @@ export default {
       line-height: 62px;
       text-align: center;
       font-weight: bold;
-      background: #FBF8FB;
+      background: #24152f;
       font-size: 14px;
       color: #0f0f0f;
       border-bottom: 1px solid #f2f4f5;
@@ -235,7 +235,7 @@ export default {
 
         .ipt-text-b {
           margin: 5px 0 9px 0;
-          color: #000;
+
           font-size: 12px;
           font-weight: bold;
         }
@@ -247,7 +247,7 @@ export default {
 
           span {
             font-weight: 400;
-            color: #000000;
+            color: white;
           }
 
           .ipt-server-i {
@@ -258,7 +258,7 @@ export default {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #F8F3F9;
+            background: #220a35;
             border-radius: 7px 7px 7px 7px;
 
             &:first-child {
@@ -268,7 +268,7 @@ export default {
 
           .ipt-server-i-active {
             color: #0287db;
-            background: #F8F3F9;
+            background: #220a35;
             border: 1px solid #9F54BA;
 
             span {
@@ -284,7 +284,7 @@ export default {
 
           span {
             &:first-child {
-              color: #000000;
+              color: white;
             }
 
             &:last-child {
@@ -306,9 +306,10 @@ export default {
             color: #3aae55;
           }
         }
+
         :deep() {
           .van-cell {
-          padding-left: 0px;
+            padding-left: 0px;
           }
         }
 
@@ -389,4 +390,5 @@ export default {
 
 .c2 {
   color: #3aae55;
-}</style>
+}
+</style>

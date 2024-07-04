@@ -1,33 +1,16 @@
 <template>
-  <van-dialog
-    v-model:show="show"
-    show-cancel-button
-    teleport="#page-box"
-    :lockScroll="false"
-    :showConfirmButton="false"
-    :showCancelButton="false"
-    closeOnClickOverlay
-  >
+  <van-dialog v-model:show="show" teleport="#page-box" :lockScroll="false" :showConfirmButton="false" :showCancelButton="false" closeOnClickOverlay>
     <div class="title text-center">{{ t("bourse.addTit") }}</div>
     <div class="form-box">
       <div class="card">
         <div class="label lh-16 mb-2">
           {{ t("createExchange.name") }}
-          <van-popover
-            v-model:show="showTip1"
-            theme="dark"
-            placement="top"
-            trigger="manual"
-          >
+          <van-popover v-model:show="showTip1" theme="dark" placement="top" trigger="manual">
             <div class="f-12 pl-10 pr-10 pt-10 pb-10 popover-tip">
               {{ t("bourse.tipname") }}
             </div>
             <template #reference>
-              <van-icon
-                @mouseenter="showTip1 = true"
-                @mouseout="showTip1 = false"
-                name="question hover"
-              />
+              <van-icon @mouseenter="showTip1 = true" @mouseout="showTip1 = false" name="question hover" />
             </template>
           </van-popover>
         </div>
@@ -36,21 +19,12 @@
       <div class="card">
         <div class="label lh-16 mb-2">
           {{ t("minerspledge.stackFee") }}
-          <van-popover
-            v-model:show="showTip2"
-            theme="dark"
-            placement="top"
-            trigger="manual"
-          >
+          <van-popover v-model:show="showTip2" theme="dark" placement="top" trigger="manual">
             <div class="f-12 pl-10 pr-10 pt-10 pb-10 popover-tip">
               {{ t("bourse.tipstake") }}
             </div>
             <template #reference>
-              <van-icon
-                @mouseenter="showTip2 = true"
-                @mouseout="showTip2 = false"
-                name="question hover"
-              />
+              <van-icon @mouseenter="showTip2 = true" @mouseout="showTip2 = false" name="question hover" />
             </template>
           </van-popover>
         </div>
@@ -59,21 +33,12 @@
       <div class="card">
         <div class="label lh-16 mb-2">
           {{ t("bourse.addTit") }}
-          <van-popover
-            v-model:show="showTip3"
-            theme="dark"
-            placement="top"
-            trigger="manual"
-          >
+          <van-popover v-model:show="showTip3" theme="dark" placement="top" trigger="manual">
             <div class="f-12 pl-10 pr-10 pt-10 pb-10 popover-tip">
               {{ t("bourse.tipadd") }}
             </div>
             <template #reference>
-              <van-icon
-                @mouseenter="showTip3 = true"
-                @mouseout="showTip3 = false"
-                name="question hover"
-              />
+              <van-icon @mouseenter="showTip3 = true" @mouseout="showTip3 = false" name="question hover" />
             </template>
           </van-popover>
         </div>
@@ -82,21 +47,12 @@
       <div class="card">
         <div class="label lh-16 mb-2">
           {{ t("bourse.hsitoryReturn") }}
-          <van-popover
-            v-model:show="showTip4"
-            theme="dark"
-            placement="top"
-            trigger="manual"
-          >
+          <van-popover v-model:show="showTip4" theme="dark" placement="top" trigger="manual">
             <div class="f-12 pl-10 pr-10 pt-10 pb-10 popover-tip">
               {{ t("bourse.tipprofit") }}
             </div>
             <template #reference>
-              <van-icon
-                @mouseenter="showTip4 = true"
-                @mouseout="showTip4 = false"
-                name="question hover"
-              />
+              <van-icon @mouseenter="showTip4 = true" @mouseout="showTip4 = false" name="question hover" />
             </template>
           </van-popover>
         </div>
@@ -107,21 +63,12 @@
       <div class="card">
         <div class="label lh-16 mb-2">
           {{ t("bourse.income") }}
-          <van-popover
-            v-model:show="showTip5"
-            theme="dark"
-            placement="top"
-            trigger="manual"
-          >
+          <van-popover v-model:show="showTip5" theme="dark" placement="top" trigger="manual">
             <div class="f-12 pl-10 pr-10 pt-10 pb-10 popover-tip">
               {{ t("bourse.tipincome") }}
             </div>
             <template #reference>
-              <van-icon
-                @mouseenter="showTip5 = true"
-                @mouseout="showTip5 = false"
-                name="question hover"
-              />
+              <van-icon @mouseenter="showTip5 = true" @mouseout="showTip5 = false" name="question hover" />
             </template>
           </van-popover>
         </div>
@@ -132,21 +79,12 @@
       <div class="card">
         <div class="label lh-16 mb-2">
           {{ t("send.gasfee") }}
-          <van-popover
-            v-model:show="showTip6"
-            theme="dark"
-            placement="top"
-            trigger="manual"
-          >
+          <van-popover v-model:show="showTip6" theme="dark" placement="top" trigger="manual">
             <div class="f-12 pl-10 pr-10 pt-10 pb-10 popover-tip">
               {{ t("common.gasFee") }}
             </div>
             <template #reference>
-              <van-icon
-                @mouseenter="showTip6 = true"
-                @mouseout="showTip6 = false"
-                name="question hover"
-              />
+              <van-icon @mouseenter="showTip6 = true" @mouseout="showTip6 = false" name="question hover" />
             </template>
           </van-popover>
         </div>
@@ -158,11 +96,11 @@
     <Tip :message="t('createExchange.addStaking')" />
     <div class="btn-box flex between pb-20">
       <van-button block class="mr-10" @click="show = false">{{
-        t("common.cancel")
-      }}</van-button>
+    t("common.cancel")
+  }}</van-button>
       <van-button block type="primary" @click="submit">{{
-        t("common.confirm")
-      }}</van-button>
+    t("common.confirm")
+        }}</van-button>
     </div>
   </van-dialog>
 </template>
@@ -225,7 +163,7 @@ export default defineComponent({
     const { t } = useI18n();
     const { addExchangeBalance, miunsExchangeBalance } = useExchanges();
     const store = useStore();
-    const {state} = store
+    const { state } = store
     const gasFee = ref();
     watch(
       () => props.modelValue,
@@ -233,8 +171,8 @@ export default defineComponent({
         show.value = n;
         if (n) {
           const { address } = state.account.accountInfo;
-          const d = {type:21,version:"v0.0.1"}
-          const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d)}`;
+          const d = { type: 21, version: "v0.0.1" }
+          const str = `erbie:${JSON.stringify(d)}`;
           const data3 = web3.utils.fromUtf8(str);
           const tx1 = {
             from: address,
@@ -263,12 +201,12 @@ export default defineComponent({
     const historyProfit = ref("");
     const calcProfit = async () => {
       //  @ts-ignore
-      const {t0,t1,t2,t3} = state.configuration.setting.conversion
+      const { t0, t1, t2, t3 } = state.configuration.setting.conversion
 
       const wallet = await getWallet();
       const blockNumber = await wallet.provider.getBlockNumber();
       const addressInfo = await getAccountAddr(wallet.address)
-      const {rewardSNFTCount} = addressInfo
+      const { rewardSNFTCount } = addressInfo
       historyProfit.value = new BigNumber(rewardSNFTCount).multipliedBy(t0).toString()
       const blockn = web3.utils.toHex(blockNumber.toString());
       const data = await wallet.provider.send("eth_getValidator", [blockn]);
@@ -318,29 +256,34 @@ export default defineComponent({
 .title {
   font-size: 15px;
   font-weight: bold;
-  color: #000000;
   line-height: 60px;
-  background: #FBF8FB;
+  background: #24152f;
 }
+
 .form-box {
   border-radius: 10px;
   border: 1px solid #e4e7e8;
   margin: 27px 15px 15px;
   padding: 12px 15px 0;
 }
+
 .card {
   border-bottom: 1px solid #e4e7e8;
   padding: 11px 0;
+
   .label {
     color: #8f8f8f;
   }
+
   .value {
-    color: #000000;
+    color: white;
     margin-top: 5px;
+
     &.gasFee {
       color: #3aae55;
     }
   }
+
   &:nth-last-of-type(1) {
     border-bottom: none;
   }

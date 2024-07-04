@@ -2,8 +2,8 @@
   <NavHeader :title="t('setting.transitionHistory')">
     <template v-slot:left>
       <span class="back hover f-12" @click="back">{{
-        t("createAccountpage.back")
-      }}</span>
+    t("createAccountpage.back")
+  }}</span>
     </template>
   </NavHeader>
   <div class="transaction-history">
@@ -32,7 +32,7 @@
   <Transition name="slider">
     <i18n-t tag="div" v-if="showBuyTip" keypath="wallet.toBrowser" :class="`flex center scan-link fixed-bottom ${bugTipClass}`">
       <template v-slot:link>
-        <span @click="toScan(accountInfo.address, '/AccountDetail')" class="f-12 view-history hover ml-4" rel="noopener noreferrer">{{ t("wallet.scanLink") }}</span>
+        <span @click="toScan(accountInfo.address, '/accountDetail')" class="f-12 view-history hover ml-4" rel="noopener noreferrer">{{ t("wallet.scanLink") }}</span>
       </template>
     </i18n-t>
   </Transition>
@@ -42,8 +42,8 @@
   </van-dialog>
 
   <CommonModal v-model="showSpeedModal" :title="sendTxType == 1
-      ? t('common.gasSpeedUp')
-      : t('transationHistory.cancelDealTit')
+    ? t('common.gasSpeedUp')
+    : t('transationHistory.cancelDealTit')
     " className="transactionDetailsModal">
     <div class="m-14 pl-14 pr-14 border-round detail-modal">
       <div class="flex between lh-16 pt-12 pb-8">
@@ -53,47 +53,47 @@
       <div class="flex between lh-16 pt-8 pb-8 border-bottom">
         <span>{{ t("sendto.gasLimit") }}</span>
         <span>{{
-          ethers.utils.formatUnits(
-            transactionData.data.sendData.gasLimit,
-            "wei"
-          )
-        }}</span>
+    ethers.utils.formatUnits(
+      transactionData.data.sendData.gasLimit,
+      "wei"
+    )
+  }}</span>
       </div>
       <div class="flex between lh-16 pt-8 pb-8">
         <span>{{ t("converSnft.amount") }}</span>
         <span>{{
-          !transactionData.data.tokenAddress
-          ? ethers.utils.formatEther(transactionData.data.sendData.value)
-          : transactionData.data.amount
-        }}</span>
+    !transactionData.data.tokenAddress
+      ? ethers.utils.formatEther(transactionData.data.sendData.value)
+      : transactionData.data.amount
+  }}</span>
       </div>
       <div class="flex between lh-16 pt-8 pb-8">
         <span>{{ t("transactionDetails.gasfee") }}</span>
         <span>{{
-          transactionData.data.sendData.gasPrice
-          ? ethers.utils.formatEther(transactionData.data.sendData.gasPrice)
-          : 0
-        }}</span>
+    transactionData.data.sendData.gasPrice
+      ? ethers.utils.formatEther(transactionData.data.sendData.gasPrice)
+      : 0
+  }}</span>
       </div>
       <div class="flex between lh-16 pt-8 pb-12">
         <span>{{ t("transactionDetails.totalAmount") }}</span>
         <span>≈
           {{
-            !transactionData.data.tokenAddress
-            ? ethers.utils.formatEther(transactionData.data.sendData.value)
-            : transactionData.data.amount
-          }}
+    !transactionData.data.tokenAddress
+      ? ethers.utils.formatEther(transactionData.data.sendData.value)
+      : transactionData.data.amount
+  }}
           {{ currentNetwork.currencySymbol }}</span>
       </div>
     </div>
     <ModifGasFee :show="showSpeedModal" :to="transactionData.data.to" :gasPrice="transactionData.data.gasPrice" :gasLimit="transactionData.data.gasLimit" :amount="ethers.utils.formatEther(transactionData.data.sendData.value)" :tokenContractAddress="''" @change="handleGasChange" />
     <div class="sendBtnBox pb-20 mt-20">
       <van-button @click="showSpeedModal = false" class="mr-26">{{
-        t("common.cancel")
-      }}</van-button>
+    t("common.cancel")
+        }}</van-button>
       <van-button type="primary" @click="reSendTx" :loading="reloading">{{
         t("common.confirm")
-      }}</van-button>
+        }}</van-button>
     </div>
   </CommonModal>
 </template>
@@ -720,7 +720,7 @@ export default {
     padding: 3px 5px;
     box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    background: #fff;
+    background: #150520;
   }
 }
 
@@ -768,12 +768,9 @@ export default {
   }
 }
 
-.transaction-history {
-  /* overflow-y: scroll; */
-}
 
 .tabs-box {
-  background: #fff;
+  background: #150520;
 }
 
 .tabs {

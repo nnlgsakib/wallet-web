@@ -65,7 +65,7 @@ export default {
   .miners {
     width: 341px;
     height: 327px;
-    background: #fff;
+    background: #150520;
     margin: auto;
     border-radius: 8px;
 
@@ -90,9 +90,9 @@ export default {
       line-height: 62px;
       text-align: center;
       font-weight: bold;
-      background: #FBF8FB;
+      background: #24152f;
       font-size: 14px;
-      color: #0f0f0f;
+      color: white;
     }
 
     .miners-container {
@@ -221,4 +221,5 @@ export default {
   .underline {
     text-decoration: underline;
   }
-}</style>
+}
+</style>

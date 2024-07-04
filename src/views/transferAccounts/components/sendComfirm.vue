@@ -278,10 +278,10 @@ export default defineComponent({
 }
 
 .title {
-  color: #000;
+
   font-size: 15px;
   line-height: 62px;
-  background: #FBF8FB;
+  background: #24152f;
   font-weight: bold;
 }
 
@@ -295,7 +295,7 @@ export default defineComponent({
   width: 35px;
   height: 35px;
   border-radius: 50%;
-  border: 1px solid #000;
+  border: 1px solid #ccc;
 
   i {
     font-size: 20px;

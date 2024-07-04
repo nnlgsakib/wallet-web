@@ -123,15 +123,15 @@
 
       <van-button round block plain class="mr-10" @click="handleImport">
         <span>{{
-          t("createAccountpage.mnemonicBtn")
-        }}</span>
+      t("createAccountpage.mnemonicBtn")
+    }}</span>
 
       </van-button>
 
       <van-button round block type="primary" @click="tologin">
         {{
-          t("introductorypage.create")
-        }}
+      t("introductorypage.create")
+    }}
       </van-button>
     </div>
   </div>
@@ -279,7 +279,6 @@ export default {
 
 .el-carousel .el-carousel__item {
   margin-top: 20px;
-  color: #000;
   font-size: 14px;
   text-align: center;
   background-repeat: no-repeat;
@@ -342,4 +341,5 @@ export default {
     margin: 20px;
   }
 
-}</style>
+}
+</style>

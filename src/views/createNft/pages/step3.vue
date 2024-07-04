@@ -1,34 +1,34 @@
 <template>
   <div class="loading-bg pt-24 pb-24">
-    <div class="tit-big text-center f-16">{{t('castingnft.createNFT')}}</div>
+    <div class="tit-big text-center f-16">{{ t('castingnft.createNFT') }}</div>
     <div class="flex between center-v dotted-box">
       <div class="step2 f-12 lh-16">1</div>
       <span class="dotted-line"></span>
       <div class="step2 f-12 lh-16 no">2</div>
     </div>
     <div class="flex between f-12 dotted-box">
-      <div class="tit-small">{{t('castingnft.information')}}</div>
-      <div class="tit-small">{{t('castingnft.done')}}</div>
+      <div class="tit-small">{{ t('castingnft.information') }}</div>
+      <div class="tit-small">{{ t('castingnft.done') }}</div>
     </div>
   </div>
   <!-- icon -->
   <div class="icon-box flex center">
-    <div class="iconele flex center" :style="{backgroundImage: `url(${require('@/views/createNft/imgs/circle.png')})`}">
-      <div class="iconinner flex center" :style="{backgroundImage: `url(${require('@/views/createNft/imgs/circle1.png')})`}">
+    <div class="iconele flex center" :style="{ backgroundImage: `url(${require('@/views/createNft/imgs/circle.png')})` }">
+      <div class="iconinner flex center" :style="{ backgroundImage: `url(${require('@/views/createNft/imgs/circle1.png')})` }">
         <i class="iconfont icon-duigouxiao"></i>
       </div>
     </div>
   </div>
   <div class="tip">
-    <div class="lh-30 text-bold text-center f-21 mt-8 mb-16">{{t('castingnft.congratulations')}}</div>
-    <div class="f-12 lh-16 tip-info text-center">{{t('castingnft.successfullyCreated')}}</div>
+    <div class="lh-30 text-bold text-center f-21 mt-8 mb-16">{{ t('castingnft.congratulations') }}</div>
+    <div class="f-12 lh-16 tip-info text-center">{{ t('castingnft.successfullyCreated') }}</div>
   </div>
   <div class="btn-group">
     <div class="container pl-26 pr-26 pb-26">
       <van-button type="primary" block @click="tohome">
-      {{t('castingnft.backHome')}}
-      <span>{{count}}s</span>
-    </van-button>
+        {{ t('castingnft.backHome') }}
+        <span>{{ count }}s</span>
+      </van-button>
     </div>
   </div>
 </template>
@@ -81,8 +81,8 @@ export default {
       }, 1000)
     }
     onUnmounted(() => {
-        clearInterval(timer)
-      })
+      clearInterval(timer)
+    })
     return {
       t,
       active,
@@ -99,20 +99,25 @@ export default {
   right: 0;
   bottom: 0;
 }
+
 .dotted-box {
   width: 45vw;
   margin: 0 auto;
 }
+
 .icon-duigouxiao {
-  color: rgba(62, 174, 88,1);
+  color: rgba(62, 174, 88, 1);
   font-size: 50px;
 }
+
 .loading-bg {
-  background: #F8F3F9;
+  background: #220a35;
   height: 135px;
+
   .tit-big {
     line-height: 21px;
   }
+
   .step {
     width: 17px;
     height: 17px;
@@ -121,6 +126,7 @@ export default {
     text-align: center;
     border-radius: 50%;
   }
+
   .step2 {
     width: 17px;
     height: 17px;
@@ -129,6 +135,7 @@ export default {
     text-align: center;
     border-radius: 50%;
   }
+
   .step3 {
     width: 16px;
     height: 16px;
@@ -138,6 +145,7 @@ export default {
     text-align: center;
     border-radius: 50%;
   }
+
   .dotted-line {
     text-align: center;
     width: 88%;
@@ -149,12 +157,15 @@ export default {
     color: #9F54BA;
   }
 }
+
 .dotted-box {
   width: 45vw;
   margin: 0 auto;
 }
+
 .icon-box {
   margin-top: 50px;
+
   .iconele {
     width: 175px;
     height: 175px;
@@ -163,6 +174,7 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: left 0 top 0 right 0 bottom 0;
+
     .iconinner {
       width: 110px;
       height: 110px;
@@ -177,6 +189,7 @@ export default {
     }
   }
 }
+
 .tip-info {
   width: 255px;
   margin: 0 auto;

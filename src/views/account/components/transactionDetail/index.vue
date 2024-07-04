@@ -14,8 +14,8 @@
             </div>
           </div>
           <div :class="`value flex right center-v status ${transactionStatusClass(
-            data
-          )}`">
+        data
+      )}`">
             <span>{{ transactionStatus(data) }}</span>
           </div>
         </div>
@@ -40,10 +40,10 @@
         <div class="card flex between card-sml pt-10">
           <div class="label">
             {{
-              data.transitionType == "6"
-              ? t("common.convertAmount")
-              : t("transactionDetails.transferAmount")
-            }}
+        data.transitionType == "6"
+          ? t("common.convertAmount")
+          : t("transactionDetails.transferAmount")
+      }}
           </div>
           <div class="value">{{ transferAmountText(data) }} {{ currentNetwork.currencySymbol }}</div>
         </div>
@@ -77,7 +77,7 @@
       }}</van-button>
       <van-button block type="primary" @click="view">{{
         t("transactionDetails.viewDetails")
-      }}</van-button>
+        }}</van-button>
     </div>
   </div>
 </template>
@@ -100,7 +100,7 @@ import { copy } from "@/utils/utils";
 import { useI18n } from "vue-i18n";
 import BigNumber from "bignumber.js";
 import { useToast } from "@/plugins/toast";
-import { VUE_APP_SCAN_URL } from "@/enum/env";
+import { VUE_APP_SCAN_PATH, VUE_APP_SCAN_URL } from "@/enum/env";
 import {
   transactionTarget,
   formatDate,
@@ -174,7 +174,8 @@ export default defineComponent({
     })
 
     const view = () => {
-      window.open(`${VUE_APP_SCAN_URL}/TradeDetail?addr=${props.data.hash}`);
+
+      window.open(`${VUE_APP_SCAN_PATH}/txDetail/${props.data.hash}`);
     };
     const cancel = () => {
       emit("handleClose");

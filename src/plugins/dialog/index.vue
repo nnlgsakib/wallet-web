@@ -4,26 +4,18 @@
       <div class="wormholes-dialog">
 
         <div>
-          <div class="title" v-if="title">{{title}}</div>
+          <div class="title" v-if="title">{{ title }}</div>
 
-          <div class="flex center icon-box"><Icon name="warning" /></div>
+          <div class="flex center icon-box">
+            <Icon name="warning" />
+          </div>
           <div class="text text-center mt-8 pl-20 pr-20">{{ message }}</div>
-          <div
-            :class="`flex mt-26 btn-box ${
-              hasCancelBtn && hasConfirmBtn ? 'between' : 'center'
-            }`"
-          >
+          <div :class="`flex mt-26 btn-box ${hasCancelBtn && hasConfirmBtn ? 'between' : 'center'
+      }`">
             <Button @click="hide" v-if="hasCancelBtn">{{
-              i18n.global.t("createminerspledge.cancel")
-            }}</Button>
-            <Button
-              @click="confirmCall"
-              v-if="hasConfirmBtn"
-              :type="theme == 'light' ? 'primary' : 'default'"
-              :plain="theme == 'light' ? false : true"
-              class="okbtn"
-              >{{ i18n.global.t("common.confirm") }}</Button
-            >
+      i18n.global.t("createminerspledge.cancel")
+    }}</Button>
+            <Button @click="confirmCall" v-if="hasConfirmBtn" :type="theme == 'light' ? 'primary' : 'default'" :plain="theme == 'light' ? false : true" class="okbtn">{{ i18n.global.t("common.confirm") }}</Button>
           </div>
         </div>
       </div>
@@ -51,7 +43,7 @@ interface DialogOpt {
 }
 const hasCancelBtn: Ref<boolean> = ref(true);
 const hasConfirmBtn: Ref<boolean> = ref(true);
-let confirmCallBack: any = () => {}
+let confirmCallBack: any = () => { }
 let confirmCall = () => {
   hide()
   confirmCallBack ? confirmCallBack() : ''
@@ -80,7 +72,7 @@ const open = (_opt: DialogOpt) => {
     hasCancelBtn: true,
     hasConfirmBtn: true,
     callBack: confirmCallBack,
-    title:"",
+    title: "",
     ..._opt,
   };
   const opt = { ...defaultOpt, ..._opt };
@@ -137,65 +129,78 @@ defineExpose({
   top: 0;
   bottom: 0;
   z-index: 5000;
+
   &.light {
     background: rgba($color: #000000, $alpha: 0.5);
+
     .wormholes-dialog {
       overflow: hidden;
-      background: #fff;
-      .text {
-        color: #000;
-      }
+      background: #24152f;
+
+      .text {}
     }
   }
+
   &.dark {
     background: rgba($color: #fff, $alpha: 0.2);
+
     .wormholes-dialog {
       overflow: hidden;
-      background: rgba($color: #000000, $alpha: 0.7);
+      background: #24152f;
+
       .text {
         color: #fff;
       }
     }
+
     :deep(.van-button--plain) {
       background: none;
       color: #fff;
       border: 1px solid #fff;
     }
   }
+
   .title {
     line-height: 60px;
     text-align: center;
-    background: #FBF8FB;
+    background: #24152f;
     font-weight: bold;
     font-size: 15px;
     box-shadow: 0 1px 1px rgb(135 134 134 / 10%);
   }
+
   .okbtn {
     min-width: 100px;
   }
+
   .wormholes-dialog {
     width: 340px;
     min-height: 230px;
     max-height: 500px;
     border-radius: 7px;
     padding-bottom: 35px;
+
     .icon-box i {
       font-size: 44px;
       color: #f7bf03;
       margin-top: 50px;
     }
+
     .text {
       font-size: 15px;
       line-height: 20px;
     }
   }
+
   .btn-box {
     padding: 0 50px;
+
     button {
       width: 100px;
     }
   }
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.2s ease-in;

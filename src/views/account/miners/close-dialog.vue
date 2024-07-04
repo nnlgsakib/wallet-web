@@ -120,8 +120,8 @@ export default {
     const http = async () => {
       try {
         isLoading.value = true;
-        const d2 = {type:25,reward_flag:select.value,version:"v0.0.1"}
-        const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d2)}`;
+        const d2 = { type: 25, reward_flag: select.value, version: "v0.0.1" }
+        const str = `erbie:${JSON.stringify(d2)}`;
         const data3 = web3.utils.fromUtf8(str);
         const tx1 = {
           from: accountInfo.value.address,
@@ -161,7 +161,7 @@ export default {
             address,
             "latest",
           ]);
-          
+
           select.value = ethAccountInfo.Worm.RewardFlag;
         } finally {
           Toast.clear()
@@ -201,7 +201,7 @@ export default {
   z-index: 9999;
   width: 340px;
   height: 380px;
-  background: #fff;
+  background: #150520;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -218,8 +218,8 @@ export default {
   line-height: 62px;
   text-align: center;
   font-size: 15px;
-  background: #FBF8FB;
-  color: #000;
+  background: #24152f;
+
   font-weight: bold;
 }
 
@@ -258,9 +258,9 @@ export default {
       box-sizing: border-box;
 
       &:first-child {
-        color: #000;
+
         margin-right: 40px;
-        border: 1px solid #000;
+        border: 1px solid #ccc;
       }
 
       &:last-child {

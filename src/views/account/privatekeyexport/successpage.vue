@@ -3,8 +3,8 @@
     <NavHeader :title="t('setting.securityandPrivacy')">
       <template v-slot:left>
         <span class="back" @click="appProvide.back">{{
-          t("common.back")
-        }}</span>
+      t("common.back")
+    }}</span>
       </template>
     </NavHeader>
 
@@ -249,7 +249,7 @@ export default {
   .pwd-ipt.error {
     :deep(.van-field__body) {
       border: 1px solid #d73a49 !important;
-      background: #fbf2f3;
+      background: transparent;
     }
   }
 
@@ -282,7 +282,7 @@ export default {
     padding-bottom: 12px;
     padding-left: 15px;
     padding-right: 15px;
-    background-color: #fbf2f3;
+    background-color: #220a35;
     // padding: 0 22px;
     font-size: 12px;
     display: flex;
@@ -354,13 +354,13 @@ export default {
   width: 100%;
 
   .qccode-display {
-    border: 7px solid #000;
+    border: 7px solid #fff;
     padding: 5px;
     margin: 0 auto;
   }
 }
 </style>
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 :deep(.van-cell:after) {
   display: none;
 }
@@ -386,7 +386,7 @@ export default {
     align-items: center;
     height: 48px;
     padding: 0 16px;
-    background: #fff;
+    background: #150520;
     box-sizing: border-box;
     box-shadow: 0 1px 2px rgb(135 134 134 / 10%);
   }
@@ -473,7 +473,7 @@ export default {
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      background: #F8F3F9;
+      background: #220a35;
       border-radius: 7.5px;
       box-sizing: border-box;
     }
@@ -505,7 +505,7 @@ export default {
     }
 
     .active-d {
-      border: 1px solid #000;
+      border: 1px solid #ccc;
     }
   }
 
@@ -525,7 +525,7 @@ export default {
   .bourse-container-error {
     margin: 0 15px 25px 15px;
     height: 56.5px;
-    background: #F8F3F9;
+    background: #220a35;
     border-radius: 7.5px;
     display: flex;
     align-items: center;
@@ -639,7 +639,7 @@ export default {
 .bourse-container-error,
 .bourse-container-warning {
   height: 72px;
-  background: #fbf2f3;
+  background: transparent;
   border-radius: 7.5px;
   margin-top: 15px !important;
   display: flex;
@@ -663,4 +663,5 @@ export default {
 .right-img-copy {
   width: 15px;
   height: 15px;
-}</style>
+}
+</style>

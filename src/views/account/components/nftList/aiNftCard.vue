@@ -29,7 +29,7 @@
     </div>
   </div>
 </template>
-  
+
 <script lang="ts">
 import { defineComponent, ref, reactive, getCurrentInstance } from "vue";
 import { addressMask, decimal } from "@/utils/filters";
@@ -100,7 +100,7 @@ export default defineComponent({
   }
 
   &.fail {
-    background: #F3F3F3;
+    background: #24152f;
   }
 
   &-text {
@@ -162,6 +162,7 @@ export default defineComponent({
     width: 82px;
     margin-top: 5px;
     cursor: pointer;
+
     &.gary {
       background-color: #ccc;
       cursor: not-allowed;
@@ -172,6 +173,7 @@ export default defineComponent({
 .nft-card {
   &.card:hover {
     cursor: pointer;
+
     .info {
       transition: 0.3s ease;
       box-shadow: 0px 2px 14px rgba($color: #ccc, $alpha: 0.4);
@@ -185,7 +187,7 @@ export default defineComponent({
   }
 
   &.list:hover {
-    background: #f8f3f9;
+    background: #220a35;
     color: #9f54ba;
 
     .usd,
@@ -304,8 +306,9 @@ export default defineComponent({
   color: #fff;
   background: #9f54ba;
   border-radius: 12px;
+
   &.gary {
-      background-color: #ccc;
-    }
+    background-color: #ccc;
+  }
 }
 </style>

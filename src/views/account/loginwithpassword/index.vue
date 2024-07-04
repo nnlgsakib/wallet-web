@@ -2,19 +2,19 @@
   <div>
     <NavHeader :title="t('wallet.wormHoles')" :hasLeft="false" />
     <div class="title">
-                
-    <WormTransition size="small">
-      <template v-slot:icon>
-        <img class="iconele" src="@/assets/token/logowallet.png" />
-      </template>
-    </WormTransition>
+
+      <WormTransition size="small">
+        <template v-slot:icon>
+          <img class="iconele" src="@/assets/token/logowallet.png" />
+        </template>
+      </WormTransition>
       <!-- <img class="iconele flex center" src="@/assets/token/icon_blue.svg" alt /> -->
       <div class="tit-big text-center f-24">
         {{ t("createAccountpage.welcome") }}
       </div>
       <div class="tit-small text-center f-12 mt-14 mb-30 lh-16">
-    
-        {{t('loginwithpassword.smallTit')}}
+
+        {{ t('loginwithpassword.smallTit') }}
       </div>
     </div>
     <div class="create-new-password">
@@ -23,54 +23,29 @@
           <div class="text-bold f-12 mt-10 mb-10 lh-16 flex between">
             <span>{{ t("createAccountpage.password") }}</span>
             <span>
-              <i
-                @click="toggleMask"
-                :class="`iconfont hover ${
-                  switchPassType ? 'icon-yanjing' : 'icon-yanjing1'
-                }`"
-              ></i>
+              <i @click="toggleMask" :class="`iconfont hover ${switchPassType ? 'icon-yanjing' : 'icon-yanjing1'
+      }`"></i>
             </span>
           </div>
-          <van-field
-            v-model="password"
-            validate-trigger="onSubmit"
-            name="password"
-            :class="`text ${pw1Error ? 'error' : ''}`"
-            :type="`${switchPassType ? 'text' : 'password'}`"
-            @click-right-icon="switchPassType = !switchPassType"
-            :placeholder="$t('createAccountpage.passwordPlaceholder')"
-            :rules="[{ validator: asynPwd }]"
-          />
+          <van-field v-model="password" validate-trigger="onSubmit" name="password" :class="`text ${pw1Error ? 'error' : ''}`" :type="`${switchPassType ? 'text' : 'password'}`" @click-right-icon="switchPassType = !switchPassType" :placeholder="$t('createAccountpage.passwordPlaceholder')" :rules="[{ validator: asynPwd }]" />
         </van-cell-group>
 
         <div class="btn-box">
-          <van-button
-            :loading="loading"
-            :disable="btnDisabled"
-            round
-            block
-            type="primary"
-            native-type="submit"
-            >{{ t("createAccountpage.loginIn") }}</van-button
-          >
+          <van-button :loading="loading" :disable="btnDisabled" round block type="primary" native-type="submit">{{ t("createAccountpage.loginIn") }}</van-button>
         </div>
       </van-form>
       <div class="text-center f-12">
         <i18n-t tag="div" class="reset-box" keypath="createAccountpage.cantLogin">
           <template v-slot:reset>
-        <span class="lh-20 tool hover" @click="reset" :disable="reset_flag">
-          {{ t("createAccountpage.resentWallet") }}
-        </span>
+            <span class="lh-20 tool hover" @click="reset" :disable="reset_flag">
+              {{ t("createAccountpage.resentWallet") }}
+            </span>
           </template>
         </i18n-t>
 
       </div>
     </div>
-    <Resetpopup
-      v-model="resetmodule"
-      @handleConfirm="handleComfirm"
-      @cancel="cancel"
-    />
+    <Resetpopup v-model="resetmodule" @handleConfirm="handleComfirm" @cancel="cancel" />
   </div>
 </template>
 
@@ -188,8 +163,8 @@ export default {
           // tosign
           router.replace({ name: "sign", query });
         } else {
-          if(backUrl){
-            if(action){
+          if (backUrl) {
+            if (action) {
               router.replace({ name: "connect-wallet", query });
             } else {
               // @ts-ignore
@@ -225,7 +200,7 @@ export default {
     const cancel = () => {
       resetmodule.value = false;
     };
-    const handleComfirm = () => {};
+    const handleComfirm = () => { };
     const checked = ref(false);
     const checked1 = ref(true);
     const btnDisabled = computed(() => {
@@ -270,28 +245,34 @@ export default {
 .reset-box {
   color: #828184;
 }
+
 .btn-box {
   margin: 50px 28px 30px;
 }
+
 :deep(.van-cell-group--inset) {
   margin: 0 28px;
 }
+
 .error {
   :deep(.van-field__body) {
     border: 1px solid #d73a49 !important;
-    background: #fbf2f3;
+    background: transparent;
   }
 }
+
 .title {
   .iconele {
     width: 19px;
   }
+
   .tit-big {
     font-size: 24px;
     font-weight: bold;
     line-height: 30px;
     margin-bottom: 5px;
   }
+
   .tit-small {
     color: #848484;
     margin-bottom: 40px;
@@ -307,11 +288,13 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     .rember_me_left {
       margin-left: 20px;
-      color: #000;
+
       font-size: 14px;
     }
+
     .rember_me_right {
       margin-right: 10px;
     }
@@ -320,6 +303,7 @@ export default {
   .tit-small {
     color: #bbc0c5;
   }
+
   .right {
     color: #9F54BA;
     text-decoration: underline;
@@ -328,30 +312,38 @@ export default {
   .icon-yanjing {
     color: #9F54BA;
   }
+
   :deep(.van-field__label) {
     display: none;
   }
+
   :deep(.van-field__error-message) {
     line-height: 14px;
   }
+
   :deep(.van-cell:after) {
     display: none;
   }
+
   :deep(.van-cell) {
     padding: 0;
   }
+
   :deep(.van-field__body) {
     margin-bottom: 7px;
     padding: 0 10px;
     font-size: 12px;
+
     &:hover {
       border: 1px solid #9F54BA;
     }
   }
 }
+
 .tool {
   color: #9F54BA;
 }
+
 .underline {
   text-decoration: underline;
 }

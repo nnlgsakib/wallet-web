@@ -37,19 +37,11 @@
               <span> {{ t("sendNft1.to") }}</span>
             </div>
             <div class="code-b">
-              <van-field
-                v-model="toAddress"
-                :placeholder="$t('sendNft1.add')"
-                :rules="[
-                  { required: true, message: '' },
-                  { validator: asyncaddress },
-                ]"
-              />
-              <van-icon
-                name="cross"
-                @click="toAddress = ''"
-                v-show="checkAdd && toAddress"
-              />
+              <van-field v-model="toAddress" :placeholder="$t('sendNft1.add')" :rules="[
+            { required: true, message: '' },
+            { validator: asyncaddress },
+          ]" />
+              <van-icon name="cross" @click="toAddress = ''" v-show="checkAdd && toAddress" />
             </div>
           </div>
           <!-- <div class="select flex center">
@@ -98,12 +90,7 @@
 
       <van-sticky offset-bottom="30px" position="bottom">
         <div class="btn-box">
-          <van-button
-            type="primary"
-            :loading="loading"
-            block
-            native-type="submit"
-          >
+          <van-button type="primary" :loading="loading" block native-type="submit">
             {{ t("sendNft.send") }}
           </van-button>
         </div>
@@ -188,8 +175,8 @@ export default {
       loading.value = true;
       const { address } = query;
       const wallet = await getWallet();
-      const d2 = {type:1,nft_address: address, version:"v0.0.1"}
-      const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d2)}`;
+      const d2 = { type: 1, nft_address: address, version: "v0.0.1" }
+      const str = `erbie:${JSON.stringify(d2)}`;
       const data = web3.utils.fromUtf8(str);
       const tx1 = {
         from: wallet.address,
@@ -270,33 +257,40 @@ export default {
     font-size: 18px;
     color: #9F54BA;
   }
+
   .close {
     color: #9F54BA;
     font-size: 12px;
   }
+
   .code-box {
     padding: 15px;
     box-sizing: border-box;
-    background: #fff;
+    background: #150520;
   }
+
   .code {
     height: 150px;
     box-sizing: border-box;
     border-radius: 7px;
     padding: 15px;
     box-sizing: border-box;
+
     &:after {
       border-radius: 5px;
     }
+
     .line {
       height: 24px;
       position: relative;
+
       .l-div {
         position: absolute;
         left: 15px;
         right: 15px;
         top: 12px;
       }
+
       //   &:after {
       //     content: "";
       //     display: block;
@@ -316,10 +310,11 @@ export default {
         margin-left: -20px;
         z-index: 9;
         text-align: center;
-        background: #fff;
+        background: #150520;
         margin-right: 0;
       }
     }
+
     .code-t {
       .info {
         .icon {
@@ -330,32 +325,40 @@ export default {
           overflow: hidden;
           border: 1px solid #9F54BA;
         }
+
         .desc {
           padding: 6px 0;
           margin-left: 5px;
           max-width: 250px;
           font-size: 12px;
-          & > div {
+
+          &>div {
             line-height: 17px;
           }
+
           .add {
             color: rgba(154, 154, 154, 1);
           }
         }
       }
+
       .select {
         color: #9F54BA;
         font-size: 18px;
       }
     }
+
     .code-b {
       position: relative;
+
       :deep(.van-field__control) {
         text-overflow: ellipsis;
       }
+
       .van-form {
         margin-right: 20px;
       }
+
       i {
         color: #9F54BA;
         position: absolute;
@@ -365,34 +368,41 @@ export default {
       }
     }
   }
+
   .add-error {
     padding: 12px 15px;
     width: 345px;
-    background: #fbf2f3;
+    background: transparent;
     border-radius: 7px;
     margin: 10px 15px;
     line-height: 20px;
     box-sizing: border-box;
     font-size: 12px;
+
     .icon-box {
       padding: 0 8px 0 0;
+
       i {
         font-size: 20px;
         color: rgba(255, 0, 0, 0.76);
       }
     }
-    .text {
-    }
+
+
   }
+
   :deep(.van-tab--active) {
     color: #9F54BA;
   }
+
   :deep(.van-tabs__line) {
     display: none;
   }
+
   .btn-box {
     padding: 0 15px;
   }
+
   .van-tabs {
     margin-bottom: 50px;
   }

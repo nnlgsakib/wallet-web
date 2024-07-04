@@ -64,7 +64,7 @@ const handleClick = () => {
 $fontColor: #848484;
 
 .valid-card {
-  background: #f3f3f3;
+  background: #24152f;
   border-radius: 5px;
   box-sizing: border-box;
   border: 1px solid #f3f3f3;

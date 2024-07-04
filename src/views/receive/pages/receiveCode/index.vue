@@ -2,16 +2,16 @@
   <van-sticky>
     <NavHeader title="Close" :hasRight="false" :hasLeft="true" :backReplaceName="replaceBackUrl" cancelRouteName="home">
       <template v-slot:left>
-       <span class="back hover f-12" @click="appProvide.back">{{t('createAccountpage.back')}}</span>
+        <span class="back hover f-12" @click="appProvide.back">{{ t('createAccountpage.back') }}</span>
       </template>
       <template v-slot:title>
-        <div class="flex center title">{{t('receive.receive')}}</div>
+        <div class="flex center title">{{ t('receive.receive') }}</div>
       </template>
     </NavHeader>
   </van-sticky>
-  <div class="text-center lh-16 f-12 tit mt-30">{{t('receive.transfer')}}</div>
+  <div class="text-center lh-16 f-12 tit mt-30">{{ t('receive.transfer') }}</div>
   <div class="text-center lh-24 flex center" v-show="amount > 0">
-    <span class="f-18">{{amount}} {{chooseToken.name}}</span>
+    <span class="f-18">{{ amount }} {{ chooseToken.name }}</span>
   </div>
   <div class="flex center">
     <div class="code-box flex center mt-16">
@@ -27,7 +27,7 @@
           <i class="iconfont icon-fuzhi2"></i>
         </div>
       </div>
-      <div class="text-center text text-bold mt-4">{{t('receive.copy')}}</div>
+      <div class="text-center text text-bold mt-4">{{ t('receive.copy') }}</div>
     </div>
     <div class="btn-box">
       <div class="flex center" @click="handleSetAmount">
@@ -35,7 +35,7 @@
           <i class="iconfont icon-meiyuan"></i>
         </div>
       </div>
-      <div class="text-center text text-bold mt-4">{{t('receive.amount')}}</div>
+      <div class="text-center text text-bold mt-4">{{ t('receive.amount') }}</div>
     </div>
   </div>
   <!-- Set amount Popup -->
@@ -44,8 +44,8 @@
 <script lang="ts">
 import QrcodeVue from 'qrcode.vue'
 import { setCookies, getCookies } from '@/utils/jsCookie'
-import { ref, Ref, computed, toRaw, SetupContext, onMounted, onActivated, getCurrentInstance, ComponentInternalInstance,inject  } from 'vue'
-import { Icon, NavBar, Form, Field, CellGroup, Button, Toast,Sticky } from 'vant'
+import { ref, Ref, computed, toRaw, SetupContext, onMounted, onActivated, getCurrentInstance, ComponentInternalInstance, inject } from 'vue'
+import { Icon, NavBar, Form, Field, CellGroup, Button, Toast, Sticky } from 'vant'
 import useClipboard from 'vue-clipboard3'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
@@ -108,8 +108,8 @@ export default {
       return token
         ? token
         : {
-            name
-          }
+          name
+        }
     })
     const replaceBackUrl = ""
     return {
@@ -133,37 +133,45 @@ export default {
 .tit {
   line-height: 31px;
 }
+
 .meiyuan {
   color: #848484;
 }
+
 .code {
   width: 214px !important;
   height: 214px !important;
 }
+
 .code-box {
   width: 236px;
   height: 236px;
-  border: 7px solid #000;
+  border: 7px solid #fff;
   padding: 1px;
 }
+
 .load-btn {
   width: 250px;
-  background: #f1f3f4;
+  background: #220a35;
   box-sizing: border-box;
   border-radius: 30px;
   margin: 15px auto 0;
   color: #9F54BA;
+
   i {
     font-size: 12px;
   }
+
   &:hover {
     background: #dcecf9;
   }
 }
+
 .btn-group {
   width: 180px;
   margin: 25px auto 20px;
 }
+
 .btn-box {
   .btn {
     width: 34px;
@@ -172,17 +180,21 @@ export default {
     border-radius: 17px;
     border: 1PX solid #9F54BA;
     cursor: pointer;
+
     &:hover {
       background: #9F54BA;
+
       i {
         color: #fff;
       }
     }
+
     i {
       font-size: 18px;
       color: #9F54BA;
     }
   }
+
   .text {
     color: #9F54BA;
     font-size: 12px;

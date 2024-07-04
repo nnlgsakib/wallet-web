@@ -183,7 +183,7 @@ export default {
   .miners {
     width: 341px;
     height: 646px;
-    background: #fff;
+    background: #150520;
     margin: auto;
     border-radius: 8px;
 
@@ -192,9 +192,9 @@ export default {
       line-height: 62px;
       text-align: center;
       font-weight: bold;
-      background: #FBF8FB;
+      background: #24152f;
       font-size: 14px;
-      color: #0f0f0f;
+      color: white;
     }
 
     .miners-container {
@@ -312,7 +312,7 @@ export default {
 
         .ipt-text-b {
           margin: 5px 0 9px 0;
-          color: #000;
+
           font-size: 12px;
           font-weight: bold;
         }
@@ -324,7 +324,7 @@ export default {
 
           span {
             font-weight: 400;
-            color: #000000;
+            color: white;
           }
 
           .ipt-server-i {
@@ -335,7 +335,7 @@ export default {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #F8F3F9;
+            background: #220a35;
             border-radius: 7px 7px 7px 7px;
 
             &:first-child {
@@ -345,7 +345,7 @@ export default {
 
           .ipt-server-i-active {
             color: #0287db;
-            background: #F8F3F9;
+            background: #220a35;
             border: 1px solid #9F54BA;
 
             span {
@@ -361,7 +361,7 @@ export default {
 
           span {
             &:first-child {
-              color: #000000;
+              color: white;
             }
 
             &:last-child {
@@ -383,7 +383,8 @@ export default {
             color: #3aae55;
           }
         }
-        :deep(){
+
+        :deep() {
           .van-cell {
             padding: 5px 0;
           }
@@ -431,11 +432,12 @@ export default {
           margin: 0 5px 0 10px;
         }
       }
-      :deep(){
-          .van-cell:after {
-            display: none;
-          }
+
+      :deep() {
+        .van-cell:after {
+          display: none;
         }
+      }
 
     }
   }
@@ -462,4 +464,5 @@ export default {
 .mb-s-10 {
   margin-top: 10px;
   display: block;
-}</style>
+}
+</style>

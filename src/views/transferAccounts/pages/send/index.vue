@@ -10,7 +10,7 @@
     </template>
   </NavHeader>
   <div class="page-container">
-    <div class="mt-14 mr-14 pl-14 userinfo-box">
+    <div class="mt-14 mr-14 ml-14 userinfo-box">
       <div :class="`userinfo ${checkAddressError ? 'error' : ''}`">
         <div class="from flex column between">
           <div class="information p-14 flex between" @click="handleShowAccountModal">
@@ -52,7 +52,7 @@
                 <AccountIcon :data="account.data.icon" />
               </div>
               <div :class="`flex column ${account.data.name ? 'between' : ''
-                }  userinformation center-h pt-4 pb-4`">
+        }  userinformation center-h pt-4 pb-4`">
                 <div class="username mb-4">{{ account.data.name }}</div>
                 <div class="userbalance userbalanceBox">
                   {{ account.data.address }}
@@ -75,7 +75,7 @@
       {{ addressMsg }}
     </div>
     <!-- Transfer amount / balance area -->
-    <div class="pl-14 pr-14 userinfo-box mt-14">
+    <div class="ml-14 mr-14 userinfo-box mt-14">
       <div :class="`userinfo  ${amountErr ? 'error' : ''}`">
         <div class="from flex column between">
           <!-- Transfer amount -->
@@ -91,7 +91,7 @@
               <div class="van-hairline--right h-12 mr-14 ml-14 line-box" style="width: 1px"></div>
               <div class="token-info flex center-v between pr-6 pl-6 hover" @click="handleTokenModal">
                 <div class="xuanwo flex center">
-                  <img src="@/assets/token/logowallet.png" alt />
+                  <img src="@/assets/currency.svg" alt />
                 </div>
                 <div class="van-ellipsis ml-6 mr-6 token-name lh-14">
                   {{ chooseToken.name }}
@@ -108,7 +108,7 @@
     </div>
 
     <!-- Sliding bar -->
-    <div class="pl-14 pt-14 pr-14 userinfo-box">
+    <div class="ml-14 mt-14 mr-14 userinfo-box">
       <div class="userinfo slider-box amount-info pt-20 pb-20 pl-14 pr-14">
         <div class="flex between">
           <div>
@@ -713,7 +713,7 @@ export default {
 
 .title {
   font-size: 16px;
-  color: #000;
+
   font-weight: bold;
 }
 
@@ -755,7 +755,7 @@ export default {
     bottom: 95px;
 
     .box {
-      background: #fbf2f3;
+      background: transparent;
       border-radius: 7.5px;
       font-size: 12px;
     }
@@ -782,7 +782,7 @@ export default {
 
   .limit-box {
     height: 44px;
-    background: #f1f3f4;
+    background: #220a35;
     border-radius: 22px;
 
     .ipt-box {
@@ -821,7 +821,7 @@ export default {
     height: 35px;
     min-width: 90px;
     max-width: 140px;
-    background: #f1f3f4;
+    background: #220a35;
     border-radius: 17.5px;
 
     .xuanwo {
@@ -839,9 +839,7 @@ export default {
       }
     }
 
-    .token-name {
-      color: #000;
-    }
+    .token-name {}
   }
 
   :deep() {
@@ -880,7 +878,7 @@ export default {
       display: block;
       height: 7.5px;
       border-radius: 50%;
-      background: #f1f3f4;
+      background: #220a35;
       z-index: 1;
 
       &.active {
@@ -933,7 +931,7 @@ export default {
   }
 
   .userinfo-box {
-    background: #fff;
+    background: #24152f;
   }
 
   .clearAddress {
@@ -943,7 +941,7 @@ export default {
 
   .slider-box.amount-info {
     .value {
-      color: #000;
+
       font-size: 12px;
     }
   }
@@ -992,9 +990,7 @@ export default {
       color: #9a9a9a;
       line-height: 18px;
 
-      &.equal {
-        color: #000;
-      }
+      &.equal {}
     }
 
     .second {
@@ -1023,16 +1019,16 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    background: #fff;
+    background: #24152f;
     border: 1px solid #bbc0c5;
     border-radius: 5px;
 
     &.error {
       border-color: #d73a49;
-      background: #fbf2f3;
+      background: transparent;
 
       .van-cell {
-        background: #fbf2f3;
+        background: transparent;
       }
     }
 
@@ -1070,7 +1066,7 @@ export default {
 
       &:hover {
         transition: ease 0.3s;
-        background-color: #F8F3F9;
+        background-color: none;
       }
 
       .closeIcon {

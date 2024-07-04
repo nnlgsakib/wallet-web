@@ -63,7 +63,7 @@
                 </div>
                 <template #reference>
                   <div class="tag-user type1 position relative hover" @mouseover="showPopover3 = true" @mouseleave="handleMouseLeave3" v-show="creatorStatus
-                    ">
+        ">
                     <span class="user flex center" @click="toCreator">
                       <i class="iconfont icon-Add"></i>
                     </span>
@@ -85,16 +85,16 @@
                     <!-- <template v-slot:value>{{Coefficient}}</template> -->
                     <template v-slot:btn>
                       <span class="gotIt hover" @click="toStaker">{{
-                        t("minerspledge.gotIt")
-                      }}</span>
+        t("minerspledge.gotIt")
+      }}</span>
                     </template>
                   </i18n-t>
                   <i18n-t tag="div" v-if="expresionClass == 'neutral'" keypath="minerspledge.homeTip">
                     <!-- <template v-slot:value>{{Coefficient}}</template> -->
                     <template v-slot:btn>
                       <span class="gotIt hover" @click="toStaker">{{
-                        t("minerspledge.gotIt")
-                      }}</span>
+        t("minerspledge.gotIt")
+      }}</span>
                     </template>
                   </i18n-t>
                 </div>
@@ -130,7 +130,7 @@
           <div class="account flex center-v" @click="toggleAccount">
             <div class="addrName" style="font-size: 14px; color: #79797a">
               {{ accountInfo.name }}
-              <van-icon name="play" color="#000" :style="`transform: rotate(${showAccount ? '-' : ''}${90}deg);`" />
+              <van-icon name="play" color="white" :style="`transform: rotate(${showAccount ? '-' : ''}${90}deg);`" />
             </div>
           </div>
 
@@ -144,16 +144,14 @@
         </div>
         <div class="slider-bottom">
           <div class="setting-list">
-            <div class="setting-btn clickActive flex center-v" @click="toOfficiaWebsite">
+            <!-- <div class="setting-btn clickActive flex center-v" @click="toOfficiaWebsite">
               <i class="iconfont icon-zailiulanqidakai"></i>
               <span>{{ t("sidebar.aboutAs") }}</span>
-            </div>
+            </div> -->
             <div class="setting-btn flex between center-v clickActive" @click="toStaker">
               <div class="flex center">
                 <i class="iconfont icon-chuiziicon"></i>
-                {{
-                  t('validator.pageTit')
-                }}
+                Builder
               </div>
             </div>
             <!-- <div class="setting-btn clickActive flex center-v" @click="toGenerate">
@@ -276,7 +274,7 @@ import dialogWarnings from "@/components/dialogWarning/message.vue";
 import { useToast } from "@/plugins/toast";
 import { useDialog } from "@/plugins/dialog";
 import { isCommunityResourcable } from "@ethersproject/providers";
-import { VUE_APP_EXCHANGESMANAGEMENT_URL,VUE_APP_SCAN_URL,WALLET_DOC,OFFICIAL_WEBSITE } from "@/enum/env";
+import { VUE_APP_EXCHANGESMANAGEMENT_URL, VUE_APP_SCAN_URL, WALLET_DOC, OFFICIAL_WEBSITE } from "@/enum/env";
 import BigNumber from "bignumber.js";
 export default defineComponent({
   name: "NavHeader",
@@ -391,7 +389,7 @@ export default defineComponent({
     })
 
     const isStaker = computed(() => {
-      return new BigNumber(ethAccountInfo.value.PledgedBalance || 0).div(1000000000000000000).gte(700)
+      return new BigNumber(ethAccountInfo.value.PledgedBalance || 0).div(1000000000000000000).gte(350)
     })
     const exchangeStatus = computed(() => store.state.account.exchangeStatus);
     const { emit } = context;
@@ -474,7 +472,7 @@ export default defineComponent({
       })
       show.value = false;
       const exchangeStatus = await dispatch('account/getExchangeStatus')
-      
+
       Toast.clear()
       if (exchangeStatus.ExchangerFlag) {
         router.push({
@@ -774,7 +772,7 @@ export default defineComponent({
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style  lang="scss">
+<style lang="scss">
 .icon-liulanlishi {
   font-size: 22px !important;
 }

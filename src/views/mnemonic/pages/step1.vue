@@ -11,18 +11,12 @@
       </div>
     </div>
     <div class="icon-box flex center">
-      <div
-        class="iconele flex center"
-        :style="{
+      <div class="iconele flex center" :style="{
           backgroundImage: `url(${require('@/views/mnemonic/imgs/circle.png')})`,
-        }"
-      >
-        <div
-          class="iconinner flex center"
-          :style="{
-            backgroundImage: `url(${require('@/views/mnemonic/imgs/circle2.png')})`,
-          }"
-        >
+        }">
+        <div class="iconinner flex center" :style="{
+          backgroundImage: `url(${require('@/views/mnemonic/imgs/circle2.png')})`,
+        }">
           <img src="./../imgs/lock.png" alt="" />
         </div>
       </div>
@@ -87,17 +81,21 @@ export default {
 </script>
 <style lang="scss" scoped>
 .mnemonic-bg {
-  background: #F8F3F9;
+  background: #150520;
+
   .tit-big {
     line-height: 21px;
   }
+
   .tit-small {
     width: 290px;
     color: rgba(132, 132, 132, 1);
   }
 }
+
 .icon-box {
   margin-top: 50px;
+
   .iconele {
     width: 175px;
     height: 175px;
@@ -107,6 +105,7 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: left 0 top 0 right 0 bottom 0;
+
     .iconinner {
       width: 110px;
       height: 110px;
@@ -121,22 +120,26 @@ export default {
     }
   }
 }
+
 .tip-info {
   width: 255px;
   margin: 0 auto;
   color: #848484;
 }
+
 .remind {
   font-weight: bold;
-  color: #000;
+
   text-decoration: underline;
 }
+
 .btn-group {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 50px;
 }
+
 .m-page {
   padding-bottom: 100px;
 }

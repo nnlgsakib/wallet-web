@@ -1,42 +1,24 @@
-
 <template>
-  <van-dialog
-    v-model:show="show"
-    teleport="#page-box"
-    :class="`select-accounts-modal ${hasBtn ? 'hasBtn' : ''}`"
-    :showConfirmButton="false"
-    :show-cancel-button="false"
-    closeOnClickOverlay
-  >
+  <van-dialog v-model:show="show" teleport="#page-box" :class="`select-accounts-modal ${hasBtn ? 'hasBtn' : ''}`" :showConfirmButton="false" :show-cancel-button="false" closeOnClickOverlay>
     <!-- <van-action-sheet v-model:show="show" class="account-action-sheet" teleport="#page-box"> -->
     <div class="sheet-header van-hairline--bottom">
       {{ t("wallet.account") }}
     </div>
     <div class="account-container">
       <div class="account-list scrollBar" ref="listDom" id="listDom">
-        <div
-          v-for="(item, index) in options"
-          :key="item.value"
-          :class="`border-bottom clickActive ${
-                  accountInfo.address.toUpperCase() ==
-                  item.address.toUpperCase()
-                    ? 'select'
-                    : ''
-                }`"
-          @click="handleSelect(item, index)"
-          :data-selected="accountInfo.address.toUpperCase() ==
-                  item.address.toUpperCase() ? true : false"
-        >
+        <div v-for="(item, index) in options" :key="item.value" :class="`clickActive ${index !== options.length - 1 ? 'border-bottom ' : ''} ${accountInfo.address.toUpperCase() ==
+    item.address.toUpperCase()
+    ? 'select'
+    : ''
+    }`" @click="handleSelect(item, index)" :data-selected="accountInfo.address.toUpperCase() ==
+    item.address.toUpperCase() ? true : false">
           <div class="flex account-card-s">
             <div class="flex center account-icon">
-              <i
-                :class="`iconfont f-14 ${
-                  accountInfo.address.toUpperCase() ==
-                  item.address.toUpperCase()
-                    ? 'icon-xuanzhong1'
-                    : 'icon-danxuanxuanzhong'
-                }`"
-              ></i>
+              <i :class="`iconfont f-14 ${accountInfo.address.toUpperCase() ==
+    item.address.toUpperCase()
+    ? 'icon-xuanzhong1'
+    : 'icon-danxuanxuanzhong'
+    }`"></i>
             </div>
             <div class="account-icon-s flex center">
               <div class="account-icon-box-s">
@@ -55,18 +37,12 @@
             <div class="account-import-tag flex center"></div>
             <div class="flex right center-v add-choose-icon">
               <span v-show="item.imported" class="imported">{{
-                t("sidebar.imported")
-              }}</span>
-              <van-loading
-                class="ml-14"
-                size="22px"
-                v-show="
-                  accountLoading &&
-                  clickAccountIdx != null &&
-                  clickAccountIdx == index
-                "
-                color="#9F54BA"
-              />
+    t("sidebar.imported")
+  }}</span>
+              <van-loading class="ml-14" size="22px" v-show="accountLoading &&
+    clickAccountIdx != null &&
+    clickAccountIdx == index
+    " color="#9F54BA" />
             </div>
           </div>
         </div>
@@ -74,19 +50,14 @@
     </div>
     <div v-if="hasBtn" class="btn-box">
       <div class="create hover" @click.stop="createAccount">
-        <van-button
-          block
-          plain
-          @click="handleCreateAccount"
-        >
-          {{ t("account.createaccount") }}</van-button
-        >
+        <van-button block plain @click="handleCreateAccount">
+          {{ t("account.createaccount") }}</van-button>
 
       </div>
       <div class="import hoverx">
         <van-button plain block @click="toImport">{{
-          t("account.importaccount")
-        }}</van-button>
+    t("account.importaccount")
+          }}</van-button>
       </div>
     </div>
     <!-- </van-action-sheet> -->
@@ -152,7 +123,7 @@ export default defineComponent({
       createAccount,
       accountLoading,
       clickAccountIdx,
-      createLoading ,
+      createLoading,
       listDom,
     } = useToggleAccount();
     const show = ref(false);
@@ -166,11 +137,11 @@ export default defineComponent({
       () => props.modelValue,
       (n: boolean) => {
         show.value = n;
-        if(n){
+        if (n) {
           let time = setTimeout(() => {
             handleScroll()
             clearTimeout(time)
-          },100)
+          }, 100)
         }
       }
     );
@@ -200,7 +171,7 @@ export default defineComponent({
       const ele: any = newList.find((item: any) => item.dataset.selected == 'true')
       const hei = ele.offsetTop - ele.offsetHeight
       dispatch('common/scrollTop', {
-        id:'listDom',
+        id: 'listDom',
         top: hei
       })
     };
@@ -238,30 +209,36 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .btn-box {
-   button {
+  button {
     height: 58px;
-    border:none;
+    border: none;
     background: none;
     border-radius: 0;
+
     .create {
       line-height: 58px;
       border-bottom: 1px solid #ECEDEF;
     }
-   }
+  }
 }
+
 .icon-danxuanxuanzhong {
   font-size: 16px !important;
 }
+
 .account-icon {
   color: #848285;
   margin-right: 10px;
+
   i {
     font-size: 20px;
   }
+
   i.icon-xuanzhong1 {
     color: #9F54BA;
   }
 }
+
 .imported {
   line-height: 20px;
   background: #ebf9ee;
@@ -269,6 +246,7 @@ export default defineComponent({
   color: #4bb865;
   padding: 0 6px;
 }
+
 .account-groups {
   .createBtn {
     color: #9F54BA;
@@ -284,17 +262,23 @@ export default defineComponent({
     line-height: 50px;
   }
 }
+
 .account-card-s {
   height: 72px;
   padding: 0 15px;
   transition: ease 0.3s;
+
   &:hover {
-    .account-value,.account-name {
+
+    .account-value,
+    .account-name {
       color: #9F54BA;
     }
   }
+
   .account-icon-s {
     padding: 0 10px 0 0;
+
     .account-icon-box-s {
       width: 30px;
       height: 30px;
@@ -303,12 +287,14 @@ export default defineComponent({
       overflow: hidden;
     }
   }
+
   .account-name {
     line-height: 24px;
     font-size: 15px;
     justify-content: flex-start;
     font-weight: bold;
   }
+
   .account-value {
     color: rgba(131, 131, 131, 1);
     line-height: 16px;
@@ -317,10 +303,12 @@ export default defineComponent({
 
   .account-info-box {
     min-width: 160px;
+
     &.half {
       width: 100px;
     }
   }
+
   .account-import-tag {
     span {
       display: inline-block;
@@ -333,26 +321,32 @@ export default defineComponent({
       color: rgba(154, 161, 168, 1);
     }
   }
+
   .add-choose-icon {
     width: 100%;
 
   }
 }
+
 .account-modal-title {
   line-height: 21px;
   font-size: 15px;
   padding: 14px 0;
 }
+
 .account-list {
   max-height: 45vh;
   overflow-y: scroll;
+
   .bt.select {
     color: #9F54BA;
+
     .account-value {
       color: #9F54BA;
     }
   }
 }
+
 .create {
   text-align: center;
   font-size: 12px;
@@ -360,25 +354,29 @@ export default defineComponent({
   box-sizing: border-box;
   color: #9F54BA;
   border-bottom: 1px solid #ECEDEF;
-   i {
+
+  i {
     color: #9F54BA;
-   }
+  }
 }
+
 .import {
   text-align: center;
   font-size: 12px;
   color: #9F54BA;
 }
+
 .bt {
   border-bottom: 1px solid #ecedef;
 }
+
 .sheet-header {
   height: 60px;
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: center;
-  background: #FBF8FB;
+  background: #24152f;
   font-size: 15px;
   font-weight: bold;
   // border-radius: 20px 20px 0px 0px;

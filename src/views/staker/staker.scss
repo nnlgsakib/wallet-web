@@ -2,11 +2,13 @@ $fontColor: #848484;
 
 .staker-validator-page {
     padding: 15px 15px 0;
-    .stakerArrow{
+
+    .stakerArrow {
         position: absolute;
         right: 10px;
         top: 12px;
     }
+
     .iconBox {
         width: 32px;
         height: 32px;
@@ -14,12 +16,14 @@ $fontColor: #848484;
         overflow: hidden;
         border: 2px solid #fff;
     }
+
     .staker-card {
         .stakerAddr {
             position: relative;
-            background: #F3F3F3;
+            background: #24152f;
             border-radius: 5px;
             cursor: pointer;
+
             .iconBox {
                 border-radius: 50%;
                 overflow: hidden;
@@ -48,7 +52,7 @@ $fontColor: #848484;
     }
 
     .add-valid-btn {
-        background: #F3F3F3;
+        background: #24152f;
         height: 54px;
         border-radius: 4px 4px 4px 4px;
         border: 1px dashed #B3B3B3;
@@ -128,14 +132,16 @@ $fontColor: #848484;
             min-width: 160px;
         }
     }
+
     .redeemBtn {
         line-height: 42px;
         width: 140px;
+
         &.disabled {
-            cursor:not-allowed;
+            cursor: not-allowed;
         }
     }
- 
+
 
 }
 
@@ -157,7 +163,7 @@ $fontColor: #848484;
 
     .el-slider__runway {
         height: 3px;
-        background: #f1f3f4;
+        background: #220a35;
     }
 
     .el-slider__bar {
@@ -176,7 +182,7 @@ $fontColor: #848484;
     .el-slider__stop {
         height: 4px;
         width: 3px;
-        background-color: #F1F3F4;
+        background: #220a35;
         margin-top: -4px;
         border-radius: 0;
         transform: translateX(0);
@@ -194,6 +200,7 @@ $fontColor: #848484;
         display: flex;
         align-items: center;
         justify-content: center;
+
         .van-icon-question {
             margin-left: 0 !important;
         }

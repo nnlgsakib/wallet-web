@@ -1,33 +1,16 @@
 <template>
-  <van-dialog
-    v-model:show="show"
-    show-cancel-button
-    teleport="#page-box"
-    class="server-modal"
-    :showConfirmButton="false"
-    :showCancelButton="false"
-    closeOnClickOverlay
-  >
+  <van-dialog v-model:show="show" show-cancel-button teleport="#page-box" class="server-modal" :showConfirmButton="false" :showCancelButton="false" closeOnClickOverlay>
     <div class="title text-center">{{ t("common.server") }}</div>
     <div class="form-box">
       <div class="card">
         <div class="label lh-16 mb-2">
           {{ t("bourse.serverFee") }}
-          <van-popover
-            v-model:show="showpop1"
-            theme="dark"
-            placement="top"
-            trigger="manual"
-          >
+          <van-popover v-model:show="showpop1" theme="dark" placement="top" trigger="manual">
             <div class="f-12 pl-10 pr-10 pt-10 pb-10 popover-tip">
               {{ t("createExchange.serveTip1") }}
             </div>
             <template #reference>
-              <van-icon
-                @mouseenter="showpop1 = true"
-                @mouseout="showpop1 = false"
-                name="question hover"
-              />
+              <van-icon @mouseenter="showpop1 = true" @mouseout="showpop1 = false" name="question hover" />
             </template>
           </van-popover>
         </div>
@@ -36,68 +19,41 @@
       <div class="card">
         <div class="label lh-16 mb-2">
           {{ t("bourse.period") }}
-          <van-popover
-            v-model:show="showpop2"
-            theme="dark"
-            placement="top"
-            trigger="manual"
-          >
+          <van-popover v-model:show="showpop2" theme="dark" placement="top" trigger="manual">
             <div class="f-12 pl-10 pr-10 pt-10 pb-10 popover-tip">
               {{ t("createExchange.serveTip2") }}
             </div>
             <template #reference>
-              <van-icon
-                @mouseenter="showpop2 = true"
-                @mouseout="showpop2 = false"
-                name="question hover"
-              />
+              <van-icon @mouseenter="showpop2 = true" @mouseout="showpop2 = false" name="question hover" />
             </template>
           </van-popover>
         </div>
-        <div class="value lh-16">{{t('createExchange.serverDesc',{days, hours})}}</div>
+        <div class="value lh-16">{{ t('createExchange.serverDesc', { days, hours }) }}</div>
       </div>
       <div class="card">
         <div class="label lh-16 mb-2">
           {{ t("bourse.periodAdd") }}
-          <van-popover
-            v-model:show="showpop3"
-            theme="dark"
-            placement="top"
-            trigger="manual"
-          >
+          <van-popover v-model:show="showpop3" theme="dark" placement="top" trigger="manual">
             <div class="f-12 pl-10 pr-10 pt-10 pb-10 popover-tip">
               {{ t("createExchange.serveTip3") }}
             </div>
             <template #reference>
-              <van-icon
-                @mouseenter="showpop3 = true"
-                @mouseout="showpop3 = false"
-                name="question hover"
-              />
+              <van-icon @mouseenter="showpop3 = true" @mouseout="showpop3 = false" name="question hover" />
             </template>
           </van-popover>
         </div>
-        <div class="value lh-16">365 {{t('common.days')}}</div>
+        <div class="value lh-16">365 {{ t('common.days') }}</div>
       </div>
       <div class="card">
         <div class="label lh-16 mb-2">
           {{ t("send.gasfee") }}
 
-          <van-popover
-            v-model:show="showpop4"
-            theme="dark"
-            placement="top"
-            trigger="manual"
-          >
+          <van-popover v-model:show="showpop4" theme="dark" placement="top" trigger="manual">
             <div class="f-12 pl-10 pr-10 pt-10 pb-10 popover-tip">
               {{ t("common.gasFee") }}
             </div>
             <template #reference>
-              <van-icon
-                @mouseenter="showpop4 = true"
-                @mouseout="showpop4 = false"
-                name="question hover"
-              />
+              <van-icon @mouseenter="showpop4 = true" @mouseout="showpop4 = false" name="question hover" />
             </template>
           </van-popover>
         </div>
@@ -109,11 +65,11 @@
     <Tip :message="t('bourse.addServeAmount')" />
     <div class="btn-box flex between">
       <van-button block class="mr-10" @click="show = false">{{
-        t("common.cancel")
-      }}</van-button>
+    t("common.cancel")
+  }}</van-button>
       <van-button block type="primary" @click="submit">{{
-        t("common.confirm")
-      }}</van-button>
+    t("common.confirm")
+        }}</van-button>
     </div>
   </van-dialog>
 </template>
@@ -190,16 +146,16 @@ export default defineComponent({
         if (n) {
           const contract = await getContract();
           const gasPrice = await contract.provider.getGasPrice();
-          const priceStr = ethers.utils.formatUnits(gasPrice,'wei')
+          const priceStr = ethers.utils.formatUnits(gasPrice, 'wei')
           const gasLimit = await contract.estimateGas.payForRenew({
             value: ethers.utils.parseEther(200 + ""),
           });
-          gasFee.value =  new Bignumber(
+          gasFee.value = new Bignumber(
             ethers.utils.formatEther(gasLimit)
           )
             .multipliedBy(priceStr)
             .toFixed(9);
-   
+
         }
       }
     );
@@ -212,8 +168,8 @@ export default defineComponent({
     const { $tradeConfirm } = useTradeConfirm();
     const callBack = () => {
 
-            emit("updateStatus");
-                         
+      emit("updateStatus");
+
     }
     const submit = async () => {
       const bigAmount = new Bignumber(accountInfo.value.amount);
@@ -248,7 +204,7 @@ export default defineComponent({
           callBack: callBack,
           failBack: callBack
         });
-        send2(200, props.exchangeName,()=>{}, false);
+        send2(200, props.exchangeName, () => { }, false);
       }
     };
     const showpop4 = ref(false);
@@ -272,49 +228,59 @@ export default defineComponent({
 .popover-tip {
   max-width: 150px;
 }
+
 .title {
   font-size: 15px;
   font-weight: bold;
-  color: #000000;
   line-height: 60px;
-  background: #FBF8FB;
+  background: #24152f;
 }
+
 .form-box {
   border-radius: 10px;
   border: 1px solid #e4e7e8;
   margin: 27px 15px 15px;
   padding: 12px 15px 0;
 }
+
 .card {
   border-bottom: 1px solid #e4e7e8;
   padding: 11px 0;
+
   .label {
     color: #8f8f8f;
   }
+
   .value {
-    color: #000000;
+    color: white;
     margin-top: 5px;
+
     &.gas {
       color: #3aae55;
     }
   }
+
   &:nth-last-of-type(1) {
     border-bottom: none;
   }
 }
+
 .tips {
   margin: 15px;
   padding: 12px 15px;
-  background: #F8F3F9;
+  background: #220a35;
   border-radius: 5px;
+
   .text {
     line-height: 16px;
   }
+
   i {
     color: #9F54BA;
     margin-right: 9px;
   }
 }
+
 .btn-box {
   margin: 20px 42px 20px;
 }

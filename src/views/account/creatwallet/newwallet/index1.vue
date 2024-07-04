@@ -1,16 +1,16 @@
 <template>
-    <NavHeader :hasRight="false">
-      <template v-slot:left>
-       <span class="back hover" @click="back">{{t('createAccountpage.back')}}</span>
-      </template>
-      <template v-slot:title>
-        <div class="flex center title">{{t('wallet.wormHoles')}}</div>
-      </template>
-    </NavHeader>
+  <NavHeader :hasRight="false">
+    <template v-slot:left>
+      <span class="back hover" @click="back">{{ t('createAccountpage.back') }}</span>
+    </template>
+    <template v-slot:title>
+      <div class="flex center title">{{ t('wallet.wormHoles') }}</div>
+    </template>
+  </NavHeader>
   <div>
     <div class="title">
       <!-- <img class="iconele flex center" src="@/assets/token/logowallet.png" /> -->
-      <WormholesTransition size="small" >
+      <WormholesTransition size="small">
         <template v-slot:icon>
           <img class="iconele flex center" src="@/assets/token/logowallet.png" />
         </template>
@@ -28,60 +28,32 @@
           <div class="text-bold f-12 mt-10 mb-10 lh-16 flex between">
             <span>{{ t("createAccountpage.password") }}</span>
             <span>
-              <i
-                @click="toggleMask"
-                :class="`iconfont hover ${
-                  choice ? 'icon-yanjing' : 'icon-yanjing1'
-                }`"
-              ></i>
+              <i @click="toggleMask" :class="`iconfont hover ${choice ? 'icon-yanjing' : 'icon-yanjing1'
+    }`"></i>
             </span>
           </div>
-          <van-field
-            validate-trigger="onSubmit"
-            :class="`text ${pw1Error ? 'error' : ''}`"
-            v-model="password"
-            name="password"
-            :type="`${choice ? 'text' : 'password'}`"
-            :placeholder="$t('createAccountpage.passwordPlaceholder')"
-            :rules="[
-              // { required: true, message:t('createAccountpage.pwdMessage') },
-              { validator: asynPwd },
-            ]"
-          />
+          <van-field validate-trigger="onSubmit" :class="`text ${pw1Error ? 'error' : ''}`" v-model="password" name="password" :type="`${choice ? 'text' : 'password'}`" :placeholder="$t('createAccountpage.passwordPlaceholder')" :rules="[
+    // { required: true, message:t('createAccountpage.pwdMessage') },
+    { validator: asynPwd },
+  ]" />
           <!-- <div class="tit-small f-12" v-if="password.length<6||password.length>20">{{$t('createAccountpage.pwdMessage')}}</div> -->
           <div class="text-bold f-12 mt-20 mb-10 lh-16 flex between">
             <span>{{ t("createAccountpage.confirmPassword") }}</span>
           </div>
-          <van-field
-            validate-trigger="onSubmit"
-            v-model="password2"
-            :class="`text ${pw2Error ? 'error' : ''}`"
-            :type="`${choice ? 'text' : 'password'}`"
-            name="password2"
-            :placeholder="t('createAccountpage.confirmPassword')"
-            :rules="[
-              //  { required: true, message:t('createAccountpage.pwdMessage') },
-              { validator: asynPwd2 },
-              {
-                validator: asynPwd3,
-                message: t('createAccountpage.inconsistentPwd'),
-              },
-            ]"
-          />
+          <van-field validate-trigger="onSubmit" v-model="password2" :class="`text ${pw2Error ? 'error' : ''}`" :type="`${choice ? 'text' : 'password'}`" name="password2" :placeholder="t('createAccountpage.confirmPassword')" :rules="[
+    //  { required: true, message:t('createAccountpage.pwdMessage') },
+    { validator: asynPwd2 },
+    {
+      validator: asynPwd3,
+      message: t('createAccountpage.inconsistentPwd'),
+    },
+  ]" />
           <!-- Privacy agreement  -->
           <div class="yinsi flex con"></div>
         </van-cell-group>
         <div class="btn-box">
           <div class="flex center container pl-28 pr-28">
-          <van-button
-            :loading="loading"
-            round
-            block
-            :disabled="btnDisabled"
-            type="primary"
-            native-type="submit"
-            >{{ t("createAccountpage.createAccount") }}</van-button
-          >
+            <van-button :loading="loading" round block :disabled="btnDisabled" type="primary" native-type="submit">{{ t("createAccountpage.createAccount") }}</van-button>
           </div>
 
         </div>
@@ -89,8 +61,8 @@
       <div class="pwd-tip">
         <i18n-t keypath="createAccountpage.pwdTip" tag="div" class="text-center mt-20 lh-16">
           <template v-slot:br><br></template>
-          <template v-slot:link1><span class="hover" @click="routerTo('termsOfUse')">{{t('createAccountpage.link1')}}</span></template>
-          <template v-slot:link2><span class="hover" @click="routerTo('privacyNotice')">{{t('createAccountpage.link2')}}</span></template>
+          <template v-slot:link1><span class="hover" @click="routerTo('termsOfUse')">{{ t('createAccountpage.link1') }}</span></template>
+          <template v-slot:link2><span class="hover" @click="routerTo('privacyNotice')">{{ t('createAccountpage.link2') }}</span></template>
         </i18n-t>
       </div>
     </div>
@@ -189,7 +161,7 @@ export default {
             password: password.value,
           });
           // await localforage.setItem("mnemonic", mnemonicData);
-          commit('mnemonic/UPDATE_MNEMONIC',mnemonicData)
+          commit('mnemonic/UPDATE_MNEMONIC', mnemonicData)
           router.replace({
             name: "create-step",
           });
@@ -247,11 +219,11 @@ export default {
       choice.value ? (choice.value = false) : (choice.value = true);
     };
     const routerTo = (name: any) => {
-      if(name == 'termsOfUse') {
-        window.open('https://limino.com/upload/tst.html')
+      if (name == 'termsOfUse') {
+        window.open('https://wallet.erbie.io/upload/tst.html')
       }
-      if(name =='privacyNotice') {
-        window.open('https://limino.com/upload/pn.html')
+      if (name == 'privacyNotice') {
+        window.open('https://wallet.erbie.io/upload/pn.html')
       }
     }
     const back = () => {
@@ -285,25 +257,30 @@ export default {
   color: #9F54BA;
   font-size: 12px;
 }
+
 .title {
   font-size: 16px;
-    color: #000;
+
   font-weight: bold;
 }
+
 .pwd-tip {
   span {
     color: #9F54BA;
   }
 }
+
 .btn-box {
   margin-top: 30px;
 }
+
 .error {
   :deep(.van-field__body) {
     border: 1px solid #d73a49 !important;
-    background: #fbf2f3;
+    background: transparent;
   }
 }
+
 .title {
   .iconele {
     width: 16px;
@@ -311,57 +288,72 @@ export default {
     // margin: 0 auto 10px;
     // padding-top: 50px;
   }
+
   .tit-big {
     line-height: 30px;
     font-weight: 600;
   }
+
   .tit-small {
     color: #848484;
     margin-bottom: 49px;
   }
 }
+
 .create-new-password {
   .tit-small {
     color: #848484;
   }
+
   .right {
     color: #9F54BA;
     text-decoration: underline;
   }
+
   .icon-yanjing {
     color: #9F54BA;
   }
+
   :deep(.van-field__label) {
     display: none;
   }
+
   :deep(.van-field__error-message) {
     margin-bottom: 12px;
   }
+
   :deep(.van-cell:after) {
     display: none;
   }
+
   :deep(.van-cell) {
     padding: 0;
   }
+
   :deep(.van-field__body) {
     margin-bottom: 10px;
     padding: 0 10px;
     transition: ease 0.3s;
     font-size: 12px;
+
     &:hover {
       border: 1px solid #9F54BA;
     }
   }
+
   .tool {
     color: #9F54BA;
   }
+
   .pointer {
     cursor: pointer;
   }
+
   .check-box {
     margin-top: 30px;
   }
 }
+
 :deep(.icon-box) {
   margin-top: 35px;
 }

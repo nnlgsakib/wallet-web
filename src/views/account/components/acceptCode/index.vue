@@ -20,17 +20,12 @@
     </div>
     <div class="request-box">
       <van-button plain block type="primary" @click="toPayment">{{
-        t("send.sendbutton")
-      }}</van-button>
+      t("send.sendbutton")
+    }}</van-button>
     </div>
   </div>
-      <dialog-warning
-      v-model:isWarning="isWarning"
-      :text="t('copy.copy')"
-      iconName="checked"
-      color="#3AAE55"
-    >
-    </dialog-warning>
+  <dialog-warning v-model:isWarning="isWarning" :text="t('copy.copy')" iconName="checked" color="#3AAE55">
+  </dialog-warning>
 </template>
 
 <script lang="ts">
@@ -74,8 +69,8 @@ export default defineComponent({
       router.push({
         name: "receive-choose",
         query: {
-          clickBackUrl:"home",
-          backUrl:"receive-set-amount"
+          clickBackUrl: "home",
+          backUrl: "receive-set-amount"
         }
       });
     };
@@ -109,48 +104,56 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" >
+<style lang="scss">
 .accept-popup {
   height: 450px;
+
   .short-line {
     width: 45px;
     height: 5px;
     background: #c1c5ca;
     border-radius: 2.5px;
   }
+
   &-top {
     height: 28px;
   }
+
   &-tit {
     line-height: 21px;
     font-size: 15px;
     margin: 13px 0 10px 0;
   }
+
   .code {
     width: 185px !important;
     height: 185px !important;
     background: lightcyan;
   }
+
   .scan-code-tit {
     line-height: 17px;
     font-size: 12px;
     color: #757780;
     margin: 21px 0 21px;
   }
+
   .copy-info {
     width: 112px;
-    background: #F1F3F4;
+    background: #220a35;
     font-size: 12px;
     height: 25px;
     border-radius: 12.5px;
     line-height: 25px;
     text-align: center;
     padding: 0 10px;
+
     .address {
       color: #757780;
     }
 
   }
+
   .request-box {
     padding: 0 25px;
     margin-top: 25px;

@@ -2,8 +2,7 @@
   <div class="gas-fee-page">
     <div class="pl-14 pr-14 userinfo-box">
       <van-skeleton title :row="5" :loading="loading">
-        <div
-          class="
+        <div class="
             userinfo
             border-round
             slider-box
@@ -12,56 +11,33 @@
             pb-20
             pl-14
             pr-14
-          "
-        >
+          ">
           <div class="flex between">
             <div>
               <!-- gas price -->
               <div class="label text-left">
                 {{ t("sendto.gasprice") }}
-                <van-popover
-                  v-model:show="gasPriceModal"
-                  theme="dark"
-                  placement="right"
-                >
+                <van-popover v-model:show="gasPriceModal" theme="dark" placement="right">
                   <p class="pl-10 pr-10 f-12">{{ t("sendto.gastit") }}</p>
                   <template #reference>
-                    <van-icon
-                      name="question hover"
-                      @mouseover="gasPriceModal = true"
-                      @mouseleave="gasPriceModal = false"
-                    />
+                    <van-icon name="question hover" @mouseover="gasPriceModal = true" @mouseleave="gasPriceModal = false" />
                   </template>
                 </van-popover>
               </div>
               <div class="value">
                 <span class="text-bold">≈ {{ gasData[gasFee] }} Gwei,</span>
-                <span class="second pl-6"
-                  >≈ {{ second }} {{ t("sendto.second") }}</span
-                >
+                <span class="second pl-6">≈ {{ second }} {{ t("sendto.second") }}</span>
               </div>
             </div>
           </div>
 
           <div class="slider-container pl-10 pr-10 mt-14 mb-12">
-            <van-slider
-              v-model="gasFee"
-              :min="0"
-              :max="2"
-              :step="1"
-              bar-height="2.5px"
-              active-color="#85E19B"
-            />
+            <van-slider v-model="gasFee" :min="0" :max="2" :step="1" bar-height="2.5px" active-color="#85E19B" />
           </div>
           <div class="slider-dian">
-            <span
-              :class="`slider-icon slider-l ${
-                gasFee == 1 || gasFee == 2 ? 'active' : ''
-              }`"
-            ></span>
-            <span
-              :class="`slider-icon slider-c ${gasFee == 2 ? 'active' : ''}`"
-            ></span>
+            <span :class="`slider-icon slider-l ${gasFee == 1 || gasFee == 2 ? 'active' : ''
+        }`"></span>
+            <span :class="`slider-icon slider-c ${gasFee == 2 ? 'active' : ''}`"></span>
             <span class="slider-icon slider-r"></span>
             <div class="speed-label speed-l">{{ t("sendto.slow") }}</div>
             <div class="speed-label speed-c">{{ t("sendto.standard") }}</div>
@@ -72,40 +48,23 @@
           <!-- gas limit -->
           <div class="label mb-10 pt-20 text-left">
             {{ t("sendto.gasLimit") }}
-            <van-popover
-              v-model:show="gasLimitModal"
-              theme="dark"
-              placement="right"
-            >
+            <van-popover v-model:show="gasLimitModal" theme="dark" placement="right">
               <p class="pl-10 pr-10">{{ t("sendto.gasLimittit") }}</p>
               <template #reference>
-                <van-icon
-                  name="question hover"
-                  @mouseover="gasLimitModal = true"
-                  @mouseleave="gasLimitModal = false"
-                />
+                <van-icon name="question hover" @mouseover="gasLimitModal = true" @mouseleave="gasLimitModal = false" />
               </template>
             </van-popover>
           </div>
 
           <div class="limit-box flex between center-v pl-16 pr-16">
-            <div
-              class="action flex center clickActive"
-              @click="handleLimit(-1)"
-              v-show="!minusDisabled"
-            >
+            <div class="action flex center clickActive" @click="handleLimit(-1)" v-show="!minusDisabled">
               <van-icon name="minus" />
             </div>
             <div class="action flex center disabled" v-show="minusDisabled">
               <van-icon name="minus" />
             </div>
             <div class="ipt-box flex center">
-              <van-field
-                v-model="gasLimit"
-                type="number"
-                @blur="limitBlur"
-                placeholder="21000"
-              ></van-field>
+              <van-field v-model="gasLimit" type="number" @blur="limitBlur" placeholder="21000"></van-field>
             </div>
             <div class="action flex center clickActive" @click="handleLimit(1)">
               <van-icon name="plus" />
@@ -323,7 +282,7 @@ export default defineComponent({
         gasLimit.value = bigLimit.plus(1000).toNumber();
       }
     };
-    onMounted(() => {});
+    onMounted(() => { });
 
     return {
       gasPriceModal,
@@ -347,13 +306,16 @@ export default defineComponent({
 .userinfo-box {
   height: 248px;
 }
+
 .back {
   color: #9F54BA;
   font-size: 12px;
 }
+
 .slider-box {
   &:hover {
     border: 1px solid #9F54BA !important;
+
     .van-hairline--bottom {
       &:after {
         border-color: #9F54BA;
@@ -361,37 +323,44 @@ export default defineComponent({
     }
   }
 }
+
 .title {
   font-size: 16px;
-  color: #000;
+
   font-weight: bold;
 }
+
 :deep() {
   .van-field__body {
     border: none;
   }
 }
+
 :deep(.van-slider .van-slider__button) {
   z-index: 100;
   width: 20px;
   height: 20px;
 }
+
 :deep(.van-slider .van-slider__bar) {
   z-index: 1000;
 }
+
 :deep(.van-slider) {
   z-index: 1000;
 }
+
 .gas-fee-page {
   font-size: 12px;
+
   :deep() {
     .van-cell .van-field__body {
       border: none;
     }
   }
-  .text-bold {
-    color: #000;
-  }
+
+  .text-bold {}
+
   .amount-info {
     .van-cell {
       background: none;
@@ -403,28 +372,31 @@ export default defineComponent({
       font-size: 12px;
       color: #9a9a9a;
       line-height: 18px;
-      &.equal {
-        color: #000;
-      }
+
     }
+
     .second {
       color: #3aae55;
     }
   }
+
   .userinfo {
     border-radius: 5px;
   }
+
   .slider-dian {
     height: 30px;
     position: relative;
+
     .slider-icon {
       width: 7.5px;
       position: absolute;
       display: block;
       height: 7.5px;
       border-radius: 50%;
-      background: #f1f3f4;
+      background: #220a35;
       z-index: 1;
+
       &.active {
         background: #85e19b;
       }
@@ -435,16 +407,19 @@ export default defineComponent({
       top: -17px;
       display: none;
     }
+
     .slider-c {
       left: 50%;
       margin-left: -3.75px;
       top: -17px;
     }
+
     .slider-r {
       right: 8px;
       top: -17px;
       display: none;
     }
+
     // speed
     .speed-label {
       font-size: 12px;
@@ -452,51 +427,62 @@ export default defineComponent({
       line-height: 18px;
       position: absolute;
       top: 2px;
+
       &.speed-l {
         left: 0;
       }
+
       &.speed-c {
         left: 50%;
         width: 48px;
         margin-left: -24px;
         text-align: center;
       }
+
       &.speed-r {
         right: 0;
       }
     }
   }
+
   .limit-box {
     height: 44px;
-    background: #f1f3f4;
+    background: #220a35;
     border-radius: 22px;
+
     .ipt-box {
       width: 60px;
       background: none;
+
       .van-cell {
         background: none;
         padding: 0;
       }
+
       :deep(.van-field input) {
         text-align: center;
         background: none;
-        color: #000;
+
         font-weight: bold;
       }
     }
+
     .action {
       width: 17.5px;
       height: 17.5px;
       border-radius: 50%;
       border: 1px solid #9F54BA;
       cursor: pointer;
+
       &.disabled {
         border: 1px solid #ccc;
         cursor: no-drop;
+
         i {
           color: #ccc;
         }
       }
+
       i {
         font-size: 12px;
         color: #9F54BA;

@@ -3,12 +3,7 @@
     <van-index-bar sticky :sticky-offset-top="offsetTop" :index-list="indexList">
       <div v-for="(item, idx) in contacts" :key="idx">
         <van-index-anchor :index="item.label" />
-        <div
-          @click="handlerClick(child)"
-          class="contact-card flex pt-14 pb-14 border-bottom"
-          v-for="child in item.children"
-          :key="child.address"
-        >
+        <div @click="handlerClick(child)" class="contact-card flex pt-14 pb-14 border-bottom" v-for="child in item.children" :key="child.address">
           <div class="contact-icon flex center">
             <div class="contact-icon-box">
               <AccountIcon :data="child.icon" />
@@ -94,14 +89,16 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 :deep(.van-index-anchor) {
-  background: #f1f3f4;
+  background: #220a35;
   color: #aeaeae;
   line-height: 30px;
 }
+
 :deep(.van-index-bar__sidebar) {
   color: #909090;
   right: 8px;
 }
+
 :deep(.van-index-bar__index) {
   width: 18px;
   height: 18px;
@@ -110,29 +107,35 @@ export default defineComponent({
   margin-bottom: 4px;
   padding: 0;
 }
+
 :deep(.van-index-bar__index--active) {
   background: #9F54BA;
   color: #fff;
   border-radius: 9px;
 }
+
 .contact-card {
   transition: ease all 0.2s;
   padding-left: 15px;
   padding-right: 15px;
+
   &:hover {
     cursor: pointer;
     background: #eef4fa;
     box-shadow: 0 2px 4px rgb(6 58 95 / 10%);
   }
+
   .contact-icon {
     &-box {
       overflow: hidden;
     }
   }
+
   .contact-info {
     padding: 2px 0;
-    &-name {
-    }
+
+    &-name {}
+
     &-address {
       color: #909090;
     }

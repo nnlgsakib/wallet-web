@@ -37,7 +37,7 @@
         <span>{{ accountInfo.name }}</span>
         <div>
           <i :class="`iconfont ${!actionSheetShow ? 'icon-xiala' : 'icon-shangla'
-            }`"></i>
+    }`"></i>
         </div>
       </div>
       <div class="account-amount text-center">
@@ -69,10 +69,10 @@
         </div>
       </div>
       <van-tabs v-model:active="active" sticky :offset-top="48" @click-tab="onClickTab">
-        <div class="listType" v-show="active == 1">
+        <!-- <div class="listType" v-show="active == 1">
           <i class="iconfont icon-fenlei2" @click="handleSetListType1(1)" v-if="layoutType == 'list'"></i>
           <i class="iconfont icon-liebiao" @click="handleSetListType1(2)" v-else></i>
-        </div>
+        </div> -->
         <van-tab :title="$t('wallet.token')">
           <TokenCard :data="myToken" :networkIcon="false" />
           <TokenCard v-for="(item, idx) in accountTokens" :key="idx" :data="item" />
@@ -87,11 +87,11 @@
             </div>
           </div>
         </van-tab>
-        <van-tab :title="$t('wallet.NFTs')">
+        <!-- <van-tab :title="$t('wallet.NFTs')">
           <NftList v-if="active === 1" />
-        </van-tab>
+        </van-tab> -->
         <van-tab :title="$t('wallet.SNFTs')">
-          <SNftList @success="isSelect = false" v-model:isSelect="isSelect" :active="active" v-if="active === 2" @updateLength="handleLength" @showSwitch="handleShowSwitch" />
+          <SNftList @success="isSelect = false" v-model:isSelect="isSelect" :active="active" v-if="active === 1" @updateLength="handleLength" @showSwitch="handleShowSwitch" />
         </van-tab>
       </van-tabs>
     </div>

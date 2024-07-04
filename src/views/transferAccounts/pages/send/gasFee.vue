@@ -8,7 +8,7 @@
     </template>
   </NavHeader>
   <div class="gas-fee-page">
-    <div class="pl-14 pt-14 pr-14 userinfo-box">
+    <div class="ml-14 mt-14 mr-14 userinfo-box">
       <van-skeleton title :row="5" :loading="loading">
         <div class="userinfo slider-box amount-info pt-20 pb-20 pl-14 pr-14">
           <div class="flex between">
@@ -35,7 +35,7 @@
           </div>
           <div class="slider-dian">
             <span :class="`slider-icon slider-l ${gasFee == 1 || gasFee == 2 ? 'active' : ''
-              }`"></span>
+        }`"></span>
             <span :class="`slider-icon slider-c ${gasFee == 2 ? 'active' : ''}`"></span>
             <span class="slider-icon slider-r"></span>
             <div class="speed-label speed-l">{{ t("sendto.slow") }}</div>
@@ -319,7 +319,7 @@ export default {
 
 .title {
   font-size: 16px;
-  color: #000;
+
   font-weight: bold;
 }
 
@@ -346,9 +346,7 @@ export default {
 .gas-fee-page {
   font-size: 12px;
 
-  .text-bold {
-    color: #000;
-  }
+  .text-bold {}
 
   .amount-info {
     .van-cell {
@@ -362,9 +360,7 @@ export default {
       color: #9a9a9a;
       line-height: 18px;
 
-      &.equal {
-        color: #000;
-      }
+      &.equal {}
     }
 
     .second {
@@ -387,7 +383,7 @@ export default {
       display: block;
       height: 7.5px;
       border-radius: 50%;
-      background: #f1f3f4;
+      background: #220a35;
       z-index: 1;
 
       &.active {
@@ -440,7 +436,7 @@ export default {
 
   .limit-box {
     height: 44px;
-    background: #f1f3f4;
+    background: #220a35;
     border-radius: 22px;
 
     .ipt-box {
@@ -455,7 +451,7 @@ export default {
       :deep(.van-field input) {
         text-align: center;
         background: none;
-        color: #000;
+
         font-weight: bold;
       }
     }

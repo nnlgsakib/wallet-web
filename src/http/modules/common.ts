@@ -24,7 +24,12 @@ export const is_install = (address: string) => {
     null
   );
 };
-
+/**
+ * @deprecated
+ * @param address
+ * @param params
+ * @returns
+ */
 // One-click exchange to get the address
 export const getSysParams = (address: string, params = {}) => {
   return httpGet(
@@ -35,6 +40,7 @@ export const getSysParams = (address: string, params = {}) => {
 
 /**
  * Query exchange signature data
+ * @deprecated
  * @param address
  * @param params
  * @returns boolean
@@ -46,7 +52,13 @@ export const getExchangeSig = (address: string, params = {}) => {
   );
 };
 
-// Set System information Set one-click exchange data
+/**
+ * Set System information Set one-click exchange data
+ * @deprecated
+ * @param address
+ * @param params
+ * @returns
+ */
 export const setExchangeSig = (address: string, params = {}) => {
   return httpPost(
     `${exchangeApi}/c${address.toLowerCase()}/v2/setExchangeSig`,
@@ -68,8 +80,7 @@ export const getConfiguration = () => {
 };
 
 // const contractApi = isProduct ? 'contractApi' : 'contractApi'
-const contractApi = isProduct ? "contractApi" : "contractApi";
-
+const contractApi = isProduct ? "/contractApi" : "https://scanapi.erbie.io";
 // Query the account information of the specified address
 export const getAccountAddr = (address: string) => {
   return httpGet(`${contractApi}/account/${address}`, {});

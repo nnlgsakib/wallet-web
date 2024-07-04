@@ -1,21 +1,21 @@
 <template>
   <van-overlay :show="dislogShow" :z-index="9999" class="custom-overlay">
     <div class="miners">
-        <div class="miners-header">
-          <span style="color: #000">{{t('minerspledge.stackinglabel')}}</span>
+      <div class="miners-header">
+        <span style="color: #000">{{ t('minerspledge.stackinglabel') }}</span>
+      </div>
+      <div class="miners-container flex column between">
+        <div style="text-align:center;margin-top:20px">
+          <van-icon name="warning" size="30" color="#D73A49" />
         </div>
-        <div class="miners-container flex column between">
-          <div style="text-align:center;margin-top:20px">
-            <van-icon name="warning" size="30" color="#D73A49" />
-          </div>
-          <div class="tips">
-            {{t('minerspledge.closeTip')}}
-            
-          </div>
-          <div class="container-btn flex center column">
-            <div>
-              <van-button  color="#000000" class="btn" plain @click="dislogShow = false">{{t('common.cancel')}}</van-button>
-              <van-button :disabled="Time !== 0" style="width: 113px;" color="#D73A49" type="primary"  round @click="submit">{{t('common.confirm')}}{{Time === 0 ? '' : `(${Time}s)`}}</van-button>
+        <div class="tips">
+          {{ t('minerspledge.closeTip') }}
+
+        </div>
+        <div class="container-btn flex center column">
+          <div>
+            <van-button class="btn" plain @click="dislogShow = false">{{ t('common.cancel') }}</van-button>
+            <van-button :disabled="Time !== 0" style="width: 113px;" color="#D73A49" type="primary" round @click="submit">{{ t('common.confirm') }}{{ Time === 0 ? '' : `(${Time}s)` }}</van-button>
           </div>
         </div>
       </div>
@@ -94,22 +94,25 @@ export default {
   .miners {
     width: 341px;
     height: 280.5px;
-    background: #fff;
+    background: #150520;
     margin: auto;
     border-radius: 8px;
     overflow: hidden;
+
     .miners-header {
       height: 62px;
       line-height: 62px;
       text-align: center;
       font-weight: bold;
-      background: #FBF8FB;
+      background: #24152f;
       font-size: 14px;
-      color: #B3B3B3;
+      color: white;
     }
+
     .miners-container {
       .contaienr-top-header {
         margin: 28px 0 21px 0;
+
         span {
           &:first-child {
             display: inline-block;
@@ -123,6 +126,7 @@ export default {
             color: #0287db;
             border: 3px solid #0287db;
           }
+
           &:last-child {
             font-weight: bold;
             font-size: 14px;
@@ -130,6 +134,7 @@ export default {
           }
         }
       }
+
       .contaienr-top-ipt {
         width: 315px;
         height: 90px;
@@ -138,43 +143,53 @@ export default {
         box-sizing: border-box;
         border-radius: 4px 4px 4px 4px;
         border: 1px solid #e4e7e8;
+
         .ipt {
           width: 280px;
+
           span {
             font-size: 16px;
             font-weight: bold;
           }
         }
+
         .text {
           font-size: 14px;
         }
+
         .user-field {
           font-size: 12px;
         }
-        > span {
+
+        >span {
           font-size: 12px;
           color: #8f8f8f;
         }
+
         .ipt-text-a {
           padding-top: 20px;
           margin-top: 30px;
           font-size: 12px;
           color: #8f8f8f;
         }
+
         .ipt-text-b {
           margin: 5px 0 9px 0;
-          color: #000;
+
           font-size: 12px;
           font-weight: bold;
         }
+
         .ipt-server {
           font-size: 12px;
           color: #8f8f8f;
           font-weight: bold;
+
           span {
             font-weight: 400;
-            color: #000000;
+            color: white;
           }
+
           .ipt-server-i {
             width: 133px;
             height: 30px;
@@ -183,79 +198,98 @@ export default {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #F8F3F9;
+            background: #220a35;
             border-radius: 7px 7px 7px 7px;
+
             &:first-child {
               padding: 0 18px;
             }
           }
+
           .ipt-server-i-active {
             color: #0287db;
-            background: #F8F3F9;
+            background: #220a35;
             border: 1px solid #9F54BA;
+
             span {
               color: #0287db;
             }
           }
         }
+
         .money {
           margin: 10px 0 20px 0;
           font-size: 12px;
           font-weight: bold;
+
           span {
             &:first-child {
-              color: #000000;
+              color: white;
             }
+
             &:last-child {
               color: #0287db;
             }
           }
         }
+
         .ipt-slider {
           margin-left: 5px;
         }
+
         .stake {
           margin: 20px 0 5px 0;
           font-size: 12px;
           color: #8f8f8f;
+
           span {
             color: #3aae55;
           }
         }
+
         :deep() {
           .van-cell {
-          padding-left: 0px;
+            padding-left: 0px;
           }
         }
+
         .van-cell:after {
           display: none;
         }
       }
+
       .container-btn {
         margin-top: 10px;
+
         .btn {
           width: 104px;
           height: 45px;
           margin-top: 21px;
+
           &:first-child {
             margin-right: 35px;
           }
         }
+
         span {
           font-size: 12px;
+
           &:first-child {
             margin: 0 5px 0 10px;
             color: #8f8f8f;
           }
+
           &:last-child {
             color: #0287db;
           }
         }
+
         .btn-text {
           margin: 15px 0 10px 0;
           font-size: 12px;
           color: #8f8f8f;
         }
+
         .underline {
           text-decoration: underline;
         }
@@ -263,6 +297,7 @@ export default {
     }
   }
 }
+
 .miners-container-item {
   margin: 25px 12.5px 0 12.5px;
   padding: 17px 15px 0 15px;
@@ -270,23 +305,29 @@ export default {
   border-radius: 4px;
   border: 1px solid #E4E7E8;
 }
+
 .c1 {
   color: #8F8F8F;
 }
+
 .exchange {
   margin-top: 7px;
   padding-bottom: 16px;
   border-bottom: 1px solid #E4E7E8;
 }
+
 .bourse-container-meaning {
   margin-bottom: 16px;
 }
+
 .exchange-z {
   border: none;
 }
+
 .c2 {
   color: #3aae55;
 }
+
 .tips {
   text-align: center;
   padding: 20px 70px 10px 70px;

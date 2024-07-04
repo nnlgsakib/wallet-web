@@ -1,4 +1,3 @@
-
 <template>
   <van-dialog v-model:show="show" show-cancel-button teleport="#page-box" class="toggle-snft-modal" :showConfirmButton="false" closeOnClickOverlay>
     <div class="sheet-header van-hairline--bottom">
@@ -150,7 +149,7 @@ export default defineComponent({
   text-align: center;
   align-items: center;
   justify-content: center;
-  background: #FBF8FB;
+  background: #24152f;
   font-size: 15px;
   font-weight: bold;
 }
@@ -178,7 +177,7 @@ export default defineComponent({
   &.active {
     color: #9F54BA;
     border: 1px solid #9F54BA;
-    background: #F8F3F9;
+    background: #220a35;
 
     .desc,
     i {

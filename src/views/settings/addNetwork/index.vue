@@ -18,30 +18,30 @@
           <span>*</span>{{ t("addNetwork.networkname") }}
         </div>
         <van-field v-model="label" maxlength="12" :disabled="isMain ? true : false" :class="nameError ? 'error' : ''" :placeholder="$t('addNetwork.networknameoptional')" :rules="[
-          {
-            // required: true,
-            // message: t('addNetwork.inputnetworknameoptional'),
-            validator: asyncName,
-          },
-        ]" />
+    {
+      // required: true,
+      // message: t('addNetwork.inputnetworknameoptional'),
+      validator: asyncName,
+    },
+  ]" />
         <div class="label text-bold">
           <span>*</span>{{ t("addNetwork.rpcurl") }}
         </div>
         <van-field :class="urlError ? 'error' : ''" v-model="URL" :placeholder="$t('addNetwork.newRpcPlaceholder')" maxlength="200" :disabled="isMain ? true : false" validate-trigger="onChange" @blur="getChainId" :rules="[
-          // { required: true, message: t('addNetwork.inputrpcurl') },
-          { validator: asyncurl },
-        ]" />
+    // { required: true, message: t('addNetwork.inputrpcurl') },
+    { validator: asyncurl },
+  ]" />
         <div class="label text-bold">
           <span>*</span>{{ t("addNetwork.chain") }}
         </div>
         <van-field v-model="chainId" type="number" maxlength="30" validate-trigger="onChange" :disabled="isMain ? true : false" :class="chainError ? 'error' : ''" :placeholder="$t('addNetwork.chain')" :rules="[
-          // {
-          //   required: true,
-          //   message: t('addNetwork.Invalidchain'),
-          //   //  message: t('addNetwork.inputchain')
-          // },
-          { validator: asyncid },
-        ]" />
+    // {
+    //   required: true,
+    //   message: t('addNetwork.Invalidchain'),
+    //   //  message: t('addNetwork.inputchain')
+    // },
+    { validator: asyncid },
+  ]" />
         <div class="error err-msg" v-if="hasChainId">
           {{ t("addNetwork.existedchain") }}
         </div>
@@ -332,7 +332,7 @@ export default {
   .error {
     :deep(.van-field__body) {
       border-color: #d73a49;
-      background: #fbf2f3;
+      background: transparent;
     }
   }
 
@@ -352,7 +352,7 @@ export default {
   }
 
   .w-tips {
-    // background: #F8F3F9;
+    // background: #220a35;
     border-radius: 7px;
 
     // margin: 15px 0;

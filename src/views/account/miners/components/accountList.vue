@@ -1,24 +1,11 @@
 <template>
-  <van-dialog
-    v-model:show="showModal"
-    :showConfirmButton="false"
-    :showCancelButton="false"
-    teleport="#page-box"
-    closeOnClickOverlay
-    class="miner-account-list-modal"
-  >
+  <van-dialog v-model:show="showModal" :showConfirmButton="false" :showCancelButton="false" teleport="#page-box" closeOnClickOverlay class="miner-account-list-modal">
     <div class="title">{{ t("wallet.account") }}</div>
     <div class="account-list">
-      <div
-        :class="`card flex between hover van-hairline--bottom ${
-          item.address.toUpperCase() == selectAccount.address.toUpperCase()
-            ? 'active'
-            : ''
-        }`"
-        v-for="item in accountList"
-        @click.stop="handleSelect(item)"
-        :key="item.address"
-      >
+      <div :class="`card flex between hover van-hairline--bottom ${item.address.toUpperCase() == selectAccount.address.toUpperCase()
+    ? 'active'
+    : ''
+    }`" v-for="item in accountList" @click.stop="handleSelect(item)" :key="item.address">
         <div class="card-info flex">
           <div class="userIcon flex center">
             <AccountIcon size="small" :data="item.icon" />
@@ -87,34 +74,42 @@ onMounted(async () => {
 <style lang="scss" scoped>
 .title {
   line-height: 60px;
-  background: #FBF8FB;
+  background: #24152f;
   font-size: 15px;
   font-weight: bold;
   text-align: center;
 }
+
 .account-list {
   max-height: 40vh;
   overflow-y: scroll;
+
   .card {
     padding: 16px 15px;
     transition: ease .3s;
+
     &:hover {
-      background: #F8F3F9;
+      background: #220a35;
+
       .acc-info {
+
         .name,
         .address {
           color: #9F54BA;
         }
       }
     }
+
     &.active {
       .acc-info {
+
         .name,
         .address {
           color: #9F54BA;
         }
       }
     }
+
     .acc-info {
       margin-left: 15px;
 
@@ -124,6 +119,7 @@ onMounted(async () => {
       }
     }
   }
+
   .userIcon {
     width: 35px;
     height: 35px;

@@ -54,7 +54,7 @@
         </div>
         <div class="container-btn flex center column">
           <div>
-            <van-button color="#000000" class="btn" plain @click="dislogShow = false">{{ t('common.cancel') }}</van-button>
+            <van-button class="btn" plain @click="dislogShow = false">{{ t('common.cancel') }}</van-button>
             <van-button style="width: 113px;" color="#D73A49" type="primary" round @click="submit">{{ t('common.confirm') }}</van-button>
           </div>
         </div>
@@ -135,7 +135,7 @@ export default {
   .miners {
     width: 341px;
     height: 620.5px;
-    background: #fff;
+    background: #150520;
     margin: auto;
     overflow: hidden;
     border-radius: 8px;
@@ -145,7 +145,7 @@ export default {
       line-height: 62px;
       text-align: center;
       font-weight: bold;
-      background: #FBF8FB;
+      background: #24152f;
       font-size: 14px;
       color: #B3B3B3;
     }
@@ -216,7 +216,7 @@ export default {
 
         .ipt-text-b {
           margin: 5px 0 9px 0;
-          color: #000;
+
           font-size: 12px;
           font-weight: bold;
         }
@@ -228,7 +228,7 @@ export default {
 
           span {
             font-weight: 400;
-            color: #000000;
+            color: white;
           }
 
           .ipt-server-i {
@@ -239,7 +239,7 @@ export default {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #F8F3F9;
+            background: #220a35;
             border-radius: 7px 7px 7px 7px;
 
             &:first-child {
@@ -249,7 +249,7 @@ export default {
 
           .ipt-server-i-active {
             color: #0287db;
-            background: #F8F3F9;
+            background: #220a35;
             border: 1px solid #9F54BA;
 
             span {
@@ -265,7 +265,7 @@ export default {
 
           span {
             &:first-child {
-              color: #000000;
+              color: white;
             }
 
             &:last-child {
@@ -379,4 +379,5 @@ export default {
 <style>
 .tooltip2-abc {
   z-index: 10000 !important;
-}</style>
+}
+</style>

@@ -1,13 +1,5 @@
-
 <template>
-  <van-dialog
-    v-model:show="show"
-    :show-cancel-button="fasle"
-    class="minus-pledge-dialog"
-    teleport="#page-box"
-    :showConfirmButton="false"
-    closeOnClickOverlay
-  >
+  <van-dialog v-model:show="show" :show-cancel-button="fasle" class="minus-pledge-dialog" teleport="#page-box" :showConfirmButton="false" closeOnClickOverlay>
     <div class="sheet-header van-hairline--bottom">
       {{ t("createExchange.pledgeRed") }}
     </div>
@@ -15,21 +7,12 @@
       <div class="card pt-18">
         <div class="tit">
           {{ t("minerspledge.redemingAmount") }}
-          <van-popover
-            v-model:show="showPopover"
-            theme="dark"
-            placement="bottom"
-            trigger="manual"
-          >
+          <van-popover v-model:show="showPopover" theme="dark" placement="bottom" trigger="manual">
             <div class="f-12 pl-10 pr-10 pt-10 pb-10 popover-tip">
               {{ t("createExchange.redeem") }}
             </div>
             <template #reference>
-              <van-icon
-                @mouseenter="showPopover = true"
-                @mouseout="showPopover = false"
-                name="question hover"
-              />
+              <van-icon @mouseenter="showPopover = true" @mouseout="showPopover = false" name="question hover" />
             </template>
           </van-popover>
           <!-- <el-tooltip
@@ -44,21 +27,10 @@
             </el-tooltip> -->
         </div>
         <div class="mt-12">
-          <el-slider
-            :min="0"
-            :max="max"
-            :marks="marks"
-            v-model="sliderValue"
-            @input="handleInput"
-          ></el-slider>
+          <el-slider :min="0" :max="max" :marks="marks" v-model="sliderValue" @input="handleInput"></el-slider>
           <div class="ipt-box">
-            <van-field
-            type="number"
-            class="mt-14"
-            @blur="handleBlur"
-            v-model="value"
-          />
-          <span class="erb">ERB</span>
+            <van-field type="number" class="mt-14" @blur="handleBlur" v-model="value" />
+            <span class="erb">ERB</span>
           </div>
         </div>
       </div>
@@ -69,17 +41,11 @@
     </div>
     <div class="flex between btn-box">
       <van-button block plain class="mr-30" @click="handleCancel">{{
-        t("common.cancel")
-      }}</van-button>
-      <van-button
-        block
-        type="primary"
-        :disabled="countDown != 0 ? true : false"
-        @click="submit"
-        >{{
-          countDown != 0 ? countDown + "S" : t("closeexchange.yes")
-        }}</van-button
-      >
+    t("common.cancel")
+  }}</van-button>
+      <van-button block type="primary" :disabled="countDown != 0 ? true : false" @click="submit">{{
+    countDown != 0 ? countDown + "S" : t("closeexchange.yes")
+        }}</van-button>
     </div>
   </van-dialog>
 </template>
@@ -96,8 +62,8 @@ import {
   reactive,
 } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { Icon, Dialog, Button, Loading, Field,Popover } from "vant";
-import { ElSlider,ElTooltip } from "element-plus";
+import { Icon, Dialog, Button, Loading, Field, Popover } from "vant";
+import { ElSlider, ElTooltip } from "element-plus";
 import { decimal } from "@/utils/filters";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
@@ -111,7 +77,7 @@ export default defineComponent({
     [Dialog.Component.name]: Dialog.Component,
     [Button.name]: Button,
     [Loading.name]: Loading,
-    [Popover.name]:Popover,
+    [Popover.name]: Popover,
     [Field.name]: Field,
     ElSlider,
     ElTooltip,
@@ -242,21 +208,25 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
-  .ipt-box {
-    position: relative;
-    .erb {
-      position: absolute;
-      right: 10px;
-      top: 16px;
-      font-weight: bold;
-    }
+.ipt-box {
+  position: relative;
+
+  .erb {
+    position: absolute;
+    right: 10px;
+    top: 16px;
+    font-weight: bold;
   }
+}
+
 .tit {
   color: #848484;
 }
+
 .btn-box {
   padding: 12px 45px 25px;
 }
+
 .tips-icon {
   i {
     font-size: 18px;
@@ -266,33 +236,38 @@ export default defineComponent({
 }
 
 .account-container {
+
   .card,
   .tips {
     margin: 0 15px;
     overflow: inherit;
   }
+
   .tips {
     margin-top: 15px;
   }
 }
+
 .tips {
   padding: 11px 15px;
-  background: #F8F3F9;
+  background: #220a35;
   border-radius: 7px;
   margin: 15px 0;
 }
+
 :deep() {
   .slider-ipt {
     padding: 0;
     margin-bottom: 11px;
   }
+
   .van-field__value {
     overflow: inherit;
   }
 
   .el-slider__runway {
     height: 3px;
-    background: #f1f3f4;
+    background: #220a35;
   }
 
   .el-slider__bar {
@@ -314,6 +289,7 @@ export default defineComponent({
     margin-top: -2px;
     border-radius: 3.5px;
   }
+
   .el-slider__marks-text {
     z-index: 9999;
     margin-top: -26px;
@@ -329,8 +305,10 @@ export default defineComponent({
     padding: 0;
     overflow: inherit;
   }
+
   .el-slider__marks-text {
     text-align: center;
+
     &::after {
       display: block;
       content: "";
@@ -349,7 +327,7 @@ export default defineComponent({
   text-align: center;
   align-items: center;
   justify-content: center;
-  background: #FBF8FB;
+  background: #24152f;
   font-size: 15px;
   font-weight: bold;
 }

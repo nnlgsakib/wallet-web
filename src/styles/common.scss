@@ -4,8 +4,8 @@ body {
   -webkit-overflow-scrolling: touch;
   -webkit-touch-callout: none;
   user-select: none;
-  background-color: #f2f3f4;
   font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
+  color: white;
 }
 
 .loading-box {
@@ -19,7 +19,7 @@ body {
 
 .van-image__error-icon,
 .van-image__loading-icon {
-  background: #F8F3F9;
+  background: #220a35;
 }
 
 .container {
@@ -47,7 +47,7 @@ body {
 
   &:hover {
     &::-webkit-scrollbar-track {
-      background: #f1f1f1;
+      background: #333;
     }
   }
 
@@ -71,7 +71,7 @@ body {
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: rgb(202, 201, 201);
+    background-color: #555;
     background-clip: padding-box;
     min-height: 20px;
     -webkit-border-radius: 2em;
@@ -83,7 +83,7 @@ body {
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background-color: #a7a7a7;
+    background-color: #666;
     opacity: 1;
   }
 }
@@ -91,6 +91,7 @@ body {
 .clickActive {
   cursor: pointer;
   transition: ease .3s;
+
   &:active {
     background: rgba($color: #000, $alpha: 0.1);
   }
@@ -132,6 +133,10 @@ a {
   cursor: pointer;
 }
 
+input {
+  background: transparent;
+}
+
 .cancel,
 .menu,
 .actions-btn,
@@ -147,6 +152,14 @@ a {
 .copy-info,
 .actions-list-card {
   cursor: pointer;
+}
+
+input {
+  color: white;
+}
+
+input::placeholder {
+  color: #ccc;
 }
 
 .van-button--plain,
@@ -178,7 +191,7 @@ a {
 
   .van-dialog__footer {
     button {
-      color: #000;
+
       border: none;
       border-radius: 0;
     }
@@ -191,7 +204,7 @@ a {
 }
 
 .van-button--primary:hover {
-  background: #9643b4;
+  background: rgba($color: #9643b4, $alpha: .1);
 }
 
 .van-button--plain.van-button--primary:hover {
@@ -225,7 +238,7 @@ a {
 .van-field.error {
   .van-field__body {
     border-color: #D73A49;
-    background-color: #FBF2F3;
+    background-color: #220a35;
   }
 }
 
@@ -293,6 +306,7 @@ a {
 .validPopover {
   max-width: 500px !important;
 }
+
 .nft-tag-popover {
   .van-popover__content {
     background: rgba($color: #000, $alpha: .7);

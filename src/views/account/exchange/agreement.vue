@@ -3,11 +3,11 @@
     <div class="miners">
       <div class="miners-header">
         <van-icon name="arrow-left" @click="submitClick('cancel')" />
-        <span>{{$t('createExchange.open_exchange')}}</span>
+        <span>{{ $t('createExchange.open_exchange') }}</span>
       </div>
       <div class="miners-container">
         <div class="miners-container-text">
-          <div class="text-a">{{$t('createExchange.termsofservice')}}</div>
+          <div class="text-a">{{ $t('createExchange.termsofservice') }}</div>
           <div class="text-b">Last Updated:20/02/2022</div>
           <div>
             The Platform and the Services are subiect tothese
@@ -35,16 +35,9 @@
         </div>
         <div class="miners-container-select flex">
           <van-checkbox v-model="checked" shape="square" icon-size="16px"></van-checkbox>
-          <span>{{$t('createExchange.haveread')}}</span>
+          <span>{{ $t('createExchange.haveread') }}</span>
         </div>
-        <van-button
-          type="primary"
-          class="btn"
-          round
-          block
-          @click="submitClick('check')"
-          :disabled="btnDisabled"
-        >{{$t('createExchange.agree')}}</van-button>
+        <van-button type="primary" class="btn" round block @click="submitClick('check')" :disabled="btnDisabled">{{ $t('createExchange.agree') }}</van-button>
       </div>
     </div>
   </van-overlay>
@@ -127,39 +120,47 @@ export default {
   .miners {
     width: 341px;
     height: 646px;
-    background: #fff;
+    background: #150520;
     margin: auto;
     border-radius: 8px;
+
     .miners-header {
       height: 62px;
       line-height: 62px;
       padding-left: 15px;
       font-weight: bold;
-      background: #FBF8FB;
+      background: #24152f;
       font-size: 14px;
-      color: #0f0f0f;
+      color: white;
+
       span {
         margin-left: 80px;
       }
     }
+
     .miners-container {
       padding: 16px;
+
       .miners-container-text {
         line-height: 18px;
         font-size: 12px;
         color: #0f0f0f;
+
         .text-a {
           font-size: 14px;
           font-weight: bold;
           color: #0f0f0f;
         }
+
         .text-b {
           margin-bottom: 15px;
         }
+
         .text-c {
           margin: 15px 0;
         }
       }
+
       .miners-container-select {
         span {
           margin: 15px 0 15px 10px;

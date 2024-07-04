@@ -9,40 +9,40 @@
     </van-sticky>
 
     <div class="code flex center">
-     <van-image :src="pageData.data.source_url" width="6.8rem" height="6.8rem"></van-image>
+      <van-image :src="pageData.data.source_url" width="6.8rem" height="6.8rem"></van-image>
     </div>
-    
-    <div class="form van-hairline--surround">
-        <div class="content van-hairline--bottom">
-            <div class="form-titie">
-            {{t('nftDetail.name')}}:</div>
-            <div class="form-content">{{pageData.data.name}}</div>
-            </div>  
-         <div class="content van-hairline--bottom">
-            <div  class="form-titie">
-            {{t('nftDetail.address')}}:</div>
-            <div class="form-content van-ellipsis">{{addressMask(pageData.data.address)}}</div>
-            </div>  
-         <div class="content">
-            <div class="form-titie">
-            {{t('nftDetail.amount')}}:</div>
-            <div class="form-content">
-              <!-- {{pageData.data.royalty_ratio}}ERB -->
 
-            </div>
-            </div>  
-        
-    </div>
-        <van-sticky position="bottom" :offset-bottom="30">
-               <div class="actions-btn"  @click="toSend">
-          <div class="action-icon flex center ">
-            <i class="iconfont icon-jiantou_youshang"></i>
-          </div>
-          <div class="send-action text-center">
-            {{t('nftDetail.send')}}
-          </div>
+    <div class="form van-hairline--surround">
+      <div class="content van-hairline--bottom">
+        <div class="form-titie">
+          {{ t('nftDetail.name') }}:</div>
+        <div class="form-content">{{ pageData.data.name }}</div>
+      </div>
+      <div class="content van-hairline--bottom">
+        <div class="form-titie">
+          {{ t('nftDetail.address') }}:</div>
+        <div class="form-content van-ellipsis">{{ addressMask(pageData.data.address) }}</div>
+      </div>
+      <div class="content">
+        <div class="form-titie">
+          {{ t('nftDetail.amount') }}:</div>
+        <div class="form-content">
+          <!-- {{pageData.data.royalty_ratio}}ERB -->
+
         </div>
-        </van-sticky>
+      </div>
+
+    </div>
+    <van-sticky position="bottom" :offset-bottom="30">
+      <div class="actions-btn" @click="toSend">
+        <div class="action-icon flex center ">
+          <i class="iconfont icon-jiantou_youshang"></i>
+        </div>
+        <div class="send-action text-center">
+          {{ t('nftDetail.send') }}
+        </div>
+      </div>
+    </van-sticky>
 
   </div>
 </template>
@@ -83,7 +83,7 @@ export default {
     [Image.name]: Image
   },
   setup() {
-    const {t}=useI18n()
+    const { t } = useI18n()
     const router = useRouter();
     const route = useRoute();
     const { query } = route;
@@ -94,7 +94,7 @@ export default {
     };
     const toSend = () => {
       router.push({
-        name:'send-nft1',
+        name: 'send-nft1',
         query: {
           address
         }
@@ -114,10 +114,12 @@ export default {
 <style lang="scss" scoped>
 .nft-detail {
   padding-bottom: 50px;
+
   .back {
     font-size: 18px;
     color: #9F54BA;
   }
+
   .code {
     width: 256px;
     height: 256px;
@@ -125,78 +127,94 @@ export default {
     border: 1px solid #ccc;
     border-radius: 7px;
     overflow: hidden;
-    :deep(.van-image){
+
+    :deep(.van-image) {
       border-radius: 7px;
       overflow: hidden;
     }
   }
+
   .info {
     margin: 0 15px;
+
     .card {
       width: 105px;
       height: 65px;
-      background: #F8F3F9;
+      background: #220a35;
       border-radius: 7.5px;
       text-align: center;
       padding: 4px 0;
       box-sizing: border-box;
+
       &.active {
         border: 1px solid #9F54BA;
       }
-      & > div {
+
+      &>div {
         line-height: 20px;
       }
+
       &-t {
         font-size: 12px;
         color: #848484;
       }
+
       &-m {
         font-weight: bold;
         font-size: 12px;
       }
+
       &-b {
         font-size: 12px;
         color: #848484;
       }
     }
   }
+
   .form {
-      margin: 15px;
-      height: 205px;
-      &:after {
-          border-radius: 5px;
+    margin: 15px;
+    height: 205px;
+
+    &:after {
+      border-radius: 5px;
+    }
+
+    .content {
+      font-size: 14px;
+      line-height: 20px;
+      padding: 15px 10px;
+
+      .form-titie {
+        color: #E4E7E8;
       }
-      .content{
-        font-size: 14px;
-        line-height: 20px;
-        padding:15px 10px;
-        .form-titie{
-          color:#E4E7E8 ;
-        }
-      }
-      .line{
-        height: 1px;
-        background-color: #E4E7E8;
-      }
+    }
+
+    .line {
+      height: 1px;
+      background-color: #E4E7E8;
+    }
   }
-  .actions-btn{
-    .action-icon{
+
+  .actions-btn {
+    .action-icon {
       margin: 0 auto;
-     width: 35px;
-     height: 35px;
-     background-color: #9F54BA;
-     border-radius: 50%;
-     i {
-            font-size: 16px;
-            color: #fff;
-          }
-     }
-     .send-action{
-         line-height: 16px;
-          color: #9F54BA;
-          font-size: 12px;
-          margin-top: 7px;
-     }
+      width: 35px;
+      height: 35px;
+      background-color: #9F54BA;
+      border-radius: 50%;
+
+      i {
+        font-size: 16px;
+        color: #fff;
+      }
+    }
+
+    .send-action {
+      line-height: 16px;
+      color: #9F54BA;
+      font-size: 12px;
+      margin-top: 7px;
+    }
   }
 }
 </style>

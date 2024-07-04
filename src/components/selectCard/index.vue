@@ -1,9 +1,8 @@
 <template>
   <div class="select-card flex border-bottom clickActive" @click.stop="handleClick">
     <div class="net-status flex center" v-if="hasSelect">
-      <i :class="`iconfont ${
-          select ? 'icon-danxuan' : 'icon-danxuan1'
-        }`"></i>
+      <i :class="`iconfont ${select ? 'icon-danxuan' : 'icon-danxuan1'
+    }`"></i>
     </div>
 
     <div class="net-name flex between center-v">
@@ -62,33 +61,41 @@ export default defineComponent({
   padding: 0 15px;
   height: 62px;
   transition: ease 0.3s;
+
   &:hover {
-    background: #F8F3F9;
+    background: #220a35;
   }
+
   .net-status {
     width: 20px;
     color: #ccc;
+
     i {
       color: #9F54BA;
       font-size: 16px;
     }
+
     i.icon-xuanzhong1 {
       font-size: 18px;
     }
   }
+
   .net-name {
     line-height: 52px;
     margin-left: 13px;
     width: 100%;
     font-size: 13px;
+
     i {
       color: rgb(13, 215, 13);
       font-size: 14px;
       padding: 5px;
     }
   }
+
   .net-icon {
     margin-left: 18px;
+
     &-box {
       width: 13px;
       height: 13px;

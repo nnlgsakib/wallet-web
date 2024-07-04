@@ -2,13 +2,13 @@
   <div>
     <div :class="`bourse ${isModif ? 'modif' : ''}`">
       <NavHeader :title="isModif
-          ? t('minerspledge.modifValidator')
-          : t('minerspledge.beValidator')
-        ">
+      ? t('minerspledge.modifValidator')
+      : t('minerspledge.beValidator')
+      ">
         <template v-slot:left>
           <span class="back" @click="appProvide.back">{{
-            t("common.back")
-          }}</span>
+      t("common.back")
+    }}</span>
         </template>
         <template v-slot:right>
           <cancel-btn />
@@ -38,7 +38,7 @@
               <AccountIcon :data="selectAccount.icon" size="small" />
             </div>
             <div :class="`value  flex  account-box ${selectAccount.name ? ' column between' : 'center-v'
-              }`">
+      }`">
               <div class="name" v-if="selectAccount.name">
                 {{ selectAccount.name }}
               </div>
@@ -113,10 +113,10 @@
 
         <div class="bourse-container-meaning bt" v-if="!isModif" style="margin-bottom: 10px">
           <span class="card-tit">{{
-            isDelegate
-            ? t("minerspledge.Stackingtit")
-            : t("minerspledge.Delegatetit")
-          }}</span>
+      isDelegate
+        ? t("minerspledge.Stackingtit")
+        : t("minerspledge.Delegatetit")
+    }}</span>
           <el-tooltip popper-class="tooltip2" class="box-item" effect="dark" :content="t('minerspledge.proxyAccountTip')" placement="right" trigger="hover">
             <van-icon name="question" color="#9A9A9A" />
           </el-tooltip>
@@ -127,7 +127,7 @@
               <AccountIcon :data="selectAccount.icon" size="small" />
             </div>
             <div :class="`value  flex  account-box ${selectAccount.name ? ' column between' : 'center-v'
-              }`">
+      }`">
               <div class="name" v-if="selectAccount.name">
                 {{ selectAccount.name }}
               </div>
@@ -195,8 +195,8 @@
               <van-button v-if="isModif && showCloseBtn" :disabled="showCloseBtn ? false : true" plain @click="closeDialogTime = true">{{ t("minerspledge.stackinglabel") }}</van-button>
 
               <van-button :loading="isLoading" @click="onSubmit" type="primary" :style="{ width: isModif ? '48%' : '100%' }">{{
-                !isModif ? t("common.confirm") : t("bourse.saveExchange")
-              }}</van-button>
+      !isModif ? t("common.confirm") : t("bourse.saveExchange")
+    }}</van-button>
             </div>
           </div>
         </div>
@@ -217,8 +217,8 @@
             </div>
             <div class="container-btn flex center">
               <van-button type="primary" class="btn" round @click="tohome">{{
-                $t("createExchange.gohome")
-              }}</van-button>
+      $t("createExchange.gohome")
+    }}</van-button>
             </div>
           </div>
           <div class="miners-success" v-else-if="isOne">
@@ -233,8 +233,8 @@
             </div>
             <div class="container-btn flex center">
               <van-button type="primary" class="btn" round @click="tohome">{{
-                $t("createExchange.gohome")
-              }}</van-button>
+      $t("createExchange.gohome")
+    }}</van-button>
             </div>
           </div>
         </van-dialog>
@@ -249,7 +249,7 @@
         @affirmClose="closeDialogSubmit = true"
         v-model:show="closeDialogTime"
       ></close-dialog-time> -->
-        <affirm-close name="name" :serverIndex="serverIndex" :money="money" v-model:show="isCloseAffirm" @affirmClose="affirmClose" v-if="isCloseAffirm"></affirm-close>
+        <!-- <affirm-close name="name" :serverIndex="serverIndex" :money="money" v-model:show="isCloseAffirm" @affirmClose="affirmClose" v-if="isCloseAffirm"></affirm-close> -->
         <close-home v-model:isWarning="isCloseHome" v-if="isCloseHome"></close-home>
         <!-- Adjust the amount of pledge -->
         <ModifPledgeModal v-model="closeDialogTime" :max="Number(PledgedBalance)" @confirm="handleMinusConfirm" />
@@ -338,7 +338,6 @@ import addAffirmDialog from "./add-affirm-dialog.vue";
 import closeDialog from "./close-dialog.vue";
 import close1 from "./close1.vue";
 import closeSubmitDialog from "./close-submit.vue";
-import closeAffirmDialog from "./close-affirm-dialog.vue";
 import AccountIcon from "@/components/accountIcon/index.vue";
 import closeHome from "./close-home.vue";
 import { ElSelect, ElOption } from "element-plus";
@@ -380,7 +379,6 @@ export default defineComponent({
     SwitchNetwork,
     "dialog-warning": dialogWarning,
     "close-dialog": closeDialog,
-    "affirm-close": closeAffirmDialog,
     "close-home": closeHome,
     "add-affirm-dialog": addAffirmDialog,
     ElSlider,
@@ -962,7 +960,7 @@ export default defineComponent({
         const tx = {
           to: accountInfo.value.address,
           value: ethers.utils.parseEther(sendAmount.toString()),
-          data: web3.utils.fromUtf8(`${store.getters['account/chainParsePrefix']}:${JSON.stringify(d2)}`),
+          data: web3.utils.fromUtf8(`erbie:${JSON.stringify(d2)}`),
         };
         const gasFee = await getGasFee(tx);
         reconveryDetail.value = {
@@ -988,7 +986,7 @@ export default defineComponent({
     const handleReConfirm = async () => {
       const { amount }: any = reconveryDetail.value
       const d2 = { type: 26, version: "v0.0.1" }
-      const str = `${store.getters['account/chainParsePrefix']}:${JSON.stringify(d2)}`;
+      const str = `erbie:${JSON.stringify(d2)}`;
       const tx = {
         value: amount,
         data: web3.utils.fromUtf8(str),
@@ -1176,7 +1174,7 @@ export default defineComponent({
 
   .el-slider__runway {
     height: 3px;
-    background: #f1f3f4;
+    background: #220a35;
   }
 
   .el-slider__bar {
@@ -1194,7 +1192,7 @@ export default defineComponent({
   .el-slider__stop {
     height: 4px;
     width: 3px;
-    background-color: #f1f3f4;
+    background: #220a35;
     margin-top: -4px;
     border-radius: 0;
     transform: translateX(0);
@@ -1452,7 +1450,7 @@ export default defineComponent({
 .miners {
   width: 341px;
   height: 646px;
-  background: #fff;
+  background: #150520;
   margin: auto;
   border-radius: 8px;
 
@@ -1461,7 +1459,7 @@ export default defineComponent({
     line-height: 62px;
     text-align: center;
     font-weight: bold;
-    background: #FBF8FB;
+    background: #24152f;
     font-size: 14px;
     color: #0f0f0f;
   }
@@ -1544,7 +1542,7 @@ export default defineComponent({
 
       .ipt-text-b {
         margin: 5px 0 9px 0;
-        color: #000;
+
         font-size: 12px;
         font-weight: bold;
       }
@@ -1556,7 +1554,7 @@ export default defineComponent({
 
         span {
           font-weight: 400;
-          color: #000000;
+          color: white;
         }
 
         .ipt-server-i {
@@ -1567,7 +1565,7 @@ export default defineComponent({
           display: flex;
           align-items: center;
           justify-content: space-between;
-          background: #F8F3F9;
+          background: #220a35;
           border-radius: 7px 7px 7px 7px;
 
           &:first-child {
@@ -1577,7 +1575,7 @@ export default defineComponent({
 
         .ipt-server-i-active {
           color: #0287db;
-          background: #F8F3F9;
+          background: #220a35;
           border: 1px solid #9F54BA;
 
           span {
@@ -1593,7 +1591,7 @@ export default defineComponent({
 
         span {
           &:first-child {
-            color: #000000;
+            color: white;
           }
 
           &:last-child {
@@ -1782,22 +1780,20 @@ export default defineComponent({
   justify-content: center;
 
   div {
-    &:first-child {
-      color: #000;
-    }
+    &:first-child {}
   }
 }
 
 .open-c {
   :deep(.van-cell) {
-    background-color: #f1f3f4;
+    background: #220a35;
   }
 }
 
 .miners-success {
   width: 341px;
   height: 327px;
-  background: #fff;
+  background: #150520;
   margin: auto;
   border-radius: 8px;
 
@@ -1822,7 +1818,7 @@ export default defineComponent({
     line-height: 62px;
     text-align: center;
     font-weight: bold;
-    background: #FBF8FB;
+    background: #24152f;
     font-size: 14px;
     color: #0f0f0f;
   }
@@ -1953,20 +1949,20 @@ export default defineComponent({
   color: #0287db;
 }
 </style>
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 .bourse {
   height: 100%;
 
   &.modif {
     .nodeIpt {
       :deep(.van-field__body) {
-        background: #f1f3f4;
+        background: #220a35;
         border: 1px solid #bbc0c5;
       }
     }
 
     .account-outBox {
-      background: #f1f3f4;
+      background: #220a35;
       border: 1px solid #bbc0c5;
 
       .rightIcon {
@@ -1987,7 +1983,7 @@ export default defineComponent({
     align-items: center;
     height: 48px;
     padding: 0 16px;
-    background: #fff;
+    background: #150520;
     box-sizing: border-box;
     box-shadow: 0 1px 2px rgb(135 134 134 / 10%);
   }
@@ -2034,7 +2030,7 @@ export default defineComponent({
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      background: #F8F3F9;
+      background: #220a35;
       border-radius: 7.5px;
       box-sizing: border-box;
     }
@@ -2066,7 +2062,7 @@ export default defineComponent({
     }
 
     .active-d {
-      border: 1px solid #000;
+      border: 1px solid #ccc;
     }
   }
 
@@ -2092,7 +2088,7 @@ export default defineComponent({
     width: 100%;
     margin-bottom: 20px;
     height: 40px;
-    background: #fbf2f3;
+    background: transparent;
     border-radius: 7.5px;
     display: flex;
     align-items: center;
@@ -2108,7 +2104,7 @@ export default defineComponent({
     width: 100%;
     margin-bottom: 20px;
     height: 40px;
-    background: #F8F3F9;
+    background: #220a35;
     border-radius: 7.5px;
     display: flex;
     align-items: center;
@@ -2203,7 +2199,7 @@ export default defineComponent({
     .error-field {
       :deep(.van-field__body) {
         border: 1px solid #d73a49 !important;
-        background: #fbf2f3;
+        background: transparent;
       }
     }
 

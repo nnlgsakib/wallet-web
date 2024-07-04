@@ -3,24 +3,18 @@
     <div class="title text-center text-bold van-hairline--bottom">{{ t("internet.selectNet") }}</div>
 
     <div class="activited-net">
-      <div class="main-tit">{{t("common.mainNetwork")}}</div>
+      <div class="main-tit">{{ t("common.mainNetwork") }}</div>
       <NetWorkCard :data="mainNetwork" @handleClick="handleChooseComfirm(mainNetwork)" />
     </div>
     <div class="other-list" v-if="netWorkList.length">
       <div class="other-list-tit">{{ t("internet.othertitle") }}</div>
       <div class="other-list-box">
-        <NetWorkCard
-          v-for="item in netWorkList"
-          :select="item.select"
-          :key="item.value"
-          :data="item"
-          @handleClick="handleChooseComfirm(item)"
-        />
+        <NetWorkCard v-for="item in netWorkList" :select="item.select" :key="item.value" :data="item" @handleClick="handleChooseComfirm(item)" />
       </div>
     </div>
 
     <div class="flex center  btn-box">
-      <van-button plain block @click="handleNet">{{t('internet.addnetwork')}}</van-button>
+      <van-button plain block @click="handleNet">{{ t('internet.addnetwork') }}</van-button>
     </div>
   </van-dialog>
 </template>
@@ -70,7 +64,7 @@ export default defineComponent({
     }
 
     const handleNet = () => {
-      router.push({name:"addNetwork"})
+      router.push({ name: "addNetwork" })
     }
     return {
       t,
@@ -90,17 +84,18 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .title {
-  color: #000;
   font-size: 15px;
   line-height: 62px;
-  background: #FBF8FB;
+  background: #24152f;
 }
+
 .main-tit {
   font-size: 12px;
   padding: 0 18px;
   line-height: 40px;
   color: #8F8F8F;
 }
+
 .other-list-tit {
   color: #8F8F8F;
 }

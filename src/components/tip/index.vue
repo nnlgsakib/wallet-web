@@ -3,7 +3,7 @@
     <div class="flex center icon">
       <van-icon name="warning" />
     </div>
-    <div class="lh-16 msg">{{message}}</div>
+    <div class="lh-16 msg">{{ message }}</div>
   </div>
 </template>
 <script lang="ts">
@@ -11,7 +11,7 @@
 import { defineComponent } from "vue";
 import { Icon } from "vant";
 const tipType = {
-  primary:'primary',
+  primary: 'primary',
   warning: 'warning'
 };
 export default defineComponent({
@@ -28,39 +28,46 @@ export default defineComponent({
       default: tipType.primary
     }
   },
-  setup() {},
+  setup() { },
 });
 </script>
 <style lang="scss" scoped>
 .wormholes-tip {
-    margin: 15px;
-    border-radius: 5px;
-    &.primary {
-      background: #F8F3F9;
-      .icon i {
-        color: #9F54BA;
-      }
+  margin: 15px;
+  border-radius: 5px;
+
+  &.primary {
+    background: #220a35;
+
+    .icon i {
+      color: #9F54BA;
     }
-    &.warn {
-      background: #FEFCDA;
-      .icon i {
-        color: #F7BF03;
-      }
+  }
+
+  &.warn {
+    background: #FEFCDA;
+
+    .icon i {
+      color: #F7BF03;
     }
-    &.error {
-      background: #FBF2F3;
-      .icon i {
-        color: #D73A49;
-      }
+  }
+
+  &.error {
+    background: transparent;
+
+    .icon i {
+      color: #D73A49;
     }
-    .icon i{
+  }
+
+  .icon i {
     font-size: 18px;
-    
-}
+
+  }
 }
 
 .msg {
-    padding-left: 9px;
-    color: #000000;
+  padding-left: 9px;
+  color: white;
 }
 </style>

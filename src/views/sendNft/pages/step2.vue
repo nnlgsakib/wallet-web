@@ -50,8 +50,8 @@
                 <div class="username mb-4">{{ account.data.name }}</div>
                 <div class="userbalance addrbox">
                   {{
-                    account.data.address
-                  }}
+        account.data.address
+      }}
                 </div>
               </div>
             </div>
@@ -86,8 +86,8 @@
     <van-sticky position="bottom" offset-bottom="30px">
       <div class="flex center pl-20 pr-20 container">
         <van-button type="primary" @click="handleShowSendConfirm" block>{{
-          t("sendNFT.send")
-        }}</van-button>
+        t("sendNFT.send")
+      }}</van-button>
       </div>
     </van-sticky>
     <!-- Account switching -->
@@ -566,7 +566,7 @@ export default {
 }
 
 .userinfo-box {
-  background: #fff;
+  background: #24152f;
 }
 
 .clearAddress {
@@ -578,7 +578,7 @@ export default {
   width: 100% !important;
 
   .value {
-    color: #000;
+
     font-size: 12px;
   }
 }
@@ -623,9 +623,7 @@ export default {
     color: #a4a4a4;
     line-height: 18px;
 
-    &.equal {
-      color: #000;
-    }
+    &.equal {}
   }
 }
 
@@ -642,7 +640,7 @@ export default {
   .line {
     height: 0;
     width: 46%;
-    border-bottom:1PX solid #eee;
+    border-bottom: 1PX solid #eee;
   }
 }
 
@@ -650,7 +648,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background: #fff;
+  background: #24152f;
   border-radius: 5px;
   border: 1PX solid rgba($color: #B3B3B3, $alpha: 0.5);
 
@@ -685,7 +683,7 @@ export default {
 
     &:hover {
       transition: ease 0.3s;
-      background: #F8F3F9;
+      background: #220a35;
     }
 
     .closeIcon {

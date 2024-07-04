@@ -12,14 +12,7 @@
 
       <div class="bourse-container-name" v-if="false">
         <span>{{ t("bourse.name") }} ({{ name.length }}/20)</span>
-        <el-tooltip
-          popper-class="tooltip4"
-          class="box-item"
-          effect="dark"
-          :content="t('bourse.tip20')"
-          placement="right"
-          trigger="hover"
-        >
+        <el-tooltip popper-class="tooltip4" class="box-item" effect="dark" :content="t('bourse.tip20')" placement="right" trigger="hover">
           <van-icon name="question" class="ml-4" color="#9A9A9A" />
         </el-tooltip>
       </div>
@@ -27,20 +20,10 @@
       <div class="create-new-password" v-show="false">
         <van-form @submit="onSubmit" ref="formDom">
           <div>
-            <van-field
-              :disabled="isExchangerFlag"
-              maxlength="20"
-              readonly
-              validate-trigger="onSubmit"
-              v-model="name"
-              :class="`text ${nameError ? 'error' : ''}`"
-              type="text"
-              :placeholder="t('bourse.placename')"
-              :rules="[
-                // { required: true, message: t('bourse.vainame') },
-                { validator: asynPwd2, message: t('bourse.vainame2') },
-              ]"
-            />
+            <van-field :disabled="isExchangerFlag" maxlength="20" readonly validate-trigger="onSubmit" v-model="name" :class="`text ${nameError ? 'error' : ''}`" type="text" :placeholder="t('bourse.placename')" :rules="[
+      // { required: true, message: t('bourse.vainame') },
+      { validator: asynPwd2, message: t('bourse.vainame2') },
+    ]" />
           </div>
         </van-form>
       </div>
@@ -50,14 +33,7 @@
 
       <div class="bourse-container-name bt mt-14 pt-10" v-if="false">
         <span class="mt-8">{{ t("createExchange.formCharge") }}</span>
-        <el-tooltip
-          popper-class="tooltip4"
-          class="box-item"
-          effect="dark"
-          :content="feilvstr"
-          placement="right"
-          trigger="hover"
-        >
+        <el-tooltip popper-class="tooltip4" class="box-item" effect="dark" :content="feilvstr" placement="right" trigger="hover">
           <van-icon class="ml-6" name="question" color="#9A9A9A" />
         </el-tooltip>
       </div>
@@ -67,32 +43,18 @@
 
       <div v-if="isExchangerFlag" class="bourse-container-name  pt-10 ">
         <span class="mt-8">{{ t("bourse.stakingFee") }}</span>
-        <el-tooltip
-          popper-class="tooltip4"
-          class="box-item"
-          effect="dark"
-          :content="t('bourse.tip3')"
-          placement="right"
-          trigger="hover"
-        >
+        <el-tooltip popper-class="tooltip4" class="box-item" effect="dark" :content="t('bourse.tip3')" placement="right" trigger="hover">
           <van-icon class="ml-6" name="question" color="#9A9A9A" />
         </el-tooltip>
       </div>
       <div v-if="isExchangerFlag" class="f-14 text-bold mt-8">
         {{ exchangerBalance }} ERB
-        
+
       </div>
-    
+
       <div class="bourse-container-meaning bt mt-14" v-if="false">
         <span>{{ t("bourse.marketCom") }}</span>
-        <el-tooltip
-          popper-class="tooltip1"
-          class="box-item"
-          effect="dark"
-          :content="feilvstr"
-          placement="right"
-          trigger="hover"
-        >
+        <el-tooltip popper-class="tooltip1" class="box-item" effect="dark" :content="feilvstr" placement="right" trigger="hover">
           <van-icon class="ml-4" name="question" color="#9A9A9A" />
         </el-tooltip>
       </div>
@@ -103,42 +65,21 @@
         </div>
       </div>
       <div class="bourse-container-slider" v-if="false">
-        <el-slider
-          v-model="money"
-          :disabled="true"
-          :min="10"
-          :max="100"
-          :marks="marks"
-          :format-tooltip="(v) => v / 10"
-        />
-        <van-field
-          :disabled="isExchangerFlag"
-          readonly
-          v-model="money2"
-          class="slider-ipt"
-          type="number"
-          @change="handleMoney"
-        />
+        <el-slider v-model="money" :disabled="true" :min="10" :max="100" :marks="marks" :format-tooltip="(v) => v / 10" />
+        <van-field :disabled="isExchangerFlag" readonly v-model="money2" class="slider-ipt" type="number" @change="handleMoney" />
       </div>
-   
+
       <div class="bourse-container-meaning" v-if="!isExchangerFlag">
         <span>{{ t("bourse.stakingFee") }}</span>
-        <el-tooltip
-          popper-class="tooltip2"
-          class="box-item"
-          effect="dark"
-          :content="t('bourse.tip3')"
-          placement="right"
-          trigger="hover"
-        >
+        <el-tooltip popper-class="tooltip2" class="box-item" effect="dark" :content="t('bourse.tip3')" placement="right" trigger="hover">
           <van-icon name="question" class="ml-4" color="#9A9A9A" />
         </el-tooltip>
       </div>
       <div class="t3" v-if="!isExchangerFlag">
-        700ERB 
+        350ERB
       </div>
 
-     <!--
+      <!--
        // <div class="bourse-container-meaning bt mt-14" v-if="isExchangerFlag">
       //   <span>{{ t("createExchange.addPl") }} </span>
       //   <el-tooltip
@@ -268,62 +209,26 @@
 
       <div :class="!isExchangerFlag ? 'bourse-container-btns' : 'btn-groups'">
         <div class="pwd-tip mb-8">
-        <i18n-t keypath="createAccountpage.pwdTip2" tag="div" class="text-center mt-20 lh-16">
-          <template v-slot:br><br></template>
-          <template v-slot:link1><span class="hover" @click="routerTo">{{t('createAccountpage.link3')}}</span></template>
-        </i18n-t>
-      </div>
+          <i18n-t keypath="createAccountpage.pwdTip2" tag="div" class="text-center mt-20 lh-16">
+            <template v-slot:br><br></template>
+            <template v-slot:link1><span class="hover" @click="routerTo">{{ t('createAccountpage.link3') }}</span></template>
+          </i18n-t>
+        </div>
         <div class="container flex between pl-12 pr-12 btn-box">
-          <van-button
-            v-if="!isExchangerFlag"
-            @click="onSubmit"
-            block
-            type="primary"
-            >{{ t("common.confirm") }}</van-button
-          >
+          <van-button v-if="!isExchangerFlag" @click="onSubmit" block type="primary">{{ t("common.confirm") }}</van-button>
           <template v-else>
             <template v-if="isExchangerFlag">
-              <van-popover
-                v-model:show="showClose"
-                v-if="!isTimeQualified"
-                theme="dark"
-                :close-on-click-outside="false"
-                placement="top-end"
-                trigger="manual"
-                class="popover-btn-tip"
-              >
+              <van-popover v-model:show="showClose" v-if="!isTimeQualified" theme="dark" :close-on-click-outside="false" placement="top-end" trigger="manual" class="popover-btn-tip">
                 <div class="f-12 pl-10 pr-10 pt-10 pb-10">
                   {{ t("bourse.closeTip") }}
                 </div>
                 <template #reference>
-                  <van-button
-                    class="b1 mr-10 closeBtn"
-                    @click="handleMinus"
-                    block
-                    :disabled="minusDisabled"
-                    plain
-                    >{{ t("createExchange.pledgeRed") }}</van-button
-                  >
+                  <van-button class="b1 mr-10 closeBtn" @click="handleMinus" block :disabled="minusDisabled" plain>{{ t("createExchange.pledgeRed") }}</van-button>
                 </template>
               </van-popover>
-              <van-button
-                v-else
-                class="b1 mr-10 closeBtn"
-                @click="handleMinus"
-                block
-                :disabled="minusDisabled"
-                plain
-                >{{ t("createExchange.pledgeRed") }}</van-button
-              >
+              <van-button v-else class="b1 mr-10 closeBtn" @click="handleMinus" block :disabled="minusDisabled" plain>{{ t("createExchange.pledgeRed") }}</van-button>
 
-              <van-button
-                v-if="!isExchangerFlag"
-                class="b1"
-                @click="onSubmit"
-                block
-                type="primary"
-                >{{ t("bourse.saveExchange") }}</van-button
-              >
+              <van-button v-if="!isExchangerFlag" class="b1" @click="onSubmit" block type="primary">{{ t("bourse.saveExchange") }}</van-button>
               <!--
               <van-button
                 v-else
@@ -339,63 +244,20 @@
       </div>
     </div>
     <div class="flex center loading-page" v-else>
-    <van-loading color="#9F54BA" />
+      <van-loading color="#9F54BA" />
     </div>
-    <CustomExchangeModal
-      v-model="showAcount"
-      :maxBalance="10"
-      :minBalance="1"
-      :defaultAmount="moneyStr"
-      @handleConfirm="handleConfirm"
-    />
+    <CustomExchangeModal v-model="showAcount" :maxBalance="10" :minBalance="1" :defaultAmount="moneyStr" @handleConfirm="handleConfirm" />
 
-    <dialog-warning
-      v-model:isWarning="isDialogWarning"
-      :text="t('send.sendMessage')"
-    >
+    <dialog-warning v-model:isWarning="isDialogWarning" :text="t('send.sendMessage')">
     </dialog-warning>
-    <affirm-dialog
-      @open="open"
-      :name="name"
-      :money="moneyStr"
-      v-model:show="isAffirmDialog"
-      :serverIndex="serverIndex"
-      v-if="isAffirmDialog"
-    ></affirm-dialog>
-    <SwitchNetwork
-      v-model:show="showModalNetwork"
-      @close="showModalNetwork = false"
-    />
-    <close-dialog
-      @warningSuccess="handleClose"
-      v-model:isWarning="isCloseDialog"
-      v-if="isCloseDialog"
-    ></close-dialog>
-    <affirm-close
-      :name="name"
-      :money="moneyStr"
-      v-model:show="isCloseAffirm"
-      @affirmClose="affirmClose"
-    ></affirm-close>
+    <affirm-dialog @open="open" :name="name" :money="moneyStr" v-model:show="isAffirmDialog" :serverIndex="serverIndex" v-if="isAffirmDialog"></affirm-dialog>
+    <SwitchNetwork v-model:show="showModalNetwork" @close="showModalNetwork = false" />
+    <close-dialog @warningSuccess="handleClose" v-model:isWarning="isCloseDialog" v-if="isCloseDialog"></close-dialog>
+    // <affirm-close :name="name" :money="moneyStr" v-model:show="isCloseAffirm" @affirmClose="affirmClose"></affirm-close>
     <close-home v-model:isWarning="isCloseHome" v-if="isCloseHome"></close-home>
-    <AddModal
-      v-model="showAddModal"
-      :amount="addAmount"
-      :fee="exchangerBalance"
-      :name="name"
-    />
-    <MinusModal
-      v-model="showMinusModal"
-      :amount="minusAmount"
-      :fee="exchangerBalance"
-      :name="name"
-    />
-    <ModifPledgeModal
-      v-model="showPledgeModal"
-      :max="parseInt(exchangerBalance)"
-      :defaultValue="700"
-      @confirm="handleConfirmMinus"
-    />
+    <AddModal v-model="showAddModal" :amount="addAmount" :fee="exchangerBalance" :name="name" />
+    <MinusModal v-model="showMinusModal" :amount="minusAmount" :fee="exchangerBalance" :name="name" />
+    <ModifPledgeModal v-model="showPledgeModal" :max="parseInt(exchangerBalance)" :defaultValue="350" @confirm="handleConfirmMinus" />
   </div>
 </template>
 <script lang="ts">
@@ -457,7 +319,6 @@ import { ElTooltip, ElSlider } from "element-plus";
 import dialogWarning from "@/components/dialogWarning/index.vue";
 import affirmDialog from "./affirm-dialog.vue";
 import closeDialog from "./close-dialog.vue";
-import closeAffirmDialog from "./close-affirm-dialog.vue";
 import closeHome from "./close-home.vue";
 import eventBus from "@/utils/bus";
 import CustomExchangeModal from "./customExchangeModal.vue";
@@ -501,7 +362,7 @@ export default defineComponent({
     SwitchNetwork,
     "dialog-warning": dialogWarning,
     "close-dialog": closeDialog,
-    "affirm-close": closeAffirmDialog,
+    // "affirm-close": closeAffirmDialog,
     "close-home": closeHome,
     NavHeader,
     CustomExchangeModal,
@@ -548,7 +409,7 @@ export default defineComponent({
         if (exchangeStatus.value.ExchangerFlag) {
           const { ExchangerBalance, ExchangerName, ExchangerURL, FeeRate } =
             accountInfo;
-            
+
           let formatValue;
           money.value = new BigNumber(FeeRate).div(10).toNumber();
           if (ExchangerBalance.toString().indexOf("e") !== -1) {
@@ -558,7 +419,7 @@ export default defineComponent({
           } else {
             formatValue = utils.formatEther(ExchangerBalance + "");
           }
-          name.value =ExchangerName;
+          name.value = ExchangerName;
           isOne.value = false;
         }
       } catch (err) {
@@ -572,7 +433,7 @@ export default defineComponent({
     });
 
     const isTimeQualified = computed(
-      () => blockNumber.value - accountInfoBlockNumber.value >= (currentNetwork.value.chainId == 51888 ?  72 : 6307200)
+      () => blockNumber.value - accountInfoBlockNumber.value >= (currentNetwork.value.chainId == 51888 ? 72 : 6307200)
     );
 
     const minusDisabled = computed(() => !isTimeQualified.value);
@@ -603,7 +464,7 @@ export default defineComponent({
     const name = ref("Exchanger");
     const store = useStore();
     const { dispatch } = store;
-    const amount = ref(700);
+    const amount = ref(350);
     const accountInfo = computed(() => store.state.account.accountInfo);
     const exchangeStatus: ComputedRef<ExchangeStatus> = computed(
       () => store.state.account.exchangeStatus
@@ -647,7 +508,7 @@ export default defineComponent({
     // Server selection
     let serverIndex = ref(0);
     const changeServerIndex = (value: number) => {
-      if(value && insufficientMoney.value) {
+      if (value && insufficientMoney.value) {
         return
       }
       if (exchangeStatus.value.ExchangerFlag) {
@@ -696,13 +557,13 @@ export default defineComponent({
             wattingMessage: t("createExchange.create_success"),
             failMessage: t("createExchange.create_wrong"),
             // wattingTitle: serverIndex.value == 1 ?t('createExchange.wattingTitle') : t('bootstrapwindow.watting'),
-            wattingTitle:t('createExchange.wattingTitle'),
+            wattingTitle: t('createExchange.wattingTitle'),
             callBack: callBack,
             failBack: callBack,
           });
           await sendTo(
             name.value,
-            700,
+            350,
             serverIndex.value == 0 ? false : true,
             fee_rate
           );
@@ -731,7 +592,7 @@ export default defineComponent({
     })
     onMounted(() => {
       initPageData();
-      if(insufficientMoney.value) {
+      if (insufficientMoney.value) {
         serverIndex.value = 0
       }
     });
@@ -767,13 +628,13 @@ export default defineComponent({
         }
       }
 
-      if(serverIndex.value === 0) {
+      if (serverIndex.value === 0) {
         if (am.lt(701)) {
           $wtoast.warn(t("createExchange.ispoor"));
           return;
         }
       }
-      if(serverIndex.value === 1) {
+      if (serverIndex.value === 1) {
         if (am.lt(901)) {
           $wtoast.warn(t("createExchange.ispoor"));
           return;
@@ -789,13 +650,13 @@ export default defineComponent({
         console.log(error);
       }
     };
-    
+
     // Additional pledge confirmation pop-up window
     const showAddModal = ref(false);
     const handleAddAmount = () => {
       const am = new BigNumber(accountInfo.value.amount);
       const addnum = new BigNumber(addAmount.value);
-      if (addnum.lt(700)) {
+      if (addnum.lt(350)) {
         isCloseDialog.value = true;
         return;
       }
@@ -875,7 +736,7 @@ export default defineComponent({
     const closeBtnDisabled = ref(true);
 
     const changeAdd = () => {
-     
+
     };
 
     const bigAmount = new BigNumber(accountInfo.value.amount);
@@ -910,11 +771,11 @@ export default defineComponent({
     };
     const showClose = ref(true);
     const feilvstr = computed(() => {
-      return t('createExchange.commission',{value: moneyStr.value})
+      return t('createExchange.commission', { value: moneyStr.value })
     })
 
     const routerTo = () => {
-      window.open('https://limino.com/upload/tsm.html')
+      window.open('https://wallet.erbie.io/upload/tsm.html')
     }
     return {
       feilvstr,

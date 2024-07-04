@@ -128,7 +128,7 @@ export default defineComponent({
     const calcFee = async () => {
       const newTx = { ...props.tx, category: props.tx.category.value }
 
-      const str = `${store.getters['account/chainParsePrefix']}:{"version": "0.0.1","type":0,"royalty":${props.tx.royalty},"exchanger":"","meta_url":"${encode(JSON.stringify(newTx))}"}`;
+      const str = `erbie:{"version": "0.0.1","type":0,"royalty":${props.tx.royalty},"exchanger":"","meta_url":"${encode(JSON.stringify(newTx))}"}`;
       const data3 = web3.utils.fromUtf8(str);
       const myAddr = accountInfo.value.address
       const tx = {
@@ -203,10 +203,8 @@ export default defineComponent({
   line-height: 62px;
   font-weight: bold;
   font-size: 14px;
-  background: #F8F3F9;
+  background: #220a35;
 }
-
-.createNftModal {}
 
 .btn-box {
   padding: 0 52px 20px;

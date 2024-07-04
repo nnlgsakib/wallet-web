@@ -1,84 +1,90 @@
-import { defaultAbiCoder } from 'ethers/lib/utils'
+import { defaultAbiCoder } from "ethers/lib/utils";
 import { VUE_APP_SCAN_URL } from "@/enum/env";
-import useClipboard from 'vue-clipboard3'
-import { v4 as uuidv4 } from 'uuid';
-import store from '@/store';
-const { toClipboard } = useClipboard()
-
+import useClipboard from "vue-clipboard3";
+import { v4 as uuidv4 } from "uuid";
+import store from "@/store";
+const { toClipboard } = useClipboard();
 
 export const createRondamInt = (len = 64) => {
-  let str = ''
-  for(let i = 0;i< len;i++){
-    str += Math.round(Math.random()*10);
+  let str = "";
+  for (let i = 0; i < len; i++) {
+    str += Math.round(Math.random() * 10);
   }
-  return str
-}
+  return str;
+};
 
 export const createUUID = () => {
-  return uuidv4()
-}
+  return uuidv4();
+};
 
 // Copy to clipboard
 export const copy = async (v: string) => {
   try {
-      await toClipboard(v)
-      return Promise.resolve(v)
+    await toClipboard(v);
+    return Promise.resolve(v);
   } catch (err) {
-    return Promise.reject(err)
+    return Promise.reject(err);
   }
-}
+};
 
 //Gets the query parameter for the URL
 export const getQuery = () => {
-  const hash = location.hash
-  const strarr = hash.split('?')
-  const str = strarr.length ? strarr[1] : null
+  const hash = location.hash;
+  const strarr = hash.split("?");
+  const str = strarr.length ? strarr[1] : null;
   if (!str) {
-    return {}
+    return {};
   }
-  let arr = str.split("&"); 
+  let arr = str.split("&");
   let obj: any = {};
   for (let i of arr) {
     obj[i.split("=")[0]] = i.split("=")[1];
   }
-  return obj
-}
-
-
+  return obj;
+};
 
 export function toHex(str: string) {
-  if (str === '') return ''
-  var hexCharCode = []
+  if (str === "") return "";
+  var hexCharCode = [];
   for (var i = 0; i < str.length; i++) {
-      hexCharCode.push(str.charCodeAt(i).toString(16))
+    hexCharCode.push(str.charCodeAt(i).toString(16));
   }
-  return hexCharCode.join('')
+  return hexCharCode.join("");
 }
-
-
 
 //Generate a globally unique identifier
 export function guid() {
   function S4() {
-     return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
   }
-  return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+  return (
+    S4() +
+    S4() +
+    "-" +
+    S4() +
+    "-" +
+    S4() +
+    "-" +
+    S4() +
+    "-" +
+    S4() +
+    S4() +
+    S4()
+  );
 }
-
 
 //Download the base64 image
-export const downloadBase64Img = (fileName: string = 'qrcode') => {
-  let aLink = document.createElement('a')
-  const canvasData = document.getElementsByTagName('canvas')
-  let evt = document.createEvent("HTMLEvents")
-   // InitEvent without the last two parameters will report an error under FF event type, whether it bubbles, and whether it blocks the default behavior of the browser
-  evt.initEvent("click", true, true)
-  aLink.download = fileName + new Date().getTime()
+export const downloadBase64Img = (fileName: string = "qrcode") => {
+  let aLink = document.createElement("a");
+  const canvasData = document.getElementsByTagName("canvas");
+  let evt = document.createEvent("HTMLEvents");
+  // InitEvent without the last two parameters will report an error under FF event type, whether it bubbles, and whether it blocks the default behavior of the browser
+  evt.initEvent("click", true, true);
+  aLink.download = fileName + new Date().getTime();
   aLink.href = canvasData[0].toDataURL("image/png");
   aLink.dispatchEvent(evt);
-  aLink.click()
-}
-
+  aLink.click();
+};
 
 // An array of random sequence
 export const randArr = (arr: Array<any>) => {
@@ -90,48 +96,48 @@ export const randArr = (arr: Array<any>) => {
     arr.splice(index, 1);
   }
   return res;
-}
+};
 
+type ScanPaths =
+  | "/accountDetail"
+  | "/txDetail"
+  | "/accountDetail"
+  | "/blockDetail";
 
-
-type ScanPaths = '/AccountDetail' | '/TradeDetail' | '/NFTDetails' | '/SNFTDetails' | '/BlockDetails'
-
-export const toScan = (addr: string, path: ScanPaths = '/AccountDetail') => {
-  const fullPath = `${VUE_APP_SCAN_URL}${path}?addr=${addr}`
-  if(addr) {
-    if(store.state.account.currentNetwork.id === 'wormholes-network-1') {
+export const toScan = (addr: string, path: ScanPaths = "/accountDetail") => {
+  const fullPath = `${VUE_APP_SCAN_URL}${path}/${addr}`;
+  if (addr) {
+    if (store.state.account.currentNetwork.id === "wormholes-network-1") {
       window.open(fullPath);
     } else {
-      const defaultUrl = store.state.account.currentNetwork.browser
-      if(defaultUrl) {
+      const defaultUrl = VUE_APP_SCAN_URL;
+      if (defaultUrl) {
         window.open(`${defaultUrl}`);
       } else {
         window.open(fullPath);
       }
     }
   } else {
-    throw Error('The address cannot be empty')
+    throw Error("The address cannot be empty");
   }
-}
-
+};
 
 export function throttle(fn: Function, delay = 200) {
-  let timer: any = null
+  let timer: any = null;
   return function () {
-      if(timer) return
-      timer = setTimeout(() => {
-        // @ts-ignore
-        fn.apply(this, arguments)
-        timer = null
-      })
-  }
+    if (timer) return;
+    timer = setTimeout(() => {
+      // @ts-ignore
+      fn.apply(this, arguments);
+      timer = null;
+    });
+  };
 }
-
 
 export function debounce(fn: Function, wait = 500) {
   let timeout: any = null;
-  return function() {
-      if(timeout !== null) clearTimeout(timeout);
-      timeout = setTimeout(fn, wait);
-  }
+  return function () {
+    if (timeout !== null) clearTimeout(timeout);
+    timeout = setTimeout(fn, wait);
+  };
 }

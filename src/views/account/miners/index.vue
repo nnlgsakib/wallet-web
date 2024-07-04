@@ -3,8 +3,8 @@
     <NavHeader :title="t('minerspledge.beValidator')" :hasRight="false">
       <template v-slot:left>
         <span class="back" @click="appProvide.back">{{
-          t("common.back")
-        }}</span>
+      t("common.back")
+    }}</span>
       </template>
     </NavHeader>
     <div class="bourse-container-error pt-12 pb-12">
@@ -190,7 +190,7 @@ export default defineComponent({
 });
 </script>
 
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 .bourse {
   height: 100%;
 
@@ -200,7 +200,7 @@ export default defineComponent({
     align-items: center;
     height: 48px;
     padding: 0 16px;
-    background: #fff;
+    background: #150520;
     box-sizing: border-box;
     box-shadow: 0 1px 2px rgb(135 134 134 / 10%);
   }
@@ -287,7 +287,7 @@ export default defineComponent({
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      background: #F8F3F9;
+      background: #220a35;
       border-radius: 7.5px;
       box-sizing: border-box;
     }
@@ -319,7 +319,7 @@ export default defineComponent({
     }
 
     .active-d {
-      border: 1px solid #000;
+      border: 1px solid #ccc;
     }
   }
 
@@ -338,7 +338,7 @@ export default defineComponent({
 
   .bourse-container-error {
     margin: 0 15px 25px 15px;
-    background: #F8F3F9;
+    background: #220a35;
     border-radius: 7.5px;
     display: flex;
     align-items: center;
@@ -468,7 +468,7 @@ export default defineComponent({
 .bourse-container-error,
 .bourse-container-warning {
   height: 72px;
-  background: #fbf2f3;
+  background: transparent;
   border-radius: 7.5px;
   margin-top: 15px !important;
   display: flex;
@@ -670,4 +670,5 @@ export default defineComponent({
 
 :deep(.van-cell__right-icon) {
   margin-top: 11px;
-}</style>
+}
+</style>

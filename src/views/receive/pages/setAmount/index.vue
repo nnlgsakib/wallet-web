@@ -1,30 +1,21 @@
 <template>
-    <van-sticky>
+  <van-sticky>
     <NavHeader :title="t('receive.receive')">
       <template v-slot:left>
-       <span class="back hover f-12" @click="back">{{t('createAccountpage.back')}}</span>
+        <span class="back hover f-12" @click="back">{{ t('createAccountpage.back') }}</span>
       </template>
     </NavHeader>
   </van-sticky>
   <div class="page-set-amount">
-    <div class="tit">{{t('receive.enterNum')}}</div>
+    <div class="tit">{{ t('receive.enterNum') }}</div>
     <div class="amount-box flex between">
       <div class="flex center-v">
-        <input
-        v-model="amount"
-          type="number"
-          placeholder="Enter the amount"
-          class="ipt"
-          maxlength="24"
-        />
+        <input v-model="amount" type="number" placeholder="Enter the amount" class="ipt" maxlength="24" />
       </div>
       <div class="flex center-v right">
-        <div
-          class="token-info hover flex center-v between pr-6 pl-6 hover"
-          @click="handleTokenModal"
-        >
+        <div class="token-info hover flex center-v between pr-6 pl-6 hover" @click="handleTokenModal">
           <div class="xuanwo flex center">
-            <img src="@/assets/token/logowallet.png" alt="icon-blue" />
+            <img src="@/assets/currency.svg" alt="icon-blue" />
           </div>
           <div class="van-ellipsis ml-6 mr-6 token-name lh-14">
             {{ chooseToken.name }}
@@ -36,8 +27,8 @@
   </div>
   <div class="btn-group">
     <div class="container pl-24 pr-24">
-      <van-button plain class="mb-14" block @click="reset">{{t('receive.reset')}}</van-button>
-      <van-button type="primary" block @click="handlerNext">{{t('receive.next')}}</van-button>
+      <van-button plain class="mb-14" block @click="reset">{{ t('receive.reset') }}</van-button>
+      <van-button type="primary" block @click="handlerNext">{{ t('receive.next') }}</van-button>
     </div>
   </div>
 </template>
@@ -89,51 +80,55 @@ const handleTokenModal = () => {
   });
 };
 const back = () => {
-  router.replace({name:'receive-choose'})
+  router.replace({ name: 'receive-choose' })
 }
 const amount = ref('')
 const code = ref({})
 
-onMounted(async() => {
-    const wallet = await getWallet()
-    const { address } = wallet
-    const { tokenContractAddress,symbol,name } = route.query
-    code.value = JSON.stringify({ data: { address, tokenContractAddress, value: amount.value,symbol,name }, type: 'receive' })
+onMounted(async () => {
+  const wallet = await getWallet()
+  const { address } = wallet
+  const { tokenContractAddress, symbol, name } = route.query
+  code.value = JSON.stringify({ data: { address, tokenContractAddress, value: amount.value, symbol, name }, type: 'receive' })
 })
 
 const reset = () => {
-    amount.value = ''
+  amount.value = ''
 }
 const handlerNext = () => {
-    if(parseFloat(amount.value) <= 0 || !amount.value){
-        Toast(t('receive.numTip'))
-        return
-    }
-    const {type,data}: any = {...JSON.parse(code.value.toString())}
-    router.push({
-        name:"receive-send-link",
-        query: {code:JSON.stringify({type,data:{...data,value:amount.value}})}
-    })
+  if (parseFloat(amount.value) <= 0 || !amount.value) {
+    Toast(t('receive.numTip'))
+    return
+  }
+  const { type, data }: any = { ...JSON.parse(code.value.toString()) }
+  router.push({
+    name: "receive-send-link",
+    query: { code: JSON.stringify({ type, data: { ...data, value: amount.value } }) }
+  })
 }
 </script>
 <style lang="scss">
 .title {
   font-size: 16px;
-    color: #000;
+
   font-weight: bold;
 }
+
 .page-set-amount {
   padding: 22px 15px 0;
+
   .tit {
     line-height: 20px;
     font-size: 14px;
   }
+
   .amount-box {
     height: 75px;
     margin-top: 5px;
     border-radius: 5px;
     border: 1px solid #bbc0c5;
     padding: 0 15px;
+
     .ipt {
       border: none;
       outline: none;
@@ -141,18 +136,22 @@ const handlerNext = () => {
       line-height: 20px;
       font-size: 12px;
     }
+
     .token-info {
       height: 35px;
       border-radius: 17.5px;
-      background: #f1f3f4;
-       i {
+      background: #220a35;
+
+      i {
         color: #9F54BA;
         font-size: 16px;
-       }
-       .token-name {
+      }
+
+      .token-name {
         font-size: 12px;
-       }
+      }
     }
+
     .xuanwo {
       img {
         width: 20px;
@@ -161,6 +160,7 @@ const handlerNext = () => {
     }
   }
 }
+
 .btn-group {
   position: fixed;
   bottom: 25px;

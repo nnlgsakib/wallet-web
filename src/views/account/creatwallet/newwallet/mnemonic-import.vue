@@ -1,11 +1,11 @@
 <template>
-    <van-sticky>
+  <van-sticky>
     <NavHeader :hasRight="false">
       <template v-slot:left>
-       <span class="back hover f-12" @click="back">{{t('createAccountpage.back')}}</span>
+        <span class="back hover f-12" @click="back">{{ t('createAccountpage.back') }}</span>
       </template>
       <template v-slot:title>
-        <div class="flex center title">{{t("createAccountpage.mnemonicBtn")}}</div>
+        <div class="flex center title">{{ t("createAccountpage.mnemonicBtn") }}</div>
       </template>
     </NavHeader>
   </van-sticky>
@@ -15,69 +15,48 @@
       <div class="tit-big text-center f-24">{{t('createAccountpage.createAccount')}}</div>
       <div class="tit-small text-center f-12 mt-14 mb-30 lh-16">{{t('createAccountpage.setup')}}</div>
     </div> -->
-    <WormTransition size="small" >
-        <template v-slot:icon>
-          <img class="iconele flex center" src="@/assets/token/logowallet.png" />
-        </template>
-      </WormTransition>
+    <WormTransition size="small">
+      <template v-slot:icon>
+        <img class="iconele flex center" src="@/assets/token/logowallet.png" />
+      </template>
+    </WormTransition>
     <div class="create-new-password">
       <van-form @submit="onSubmit">
         <van-cell-group inset>
           <div class="text-bold f-12 mt-10 mb-10 lh-16 flex between">
-            <span>{{t('createAccountpage.password')}}</span>
+            <span>{{ t('createAccountpage.password') }}</span>
             <span>
               <i @click="toggleMask" :class="`iconfont hover ${choice ? 'icon-yanjing' : 'icon-yanjing1'}`"></i>
             </span>
           </div>
-          <van-field
-            :class="`${pwd1Err ? 'error' : ''}`"
-            v-model="password"
-            name="password"
-            :type="`${choice ? 'text' : 'password'}`"
-            :placeholder="$t('createAccountpage.passwordPlaceholder')"
-            :rules="[
-              // { required: true, message:t('createAccountpage.pwdRequired') },
-              { validator: asynPwd, message: t('createAccountpage.pwdWorng') },
-               ]"
-          />
+          <van-field :class="`${pwd1Err ? 'error' : ''}`" v-model="password" name="password" :type="`${choice ? 'text' : 'password'}`" :placeholder="$t('createAccountpage.passwordPlaceholder')" :rules="[
+      // { required: true, message:t('createAccountpage.pwdRequired') },
+      { validator: asynPwd, message: t('createAccountpage.pwdWorng') },
+    ]" />
           <!-- <div class="tit-small f-12" v-if="password.length<6||password.length>20">{{$t('createAccountpage.pwdMessage')}}</div> -->
           <div class="text-bold f-12 mt-20 mb-10 lh-16 flex between">
-            <span>{{t('createAccountpage.confirmPassword')}}</span>
+            <span>{{ t('createAccountpage.confirmPassword') }}</span>
           </div>
-          <van-field
-            v-model="password2"
-            :type="`${choice ? 'text' : 'password'}`"
-            name="password2"
-            :class="` ${pwd2Err ? 'error' : ''}`"
-
-            :placeholder="t('createAccountpage.confirmPassword')"
-            :rules="[
-                //  { required: true, message:t('createAccountpage.pwdRequired') },
-              { validator: asynPwd2, message: t('createAccountpage.pwdWorng') },
-              { validator: asynPwd3, message: t('createAccountpage.inconsistentPwd') },
-              ]"
-          />
+          <van-field v-model="password2" :type="`${choice ? 'text' : 'password'}`" name="password2" :class="` ${pwd2Err ? 'error' : ''}`" :placeholder="t('createAccountpage.confirmPassword')" :rules="[
+      //  { required: true, message:t('createAccountpage.pwdRequired') },
+      { validator: asynPwd2, message: t('createAccountpage.pwdWorng') },
+      { validator: asynPwd3, message: t('createAccountpage.inconsistentPwd') },
+    ]" />
         </van-cell-group>
         <div style="margin: 16px">
-          <van-button
-            :loading="loading"
-            round
-            block
-            type="primary"
-            native-type="submit"
-          >{{t('createAccountpage.create')}}</van-button>
+          <van-button :loading="loading" round block type="primary" native-type="submit">{{ t('createAccountpage.create') }}</van-button>
         </div>
       </van-form>
       <div class="pwd-tip">
         <i18n-t keypath="createAccountpage.pwdTip" tag="div" class="text-center mt-20 lh-16">
           <template v-slot:br><br></template>
-          <template v-slot:link1><span class="hover" @click="routerTo('termsOfUse')">{{t('createAccountpage.link1')}}</span></template>
-          <template v-slot:link2><span class="hover" @click="routerTo('privacyNotice')">{{t('createAccountpage.link2')}}</span></template>
+          <template v-slot:link1><span class="hover" @click="routerTo('termsOfUse')">{{ t('createAccountpage.link1') }}</span></template>
+          <template v-slot:link2><span class="hover" @click="routerTo('privacyNotice')">{{ t('createAccountpage.link2') }}</span></template>
         </i18n-t>
       </div>
     </div>
   </div>
-  
+
 
 </template>
 <script lang="ts">
@@ -122,18 +101,18 @@ export default {
     const password2: Ref<string> = ref('')
     const loading = ref(false)
     const choice: Ref<boolean> = ref(false)
-      const back = () => {
-        router.back()
-      }
+    const back = () => {
+      router.back()
+    }
     // Listen to the broadcast of the same source window
     const { handleUpdate } = useBroadCast()
 
     const routerTo = (name: any) => {
-      if(name == 'termsOfUse') {
-        window.open('https://limino.com/upload/tst.html')
+      if (name == 'termsOfUse') {
+        window.open('https://wallet.erbie.io/upload/tst.html')
       }
-      if(name =='privacyNotice') {
-        window.open('https://limino.com/upload/pn.html')
+      if (name == 'privacyNotice') {
+        window.open('https://wallet.erbie.io/upload/pn.html')
       }
     }
     const onSubmit = async (value: object) => {
@@ -166,7 +145,7 @@ export default {
                   password: password.value
                 })
                 // localforage.setItem('mnemonic', mnemonicData)
-                commit('mnemonic/UPDATE_MNEMONIC',mnemonicData)
+                commit('mnemonic/UPDATE_MNEMONIC', mnemonicData)
                 await dispatch('account/addAccount', {
                   keyStore,
                   mnemonic: mnemonicParams,
@@ -200,11 +179,11 @@ export default {
         Toast(t('createwallet.notmatch'))
       }
     }
-    const pwd1Err= ref(false)
-    const pwd2Err= ref(false)
+    const pwd1Err = ref(false)
+    const pwd2Err = ref(false)
     const asynPwd = (val: string) => {
       pwd1Err.value = false
-      if(!val){
+      if (!val) {
         pwd1Err.value = true
         return t('createAccountpage.pwdRequired')
       }
@@ -216,7 +195,7 @@ export default {
     }
     const asynPwd2 = (val: string) => {
       pwd2Err.value = false
-      if(!val){
+      if (!val) {
         pwd2Err.value = true
         return t('createAccountpage.pwdRequired')
       }
@@ -229,7 +208,7 @@ export default {
     }
     const asynPwd3 = (val: string) => {
       pwd2Err.value = false
-      if(!val){
+      if (!val) {
         pwd2Err.value = true
         return t('createAccountpage.pwdRequired')
       }
@@ -247,7 +226,7 @@ export default {
     const modal2 = ref(false);
 
     onMounted(() => {
-      if(!mnemonic) {
+      if (!mnemonic) {
         router.back()
       }
     })
@@ -274,50 +253,60 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  :deep(){
-    .van-field.error {
+:deep() {
+  .van-field.error {
     .van-field__body {
       border: 1px solid #D73A49;
-      background: #FBF2F3;
+      background: transparent;
     }
   }
-  }
-  .pwd-tip {
+}
+
+.pwd-tip {
   span {
     color: #9F54BA;
   }
 }
-  .title {
+
+.title {
   font-weight: 600;
   font-size: 16px;
 }
-    .iconele {
-    width: 20px;
-  }
+
+.iconele {
+  width: 20px;
+}
 
 .create-new-password {
   .tit-small {
     color: #848484;
   }
+
   .right {
     color: #9F54BA;
     text-decoration: underline;
   }
+
   .icon-yanjing {
     color: #9F54BA;
   }
+
   :deep(.van-field__label) {
     display: none;
   }
+
   :deep(.van-field__error-message) {
     margin-bottom: 12px;
   }
+
   :deep(.van-cell:after) {
     display: none;
   }
+
   :deep(.van-cell) {
     padding: 0;
   }
+
   :deep(.van-field__body) {
     height: 42px;
     border: 1PX solid #adb8c5;
@@ -326,16 +315,20 @@ export default {
     border-radius: 5px;
     transition: ease 0.3s;
     font-size: 12px;
+
     &:hover {
       border: 1PX solid #9F54BA;
     }
   }
+
   .tool {
     color: #9F54BA;
   }
+
   .pointer {
     cursor: pointer;
   }
+
   .check-box {
     margin-top: 30px;
   }

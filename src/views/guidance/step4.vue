@@ -1,19 +1,18 @@
-
 <template>
   <div v-if="showModal" class="custom-popover">
     <div class="custom-popover-header">
       <div class="container" style="height: 100%;">
-      <div class="footer-btns">
-        <div class="container pl-20 pr-20 evenly flex">
-          <span @click="dispatchClose">{{ t('common.cancel') }}</span>
-          <span @click="handleClick(4)">{{ t('common.next') }} 4/7</span>
+        <div class="footer-btns">
+          <div class="container pl-20 pr-20 evenly flex">
+            <span @click="dispatchClose">{{ t('common.cancel') }}</span>
+            <span @click="handleClick(4)">{{ t('common.next') }} 4/7</span>
+          </div>
         </div>
-      </div>
-      <div class="footer-text">
-        <div>
-          {{ t('common.nftN') }}
+        <div class="footer-text">
+          <div>
+            {{ t('common.nftN') }}
+          </div>
         </div>
-      </div>
       </div>
     </div>
     <div class="custom-popover-container">
@@ -27,7 +26,7 @@
 
   <dialog-warning @warningSuccess="warningSuccess" theme="light" @close="handleClose" :text="t('common.confirmExit')" v-model:isWarning="isWarning"></dialog-warning>
 </template>
-  
+
 <script lang="ts">
 import { defineComponent, ref, Ref, watch, SetupContext, computed, onMounted, onBeforeMount } from "vue";
 import { Popover, Dialog, Button } from "vant";
@@ -144,7 +143,7 @@ export default defineComponent({
 }
 
 .list-container {
-  background: #fff;
+  background: #150520;
   position: relative;
 
   &::after {
@@ -282,7 +281,7 @@ export default defineComponent({
   height: 67px;
   padding: 0px 10px 0 15px;
   border-bottom: 1px solid #E4E7E8;
-  background: #fff;
+  background: #150520;
   display: flex;
   align-items: center;
 
@@ -462,7 +461,8 @@ export default defineComponent({
     right: 20px;
     left: inherit;
   }
-  .custom-popover-header{
+
+  .custom-popover-header {
     height: 310px;
   }
 }
