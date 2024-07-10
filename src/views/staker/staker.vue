@@ -21,18 +21,6 @@
                 </div>
             </div>
 
-            <!-- <div class="label lh-28 flex center-v">
-                <span>{{ t('validator.ownValidator') }}</span>
-                <van-popover v-model:show="stakerModal" theme="dark" placement="bottom-start">
-                    <p class="pl-10 pr-10">{{ t("validator.ownValidatorTip") }}</p>
-                    <template #reference>
-                        <van-icon name="question hover" @mouseover="stakerModal = true" @mouseleave="stakerModal = false" />
-                    </template>
-                </van-popover>
-            </div> -->
-            <!-- <div>
-                <ValidCard v-for="item in myAccounts" :key="item.Addr" :title="item.Addr" :data="item" @handleClick="handleClick(item)" />
-            </div> -->
             <div class="flex between  pt-10 " v-if="coefficient < 70 && isValidator">
                 <div class="lh-14 flex center-v pr-10 neutral ">{{ t('minerspledge.resetBtnTip', { value: resetWeightNum }) }}</div>
                 <div class="flex center">
@@ -45,7 +33,7 @@
             <div class="label lh-28  flex center-v">
                 <span>{{ t('validator.otherValidator') }}</span>
                 <van-popover v-model:show="validModal" theme="dark" placement="bottom-start">
-                    <p class="pl-10 pr-10">{{ t("validator.otherValidatorTip") }}</p>
+                    <p class="pl-10 pr-10">Stake ERB with highly stable validators to earn inflation rewards.</p>
                     <template #reference>
                         <van-icon name="question hover" @mouseover="validModal = true" @mouseleave="validModal = false" />
                     </template>
@@ -62,7 +50,7 @@
             <div class="label lh-28  flex center-v">
                 <span>{{ t('validator.totalStaking') }}</span>
                 <van-popover v-model:show="totalModal" theme="dark" placement="bottom-start">
-                    <p class="pl-10 pr-10">{{ t("common.exchange_pledge") }}</p>
+                    <p class="pl-10 pr-10">The minimum staking amount is 350 ERB.</p>
                     <template #reference>
                         <van-icon name="question hover" @mouseover="totalModal = true" @mouseleave="totalModal = false" />
                     </template>
@@ -77,7 +65,7 @@
             <div class="label lh-28  flex center-v">
                 <span>{{ t('validator.amount') }}</span>
                 <van-popover v-model:show="amountModal" theme="dark" placement="bottom-start">
-                    <p class="pl-10 pr-10">{{ t("validator.amountTip") }}</p>
+                    <p class="pl-10 pr-10">The remaining available balance in your account.</p>
                     <template #reference>
                         <van-icon name="question hover" @mouseover="amountModal = true" @mouseleave="amountModal = false" />
                     </template>
@@ -99,7 +87,7 @@
                 </div>
             </van-form>
         </div>
-        <div class="flex evenly mt-24 mb-24 btnBox" v-if="isStaker">
+        <div class="flex evenly mt-24 pb-24 btnBox" v-if="isStaker">
             <van-button @click="handleMinusClick" :disabled="freezeStatus">
                 <el-tooltip popper-class="tooltip2" class="box-item" effect="dark" :content="t('minerspledge.closeTip2')" placement="top" trigger="hover">
                     <div :class="`hover redeemBtn ${freezeStatus ? ' disabled' : ''}`">
@@ -109,7 +97,7 @@
             </van-button>
             <van-button type="primary" @click="handleAddClick">{{ t('bourse.addTit') }}</van-button>
         </div>
-        <div class="flex evenly mt-24 mb-24" v-else>
+        <div class="flex evenly mt-24 pb-24" v-else>
             <van-button type="primary" block @click="handleAddClick">{{ t('validator.pageTit') }}</van-button>
         </div>
     </div>

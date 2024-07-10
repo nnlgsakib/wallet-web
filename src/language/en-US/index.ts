@@ -309,7 +309,7 @@ export default {
     backstage: "Backstage",
     autoNFTexchange: "AutoNFTexchange",
     wallet: "Wallet ",
-    transationjhistory: "Transaction History ",
+    transationjhistory: "History ",
     setting: "Settings",
     logout: "Logout",
     sendtransaction: "Send transactions",
