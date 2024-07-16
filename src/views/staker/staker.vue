@@ -98,7 +98,7 @@
             <van-button type="primary" @click="handleAddClick">{{ t('bourse.addTit') }}</van-button>
         </div>
         <div class="flex evenly mt-24 pb-24" v-else>
-            <van-button type="primary" block @click="handleAddClick">{{ t('validator.pageTit') }}</van-button>
+            <van-button type="primary" block @click="handleAddClick">Confirm</van-button>
         </div>
     </div>
 
