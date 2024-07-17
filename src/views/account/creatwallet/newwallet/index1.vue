@@ -53,7 +53,7 @@
         </van-cell-group>
         <div class="btn-box">
           <div class="flex center container pl-28 pr-28">
-            <van-button :loading="loading" round block :disabled="btnDisabled" type="primary" native-type="submit">{{ t("createAccountpage.createAccount") }}</van-button>
+            <van-button :loading="loading" round block type="primary" native-type="submit">{{ t("createAccountpage.createAccount") }}</van-button>
           </div>
 
         </div>

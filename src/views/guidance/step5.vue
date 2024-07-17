@@ -22,7 +22,7 @@
     <div class="custom-popover-footer">
       <div class="footer-btns">
         <div class="container pl-20 pr-20 evenly flex"> <span @click="dispatchClose">{{ t("common.cancel") }}</span>
-          <span @click="handleClick(4)">{{ t("common.next") }} 4/6</span>
+          <span @click="handleClick(4)">{{ t("common.next") }} 4/5</span>
         </div>
       </div>
     </div>

@@ -118,7 +118,7 @@
   </div>
 
   <!-- Log in to create a new account -->
-  <div class="btn-groups">
+  <div class="mt-40">
     <div class="flex center container pl-28 pr-28">
 
       <van-button round block plain class="mr-10" @click="handleImport">
@@ -131,7 +131,7 @@
       <van-button round block type="primary" @click="tologin">
         {{
       t("introductorypage.create")
-    }}
+        }}
       </van-button>
     </div>
   </div>
@@ -235,7 +235,7 @@ export default {
     position: fixed;
     left: 0;
     right: 0;
-    bottom: 20vh;
+    bottom: 30vh;
   }
 
   .el-carousel__indicator.is-active button {

@@ -105,12 +105,12 @@ export default {
   introductorypage: {
     bootstrap1: "Welcome to Erbie",
     bootstrap2: "Trusted and Secure",
-    bootstrap3: "Earn Through NFTs",
+    bootstrap3: "Earn Through CSBT",
     bootstrap4: "Secure Savings",
     bootstrap1title:
       "We are dedicated to solving your virtual asset management problems.",
     bootstrap2title: "View, trade, and exchange your assets anytime",
-    bootstrap3title: "Create your own NFT Staker with the click of a button",
+    bootstrap3title: "Own your CSBT and continue to earn",
     bootstrap4title:
       "Erbie uses advanced security encryption technology to ensure the security of your assets",
     login: "Log In",
@@ -602,7 +602,7 @@ export default {
   },
   // mnemonic
   mnemonic: {
-    recoveryPhrase: "Backup memorizing words",
+    recoveryPhrase: "Mnemonic Recovery",
     hint: "Your wallet is not backed up!",
     tips: "Your funds will be at risk if you do not backup before using your wallet. Make sure to backup now.",
     yourRecoveryPhrase: "Your Secret Recovery Phrase",
@@ -834,7 +834,7 @@ export default {
     pwdWorng: "Password must be composed of 6-20 letters and numbers.",
     pwdMessage: "Password must be composed of 6-20 letters and numbers.",
     inconsistentPwd: "The entered passwords are inconsistent",
-    mnemonicBtn: "Backup memorizing words",
+    mnemonicBtn: "Mnemonic Recovery",
     mneTit: "Import by Secret Recovery Phrase",
     iptMne: "Please enter Secret Recovery Phrase.",
     recoMne: "Secret Recovery Phrase",

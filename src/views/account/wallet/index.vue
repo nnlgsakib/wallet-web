@@ -101,7 +101,7 @@
       </van-loading>
     </div>
     <div>
-      <Transition name="sliderLeft">
+      <!-- <Transition name="sliderLeft">
         <div class="help-center-box" v-if="!isSelect || active === 0">
           <div class="flex right pl-20 pr-20">
             <div class="help-btn flex center hover" @click="toHelp" @mouseover="showHelp = true" @mouseout="showHelp = false">
@@ -112,7 +112,7 @@
             </div>
           </div>
         </div>
-      </Transition>
+      </Transition> -->
       <!-- <Transition name="sliderLeft">
         <div class="btn-groups" v-if="active == 1">
           <div class="pl-20 pr-20 flex right center-v">
@@ -135,7 +135,7 @@
     <guide-five></guide-five>
     <guide-six></guide-six>
     <!-- <guide-seven></guide-seven> -->
-    <guide-eight></guide-eight>
+    <!-- <guide-eight></guide-eight> -->
     <action-sheet v-model="actionSheetShow"></action-sheet>
     <BackUpBottom />
   </div>
@@ -197,7 +197,7 @@ import GuideModal4 from "@/views/guidance/step4.vue";
 import GuideModal5 from "@/views/guidance/step5.vue";
 import GuideModal6 from "@/views/guidance/step6.vue";
 import GuideModal7 from "@/views/guidance/step7.vue";
-import GuideModal8 from "@/views/guidance/step8.vue";
+// import GuideModal8 from "@/views/guidance/step8.vue";
 import actionSheet from "./action-sheet.vue";
 import dialogWarning from "@/components/dialogWarning/message.vue";
 import { useToast } from "@/plugins/toast";
@@ -235,7 +235,7 @@ export default {
     "guide-five": GuideModal5,
     "guide-six": GuideModal6,
     // 'guide-seven': GuideModal7,
-    'guide-eight': GuideModal8,
+    // 'guide-eight': GuideModal8,
     "dialog-warning": dialogWarning,
   },
   setup() {

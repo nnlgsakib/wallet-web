@@ -11,7 +11,7 @@
                 <div class="flex cenetr iconBox">
                     <AccountIcon :data="accountInfo.icon" />
                 </div>
-                <div class="flex-1 ml-10 flex column between">
+                <div class=" ml-10 flex column between">
                     <div>{{ accountInfo.name }}</div>
                     <div class="addr">{{ accountInfo.address }}</div>
                 </div>

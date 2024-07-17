@@ -166,7 +166,7 @@ export default {
     },
     showDialog({ commit, state }: any, idx: number) {
       commit("UPDATA_HIDE", idx);
-      if (idx === 6) {
+      if (idx === 5) {
         commit("UPDATA_SHOW", 13);
       } else {
         commit("UPDATA_SHOW", idx + 1);

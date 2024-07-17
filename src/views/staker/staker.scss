@@ -32,6 +32,9 @@ $fontColor: #848484;
 
             .addr {
                 color: $fontColor;
+                font-size: 10px;
+                text-overflow: ellipsis;
+                word-wrap: normal;
             }
 
             i {
