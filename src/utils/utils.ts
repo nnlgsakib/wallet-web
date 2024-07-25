@@ -1,5 +1,5 @@
 import { defaultAbiCoder } from "ethers/lib/utils";
-import { VUE_APP_SCAN_URL } from "@/enum/env";
+import { VUE_APP_SCAN_PATH, VUE_APP_SCAN_URL } from "@/enum/env";
 import useClipboard from "vue-clipboard3";
 import { v4 as uuidv4 } from "uuid";
 import store from "@/store";
@@ -105,7 +105,7 @@ type ScanPaths =
   | "/blockDetail";
 
 export const toScan = (addr: string, path: ScanPaths = "/accountDetail") => {
-  const fullPath = `${VUE_APP_SCAN_URL}${path}/${addr}`;
+  const fullPath = `${VUE_APP_SCAN_PATH}${path}/${addr}`;
   if (addr) {
     if (store.state.account.currentNetwork.id === "wormholes-network-1") {
       window.open(fullPath);
