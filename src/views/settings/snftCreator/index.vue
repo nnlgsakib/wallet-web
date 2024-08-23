@@ -168,7 +168,7 @@
   const showPopup3 = ref(false);
   const showPopup4 = ref(false);
   const exchangeUrl = `${VUE_APP_EXCHANGES_URL}/c0x97807fd98c40e0237aa1f13cf3e7cedc5f37f23b/#/assets`
-  const browserurl = `${VUE_APP_SCAN_URL}AccountDetail/${accountInfo.value.address}`
+  const browserurl = `${VUE_APP_SCAN_URL}address/${accountInfo.value.address}`
   
   const creatorStatus = computed(() => state.account.creatorStatus || {})
   onMounted(() => {

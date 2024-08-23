@@ -175,7 +175,7 @@ export default defineComponent({
 
     const view = () => {
 
-      window.open(`${VUE_APP_SCAN_PATH}/txDetail/${props.data.hash}`);
+      window.open(`${VUE_APP_SCAN_PATH}/tx/${props.data.hash}`);
     };
     const cancel = () => {
       emit("handleClose");

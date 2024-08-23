@@ -32,7 +32,7 @@
   <Transition name="slider">
     <i18n-t tag="div" v-if="showBuyTip" keypath="wallet.toBrowser" :class="`flex center scan-link fixed-bottom ${bugTipClass}`">
       <template v-slot:link>
-        <span @click="toScan(accountInfo.address, '/accountDetail')" class="f-12 view-history hover ml-4" rel="noopener noreferrer">{{ t("wallet.scanLink") }}</span>
+        <span @click="toScan(accountInfo.address, '/address')" class="f-12 view-history hover ml-4" rel="noopener noreferrer">{{ t("wallet.scanLink") }}</span>
       </template>
     </i18n-t>
   </Transition>

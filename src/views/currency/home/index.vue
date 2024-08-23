@@ -63,7 +63,7 @@
   <div class=" fixed-bottom">
     <i18n-t tag="div" keypath="wallet.toBrowser" class="flex center scan-link">
       <template v-slot:link>
-        <span @click="toScan(accountInfo.address, '/accountDetail')" class="f-12 view-history hover" rel="noopener noreferrer">{{ t("wallet.scanLink") }}</span>
+        <span @click="toScan(accountInfo.address, '/address')" class="f-12 view-history hover" rel="noopener noreferrer">{{ t("wallet.scanLink") }}</span>
       </template>
     </i18n-t>
   </div>
@@ -83,42 +83,42 @@
         <span>{{ t("sendto.gasLimit") }}</span>
         <span>{{
           ethers.utils.formatUnits(sendTx.sendData.gasLimit, "wei")
-        }}</span>
+          }}</span>
       </div>
       <div class="flex between lh-16 pt-8 pb-8">
         <span>{{ t("converSnft.amount") }}</span>
         <span>{{
           !sendTx.tokenAddress
-            ? ethers.utils.formatEther(sendTx.sendData.value)
-            : sendTx.amount
-        }}</span>
+          ? ethers.utils.formatEther(sendTx.sendData.value)
+          : sendTx.amount
+          }}</span>
       </div>
       <div class="flex between lh-16 pt-8 pb-8">
         <span>{{ t("transactionDetails.gasfee") }}</span>
         <span>{{
           sendTx.sendData.gasPrice
-            ? ethers.utils.formatEther(sendTx.sendData.gasPrice)
-            : 0
-        }}</span>
+          ? ethers.utils.formatEther(sendTx.sendData.gasPrice)
+          : 0
+          }}</span>
       </div>
       <div class="flex between lh-16 pt-8 pb-12">
         <span>{{ t("transactionDetails.totalAmount") }}</span>
         <span>≈
           {{
           !sendTx.tokenAddress
-            ? ethers.utils.formatEther(sendTx.sendData.value)
-            : sendTx.amount
-        }}
+          ? ethers.utils.formatEther(sendTx.sendData.value)
+          : sendTx.amount
+          }}
           {{ currentNetwork.currencySymbol }}</span>
       </div>
     </div>
     <ModifGasFee :show="showSpeedModal" :to="sendTx.to" :gasPrice="sendTx.gasPrice" :gasLimit="sendTx.gasLimit" :amount="ethers.utils.formatEther(sendTx.sendData.value)" @change="handleGasChange" />
     <div class="sendBtnBox pb-20 mt-20">
       <van-button @click="showSpeedModal = false" class="mr-26">{{
-          t("common.cancel")
+        t("common.cancel")
         }}</van-button>
       <van-button type="primary" @click="reSendTx" :loading="reloading">{{
-          t("common.confirm")
+        t("common.confirm")
         }}</van-button>
     </div>
   </CommonModal>

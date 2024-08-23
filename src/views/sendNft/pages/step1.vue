@@ -118,7 +118,7 @@ export default {
       });
     };
     const tomore = () => {
-      toScan(pageData.data.address, '/accountDetail')
+      toScan(pageData.data.address, '/address')
     };
     const showImg = () => {
       ImagePreview({ images: [nftInfo.value.meta_url], closeable: true });
