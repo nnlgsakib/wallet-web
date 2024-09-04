@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "serve:test": "vue-cli-service serve --mode test",
-    "build": "vue-cli-service build",
-    "build:test": "vue-cli-service build --mode test",
-    "build-report": "vue-cli-service build --report --mode production"
+    "serve": "NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
+    "serve:test": "NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve --mode test",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build",
+    "build:test": "NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build --mode test",
+    "build-report": "NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build --report --mode production"
   },
   "dependencies": {
     "@egjs/vue3-infinitegrid": "^4.10.0",
